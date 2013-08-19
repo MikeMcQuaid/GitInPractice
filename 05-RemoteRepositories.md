@@ -1,5 +1,5 @@
 # Remote Repositories
-Interacting with repositories hosted on other machines. How to download other people's work for interaction in a team or backup, dealing with large repositories and sharing work done locally with others.<br>
+Interacting with repositories hosted on other machines. How to download other people's work for interaction in a team or backup, dealing with large repositories and sharing work done locally with others.<br/>
 
 Relies on branch and tag version control concepts (not Git implementations) and a setup GitHub account (or another host).
 

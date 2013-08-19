@@ -1,5 +1,5 @@
 # Committing
-How to create a new repository on disk and create commits. Start with adding whole files to commits, then everything, then selective changes and customizing the way of interacting with Git messages and commit chunk selection.<br>
+How to create a new repository on disk and create commits. Start with adding whole files to commits, then everything, then selective changes and customizing the way of interacting with Git messages and commit chunk selection.<br/>
 
 Relies on Git installation and version control concepts from the previous chapter.
 

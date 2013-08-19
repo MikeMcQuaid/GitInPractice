@@ -1,5 +1,5 @@
 # Differences Between Commits
-Examining differences between individual commits and/or current state. Additionally show various commit metadata in different formats for different use-cases.<br>
+Examining differences between individual commits and/or current state. Additionally show various commit metadata in different formats for different use-cases.<br/>
 
 Relies on Git history concepts from the previous chapter.
 
