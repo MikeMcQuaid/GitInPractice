@@ -52,7 +52,7 @@ To change from the current "master" branch to a local branch "testing":
 ### Explanation
 `git checkout` may be a slightly confusing name. In the Subversion version control system `svn checkout` is used for the initial download from a remote repository (similar to `git clone` but for a single commit). However `git checkout` is used here to change branches.
 
-![Git workflow](diagrams/workflow.png)
+![Git remote workflow](diagrams/remote-workflow.png)
 
 `git clone` downloads the entire history of a repository and creates a "clone" (i.e. a deep copy). With closer examination `git checkout` and `svn checkout` behave similarly; both check out the contents of a version control repository into the working tree (i.e. everything that isn't under a `.git` directory) but Subversion's repository is remote and Git's repository is local. In this case `git checkout` is requesting the checkout of a particular branch so the current state of that branch is checked out into the working tree. Afterwards the HEAD pointer is updated to point to the top commit of the branch (which will be the same commit pointed to by the branch pointer).
 
