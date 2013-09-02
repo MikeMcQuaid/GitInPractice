@@ -1,5 +1,5 @@
-# Rewriting History
-Modifying existing commits and recovering from history rewrites. Advises on when history rewriting is useful, various methods of rewriting history and how to avoid losing data when doing so.
+# Resetting and Rebasing
+Modifying existing commits and recovering from history rewrites. Advises on when history rewriting is useful, basic methods of rewriting history and how to avoid losing data when doing so.
 
 ## When is it useful to rewrite history?
 (Difficulty: 8)
@@ -27,15 +27,3 @@ Modifying existing commits and recovering from history rewrites. Advises on when
 
 ## Pull a branch and rebase commits
 (Difficulty: 6)
-
-## Mass change the entire git history
-(Difficulty: 9)
-
-## Change the last commit message
-(Difficulty: 7)
-
-## Create a temporary commit
-(Difficulty: 6)
-
-## Add all changes to the previous commit
-(Difficulty: 10)

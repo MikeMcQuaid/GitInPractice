@@ -25,6 +25,9 @@ Performing system changes and ensuring Git does not interfere with manual user c
 ## Delete untracked files
 (Difficulty: 7)
 
+## Ignore files
+(Difficulty: 5)
+
 ## Delete ignored files
 (Difficulty: 6)
 
