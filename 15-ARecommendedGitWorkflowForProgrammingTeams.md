@@ -1,0 +1,1 @@
+# A recommended Git workflow for programming teams

@@ -1,9 +1,4 @@
-# Introduction To Git
-
-An introduction to version control as a concept and why it is considered good practice for programmers to use it. Explain what makes distributed version control different to centralized version control, the benefits of distribution and why Git is a good choice.
-
-With the basic concepts explained provide a practical walkthrough to how to get Git installed on their machine and get some Git hosting on the internet. Suggest some large Git projects to examine if curious and to indicate that Git is widely used. Point out other sources of help beyond this book.
-
+# Front Matter
 ## Reader Prerequisites
 Not actually a real section (but could be).
 
@@ -21,30 +16,3 @@ Not actually a real section (but could be).
 - How to configure Git to best suit individual workflows.
 - How to revert to any previously committed state with Git (even when rewriting history).
 - Understanding of how Git stores and manipulates data and advanced conceptual understanding of Git.
-
-## What is version control?
-(Difficulty: 3)
-
-## What is a distributed version control system?
-(Difficulty: 4)
-
-## What makes Git a good version control system for programmers?
-(Difficulty: 5)
-
-## How do I install Git?
-(Difficulty: 1)
-
-## Who provides good Git hosting?
-(Difficulty: 1)
-
-## What are some large projects already using Git?
-(Difficulty: 3)
-
-## Where are the best resources for help?
-(Difficulty: 2)
-
-## Show help for a command
-(Difficulty: 1)
-
-## Show help for a command in the browser
-(Difficulty: 3)

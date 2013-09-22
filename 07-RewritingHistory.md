@@ -1,4 +1,4 @@
-# Resetting and Rebasing
+# Rewriting History
 Modifying existing commits and recovering from history rewrites. Advises on when history rewriting is useful, basic methods of rewriting history and how to avoid losing data when doing so.
 
 ## When is it useful to rewrite history?
@@ -27,3 +27,8 @@ Modifying existing commits and recovering from history rewrites. Advises on when
 
 ## Pull a branch and rebase commits
 (Difficulty: 6)
+
+## Rewriting the entire history of a repository
+(Difficulty: 9)
+
+How and why to recreate the entire global history of a Git repository. Walk through a few advanced use-cases such as sanitizing before a public release, changing internal to external email addresses and creating a new repository from a subsection of another.

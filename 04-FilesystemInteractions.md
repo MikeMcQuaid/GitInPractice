@@ -1,4 +1,4 @@
-# Filesystem Operations
+# Filesystem Interactions
 Performing system changes and ensuring Git does not interfere with manual user changes to the filesystem without using Git.
 
 ## What is the interaction with the filesystem?

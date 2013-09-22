@@ -1,4 +1,14 @@
-# Configuring Git for maximum productivity
+# Git Shortcuts
+## Commit all changes without adding files
+(Difficulty: 5)
+
+## Set a commit message without opening an editor
+(Difficulty: 2)
+
+## Search for a string in all files
+(Difficulty: 4)
+
+## Configuring Git for maximum productivity
 How to setup the shell, individual and global Git configuration to maximise productivity when adopting a particular workflow.
 
 ### Set configuration for a single repository

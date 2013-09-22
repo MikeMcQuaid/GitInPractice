@@ -1,12 +1,9 @@
-# Committing
-How to create a new repository on disk and create commits. Start with adding whole files to commits, then everything, then selective changes and customizing the way of interacting with Git messages and commit chunk selection.
+# Introduction to local Git
+With the basic concepts explained provide a practical walkthrough to how to get Git installed on their machine and get some Git hosting on the internet. Suggest some large Git projects to examine if curious and to indicate that Git is widely used. Point out other sources of help beyond this book.
 
-Relies on Git installation and version control concepts from the previous chapter.
-
-## What is a commit?
-(Difficulty: 5)
-
-## Initialize a local repository
+## Why do programmers use Git?
+## Installation
+## Creating a repository
 (Difficulty: 1)
 
 ### Commands
@@ -47,35 +44,14 @@ The purpose of some of these files may be obvious given prior experience of vers
 
 Without an advanced understanding of Git it is wise to never edit any of these files directly (although it is always safe to read them) as Git's commands may read, edit and write these files through interaction with the repository.
 
-## Initialize a local repository as a server
-(Difficulty: 4)
-
-### Commands
-`git init --bare $REPOSITORY_DIRECTORY`
-
-#### Output
-`Initialized empty Git repository in /Users/mike/git-testing/.git/`
-
-### Walkthrough
-When creating a Git repository for use on a server rather than a local machine the contents of the .git subdirectory becomes the only data that is used or important. In this case a bare repository can be created which, instead of having a .git subdirectory, makes the main directory store all Git's files. Bare repositories do not allow new commits to be created locally; they must be pushed from another repository. When creating bare repositories it is good practice to name them with the extension '.git' to make their purpose clear.
-
-To create a new local bare Git repository in a new subdirectory named "git-testing.git":
-
-1. Run `git init --bare git-testing.git`
-2. A bare Git repository has been created in a new subdirectory named "git-testing.git".
-
-### Explanation
-![Git workflow](diagrams/workflow.png)
-
-Git stores data in a highly space-efficient format. Each commit after the first (known as the initial commit) follows on from a previous commit (or two previous commits in the case of a merge). The contents of the files on disk within a repository's working tree (not under the .git directory; the place where files are edited) may sometimes take up more space than the compressed version stored inside the repository. As a result if the working tree is never used directly (such as on a server) it may be better to not create it at all and never checkout the data from the repository into the working tree. This is the case with bare repositories; typically the only interaction with them is through `git push`, `git fetch` or `git pull` from another machine.
-
-## Add a file to be committed
+## Committing
+### Add a file to be committed
 (Difficulty: 2)
 
-### Commands
+#### Commands
 `git add $FILE`
 
-### Walkthrough
+#### Walkthrough
 ![Git workflow](diagrams/workflow.png)
 
 Git's index is a staging area used to build up new commits. Rather than requiring all changes in the working tree make up the next commit Git allows files (and even lines within files) to be added incrementally to the index.
@@ -89,25 +65,9 @@ To add an existing file 'README.md' to the index:
 2. Run `git add README.md`
 3. The file 'README.md' has been added to the index.
 
-### Explanation
+#### Explanation
 When a file is added to the index a file named `.git/index` is created (if it does not already exist). The added file contents and metadata are then added to the index file. Two things have been signaled to Git here: the intent for Git to track the contents of the file as it changes (this is not done without an explicit `git add`) and the contents of the file at the time `git add` was run should be added to the index, ready to create the next commit.
 
 Note that as the file is changed the contents of the commit will not be updated to reflect these changes without another `git add`. This may appear somewhat user hostile; later in the book this approach of incrementally and explicitly constructing new commits will be used to create a more readable version control history.
-
-## Commit all changes without adding files
-(Difficulty: 5)
-
-## Set a commit message without opening an editor
-(Difficulty: 2)
-
-## Use a preferred editor
-(Difficulty: 6)
-
-## Add part of a file to a commit
-(Difficulty: 6)
-
-## Commit parts of multiple files
-(Difficulty: 7)
-
-## Commit parts of multiple files graphically
-(Difficulty: 7)
+## History
+## Diffs

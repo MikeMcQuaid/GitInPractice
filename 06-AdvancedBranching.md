@@ -1,9 +1,15 @@
-# Merging
+# Advanced Branching
 Merging between branches, handling conflicts and branching workflows. Deals with all the non-history rewriting ways of bringing commits from another branch into the current branch, interacting with branches and destroying them.
 
 Relies on Git branches concepts from previous chapter.
 
-## What is a branch merge?
+## List what branches contain a commit
+(Difficulty: 10)
+
+## Create a tag
+(Difficulty: 5)
+
+## Describe the current state of a commit based on previous tags
 (Difficulty: 6)
 
 ## Revert a previous commit
@@ -31,9 +37,6 @@ Relies on Git branches concepts from previous chapter.
 (Difficulty: 9)
 
 ## Only resolve each merge conflict once
-(Difficulty: 9)
-
-## Find which commit caused a particular bug
 (Difficulty: 9)
 
 ## Pull a branch from a repository without merging
