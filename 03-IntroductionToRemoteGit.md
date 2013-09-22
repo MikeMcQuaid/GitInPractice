@@ -6,7 +6,6 @@ Dealing with local and remote branches and tags. Describe how branching is usefu
 ## Creating a GitHub repository
 ## Branches
 ### Create a new local branch from the current branch
-(Difficulty: 5)
 
 #### Commands
 `git branch $BRANCH`
@@ -31,7 +30,6 @@ When `git branch` creates a local branch it does not change to it. To do that re
 Creating a branch in Git is a quick and efficient process (particularly compared to some other version control systems which require copying files). When Git creates a branch it does not duplicate data but creates a pointer that points to the top commit of the branch. This means when more commits are made on a branch the branch pointer will be updated each time to point to the top commit.
 
 ### Checkout a local branch
-(Difficulty: 4)
 
 #### Commands
 `git checkout $BRANCH`
@@ -57,7 +55,6 @@ To change from the current "master" branch to a local branch "testing":
 The HEAD pointer is used to track which Git revision is currently checked out. After a successful checkout it is moved from pointing to the previous commit (in this case the previous branch's top commit) to the new branch's top commit. When checking out the previous branch HEAD will return to pointing at the previous branch's top commit.
 
 ### Checkout a remote branch
-(Difficulty: 6)
 
 #### Commands
 `git checkout $REMOTE/$BRANCH`

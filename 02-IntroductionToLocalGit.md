@@ -4,7 +4,6 @@ With the basic concepts explained provide a practical walkthrough to how to get 
 ## Why do programmers use Git?
 ## Installation
 ## Creating a repository
-(Difficulty: 1)
 
 ### Commands
 `git init $REPOSITORY_DIRECTORY`
@@ -46,7 +45,6 @@ Without an advanced understanding of Git it is wise to never edit any of these f
 
 ## Committing
 ### Add a file to be committed
-(Difficulty: 2)
 
 #### Commands
 `git add $FILE`
