@@ -18,8 +18,6 @@ To create a new local bare Git repository in a new subdirectory named "git-testi
 2. A bare Git repository has been created in a new subdirectory named "git-testing.git".
 
 ### Explanation
-![Git workflow](diagrams/workflow.png)
-
 Git stores data in a highly space-efficient format. Each commit after the first (known as the initial commit) follows on from a previous commit (or two previous commits in the case of a merge). The contents of the files on disk within a repository's working tree (not under the .git directory; the place where files are edited) may sometimes take up more space than the compressed version stored inside the repository. As a result if the working tree is never used directly (such as on a server) it may be better to not create it at all and never checkout the data from the repository into the working tree. This is the case with bare repositories; typically the only interaction with them is through `git push`, `git fetch` or `git pull` from another machine.
 
 ## Clone a repository on the same machine
