@@ -1,0 +1,15 @@
+[[creating-a-clean-history]]
+Creating a clean history
+------------------------
+
+[[add-part-of-a-file-to-a-commit]]
+Add part of a file to a commit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[commit-parts-of-multiple-files]]
+Commit parts of multiple files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[commit-parts-of-multiple-files-graphically]]
+Commit parts of multiple files graphically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

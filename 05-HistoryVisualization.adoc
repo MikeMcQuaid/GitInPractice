@@ -1,0 +1,47 @@
+[[history-visualization]]
+History Visualization
+---------------------
+
+[[list-commits-and-their-changes]]
+List commits and their changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[list-commits-and-a-summary-of-their-changes]]
+List commits and a summary of their changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[list-commits-with-a-single-line-per-commit]]
+List commits with a single line per-commit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[list-commits-with-a-branch-graph]]
+List commits with a branch graph
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[list-commits-with-branch-names]]
+List commits with branch names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[list-commits-beautifully]]
+List commits beautifully
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[diff-characters-rather-than-lines]]
+Diff characters rather than lines
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[summarize-a-diff]]
+Summarize a diff
+~~~~~~~~~~~~~~~~
+
+[[show-who-last-changed-each-line-of-a-file]]
+Show who last changed each line of a file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[download-partial-history-of-an-repository]]
+Download partial history of an repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[[find-which-commit-caused-a-particular-bug]]
+Find which commit caused a particular bug
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

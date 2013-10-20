@@ -1,0 +1,60 @@
+[[github-pull-requests]]
+GitHub Pull Requests
+--------------------
+
+[[making-a-pull-request-on-a-private-repository]]
+Making a pull request on a private repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Multiple workflows for multiple users within an organization to perform
+code review and work with branches on a shared private repository.
+
+[[interact-with-github-from-the-command-line]]
+Interact with GitHub from the command line
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[create-a-github-pull-request-from-the-command-line]]
+Create a GitHub pull request from the command line
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[upstream-the-current-branch-and-create-a-pull-request-from-it]]
+Upstream the current branch and create a pull request from it
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[making-a-pull-request-on-an-open-source-repository]]
+Making a pull request on an open-source repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A workflow for contributing changes to an open-source project on GitHub
+(and maximizing their chances of being included).
+
+[[when-are-pushing-and-pulling-not-enough-to-share-changes]]
+When are pushing and pulling not enough to share changes?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[write-good-commit-messages]]
+Write good commit messages
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[apply-patch-files]]
+Apply patch files
+^^^^^^^^^^^^^^^^^
+
+[[reverse-patch-files]]
+Reverse patch files
+^^^^^^^^^^^^^^^^^^^
+
+[[apply-patch-files-and-fix-whitespace]]
+Apply patch files and fix whitespace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[apply-non-git-patch-files]]
+Apply non-Git patch files
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[[merging-a-pull-request-on-an-open-source-repository]]
+Merging a pull request on an open-source repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A workflow for reviewing and merging contributed changes on an
+open-source project on GitHub.
