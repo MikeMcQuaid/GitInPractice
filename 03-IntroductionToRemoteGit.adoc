@@ -1,7 +1,4 @@
-[[introduction-to-remote-git]]
-Introduction to remote Git
---------------------------
-
+== Introduction to remote Git
 Interacting with repositories hosted on other machines. How to download
 other people's work for interaction in a team or backup, dealing with
 large repositories and sharing work done locally with others.
@@ -10,36 +7,24 @@ Dealing with local and remote branches and tags. Describe how branching
 is useful, how to create and checkout local and remote branches and
 tags.
 
-[[creating-a-github-repository]]
-Creating a GitHub repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Creating a GitHub repository
 
-[[branches]]
-Branches
-~~~~~~~~
-
-[[create-a-new-local-branch-from-the-current-branch]]
-Create a new local branch from the current branch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[[commands]]
-Commands
-++++++++
-
+=== Branches
+==== Create a new local branch from the current branch
+===== Commands
 `git branch $BRANCH`
 
-[[walkthrough]]
-Walkthrough
-+++++++++++
-
-image:screenshots/git-branch-before.png[Before `git branch testing`]
+===== Walkthrough
+.Before `git branch testing`
+image::screenshots/git-branch-before.png[]
 
 To create a new local branch "testing" from the current branch:
 
 1.  Run `git branch testing`
 2.  The local branch "testing" has been created.
 
-image:screenshots/git-branch-after.png[After `git branch testing`]
+.After `git branch testing`
+image::screenshots/git-branch-after.png[]
 
 Branches have some naming restrictions. For example, branches cannot
 have two consecutive dots (..) anywhere in their name so
@@ -49,11 +34,9 @@ refuse to create it.
 When `git branch` creates a local branch it does not change to it. To do
 that requires using `git checkout`.
 
-[[explanation]]
-Explanation
-+++++++++++
-
-image:diagrams/branches.png[Branch pointers]
+===== Explanation
+.Branch pointers
+image::diagrams/branches.png[]
 
 Creating a branch in Git is a quick and efficient process (particularly
 compared to some other version control systems which require copying
@@ -62,20 +45,11 @@ a pointer that points to the top commit of the branch. This means when
 more commits are made on a branch the branch pointer will be updated
 each time to point to the top commit.
 
-[[checkout-a-local-branch]]
-Checkout a local branch
-^^^^^^^^^^^^^^^^^^^^^^^
-
-[[commands-1]]
-Commands
-++++++++
-
+==== Checkout a local branch
+===== Commands
 `git checkout $BRANCH`
 
-[[walkthrough-1]]
-Walkthrough
-+++++++++++
-
+===== Walkthrough
 To change from the current "master" branch to a local branch "testing":
 
 1.  Run `git status` to ensure there are no modified and/or uncommitted
@@ -84,18 +58,17 @@ these changes).
 2.  Run `git checkout testing`.
 3.  The local branch "testing" has been checked out.
 
-image:screenshots/git-checkout-after.png[After `git checkout testing`]
+.After `git checkout testing`
+image::screenshots/git-checkout-after.png[]
 
-[[explanation-1]]
-Explanation
-+++++++++++
-
+===== Explanation
 `git checkout` may be a slightly confusing name. In the Subversion
 version control system `svn checkout` is used for the initial download
 from a remote repository (similar to `git clone` but for a single
 commit). However `git checkout` is used here to change branches.
 
-image:diagrams/remote-workflow.png[Git remote workflow]
+.Git remote workflow
+image::diagrams/remote-workflow.png[]
 
 `git clone` downloads the entire history of a repository and creates a
 "clone" (i.e. a deep copy). With closer examination `git checkout` and
@@ -108,7 +81,8 @@ is checked out into the working tree. Afterwards the HEAD pointer is
 updated to point to the top commit of the branch (which will be the same
 commit pointed to by the branch pointer).
 
-image:diagrams/HEAD.png[HEAD pointer]
+.HEAD pointer
+image::diagrams/HEAD.png[]
 
 The HEAD pointer is used to track which Git revision is currently
 checked out. After a successful checkout it is moved from pointing to
@@ -116,20 +90,11 @@ the previous commit (in this case the previous branch's top commit) to
 the new branch's top commit. When checking out the previous branch HEAD
 will return to pointing at the previous branch's top commit.
 
-[[checkout-a-remote-branch]]
-Checkout a remote branch
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-[[commands-2]]
-Commands
-++++++++
-
+==== Checkout a remote branch
+===== Commands
 `git checkout $REMOTE/$BRANCH`
 
-[[walkthrough-2]]
-Walkthrough
-+++++++++++
-
+===== Walkthrough
 To change from the current "master" branch to a branch "testing" on the
 remote "origin":
 
@@ -143,13 +108,10 @@ these changes).
 4.  Run `git checkout testing`.
 5.  The local branch "testing" has been checked out.
 
-image:screenshots/git-checkout-remote-after.png[After
-`git checkout testing`]
+.After `git checkout testing`
+image::screenshots/git-checkout-remote-after.png[]
 
-[[explanation-2]]
-Explanation
-+++++++++++
-
+===== Explanation
 Remote branches are branches which exist on a "remote". A remote is
 another Git repository that Git knows about; typically on a remote
 machine. The branches and all their commits are downloaded with
@@ -164,10 +126,6 @@ In the above example "testing" is tracking "origin/testing". When a
 local branch has been setup to be "tracking" a remote branch then it
 will default to pushing to and pulling from the tracked remote branch.
 
-[[merging]]
-Merging
-~~~~~~~
+=== Merging
 
-[[remote-repositories]]
-Remote Repositories
-~~~~~~~~~~~~~~~~~~~
+=== Remote Repositories

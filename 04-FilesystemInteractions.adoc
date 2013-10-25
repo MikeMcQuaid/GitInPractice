@@ -1,74 +1,37 @@
-[[filesystem-interactions]]
-Filesystem Interactions
------------------------
-
+== Filesystem Interactions
 Performing system changes and ensuring Git does not interfere with
 manual user changes to the filesystem without using Git.
 
-[[what-is-the-interaction-with-the-filesystem]]
-What is the interaction with the filesystem?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== What is the interaction with the filesystem?
 
-[[move-a-file]]
-Move a file
-~~~~~~~~~~~
+=== Move a file
 
-[[move-a-changed-file]]
-Move a changed file
-~~~~~~~~~~~~~~~~~~~
+=== Move a changed file
 
-[[remove-a-file]]
-Remove a file
-~~~~~~~~~~~~~
+=== Remove a file
 
-[[remove-a-changed-file]]
-Remove a changed file
-~~~~~~~~~~~~~~~~~~~~~
+=== Remove a changed file
 
-[[remove-a-directory-tree]]
-Remove a directory tree
-~~~~~~~~~~~~~~~~~~~~~~~
+=== Remove a directory tree
 
-[[preview-file-deletion]]
-Preview file deletion
-~~~~~~~~~~~~~~~~~~~~~
+=== Preview file deletion
 
-[[delete-untracked-files]]
-Delete untracked files
-~~~~~~~~~~~~~~~~~~~~~~
+=== Delete untracked files
 
-[[ignore-files]]
-Ignore files
-~~~~~~~~~~~~
+=== Ignore files
 
-[[delete-ignored-files]]
-Delete ignored files
-~~~~~~~~~~~~~~~~~~~~
+=== Delete ignored files
 
-[[delete-ignored-or-untracked-directories]]
-Delete ignored or untracked directories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Delete ignored or untracked directories
 
-[[temporarily-stash-some-changes]]
-Temporarily stash some changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Temporarily stash some changes
 
-[[reapply-stashed-changes]]
-Reapply stashed changes
-~~~~~~~~~~~~~~~~~~~~~~~
+=== Reapply stashed changes
 
-[[clear-stashed-changes]]
-Clear stashed changes
-~~~~~~~~~~~~~~~~~~~~~
+=== Clear stashed changes
 
-[[ignore-changed-files]]
-Ignore changed files
-~~~~~~~~~~~~~~~~~~~~
+=== Ignore changed files
 
-[[stop-ignoring-changed-files]]
-Stop ignoring changed files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Stop ignoring changed files
 
-[[list-ignored-files]]
-List ignored files
-~~~~~~~~~~~~~~~~~~
+=== List ignored files

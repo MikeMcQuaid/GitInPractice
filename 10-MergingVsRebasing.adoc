@@ -1,7 +1,4 @@
-[[merging-vs-rebasing]]
-Merging vs rebasing
--------------------
-
+== Merging vs rebasing
 As seen in previous chapters merging and rebasing are two strategies for
 updating the contents of a branch based on the contents of another.
 Merging joins the history of two branches together with a merge commit
@@ -12,16 +9,14 @@ Why are there two strategies for accomplishing essentially the same
 task? Compare the history of two popular open-source projects and their
 branching strategies.
 
-[[cmake]]
-CMake
-~~~~~
-
+=== CMake
 CMake is a cross-platform buildsystem created by Kitware. It has many
 contributors both inside and outside Kitware but relatively few
 contributions from those without direct push access to the Kitware Git
 repository.
 
-image:screenshots/cmake-branching.png[CMake branching]
+.CMake branching
+image::screenshots/cmake-branching.png[]
 
 CMake makes heavy use of branching and merges. Several of the branches
 visible in the above diagram are:
@@ -46,15 +41,13 @@ above diagram is fairly hard to follow; there are so many branches and
 merge commits that following an individual branch and how it relates to
 e.g. `next` is quite difficult.
 
-[[homebrew]]
-Homebrew
-~~~~~~~~
-
+=== Homebrew
 Homebrew is a package manager for OSX. It has thousands of contributors
 but a very small number of people with push access to the main
 repository (less than ten at the time of writing).
 
-image:screenshots/homebrew-branching.png[Homebrew branching]
+.Homebrew branching
+image::screenshots/homebrew-branching.png[]
 
 Homebrew makes very few merges within the repository. In the above
 diagram you can see the history is entirely continuous despite multiple
@@ -74,10 +67,7 @@ update delivery mechanism for users. Presenting these users with a more
 readable history allows them to better grasp updates to Homebrew with
 basic Git commands and without understanding merges.
 
-[[picking-a-strategy]]
-Picking a strategy
-~~~~~~~~~~~~~~~~~~
-
+=== Picking a strategy
 Organizations and open-source projects vary widely on branching
 approaches. When picking between a branch-and-merge or a
 branch-rebase-and-merge strategy it is worth asking the following
@@ -101,3 +91,4 @@ reasonable to always make merge commits in `master` but always rebase
 branches on top of other branches) but a consistent approach across the
 repository. This should ensure that, whatever strategy is adopted, the
 history will communicate something of the development of the project.
+

@@ -1,7 +1,4 @@
-[[advanced-branching]]
-Advanced Branching
-------------------
-
+== Advanced Branching
 Merging between branches, handling conflicts and branching workflows.
 Deals with all the non-history rewriting ways of bringing commits from
 another branch into the current branch, interacting with branches and
@@ -9,62 +6,32 @@ destroying them.
 
 Relies on Git branches concepts from previous chapter.
 
-[[list-what-branches-contain-a-commit]]
-List what branches contain a commit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== List what branches contain a commit
 
-[[create-a-tag]]
-Create a tag
-~~~~~~~~~~~~
+=== Create a tag
 
-[[describe-the-current-state-of-a-commit-based-on-previous-tags]]
-Describe the current state of a commit based on previous tags
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Describe the current state of a commit based on previous tags
 
-[[revert-a-previous-commit]]
-Revert a previous commit
-~~~~~~~~~~~~~~~~~~~~~~~~
+=== Revert a previous commit
 
-[[add-a-single-commit-to-the-current-branch]]
-Add a single commit to the current branch
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Add a single commit to the current branch
 
-[[add-a-single-commit-to-the-current-branch-with-a-sign-off]]
-Add a single commit to the current branch with a sign-off
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Add a single commit to the current branch with a sign-off
 
-[[merge-two-branches]]
-Merge two branches
-~~~~~~~~~~~~~~~~~~
+=== Merge two branches
 
-[[resolve-a-merge-conflict]]
-Resolve a merge conflict
-~~~~~~~~~~~~~~~~~~~~~~~~
+=== Resolve a merge conflict
 
-[[merge-two-branches-without-a-merge-commit]]
-Merge two branches without a merge commit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Merge two branches without a merge commit
 
-[[merge-two-branches-and-force-a-merge-commit]]
-Merge two branches and force a merge commit
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Merge two branches and force a merge commit
 
-[[merge-two-branches-with-a-different-diff-algorithm]]
-Merge two branches with a different diff algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Merge two branches with a different diff algorithm
 
-[[only-resolve-each-merge-conflict-once]]
-Only resolve each merge conflict once
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Only resolve each merge conflict once
 
-[[pull-a-branch-from-a-repository-without-merging]]
-Pull a branch from a repository without merging
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Pull a branch from a repository without merging
 
-[[delete-a-merged-branch]]
-Delete a merged branch
-~~~~~~~~~~~~~~~~~~~~~~
+=== Delete a merged branch
 
-[[delete-an-un-merged-branch]]
-Delete an un-merged branch
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Delete an un-merged branch

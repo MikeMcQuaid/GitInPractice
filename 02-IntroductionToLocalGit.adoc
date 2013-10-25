@@ -1,10 +1,8 @@
-[[introduction-to-local-git]]
-Introduction to local Git
--------------------------
-
+== Introduction to local Git
 In this chapter you will learn how and why to use Git as a version
 control system on your local system by covering the following topics:
 
+// Bullets should either all be "How to..." or starting a "...ing" word (gerund)
 * Why Git is popular with programmers
 * How to install and use Git and gitk/GitX
 * How to create a new local Git repository
@@ -20,10 +18,10 @@ that do not require a network connection. For these reasons Git is fast
 and can be used (and useful) for storing versions of files on your local
 machine.
 
-[[why-do-programmers-use-git]]
-Why do programmers use Git?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+// add new GitX screenshots for every change.
+// Why isn't section 2.1 in Chapter 1? This chapter is about
+// "How?" rather than "Why?"
+=== Why do programmers use Git?
 Git was originally created by programmers for programmers. Linus
 Torvalds, the creator of Git and the Linux kernel, started in 2008 with
 the goal of having a distributed, open-source, high-performance and hard
@@ -36,15 +34,13 @@ From it's initial creation for the Linux kernel Git is now used by all
 sizes of companies, many open source projects and large "social coding"
 Git hosting sites such as GitHub or Bitbucket.
 
-[[why-is-git-my-preferred-method-of-source-control]]
-Why is Git my preferred method of source control?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Why is Git my preferred method of source control?
 Git is my preferred method of software source code control (and even
 managing versions of text such as when I wrote this book). Git has many
 strengths over other methods of source control. Some of the reasons I
 personally prefer Git over the alternatives are:
 
+// First paragraph and bullets should be a callout
 * Local. Git stores all of the history of a repository, branches and
 commits locally. Adding new versions or querying the history of a
 repository occurs locally rather than requiring a network connection.
@@ -87,21 +83,21 @@ Bitbucket, SourceForge, Google Code and others.
 For now we'll focus on using Git locally which means we don't need
 access to a hosting service. Let's start by getting it installed.
 
-[[installation]]
-Installation
-~~~~~~~~~~~~
-
+=== Installation
 Git does not come pre-installed on most operating systems as it is a
 tool typically used by programmers rather than non-technical computer
 users. Let's install Git on your local machine. The method to do so
 varies depending on your operating system of choice.
+// note where/what automatically has Git installed and why diagrams below
+// have different versions
 
-[[how-to-install-and-run-git-on-apple-osx]]
-How to install and run Git on Apple OSX
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== How to install and run Git on Apple OSX
+// Add OSX 10.9 instructions after release (22nd October?)
+.Xcode Command Line Tools
+image::screenshots/02-Xcode-CLT.png[]
 
-image:screenshots/02-Xcode-CLT.png[Xcode Command Line Tools]
-
+// annotate diagram with sequence of actions
+// brew install git on 10.7+?
 On OSX Lion (10.7) and above Git is provided with the Apple's Xcode
 Command Line Tools. You should install Xcode from the Mac App Store.
 After installing Xcode the Xcode Command Line Tools can be installed
@@ -117,16 +113,15 @@ To run Git commands open a Terminal (either the default OSX
 `/Applications/Utilities/Terminal.app` or an alternative such as
 iTerm.app).
 
-image:screenshots/02-OSX-GitVersion.png[Git in Terminal.app]
+.Git in Terminal.app
+image::screenshots/02-OSX-GitVersion.png[]
+// remove white space from figure
 
 With the Terminal open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
 resemble Figure 2.2.
 
-[[how-to-install-and-run-git-on-linux-or-unix]]
-How to install and run Git on Linux or Unix
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== How to install and run Git on Linux or Unix
 On Linux or Unix you can install Git directly from your package manager.
 How to do this varies from system to system but some of the popular
 options are below:
@@ -141,16 +136,15 @@ options are below:
 
 To run Git commands open a Terminal application or console.
 
-image:screenshots/02-Linux-GitVersion.png[Git in terminal application]
+.Git in terminal application
+image::screenshots/02-Linux-GitVersion.png[]
+// remove white space from figure, black on white
 
 With the Terminal open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
 resemble Figure 2.3.
 
-[[how-to-install-and-run-git-on-microsoft-windows]]
-How to install and run Git on Microsoft Windows
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== How to install and run Git on Microsoft Windows
 Git for Windows can be downloaded from the official Git site at
 http://git-scm.com/download/win. Download and click through the
 installer (seen in Figure 2.4). When it has completed it will provide
@@ -164,17 +158,18 @@ you'll need to use.
 To run Git commands open the 'Git Bash' shortcut from the Start Menu.
 This will open a Unix shell in a Windows Command Prompt.
 
-image:screenshots/02-Windows-GitVersion.png[Git Bash]
+.Git Bash
+image::screenshots/02-Windows-GitVersion.png[]
+// remove white space from figure, black on white
 
 With the Git shell open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
 resemble Figure 2.5.
 
-[[gitkgitx-tools]]
-Gitk/GitX tools
-^^^^^^^^^^^^^^^
-
-image:screenshots/02-gitk.png[gitk]
+==== Gitk/GitX tools
+.gitk
+image::screenshots/02-gitk.png[]
+// annotate diagram and use same repo for gitk/gitx
 
 gitk is a tool installed with Git for viewing the history of Git
 repositories. It is installed by default with Git on Windows and Mac but
@@ -189,29 +184,30 @@ gitg for gtk+/GNOME (seen in Figure 2.7) integration and QGit for Qt/KDE
 integration. On OSX there are tools such as GitX (and various forks of
 the project).
 
-image:screenshots/02-GitX.png[GitX-dev]
+.GitX-dev
+image::screenshots/02-GitX.png[]
+// annotate diagram and use same repo for gitk/gitx
 
 As OSX is my platform of choice I'll be using screenshots of the
 GitX-dev fork (seen in Figure 2.8) of GitX to discuss history in this
 book. Don't worry about the contents of the screenshot for now; I'll
 discuss it further when you need.
 
-[[creating-a-repository]]
-Creating a repository
-~~~~~~~~~~~~~~~~~~~~~
-
+=== Creating a repository
 Once you've installed Git the first thing you need to do to use it on
-your local machine is to create a Git repository. Typically you'd do
-this by downloading (known as _cloning_ by Git) another repository that
-already exists but let's create an empty, new local repository.
+your local machine is to create a Git repository.
+// explain what a repo is e.g. a folder on disk that Git watches for you
+Typically you'd do this by downloading (known as _cloning_ by Git) another
+repository that already exists but let's create an empty, new local repository.
+// and to do that we open a new terminal window...
 
-[[the-git-init-command]]
-The git init command
-^^^^^^^^^^^^^^^^^^^^
 
+==== The git init command
 A Git repository must be initialized before any files can be added,
 commits made or pushed elsewhere. When `git init` is run it creates a
 named directory (if passed; otherwise uses the current directory).
+// use full OS paths to avoid confusion. Perhaps create repo in current
+// directory instead
 
 To create a new local Git repository in a new subdirectory named
 "git-testing":
@@ -223,6 +219,7 @@ named "git-testing".
 Under this directory a subdirectory named `.git` is created with various
 files and subdirectories under it.
 
+// annotate file listing
 ------------------------------------------------
 git-testing/.git/config
 git-testing/.git/description
@@ -255,35 +252,33 @@ tags are. These are stored under the refs folder.
 You shouldn't edit any of these files directly until you have a more
 advanced understanding of Git (or perhaps never at all). You will
 instead modify these files and folders by interacting with the Git
-repository through Git's commands .
+repository through Git's commands.
+// reference later chapter where you'll do this
 
-[[committing-changes-to-files]]
-Committing changes to files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Committing changes to files
 Like other version control systems to do anything useful in Git we first
 need one or more commits in our repository. To do this first requires
 adding files to Git's _index_.
 
-[[gits-index-a-staging-area-for-new-commits]]
-Git's index: a staging area for new commits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-image:diagrams/02-Workflow.png[Git workflow]
+==== Git's index: a staging area for new commits
+.Git workflow
+image::diagrams/02-Workflow.png[]
+// add more annotations to diagram e.g. "Add changes and new files to index",
+// "Commit files from index to repo", "Retrieve current set of files from repo
+// to local"?????
 
 Git's index is a staging area used to build up new commits. Rather than
 requiring all changes in the working tree make up the next commit Git
 allows files (and even lines within files) to be added incrementally to
 the index. The add/commit workflow can be seen in Figure 2.9.
+// use proper reference
+// another diagram showing building from the index into multiple new commits
 
 Git does not add anything to the index without your instruction. As a
 result, the first thing you have to do with a file we want to include in
 a Git repository is request Git to add it to the index.
 
-[[the-git-add-command-adding-files-to-the-index]]
-The git add command: adding files to the index
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== The git add command: adding files to the index
 To add an existing file 'README.md' to the index:
 
 1.  Change directory to the Git repository (e.g. `cd ~/git-testing/`)
@@ -303,17 +298,15 @@ the index, ready to create the next commit.
 Note that as the file is changed the contents of the commit will not be
 updated to reflect these changes without another `git add`. This may
 appear strange; why would you not want to add new changes to the next
-commit? Later in the book this approach of incrementally and explicitly
-constructing new commits will be used to create a more readable version
-control history.
+commit?
+// where in the book?
+Later in the book this approach of incrementally and explicitly constructing
+new commits will be used to create a more readable version control history.
 
 Now that the contents of the file have been added to the index we're
 ready to make a new commit.
 
-[[the-git-commit-command-adding-a-new-commit-to-the-repository]]
-The git commit command: adding a new commit to the repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== The git commit command: adding a new commit to the repository
 To commit the contents of an existing file 'README.md':
 
 1.  Change directory to the Git repository (e.g. `cd ~/git-testing/`)
@@ -325,8 +318,13 @@ description of what you have changed, save the file and close the text
 editor.
 6.  The new commit containing 'README.md' has been added to the
 repository.
+// Technically, step 6 isn't a step. It's the text that should be after the
+// list. Also, you might want to split it into Steps 1 to 3 and then a separate
+// list of steps 4 to 5 which does the actual commit.
 
-image:diagrams/02-RootCommitOutput.png[First commit]
+.First commit
+image::diagrams/02-RootCommitOutput.png[]
+// what's create mode? Any other modes?
 
 The output of `git commit` can be seen in Figure 2.10. To expand on the
 annotations in this diagram:
@@ -337,6 +335,7 @@ created a branch).
 * 'root'. As this was the first commit in the repository it is known as
 the 'root commit' or 'initial commit'. This means it has no parent
 commit.
+// what is a SHA-1 hash? Add footnote
 * 'shortened SHA-1'. Every commit in Git is given a unique 40
 hexadecimal character SHA-1 hash based on the contents and metadata of
 that commit. As these are rather unwieldy Git will often show shortened
@@ -363,7 +362,8 @@ deleted in this commit.
 Let's see the output when modifying the contents of the `README.md` file
 and and adding an empty `LICENSE.md`.
 
-image:diagrams/02-CommitOutput.png[Second commit]
+.Second commit
+image::diagrams/02-CommitOutput.png[]
 
 There are a few changes in Figure 2.11 from Figure 2.10:
 
@@ -382,20 +382,14 @@ was added in the root commit so is not.
 
 Now that we have two commits we can start looking at Git's history.
 
-[[history]]
-History
-~~~~~~~
-
+=== History
 Git's history stores the graph of all commits in the repository. Viewing
 it is useful for working out where you are in terms of branches and
 previous commits.
 
 The first command you will use to navigate history is `git log`.
 
-[[the-git-log-command-viewing-the-history]]
-The git log command: viewing the history
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== The git log command: viewing the history
 To view the commit history (also known as log):
 
 1.  Change directory to the Git repository (e.g. `cd ~/git-testing/`)
@@ -416,6 +410,7 @@ Date:   Sat Oct 12 14:00:34 2013 +0100
 
     This will help people understand what this repository is for.
 -----------------------------------------------------------------
+// perhaps add in the original command for context? Also: annotate more.
 
 The commit log (seen in Listing 2.2) lists all the commits that have
 been made on the current branch in reverse chronological order. You can
@@ -428,16 +423,15 @@ line is the commit message subject and the rest the commit message body.
 
 It's also helpful to visualize the history graphically.
 
-[[viewing-history-with-gitkgitx-tools]]
-Viewing history with gitk/GitX tools
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Viewing history with gitk/GitX tools
 To view the commit history with gitk or GitX:
 
 1.  Change directory to the Git repository (e.g. `cd ~/git-testing/`)
 2.  Run `gitk` or `gitx`
 
-image:screenshots/02-GitX-history.png[GitX history]
+.GitX history
+image::screenshots/02-GitX-history.png[]
+// annotate GitX
 
 The GitX history (seen in Figure 2.12) shows similar output to `git log`
 but in a different format. You can also see the current branch and the
@@ -447,21 +441,18 @@ Gravatar image (obtained from the commit author's email address).
 Querying the differences between any two commits can be useful so let's
 learn how to do that.
 
-[[diffs-differences-between-commits]]
-Diffs: differences between commits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Diffs: differences between commits
 You learnt in the previous chapter that diffs are the differences
 between two commits. In Git we are able to reference commits using
 various references (known by Git as _refs_).
+// git diff command example
 
-[[git-refs-different-references-for-individual-commits]]
-Git refs: different references for individual commits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Git refs: different references for individual commits
 In Git _refs_ are the various possible ways of addressing individual
-commits . A SHA-1 (shortened or the full 40 characters) is a unique
-reference to a commit. What about other ways of referencing a commit?
+commits.
+// when/why would they be used?
+ A SHA-1 (shortened or the full 40 characters) is a unique reference to a
+commit. What about other ways of referencing a commit?
 
 The first you have already seen is by the branch (which is 'master' by
 default if you haven't created any other branches). If you remember from
@@ -470,7 +461,11 @@ commit. Therefore referencing the SHA-1 of commit at the top of the
 master branch (the short version from the last example being `69664f87`)
 is the same as referencing the branch name 'master'.
 
-image:diagrams/HEAD.png[HEAD]
+.HEAD
+image::diagrams/HEAD.png[]
+// needs better annotations to tie into the text
+// use same format for this diagram and workflow as others e.g. remote colors,
+// fix font sizes etc.
 
 The second is 'HEAD'. The 'HEAD' always points to the top of whatever
 you have currently checked out so will typically be the top commit of
@@ -486,20 +481,17 @@ There are more types (such as remote references) but you don't need to
 worry about them just now.
 
 Refs can also have modifiers appended. Suffixing a ref with `^` is the
-same as saying 'the commit before that ref'. For example 'HEAD^' is the
-commit before the currently checked out commit and 'master^' is the
+same as saying 'the commit before that ref'. For example `HEAD^` is the
+commit before the currently checked out commit and `master^` is the
 penultimate commit on the master branch. Another modification allows you
-to specify the number of commits to look before. 'HEAD~2' is two commits
-before the currently checked out branch. Note that 'HEAD^' and 'HEAD~1'
+to specify the number of commits to look before. `HEAD~2` is two commits
+before the currently checked out branch. Note that `HEAD^` and `HEAD~1`
 are equivalent.
 
 Now that you know various ways to reference commits lets see how to
 query the differences between two commits.
 
-[[the-git-diff-command]]
-The git diff command
-^^^^^^^^^^^^^^^^^^^^
-
+==== The git diff command
 The `git diff` command allows you to query the differences between two
 commits (or refs).
 
@@ -509,7 +501,9 @@ the penultimate commit:
 1.  Change directory to the Git repository (e.g. `cd ~/git-testing/`)
 2.  Run `git diff HEAD^`
 
-image:diagrams/02-Diff.png[git diff]
+.git diff
+image::diagrams/02-Diff.png[]
+// more annotations, better title/caption
 
 The `git diff` output (seen in Figure 2.14) contains some similar
 elements to the `git commit` or `gitx` output we looked at earlier. You
@@ -553,10 +547,7 @@ This time because we specified `HEAD` followed by `HEAD^` we see the
 changes in Listing 2.3 from HEAD to the commit before HEAD; as if the
 changes in that commit were applied in reverse.
 
-[[summary]]
-Summary
-~~~~~~~
-
+=== Summary
 In this chapter you hopefully learned:
 
 * Git is a good version control system for programmers as it is local,
@@ -572,3 +563,4 @@ while using it.
 
 Now let's learn how to use these concepts to interact with repositories
 that are not stored on your local machine.
+

@@ -1,6 +1,5 @@
-[[introduction-to-distributed-version-control]]
-Introduction to Distributed Version Control
--------------------------------------------
+== Introduction to Distributed Version Control
+// Still need to write the intro to Part 1
 
 This chapter covers:
 
@@ -15,11 +14,12 @@ changes on a central server (_centralized version control systems_) and
 those that keep all changes on a local machine and can send and receive
 them from other machines (_distributed version control systems_).
 
-[[why-use-version-control]]
-Why use version control?
-~~~~~~~~~~~~~~~~~~~~~~~~
+// Need a paragraph or two here
 
-image:diagrams/01-Undo.png[Undo in a word processor]
+=== Why use version control?
+// Remove undo diagram and move logic into next diagram instead
+.Undo in a word processor
+image::diagrams/01-Undo.png[]
 
 A common problem when dealing with information stored on a computer is
 handling _changes_. For example, after adding, modifying or deleting
@@ -35,11 +35,15 @@ it, what the change was and perhaps even store multiple versions of the
 document in parallel. A _version control system_ (such as Git) allows
 all these operations and more.
 
-image:diagrams/01-MultipleFiles.png[Multiple files vs version control]
+.Multiple files vs version control
+image::diagrams/01-MultipleFiles.png[]
+// Split into two diagrams. Consult email discussion.
+// Reference all figures by name
 
 A typical method for version control is often simply creating duplicate
 versions of files with differing filenames and contents
 (`Important Document V4 FINAL FINAL.doc` may sound sadly familiar).
+// Here's where I figure the filesystem half of the comparison figure should go
 Rather than trying to remember differences between the versions and
 manually making copies each time you could instead put a file (or files)
 into a version control system (also known as a _revision control system_
@@ -55,11 +59,13 @@ a later time. Version control systems can therefore solve the problem of
 reviewing and retrieving previous changes and allow single files to be
 used rather than duplicated.
 
-[[version-control-workflow]]
-Version control workflow
-^^^^^^^^^^^^^^^^^^^^^^^^
+// Here's where the VCS half of the figure should go. Followed by a short
+// sentence or two comparing how the user then accesses first the current
+// version of the file and then a previous version.
 
-image:diagrams/01-Workflow.png[Workflow]
+==== Version control workflow
+.Workflow
+image::diagrams/01-Workflow.png[]
 
 Version control systems work by maintaining a list of changes to files
 over time. Each time a file is modified and committed the difference
@@ -74,10 +80,7 @@ time. This allows you to have confidence that, no matter what you may
 add, modify or delete, the older version will always be around if you
 need to check back on it.
 
-[[version-control-for-programmer-collaboration]]
-Version control for programmer collaboration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Version control for programmer collaboration
 Programmers spend most of their jobs (and sometimes their lives) editing
 text. This text is typically source code which will be interpreted by a
 computer to perform some task (hopefully better than a human) but could
@@ -94,7 +97,8 @@ fix bugs in sections of code they did not create so being able to record
 and recall the intent of the original author at a later point can help
 understand what faulty assumptions may have caused a bug.
 
-image:diagrams/01-Branches.png[Multiple branches]
+.Multiple branches
+image::diagrams/01-Branches.png[]
 
 When creating computer software it's also common to release new
 _versions_ of a product. New versions are generally released when bugs
@@ -113,11 +117,11 @@ all the changes into the main branch.
 Let's learn more about a version of a file (or files) in a version
 control system. These are known as _commits_.
 
-[[committing-recording-changes-to-code]]
-Committing: recording changes to code
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-image:diagrams/01-Commit.png[A commit]
+==== Committing: recording changes to code
+// Annotate right commit and shrink left commit so only contains unique
+// reference and headings?
+.A commit
+image::diagrams/01-Commit.png[]
 
 A _commit_ is an collection of changes to one or more files in a version
 control system. Each commit contains a message entered by the author,
@@ -144,10 +148,9 @@ commit and leave the other changes for adding in a future commit. This
 is often desirable because commits should be the smallest possible units
 of work to make them easier to understand.
 
-[[commit-storage-in-git]]
-Commit storage in Git
-^^^^^^^^^^^^^^^^^^^^^
+// rule of thumb about small commits being better and why (into callout)
 
+==== Commit storage in Git
 Git is a version control system built on top of an _object store_. When
 you commit Git creates and stores a collection of objects inside the
 object store. This object store is stored inside the Git _repository_.
@@ -157,7 +160,9 @@ in the root of the project. If you were to explore under here (as we
 will do in Chapter 2) you would find objects, various
 pointers/references to objects and configuration files.
 
-image:diagrams/01-Objects.png[Git objects]
+// annotate diagram further based on paragraph below
+.Git objects
+image::diagrams/01-Objects.png[]
 
 The main three Git objects we're concerned about are _commits_, _blobs_
 and _trees_ (there is also a _tag_ object but we can ignore this for
@@ -168,6 +173,7 @@ in the Git repository. A tree object stores a reference to all the blob
 objects at a particular point in time and other tree objects if there
 are any subfolders.
 
+// make a callout
 When using Git you should never need to interact with objects or object
 files directly. The terminology of _blobs_ and _trees_ are not used
 regularly in Git or in this book but it's useful to remember what these
@@ -181,10 +187,7 @@ Now we've peeked behind Git's abstraction to see how it stores things
 internally let's return to something very practical: how versions of
 code change over time.
 
-[[history-how-code-changes-over-time]]
-History: how code changes over time
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== History: how code changes over time
 The _history_ of a version control system is the complete list of all
 changes made since the repository was created and the initial commit was
 made. The history also contains the references to any _branches_, _tags_
@@ -211,10 +214,7 @@ like "do stuff" then it would be fairly hard to use effectively. Ideally
 commits are small and well-described; follow these two rules and having
 a complete history becomes a very useful tool.
 
-[[commits-point-to-their-parent-commits]]
-Commits point to their parent commits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Commits point to their parent commits
 Every commit points to its _parent commit_. The parent commit in a
 linear, branch-less history will be the one that immediately preceded
 it. The only commit that lacks a parent commit is the _initial commit_;
@@ -222,10 +222,9 @@ the first commit in the repository. By following the parent commit, its
 parent, its parent and so on you will always be able to get back from
 the current commit to the initial commit.
 
-[[rewriting-history]]
-Rewriting history
-^^^^^^^^^^^^^^^^^
+// add graphic of commits
 
+==== Rewriting history
 Git is unusual compared to many other version control systems in that it
 allows history to be rewritten. This may seen surprising or worrying;
 after all did I not just tell you that the history contains the entire
@@ -237,7 +236,9 @@ sometimes you may want to highlight only broader changes to files in a
 version control system over a period of time rather than sharing ever
 single change that was made in reaching the final state.
 
-image:diagrams/01-Squashing.png[Squashing]
+// annotate with better captions
+.Squashing
+image::diagrams/01-Squashing.png[]
 
 Here you see a fairly common use-case for rewriting history with Git. If
 you were working on some window code all morning and wanted your
@@ -263,10 +264,7 @@ example don't make changes only to revert then immediately in the next
 commit five minutes later), minimal and readable. These changes are
 known as _diffs_.
 
-[[diffs-the-differences-between-commits]]
-Diffs: the differences between commits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Diffs: the differences between commits
 A _diff_ (also known as a _change_ or _delta_) is the difference between
 two commits. In a version control system you can typically request a
 diff between any two commits, branches or tags. It's often useful to be
@@ -279,10 +277,8 @@ history to see what has changed. The various ways of displaying diffs in
 version control typically allow you to narrow them down per-file, folder
 and even committer.
 
-[[default-diff-format]]
-Default diff format
-^^^^^^^^^^^^^^^^^^^
-
+==== Default diff format
+// turn into an annotated diagram instead and use more than one file
 ------------------------------------
 diff --git a/README.txt b/README.txt
 index a1584ab..6706ce7 100644
@@ -308,10 +304,7 @@ files; for example when navigating through history or viewing what you
 are about to commit. It's important to grasp the format as it will be
 used throughout this book and when using Git.
 
-[[different-diff-formats]]
-Different diff formats
-^^^^^^^^^^^^^^^^^^^^^^
-
+==== Different diff formats
 Sometimes it is desirable to display diffs in slightly differing
 formats. Two common alternatives to a typical unified diff are a
 _diffstat_ and _word diff_.
@@ -345,10 +338,7 @@ text; in README files we probably care more about individual word
 choices than knowing that an entire line has changed and the special
 characters (`[-]{+}`) are not used as often in prose than in code.
 
-[[branches-working-on-multiple-versions-of-code-in-parallel]]
-Branches: working on multiple versions of code in parallel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Branches: working on multiple versions of code in parallel
 When committing to a version control system the history continues
 linearly; what was the most recent commit becomes the parent commit for
 the new commit. This parenting continues back to the initial commit in
@@ -357,7 +347,13 @@ is not enough for software projects. Sometimes you may need to make new
 commits which are not yet ready for public consumption. Enter
 _branches_.
 
-image:diagrams/01-Branches.png[Multiple branches]
+// split graphic into two based on email
+// 1. middle bottom commit annotation "minor things committed to stable branch"
+// 2. Stable branch or master branch
+// 3. annotate commits in feature branch "new features, experimental
+//    refactoring on branch"
+.Multiple branches
+image::diagrams/01-Branches.png[]
 
 Branching allows two independent tracks through history to be created
 and committed to without either modifying the other. Programmers can
@@ -380,16 +376,14 @@ with a "1.0" tag. This means you can come back to it in future, rebuild
 that release or check how certain things worked without fear that it
 will be somehow changed automatically.
 
-[[using-branching]]
-Using branching
-^^^^^^^^^^^^^^^
-
+==== Using branching
 Branching allows two independent tracks of development to occur at once.
 In our simple previous example, one developer needed to work on a
 feature and another on a releasing a bug fix without either interfering
 with the other's work. At a more advanced level branches will be used
 more extensively than just one per developer (particularly in version
 control systems like Git that make creating a branch quick and easy).
+// feature branches diagram
 Some programmers will create _feature branches_ whenever they work on a
 new bug fix or feature and then integrate these branches at a later
 point; perhaps after requesting review of their changes from others.
@@ -401,15 +395,13 @@ branch based off the (hopefully tagged) version used by customers, fix
 the error and switch branch back to the branch you had been committing
 the new feature to.
 
-[[merging-bringing-the-changes-from-one-branch-into-another]]
-Merging: bringing the changes from one branch into another
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Merging: bringing the changes from one branch into another
 At some point we have a branch that we're done with and we want to bring
 all the commits made on it into another branch. This process is known as
 a `merge`.
 
-image:diagrams/01-Merging.png[Merging branches]
+.Merging branches
+image::diagrams/01-Merging.png[]
 
 When a merge is requested all the commits from another branch are pulled
 into the current branch. Those commits then become part of the history
@@ -423,10 +415,7 @@ and make future commits on the stable branch; perhaps creating a new
 branch from the stable branch when a new feature needs to be
 implemented.
 
-[[merge-conflicts]]
-Merge conflicts
-^^^^^^^^^^^^^^^
-
+==== Merge conflicts
 So far merges may have sounded too good to be true; you can work on
 multiple things in progress and combine them at any later point in any
 order. Not so fast my merge-happy friend; I haven't told you about merge
@@ -441,6 +430,7 @@ without conflicts as long as the changes were not too near each other in
 the same file. If the version control system fails to perform the merge
 without human intervention it produces a merge conflict.
 
+// replace with annotated diagram
 -------------------------------
 <<<<<<<
 This software is very unstable.
@@ -452,6 +442,7 @@ This software is very stable.
 When a merge conflict occurs the version control system will go through
 any files that have conflicts and insert something similar to the above
 markers. These markers indicate the versions of the file on each branch.
+// add workflow diagram
 In the case we were merging the "unstable" branch into "stable" then the
 README might have a merge conflict like the above; the "stable" branch
 says the software is very stable and the "unstable" branch says it is
@@ -467,15 +458,13 @@ so they can be inspected in the future. Unfortunately sometimes people
 will pick the wrong option or merge incorrectly so it's good to be able
 to later see what conflicts they had to resolve.
 
-[[rebasing]]
-Rebasing
-^^^^^^^^
-
+==== Rebasing
 A _rebase_ is a method of history rewriting in Git that is similar to a
 merge. A rebase involves changing the parent of a commit to point to
 another.
 
-image:diagrams/01-Rebasing.png[Rebasing branches]
+.Rebasing branches
+image::diagrams/01-Rebasing.png[]
 
 In this case Seth wanted to rebase his feature branch on top of the
 current stable branch. He perhaps wanted to do this to include all the
@@ -489,11 +478,9 @@ necessary to remember for now is that it's a different approach to a
 merge that can be used for a similar outcome (pulling changes from one
 branch into another).
 
-[[remote-repositories-exchanging-commits-with-another-computer]]
-Remote Repositories: exchanging commits with another computer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-image:diagrams/01-RemoteWorkflow.png[Remote workflow]
+=== Remote Repositories: exchanging commits with another computer
+.Remote workflow
+image::diagrams/01-RemoteWorkflow.png[]
 
 Typically when using version control you will want to share your commits
 (or branches) with other people using other computers. With a
@@ -513,20 +500,15 @@ commits from another repository.
 A repository you send or receive commits to is known as a _remote
 repository_. You control when these changes are sent or received.
 
-[[communicating-with-a-remote-repository]]
-Communicating with a remote repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Communicating with a remote repository
+// push/pull workflow diagram
 Changes are sent to a remote repository in a _push_ operation and
 received in a _pull_ or _fetch_ operation. When either of these occur
 your repository talks to the other repository, finds out what you know
 in common and sends only the differences between the two repositories
 (obviously with large repositories to do otherwise would be very slow).
 
-[[authoritative-version-storage]]
-Authoritative version storage
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+==== Authoritative version storage
 With centralized version control systems the central server always
 stores the authoritative version of the code. Clients to this repository
 will typically only store a small proportion of the history and require
@@ -559,10 +541,7 @@ particular workflow may not make sense in many organizations but it
 demonstrates how distributed version control systems can allow different
 ways of managing merges to centralized version control.
 
-[[summary]]
-Summary
-~~~~~~~
-
+=== Summary
 In this chapter you hopefully learned:
 
 * _Version control systems_ exist to manage a series of changes over
@@ -597,3 +576,4 @@ request.
 
 Now let's learn how to use these concepts to create and interact with a
 Git repository on your local machine.
+

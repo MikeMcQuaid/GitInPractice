@@ -1,62 +1,30 @@
-[[git-shortcuts]]
-Git Shortcuts
--------------
+== Git Shortcuts
+=== Commit all changes without adding files
 
-[[commit-all-changes-without-adding-files]]
-Commit all changes without adding files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Set a commit message without opening an editor
 
-[[set-a-commit-message-without-opening-an-editor]]
-Set a commit message without opening an editor
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Search for a string in all files
 
-[[search-for-a-string-in-all-files]]
-Search for a string in all files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-[[configuring-git-for-maximum-productivity]]
-Configuring Git for maximum productivity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Configuring Git for maximum productivity
 How to setup the shell, individual and global Git configuration to
 maximise productivity when adopting a particular workflow.
 
-[[set-configuration-for-a-single-repository]]
-Set configuration for a single repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Set configuration for a single repository
 
-[[set-configuration-for-all-repositories]]
-Set configuration for all repositories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Set configuration for all repositories
 
-[[display-colored-output-for-git-commands]]
-Display colored output for git commands
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Display colored output for git commands
 
-[[show-the-current-branch-in-the-terminal]]
-Show the current branch in the terminal
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Show the current branch in the terminal
 
-[[set-aliases-for-commands]]
-Set aliases for commands
-^^^^^^^^^^^^^^^^^^^^^^^^
+==== Set aliases for commands
 
-[[shorten-commands]]
-Shorten commands
-^^^^^^^^^^^^^^^^
+==== Shorten commands
 
-[[setup-a-graphical-merge-tool]]
-Setup a graphical merge tool
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Setup a graphical merge tool
 
-[[override-the-url-for-a-repository]]
-Override the URL for a repository
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Override the URL for a repository
 
-[[store-passwords-in-the-osx-keychain]]
-Store passwords in the OSX keychain
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Store passwords in the OSX keychain
 
-[[store-arbitrary-text-in-git-configuration]]
-Store arbitrary text in Git configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Store arbitrary text in Git configuration

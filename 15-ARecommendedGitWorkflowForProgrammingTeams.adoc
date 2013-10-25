@@ -1,3 +1,1 @@
-[[a-recommended-git-workflow-for-programming-teams]]
-A recommended Git workflow for programming teams
-------------------------------------------------
+== A recommended Git workflow for programming teams
