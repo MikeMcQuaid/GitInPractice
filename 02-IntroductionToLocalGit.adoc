@@ -563,4 +563,3 @@ while using it.
 
 Now let's learn how to use these concepts to interact with repositories
 that are not stored on your local machine.
-

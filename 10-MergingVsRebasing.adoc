@@ -91,4 +91,3 @@ reasonable to always make merge commits in `master` but always rebase
 branches on top of other branches) but a consistent approach across the
 repository. This should ensure that, whatever strategy is adopted, the
 history will communicate something of the development of the project.
-

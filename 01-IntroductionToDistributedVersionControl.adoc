@@ -576,4 +576,3 @@ request.
 
 Now let's learn how to use these concepts to create and interact with a
 Git repository on your local machine.
-

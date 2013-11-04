@@ -296,4 +296,3 @@ In this chapter you hopefully learned:
 * How to merge branches and then delete from the local and remote repository
 
 Now let's learn how to perform some more advanced interactions with files inside the GitHub working directory.
-
