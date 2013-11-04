@@ -1,6 +1,7 @@
-== Introduction to Distributed Version Control
+= Introduction to Git
 // Still need to write the intro to Part 1
 
+== Introduction to Distributed Version Control
 This chapter covers:
 
 * Why programmers use _version control systems_ to keep track of changes

@@ -1,3 +1,5 @@
+= Git Workflows
+
 == Git Shortcuts
 === Commit all changes without adding files
 
