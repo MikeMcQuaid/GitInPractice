@@ -1,0 +1,5 @@
+= Git in Practice
+Mike McQuaid <mike@mikemcquaid.com>
+:doctype: book
+:toc:
+:numbered:

@@ -1,9 +1,3 @@
-= Git in Practice
-Mike McQuaid <mike@mikemcquaid.com>
-:doctype: book
-:toc:
-:numbered:
-
 Reader Prerequisites:
 
 * Unix Shell (medium): familiarity with the Unix shell and interacting with the filesystem and various tools using it (Git will only be used as a command-line tool in this book). For example, needs to be able to create, edit and remove directories and files from the command-line. This includes Windows users who will be encouraged to install MSYSGit (which provides Git in a Unix shell on Windows).
