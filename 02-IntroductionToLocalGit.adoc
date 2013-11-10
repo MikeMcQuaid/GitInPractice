@@ -4,84 +4,21 @@ control system on your local system by covering the following topics:
 
 // Bullets should either all be "How to..." or starting a "...ing" word (gerund)
 * Why Git is popular with programmers
-* How to install and use Git and gitk/GitX
-* How to create a new local Git repository
+* Install and using Git and gitk/GitX
+* Creating a new local Git repository
 * Committing to a Git repository
 * Viewing the history of a Git repository
 * Viewing the differences between Git commits/branches/tags
 
-Git repositories store all their data on your local machine. This means
-when you create a new Git repository it does not need to send or receive
-any data from other computers in order to be useful. When you make
-commits, view history or request diffs these are all local operations
-that do not require a network connection. For these reasons Git is fast
-and can be used (and useful) for storing versions of files on your local
-machine.
+Git repositories store all their data on your local machine. This means when
+you create a new Git repository it does not need to send or receive any data
+from other computers in order to be useful. When you make commits, view history
+or request diffs these are all local operations that do not require a network
+connection. For these reasons Git is fast and can be used (and useful) for
+storing versions of files on your local machine. Let's start using Git by
+getting it installed.
 
 // add new GitX screenshots for every change.
-// Why isn't section 2.1 in Chapter 1? This chapter is about
-// "How?" rather than "Why?"
-=== Why do programmers use Git?
-Git was originally created by programmers for programmers. Linus
-Torvalds, the creator of Git and the Linux kernel, started in 2008 with
-the goal of having a distributed, open-source, high-performance and hard
-to corrupt version control system for the Linux kernel project to use.
-Within a week Git was self-hosting (meaning Git's source code was hosted
-inside a Git repository) and within two and a half months the version
-2.6.12 of the Linux kernel was made using Git.
-
-From it's initial creation for the Linux kernel Git is now used by all
-sizes of companies, many open source projects and large "social coding"
-Git hosting sites such as GitHub or Bitbucket.
-
-==== Why is Git my preferred method of source control?
-Git is my preferred method of software source code control (and even
-managing versions of text such as when I wrote this book). Git has many
-strengths over other methods of source control. Some of the reasons I
-personally prefer Git over the alternatives are:
-
-// First paragraph and bullets should be a callout
-* Local. Git stores all of the history of a repository, branches and
-commits locally. Adding new versions or querying the history of a
-repository occurs locally rather than requiring a network connection.
-Compared to Subversion, for example, the history log or creating a
-branch is near-instant rather than sluggish (even over a fast
-connection)
-* Speed. Git was written with a strong emphasis on performance. Combined
-with the local storage model means that many actions feel instant.
-* Distributed. Related to "Local" above. As Git stores changes locally
-you are not constrained by the work of others when working in a team.
-Merge conflicts are solved at the time by the person doing the merge so
-you can continue your edit/commit workflow without interruptions.
-* Rewriting history. In Git you can modify the history of branches (and
-even entire repositories). It's often useful to be able to make lots of
-small commits which are later turned into a single commit or make commit
-messages contain more information after the fact.
-* Hard to lose data. With Git anything that is committed has a unique
-reference that survives rewriting or changes for at least 30 days. This
-means it's very hard to accidentally lose work.
-
-Git's main downsides are the both the command-line application's
-interface and the documentation can be hard to follow; they sometimes
-rely on confusing jargon to explain concepts. To the credit of the Git
-community these have both improved vastly over the years. This book will
-sometimes seek to explain some of the concepts behind the jargon; this
-helps avoid understanding Git's interface but not what it is doing
-internally.
-
-Despite these difficulties the strengths of Git have proved too strong
-for many software projects to resist. Google, Microsoft, Twitter,
-LinkedIn and Netflix all use Git as well as open-source projects such as
-the Linux kernel (the first Git user), Perl, PostgreSQL, Android, Ruby
-on Rails, Qt, GNOME, KDE, Eclipse and X.org.
-
-Many of the above projects and many users of Git have also been
-introduced to Git and use it regularly through a Git hosting provider.
-My favourite is GitHub but there are alternatives such as Gitorious,
-Bitbucket, SourceForge, Google Code and others.
-
-For now we'll focus on using Git locally which means we don't need
-access to a hosting service. Let's start by getting it installed.
 
 === Installation
 Git does not come pre-installed on most operating systems as it is a
@@ -201,7 +138,6 @@ Typically you'd do this by downloading (known as _cloning_ by Git) another
 repository that already exists but let's create an empty, new local repository.
 // and to do that we open a new terminal window...
 
-
 ==== The git init command
 A Git repository must be initialized before any files can be added,
 commits made or pushed elsewhere. When `git init` is run it creates a
@@ -219,12 +155,11 @@ named "git-testing".
 Under this directory a subdirectory named `.git` is created with various
 files and subdirectories under it.
 
-// annotate file listing
 ------------------------------------------------
-git-testing/.git/config
-git-testing/.git/description
-git-testing/.git/HEAD
-git-testing/.git/hooks/applypatch-msg.sample
+git-testing/.git/config <1>
+git-testing/.git/description <2>
+git-testing/.git/HEAD <3>
+git-testing/.git/hooks/applypatch-msg.sample <4>
 git-testing/.git/hooks/commit-msg.sample
 git-testing/.git/hooks/post-update.sample
 git-testing/.git/hooks/pre-applypatch.sample
@@ -233,12 +168,21 @@ git-testing/.git/hooks/pre-push.sample
 git-testing/.git/hooks/pre-rebase.sample
 git-testing/.git/hooks/prepare-commit-msg.sample
 git-testing/.git/hooks/update.sample
-git-testing/.git/info/exclude
-git-testing/.git/objects/info
-git-testing/.git/objects/pack
-git-testing/.git/refs/heads
-git-testing/.git/refs/tags
+git-testing/.git/info/exclude <5>
+git-testing/.git/objects/info <6>
+git-testing/.git/objects/pack <7>
+git-testing/.git/refs/heads <8>
+git-testing/.git/refs/tags <9>
 ------------------------------------------------
+<1> local configuration
+<2> description file
+<3> HEAD pointer
+<4> event hooks
+<5> excluded files
+<6> info packs?
+<7> pack files
+<8> branch pointers
+<9> tag pointers
 
 The purpose of some of these files (seen in Listing 2.1) may be obvious
 to you if you have prior experience of version control. Git has created
@@ -252,8 +196,7 @@ tags are. These are stored under the refs folder.
 You shouldn't edit any of these files directly until you have a more
 advanced understanding of Git (or perhaps never at all). You will
 instead modify these files and folders by interacting with the Git
-repository through Git's commands.
-// reference later chapter where you'll do this
+repository through Git's filesystem commands introduced in Chapter 4.
 
 === Committing changes to files
 Like other version control systems to do anything useful in Git we first
@@ -299,8 +242,8 @@ Note that as the file is changed the contents of the commit will not be
 updated to reflect these changes without another `git add`. This may
 appear strange; why would you not want to add new changes to the next
 commit?
-// where in the book?
-Later in the book this approach of incrementally and explicitly constructing
+
+In Chapter 7 this approach of incrementally and explicitly constructing
 new commits will be used to create a more readable version control history.
 
 Now that the contents of the file have been added to the index we're
@@ -335,6 +278,7 @@ created a branch).
 * 'root'. As this was the first commit in the repository it is known as
 the 'root commit' or 'initial commit'. This means it has no parent
 commit.
+// Explain what the root commit bit means. Can this show anything else?
 // what is a SHA-1 hash? Add footnote
 * 'shortened SHA-1'. Every commit in Git is given a unique 40
 hexadecimal character SHA-1 hash based on the contents and metadata of
@@ -396,11 +340,11 @@ To view the commit history (also known as log):
 2.  Run `git log`
 
 -----------------------------------------------------------------
-commit 69664f87db4f5b51e1ae64a38e6696fb2a7ed9e1
-Author: Mike McQuaid <mike@mikemcquaid.com>
-Date:   Sat Oct 12 14:36:01 2013 +0100
+commit 69664f87db4f5b51e1ae64a38e6696fb2a7ed9e1 <1>
+Author: Mike McQuaid <mike@mikemcquaid.com> <2>
+Date:   Sat Oct 12 14:36:01 2013 +0100 <3>
 
-    Change stability and add empty LICENSE.
+    Change stability and add empty LICENSE. <4>
 
 commit a10d9af146e67ecabb078e91f17913c24363ee63
 Author: Mike McQuaid <mike@mikemcquaid.com>
@@ -410,6 +354,11 @@ Date:   Sat Oct 12 14:00:34 2013 +0100
 
     This will help people understand what this repository is for.
 -----------------------------------------------------------------
+<1> commit SHA-1
+<2> commit author
+<3> commit date
+<4> commit message
+
 // perhaps add in the original command for context? Also: annotate more.
 
 The commit log (seen in Listing 2.2) lists all the commits that have

@@ -8,6 +8,8 @@ In this chapter you will learn how to retrieve and share changes with other user
 
 As you learned in Chapter 2 it's possible to work entirely with Git as a local version control system and never share changes with others. Usually, however, if you are using a version control system you will want to share changes with others; from simply sending files to a remote server for backup to collaborating as part of a large development team. Team collaboration will also require knowledge of how to create and interact with branches for working on different features in parallel. Let's start by creating a GitHub account to share your work.
 
+// Chapter needs more talking rather than problem/techniques. Teach rather than state. Walk through the workflow diagram through the chapter. State what we are going to do, why and look back at what we have done. Intro, explain and summarise more for each section. Annotate workflow diagram more and more as you go through the chapter. Try and start with workflow diagram from the end of chapter 2. Perhaps use more callout diagrams rather than hedgehogs. Needs more cuddly analogies. When reusing diagrams grey-out irrelevant bits to show they've been covered already (and do that for Chapter 1/2?).
+
 .TODO
 NOTE: Add new GitX screenshots for every change. Discuss with Dan best approach for consistent repository that's publicly accessible and backport to Chapter 1 and 2.
 
@@ -77,6 +79,7 @@ You've pushed your changes to the remote repository.
 
 .Output of `git push --set-upstream origin master`
 image::diagrams/03-GitPush.png[]
+// tell people not to worry about object preparation
 
 The `--set-upstream` option is telling Git that we want future runs of `git push` without any arguments to push our local `master` branch to the remote `master` branch on the `origin` remote. In this case we would say that the `master` branch on `origin` (often abbreviated as `origin/master`) would be the _tracking branch_ for our local `master branch`.
 
@@ -120,6 +123,7 @@ You've pulled the new commits from the GitInPractice remote repository into your
 
 .Output of `git pull`
 image::diagrams/03-GitPull.png[]
+// This should be a callout instead
 
 `git pull` displays some useful information; the current and previous known SHA-1 state of the `master` branch on the remote `origin`, the current and previous known state of your local `master` branch (in this case they are the same but may not be depending on the merge type performed) and the diff stat changes summary displaying how many lines have changed across various files.
 
@@ -140,6 +144,7 @@ You've fetched the new commits from the GitInPractice remote repository into you
 
 .Output of `git fetch`
 image::diagrams/03-GitFetch.png[]
+// Make this less threatening by using callouts and referencing git pull instead.
 
 `git fetch` is effectively half of what `git pull` is doing. If your `master` branch is tracking the `master` branch on the remote `origin` then `git pull` is directly equivalent to running `git fetch && git merge origin/master`.
 
