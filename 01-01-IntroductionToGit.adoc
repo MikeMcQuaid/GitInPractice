@@ -1,9 +1,9 @@
 = Introduction to Git
-The first part of this book will give you an outline on the essential concepts
-necessary to understand how version control systems work and how to make Git
-perform the basic tasks that would be expected of a version control system.
+The first part of this book will give you an outline of the essential concepts
+required to understand how version control systems work and how to make Git
+perform the basic tasks expected of a version control system.
 
-I will start by explaining generic version control system concepts, explain how
-distributed version control differs from centralized version control, move onto
-creating new versions in a version control system and finally how to share
-these changes with others.
+I will start by explaining generic version control system concepts, how
+distributed version control differs from centralized version control, creating
+new versions in a version control system and finally how to share these changes
+with others.
