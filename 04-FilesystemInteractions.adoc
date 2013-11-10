@@ -4,9 +4,39 @@ manual user changes to the filesystem without using Git.
 
 === What is the interaction with the filesystem?
 
-=== Move a file
+=== Rename or move a file
+==== Background
+When using Git to manage a working directory full of files or subdirectories you will sometimes want to rename or move them. You wish to request Git control this operation to ensure Git preserves their history.
 
-=== Move a changed file
+==== Problem
+You wish to rename a file named `Chapter1.asciidoc` already stored in a Git repository to `01-FirstChapter.asciidoc` and commit the renamed file.
+
+==== Solution
+1.  Change to the directory containing your repository i.e. `cd /Users/mike/GitInPracticeRedux/`
+2.  Run `git mv Chapter1.asciidoc 01-FirstChapter.asciidoc`. There should be no output.
+3.  Run `git commit -m 'Rename Chapter 1 file.'` The output should resemble:
+
+.Renamed commit output
+------------------------------------------------
+[separate-files 6d249cd] Rename Chapter 1 file. <1>
+ 1 file changed, 0 insertions(+), 0 deletions(-) <2>
+ rename Chapter1.asciidoc => 01-FirstChapter.asciidoc (100%) <3>
+------------------------------------------------
+1. commit message
+2. no insertions/deletions
+3. old => new filename
+
+You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and committed it.
+
+==== Discussion
+Moving and renaming files in version control systems rather than deleting and recreating them is done to preserve their history. For example, when a file has been moved into a new directory you will still be interested in the previous versions of the file before it was moved. In Git's case it will try and autodetect renames or moves on `git add` or `git commit`; if a file is deleted and new file is created which has a majority of lines in common then Git will automatically detect the file was moved and `git mv` is not necessary. Despite this handy feature it's good practice to use `git mv` so you don't need to wait for a `git add` or `git commit` for Git to be aware of the move and to have consistent behavior across different versions of Git (which may have differing move autodetection behaviour).
+
+After running `git mv` the move or rename will be added to Git's index staging area which, if you remember from Chapter 2, means that the change has been staged for inclusion in the next commit.
+
+It's also possible to rename files, directories or symlinks and move files, directories and symlinks into other directories inside the Git repository using the `git mv` command and the same syntax as above. If you wish to move files in to or out of a repository you must use a different, non-Git command (such as `mv`).
+
+.Overwriting existing files
+NOTE: If the filename that you move to already exists you will need to use the `git mv -f` (or `--force`) option to state to Git that you wish to overwrite whatever file is at the destination. If the destination file has not already been added or committed to Git that it will not be possible to retrieve the contents if you erroneously asked Git to overwrite it.
 
 === Remove a file
 
