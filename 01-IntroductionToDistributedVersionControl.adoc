@@ -14,8 +14,11 @@ covering the following topics:
   machines (_distributed version control systems_).
 
 You may not be familiar with version control concepts or why version control
-systems are useful for managing changes to text. Let's start off by asking the
-why you should use version control.
+systems are useful for managing changes to text. Let's start off by asking why
+you should use version control.
+
+// Needs more annotations. Always refer to figures in text at least once.
+// Figures and listings should be nearer their text. Look at PDF output.
 
 === Why use version control?
 A common problem when dealing with information stored on a computer is handling
@@ -51,7 +54,7 @@ image::diagrams/01-VersionedFile.png[]
 
 When editing a file in a version control system you will always
 edit/save/commit the same file on disk. It will not move location either
-manually or automatically (unless you with to rename it, of course). When you
+manually or automatically (unless you wish to rename it, of course). When you
 wish to access previous versions of the file you can either view them through
 the version control system or restore the file on disk to a previous version.
 This allows you to see exactly what may have changed between versions. When
@@ -71,6 +74,9 @@ the difference between the versions' files (known as _diffs_) can be queried.
 
 .Workflow
 image::diagrams/01-Workflow.png[]
+// Way more abstract than 1.1 or 1.2. Needs to be a lot more like Figure 1.2.
+// Should reference more stuff, have a running commentary round the outside,
+// better caption.
 
 As you use a version control system you will add new changes to versioned
 files, create new commits containing these changes and commit the changes to
@@ -100,6 +106,10 @@ source code.
 
 .Multiple branches
 image::diagrams/01-Branches.png[]
+// Not clear why arrows are different ways round. Timeline from left to right?
+// See 1.5 for why arrows are pointing this way? Also, should be down next to
+// the reference. You can have bugfixes for books. Also explain why you might
+// want to have branches.
 
 When creating computer software it's also common to release new _versions_ of a
 product. New versions are generally released when bugs are fixed and/or when
@@ -111,6 +121,7 @@ the bug fix to be immediately released and ensure that none of the changes made
 while creating a new feature end up in that release. Instead these changes
 would be made on an independent branch of the history to allow continuous work
 on the new feature rather than waiting for the bug fix's release to be made.
+// Update the text here to reflect that it's a book not code.
 This branch could be later _merged_ into the main branch which would include
 all the changes into the main branch.
 
@@ -121,7 +132,7 @@ be able to see how they allow multiple tracks of development in a project.
 Now you've learnt why programmers use version control let's see why they use Git specifically.
 
 === Why do programmers use Git?
-Git was originally created by programmers for programmers. Linus Torvalds, the
+Git was created by a programmer to be used by programmers. Linus Torvalds, the
 creator of Git and the Linux kernel, started in 2008 with the goal of having a
 distributed, open-source, high-performance and hard to corrupt version control
 system for the Linux kernel project to use. Within a week Git was self-hosting
@@ -132,6 +143,7 @@ From it's initial creation for the Linux kernel Git is now used by all sizes of
 companies, many open source projects and large "social coding" Git hosting
 sites such as GitHub or Bitbucket.
 
+// rewrite brackets in here
 .Why is Git my preferred method of source control?
 NOTE: Git is my preferred method of software source code control (and even
 managing versions of text such as when I wrote this book). Git has many
@@ -171,20 +183,22 @@ Code and others.
 Let's learn more how Git actually manages changes. Git's changes are known as
 _commits_.
 
-==== Committing: recording changes to code
+=== Committing: recording changes to code
 .A commit
 image::diagrams/01-Commit.png[]
 
-A _commit_ is an collection of changes to one or more files in a version
-control system. Each commit contains a message entered by the author, details
-of the author of the commit, a unique commit reference (the format of which
-varies between version control systems but in Git looks like
+A _commit_ is a collection of changes to one or more files in a version control
+system. Each commit contains a message entered by the author, details of the
+author of the commit, a unique commit reference (the format of which varies
+between version control systems but in Git looks like
 `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit
 (known as the _parent commit_), the date the commit was created and a pointer
 to the contents of files when the commit was made. The file contents are
 typically displayed as the _diff_ (the differences between the files before and
 the files after the commit).
 
+// "A typical commit broken down into its component parts is shown in Figure
+// 1.5" and then figure here.
 As you may have noticed Figure 1.5 uses arrows pointing from commits to their
 previous commit. The reason for this is that commits contain a pointer to the
 _parent commit_ and not the other way round; when a commit is made it has no
@@ -210,13 +224,14 @@ easily reverted. This is much more difficult if many unrelated changes are
 clumped together into a single commit and you wish to revert a single change.
 
 ==== Commit storage in Git
-Git is a version control system built on top of an _object store_. When you
-commit Git creates and stores a collection of objects. The object store is
-stored inside the Git _repository_. The repository is the local collection of
-all the files related to a particular Git version control system and is stored
-in a `.git` folder in the root of the project. If you were to explore under
-here (as we will do in Chapter 2) you would find objects, various
-pointers/references to objects and configuration files.
+Git is a version control system built on top of an _object store_. Git creates
+and stores a collection of objects when you commit. The object store is stored
+inside the Git _repository_. The repository is the local collection of all the
+files related to a particular Git version control system and is stored in a
+`.git` folder in the root of the project. If you were to explore under here (as
+we will do in Chapter 2) you would find objects, various pointers/references to
+objects and configuration files.
+// Reference Figure 1.6 in here.
 
 .Git objects
 image::diagrams/01-Objects.png[]
@@ -279,6 +294,7 @@ commit.
 
 .Parent commits
 image::diagrams/01-ParentCommit.png[]
+// More annotations.
 
 ==== Rewriting history
 Git is unusual compared to many other version control systems in that it allows
@@ -293,12 +309,14 @@ ever single change that was made in reaching the final state.
 
 .Squashing
 image::diagrams/01-Squashing.png[]
+// Signify movement on first three commits. Perhaps join them with a dotted line
+// or arrows? Line up "add new button" commits.
 
 Here you see a fairly common use-case for rewriting history with Git. If you
 were working on some window code all morning and wanted your coworkers to see
 it later (or just include it in the project) then there's no need for everyone
 to see the mistakes you made along the way; why damage your good reputation
-unnecessarily? In Figure 1.12 the commits are being _squashed_ together so
+unnecessarily? In Figure 1.8 the commits are being _squashed_ together so
 instead of three commits and the latter two fixing mistakes in the first commit
 we have squashed these together to create a single commit for the window
 feature. We'd only rewrite history like this if working on a separate branch
@@ -356,22 +374,23 @@ and details the inserted or deleted lines. The above example shows a change to
 a `GitInPractice.asciidoc` deleting multiple lines of text and replacing them
 with a comment.
 
-The "diff command" shows an example `diff` command that may have been used to
-output these changes (although in reality this is done by Git internally). The
-"staging area SHA-1" shows the changes that were made to the `index staging
-area` by this commit; in short the changes to the actual contents of files in
-this commit. The staging area will be explained more in Chapter 2. The "old
-file version" and "new file version" show virtual file names relating to the
-diff command; as if instead of comparing multiple versions in the version
-control repository multiple versions of the files in different folders (`a` and
-`b` were compared). The "file changes range" is used by the `diff` tool to find
-the locations in the file this diff refers to. In this example you can see the
-entire file and all the changes made to it. If this were a file with thousands
-of lines but only five lines were changed then the diff would only show the
-five lines that were changed with some surrounding context. These range markers
-would allow a `diff` tool to find what lines should be changed. Lines that are
-"unchanged" are displayed as-is, "deleted" lines are prefixed with a `-` and
-"inserted" lines are prefixed with a `+`.
+The "(1) diff command" shows an example `diff` command that may have been used
+to output these changes (although in reality this is done by Git internally).
+The "(2) staging area SHA-1" shows the changes that were made to the `index
+staging area` by this commit; in short the changes to the actual contents of
+files in this commit. The staging area will be explained more in Chapter 2. The
+"(3) old file version" and "(4) new file version" show virtual file names
+relating to the diff command; as if instead of comparing multiple versions in
+the version control repository multiple versions of the files in different
+folders (`a` and `b` were compared). The "(5) file changes range" is used by
+the `diff` tool to find the locations in the file this diff refers to. In this
+example you can see the entire file and all the changes made to it. If this
+were a file with thousands of lines but only five lines were changed then the
+diff would only show the five lines that were changed with some surrounding
+context. These range markers would allow a `diff` tool to find what lines
+should be changed. Lines that are "(6) unchanged" are displayed as-is, "(7)
+deleted" lines are prefixed with a `-` and "(8) inserted" lines are prefixed
+with a `+`.
 
 .Changed lines
 NOTE: changed lines are displayed in a unified diff as a deletion of the

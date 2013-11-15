@@ -6,16 +6,28 @@ manual user changes to the filesystem without using Git.
 
 === Rename or move a file
 ==== Background
+// For those new to git, you need to point out explicitly that renaming a file
+// or directory is synonymous with moving that file or directory and why.
+// Background is introduction. Why? Who cares? So what? Don’t want to lose
+// history because of XYZ "To answer the key questions “why? who cares? so
+// what?", each recipe begins by providing background context / motivation /use
+// cases / concrete examples so that the reader will be able to recognize the
+// situation or situations in which the problem applies.” puts the e.g. commands
+// into the listing end with “you should contrast this with removing a file”
+// segue etc.
+
 When using Git to manage a working directory full of files or subdirectories you will sometimes want to rename or move them. You wish to request Git control this operation to ensure Git preserves their history.
 
 ==== Problem
 You wish to rename a file named `Chapter1.asciidoc` already stored in a Git repository to `01-FirstChapter.asciidoc` and commit the renamed file.
 
 ==== Solution
-1.  Change to the directory containing your repository i.e. `cd /Users/mike/GitInPracticeRedux/`
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `git mv Chapter1.asciidoc 01-FirstChapter.asciidoc`. There should be no output.
 3.  Run `git commit -m 'Rename Chapter 1 file.'` The output should resemble:
 
+// Use --message instead of -m
+// put run commands in the listing
 .Renamed commit output
 ------------------------------------------------
 [separate-files 6d249cd] Rename Chapter 1 file. <1>
@@ -53,6 +65,8 @@ NOTE: If the filename that you move to already exists you will need to use the `
 === Delete ignored files
 
 === Delete ignored or untracked directories
+
+=== Resetting files to the last commit
 
 === Temporarily stash some changes
 

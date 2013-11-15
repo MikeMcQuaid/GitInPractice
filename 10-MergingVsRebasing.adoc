@@ -9,6 +9,8 @@ Why are there two strategies for accomplishing essentially the same
 task? Compare the history of two popular open-source projects and their
 branching strategies.
 
+// Add more annotated diagrams.
+
 === CMake
 CMake is a cross-platform buildsystem created by Kitware. It has many
 contributors both inside and outside Kitware but relatively few
