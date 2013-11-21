@@ -17,28 +17,29 @@ You may not be familiar with version control concepts or why version control
 systems are useful for managing changes to text. Let's start off by asking why
 you should use version control.
 
-// Needs more annotations. Always refer to figures in text at least once.
-// Figures and listings should be nearer their text. Look at PDF output.
-
 === Why use version control?
 A common problem when dealing with information stored on a computer is handling
 _changes_. For example, after adding, modifying or deleting text you may want
 to undo that action (and perhaps redo it later). At the simplest level this
 might be done by clicking _undo_ in a text editor (which reverts a previous
 action); after new words are added it may be necessary to undo these changes by
-pressing undo repeatedly until you return to the desired previous state. A
-naive method for handling multiple file versions is often simply creating
-duplicate files with differing filenames and contents (`Important Document V4
-FINAL FINAL.doc` may sound sadly familiar).
+pressing undo repeatedly until you return to the desired previous state.
 
 .Versioning with multiple files
 image::diagrams/01-MultipleFiles.png[]
+A naive method for handling multiple file versions is often simply creating
+duplicate files with differing filenames and contents (`Important Document V4
+FINAL FINAL.doc` may sound sadly familiar). An example of this approach can be
+seen in Figure 1.1.
 
 At a more advanced level you may be sharing a document with other people and,
 rather than just undoing and redoing changes, wish to know who made a change,
 why they made it, when they made it, what the change was and perhaps even store
 multiple versions of the document in parallel. A _version control system_ (such
 as Git) allows all these operations and more.
+
+.Versioning with a version control system
+image::diagrams/01-VersionedFile.png[]
 
 In a version control system instead of just saving a document after your
 changes have been made you would _commit_ it. This involves a save-like
@@ -47,10 +48,7 @@ version and specifying a message stating the reason for their change or what it
 accomplishes. When another commit is made then the previous version would
 remain in _history_ where its changes can be examined at a later time. Version
 control systems can therefore solve the problem of reviewing and retrieving
-previous changes and allow single files to be used rather than duplicated.
-
-.Versioning with a version control system
-image::diagrams/01-VersionedFile.png[]
+previous changes and allow single files to be used rather than duplicated. This workflow can be seen in Figure 1.2.
 
 When editing a file in a version control system you will always
 edit/save/commit the same file on disk. It will not move location either
@@ -72,18 +70,16 @@ changes, time it was made, who made it and the contents of the files at this
 point. The files' state from a commit can be compared to a previous version and
 the difference between the versions' files (known as _diffs_) can be queried.
 
-.Workflow
+.Git add/commit/checkout workflow
 image::diagrams/01-Workflow.png[]
-// Way more abstract than 1.1 or 1.2. Needs to be a lot more like Figure 1.2.
-// Should reference more stuff, have a running commentary round the outside,
-// better caption.
 
-As you use a version control system you will add new changes to versioned
-files, create new commits containing these changes and commit the changes to
-the repository. At a later point you can checkout different versions of files.
-This allows you to have confidence that, no matter what you may add, modify or
-delete, all committed versions of your files will remain in the version control
-system if you need to check their contents later.
+Figure 1.3 shows the workflow you will use when using a version control system.
+After adding new changes to versioned files you will create new commits
+containing these changes and commit the changes to the repository. At a later
+point you can checkout different versions of files. This allows you to have
+confidence that, no matter what you may add, modify or delete, all committed
+versions of your files will remain in the version control system if you need to
+check their contents later.
 
 ==== Version control for programmer collaboration
 Programmers spend most of their jobs (and sometimes their lives) editing text.
@@ -104,13 +100,6 @@ sheer numbers of files programmers typically work with and it should become
 clear why most programming projects use version control systems to manage their
 source code.
 
-.Multiple branches
-image::diagrams/01-Branches.png[]
-// Not clear why arrows are different ways round. Timeline from left to right?
-// See 1.5 for why arrows are pointing this way? Also, should be down next to
-// the reference. You can have bugfixes for books. Also explain why you might
-// want to have branches.
-
 When creating computer software it's also common to release new _versions_ of a
 product. New versions are generally released when bugs are fixed and/or when
 new features have been created. However, a team may be half way through
@@ -121,15 +110,19 @@ the bug fix to be immediately released and ensure that none of the changes made
 while creating a new feature end up in that release. Instead these changes
 would be made on an independent branch of the history to allow continuous work
 on the new feature rather than waiting for the bug fix's release to be made.
-// Update the text here to reflect that it's a book not code.
 This branch could be later _merged_ into the main branch which would include
 all the changes into the main branch.
 
-In Figure 1.4 you can see an example of using multiple branches when writing a
-book. We'll cover this in more detail in Section 1.4.1 but you should already
-be able to see how they allow multiple tracks of development in a project.
+.Committing on multiple branches
+image::diagrams/01-SimpleBranches.png[]
 
-Now you've learnt why programmers use version control let's see why they use Git specifically.
+In Figure 1.4 you can see a simple example of using multiple branches when
+writing a book. We'll cover this in more detail in Section 1.4.1 but you should
+already be able to see how they allow multiple tracks of development in a
+project.
+
+Now you've learnt why programmers use version control let's see why they use
+Git specifically.
 
 === Why do programmers use Git?
 Git was created by a programmer to be used by programmers. Linus Torvalds, the
@@ -139,37 +132,39 @@ system for the Linux kernel project to use. Within a week Git was self-hosting
 (meaning Git's source code was hosted inside a Git repository) and within two
 and a half months the version 2.6.12 of the Linux kernel was made using Git.
 
-From it's initial creation for the Linux kernel Git is now used by all sizes of
+From its initial creation for the Linux kernel Git is now used by all sizes of
 companies, many open source projects and large "social coding" Git hosting
 sites such as GitHub or Bitbucket.
 
-// rewrite brackets in here
-.Why is Git my preferred method of source control?
-NOTE: Git is my preferred method of software source code control (and even
-managing versions of text such as when I wrote this book). Git has many
+.Why do people prefer Git?
+NOTE: Git is my preferred method of software source code control. I also use it
+for versioning plain text files such as the text for this book. Git has many
 strengths over other methods of source control. Git stores all of the history
 of a repository, branches and commits locally. This means adding new versions
 or querying the history of a repository doesn't require a network connection.
-Compared to Subversion, for example, the history log or creating a branch is
-near-instant rather than sluggish (even over a fast connection). As Git stores
+Git's history log viewing and branch creation is near-instant compared to e.g.
+Subversion's which is sluggish even on a fast network connection. As Git stores
 changes locally you are not constrained by the work of others when working in a
 team. For example, merge conflicts are solved at the time by the person doing
 the merge so you can continue your edit/commit workflow without interruptions.
-In Git you can modify the history of branches (and even entire repositories).
+In Git you can modify the history of branches and even entire repositories.
 It's often useful to be able to make lots of small commits which are later
 turned into a single commit or make commit messages contain more information
 after the fact. Despite this flexibility with Git anything that is committed
 has a unique reference that survives rewriting or changes for at least 30 days.
 This means it's very hard to accidentally lose work.
 
-Git's main downsides are that the command-line application's interface and the
-documentation can be hard to follow; they sometimes rely on confusing jargon to
-explain concepts. To the credit of the Git community these have both improved
-vastly over the years. This book will sometimes seek to explain some of the
-concepts behind the jargon; this helps avoid understanding Git's interface but
-not what it is doing internally.
+Git's main downsides are that the command-line application's interface is often
+counterintuitive; it makes frequent use of jargon that can only be adequately
+explained by understanding Git's internals. Additionally Git's official
+documentation can be hard to follow; it also uses jargon and has to detail the
+large number of options for Git's commands. To the credit of the Git community
+both the UI and documentation around Git have improved hugely over the years.
+This book will help you understand Git's jargon and the Git's internal
+operations; this should help you to understand why Git does what it does when
+you run the various Git commands.
 
-Despite these difficulties the strengths of Git have proved too strong for many
+Despite these downsides the strengths of Git have proved too strong for many
 software projects to resist. Google, Microsoft, Twitter, LinkedIn and Netflix
 all use Git as well as open-source projects such as the Linux kernel (the first
 Git user), Perl, PostgreSQL, Android, Ruby on Rails, Qt, GNOME, KDE, Eclipse
@@ -184,9 +179,6 @@ Let's learn more how Git actually manages changes. Git's changes are known as
 _commits_.
 
 === Committing: recording changes to code
-.A commit
-image::diagrams/01-Commit.png[]
-
 A _commit_ is a collection of changes to one or more files in a version control
 system. Each commit contains a message entered by the author, details of the
 author of the commit, a unique commit reference (the format of which varies
@@ -197,8 +189,9 @@ to the contents of files when the commit was made. The file contents are
 typically displayed as the _diff_ (the differences between the files before and
 the files after the commit).
 
-// "A typical commit broken down into its component parts is shown in Figure
-// 1.5" and then figure here.
+.A typical commit broken down into its parts
+image::diagrams/01-Commit.png[]
+
 As you may have noticed Figure 1.5 uses arrows pointing from commits to their
 previous commit. The reason for this is that commits contain a pointer to the
 _parent commit_ and not the other way round; when a commit is made it has no
@@ -214,7 +207,7 @@ include in a commit and leave the other changes for adding in a future commit.
 This is often desirable because commits should be the smallest possible units
 of work to make them easier to understand.
 
-.Small commits are better commits
+.Why are small commits better?
 NOTE: Commits should be kept as small as possible. This allows their message to
 describe a single change rather than multiple changes that are unrelated but
 were worked on at the same time. Small commits keep the history readable; it's
@@ -231,21 +224,20 @@ files related to a particular Git version control system and is stored in a
 `.git` folder in the root of the project. If you were to explore under here (as
 we will do in Chapter 2) you would find objects, various pointers/references to
 objects and configuration files.
-// Reference Figure 1.6 in here.
 
-.Git objects
+.commit, blob and tree objects
 image::diagrams/01-Objects.png[]
 
-The main three Git objects we're concerned about are _commits_, _blobs_ and
-_trees_ (there is also a _tag_ object; we'll talk about tags in Section 1.4).
-We've already seen that commits store metadata and referenced file contents.
-The file contents reference is actually a reference to a _tree object_. A tree
-object stores a reference to all the _blob objects_ at a particular point in
-time and other tree objects if there are any subfolders. A blob object stores
-the contents of a particular version of a particular single file in the Git
-repository.
+In Figure 1.6 you can see the main Git objects we're concerned with: _commits_,
+_blobs_ and _trees_. There is also a _tag_ object but we'll leave tags until
+Section 1.4. We've already seen that commits store metadata and referenced file
+contents. The file contents reference is actually a reference to a _tree
+object_. A tree object stores a reference to all the _blob objects_ at a
+particular point in time and other tree objects if there are any subfolders. A
+blob object stores the contents of a particular version of a particular single
+file in the Git repository.
 
-.Interacting with objects
+.Should objects being interacted with directly?
 NOTE: When using Git you should never need to interact with objects or object
 files directly. The terminology of _blobs_ and _trees_ are not used regularly
 in Git or in this book but it's useful to remember what these are so you can
@@ -290,11 +282,10 @@ branch-less history will be the one that immediately preceded it. The only
 commit that lacks a parent commit is the _initial commit_; the first commit in
 the repository. By following the parent commit, its parent, its parent and so
 on you will always be able to get back from the current commit to the initial
-commit.
+commit. You can see an example of parent commit pointers in Figure 1.7.
 
-.Parent commits
+.Parent commit pointers
 image::diagrams/01-ParentCommit.png[]
-// More annotations.
 
 ==== Rewriting history
 Git is unusual compared to many other version control systems in that it allows
@@ -307,20 +298,18 @@ between. Similarly sometimes you may want to highlight only broader changes to
 files in a version control system over a period of time rather than sharing
 ever single change that was made in reaching the final state.
 
-.Squashing
+.Squashing multiple commits into a single commit
 image::diagrams/01-Squashing.png[]
-// Signify movement on first three commits. Perhaps join them with a dotted line
-// or arrows? Line up "add new button" commits.
 
-Here you see a fairly common use-case for rewriting history with Git. If you
-were working on some window code all morning and wanted your coworkers to see
-it later (or just include it in the project) then there's no need for everyone
-to see the mistakes you made along the way; why damage your good reputation
-unnecessarily? In Figure 1.8 the commits are being _squashed_ together so
-instead of three commits and the latter two fixing mistakes in the first commit
-we have squashed these together to create a single commit for the window
-feature. We'd only rewrite history like this if working on a separate branch
-that hadn't had other work from other people relying on it yet as it has
+In Figure 1.8 you see a fairly common use-case for rewriting history with Git.
+If you were working on some window code all morning and wanted your coworkers
+to see it later (or just include it in the project) then there's no need for
+everyone to see the mistakes you made along the way; why damage your good
+reputation unnecessarily? In Figure 1.8 the commits are being _squashed_
+together so instead of three commits and the latter two fixing mistakes in the
+first commit we have squashed these together to create a single commit for the
+window feature. We'd only rewrite history like this if working on a separate
+branch that hadn't had other work from other people relying on it yet as it has
 changed some parent commits (so, without intervention, other people's commits
 may point to commits that no longer exist). Don't worry too much about rebasing
 or squashing work for now; just this as a situation where you may want to
@@ -346,7 +335,7 @@ displaying diffs in version control typically allow you to narrow them down
 per-file, folder and even committer.
 
 ==== Default diff format
-------------------------------------
+----
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc <1>
 index 7bd3fb8..7230cbf 100644 <2>
 --- a/GitInPractice.asciidoc <3>
@@ -358,7 +347,7 @@ index 7bd3fb8..7230cbf 100644 <2>
 -...
 -Git In Perfect!
 +// TODO: think of funny first line that editor will approve. <8>
-------------------------------------
+----
 <1> diff command
 <2> staging area SHA-1
 <3> old file version
@@ -392,7 +381,7 @@ should be changed. Lines that are "(6) unchanged" are displayed as-is, "(7)
 deleted" lines are prefixed with a `-` and "(8) inserted" lines are prefixed
 with a `+`.
 
-.Changed lines
+.How do diffs show changed lines?
 NOTE: changed lines are displayed in a unified diff as a deletion of the
 previous line and insertion of the new one (even if the change is only a single
 character).
@@ -406,10 +395,10 @@ book and when using Git.
 Sometimes it is desirable to display diffs in slightly differing formats. Two
 common alternatives to a typical unified diff are a _diffstat_ and _word diff_.
 
----------------------------------------------
+----
  GitInPractice.asciidoc | 4 +--- <1>
  1 file changed, 1 insertion(+), 3 deletions(-) <2>
----------------------------------------------
+----
 <1> one file's changes
 <2> all files' changes
 
@@ -428,7 +417,7 @@ and `+`/`-` characters.
 The "all files' changes" shows a summary of totals of the number of files
 changes and lines inserted/deleted across all files.
 
-----------------------------------------------
+----
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc
 index 7bd3fb8..7230cbf 100644
 --- a/GitInPractice.asciidoc
@@ -438,8 +427,9 @@ index 7bd3fb8..7230cbf 100644
 == Chapter 1
 [-Git In Practice makes-] <1>
 [-...-]
-[-Git In Perfect!-]{+// TODO: think of funny first line that editor will approve.+} <2>
-----------------------------------------------
+[-Git In Perfect!-]{+// TODO: think of funny first line that editor
+will approve.+} <2>
+----
 <1> deleted line
 <2> modified line
 
@@ -458,13 +448,15 @@ by `[-]` and some lines that were added surrounded by `{+}`.
 === Branches: working on multiple versions of code in parallel
 When committing to a version control system the history continues linearly;
 what was the most recent commit becomes the parent commit for the new commit.
-This parenting continues back to the initial commit in the repository. As
-discussed previously, sometimes this linear approach is not enough for software
-projects. Sometimes you may need to make new commits which are not yet ready
-for public consumption. Enter _branches_.
+This parenting continues back to the initial commit in the repository. You can
+see an example of this in Figure 1.9.
 
-.Without branches
+.Committing without using branches
 image::diagrams/01-WithoutBranches.png[]
+
+As discussed previously, sometimes this linear approach is not enough for
+software projects. Sometimes you may need to make new commits which are not yet
+ready for public consumption. Enter _branches_.
 
 Branching allows two independent tracks through history to be created and
 committed to without either modifying the other. Programmers can happily commit
@@ -472,7 +464,11 @@ to their independent branch without the fear of disrupting the work of another
 branch. This means that they can, for example, commit broken or incomplete
 features rather than having to wait for others to be ready for their commits.
 It also means they can be isolated from changes made by others until they are
-ready to integrate them into their branch.
+ready to integrate them into their branch. Figure 1.10 shows the same commits
+as Figure 1.9 if they were split between two branches instead for isolation.
+
+.Committing to multiple branches
+image::diagrams/01-Branches.png[]
 
 When a branch is created and new commits are made that branch advances forward
 to include the new commits. In Git a branch is actually no more than a pointer
@@ -484,9 +480,6 @@ release version 1.0 of your software you may tag the commit used to built
 the 1.0 release with a "1.0" tag. This means you can come back to it in future,
 rebuild that release or check how certain things worked without fear that it
 will be somehow changed automatically.
-
-.Using multiple branches
-image::diagrams/01-Branches.png[]
 
 ==== Using branching
 Branching allows two independent tracks of development to occur at once. In
@@ -510,12 +503,12 @@ switch branch back to the branch you had been committing the new feature to.
 At some point we have a branch that we're done with and we want to bring all
 the commits made on it into another branch. This process is known as a `merge`.
 
-.Merging branches
+.Merging a branch into master
 image::diagrams/01-Merging.png[]
 
 When a merge is requested all the commits from another branch are pulled into
 the current branch. Those commits then become part of the history of the
-branch. Please note from Figure 11.1 the commit in which the merge is made has
+branch. Please note from Figure 1.11 the commit in which the merge is made has
 two parents commits rather than one; it is joining together two separate paths
 through the history back into a single one. After a merge you may decide to
 keep the existing branch around to add more commits to it and perhaps merge
@@ -537,7 +530,7 @@ changes were not too near each other in the same file. If the version control
 system fails to perform the merge without human intervention it produces a
 merge conflict.
 
--------------------------------
+----
 = Git In Practice <1>
 <<<<<<< HEAD <2>
 == Chapter 1 <3>
@@ -549,7 +542,7 @@ system.
 // TODO: write second chapter.
 ======= <4>
 >>>>>>> separate-files <5>
--------------------------------
+----
 <1> unchanged line
 <2> previous changes marker
 <3> previous line version
@@ -569,7 +562,7 @@ separator" separates the previous and new changes. The "new changes" marker
 shows the end of the new changes and the name of the branch that has been
 merged in; `separate-files` in this case.
 
-.Quickly finding conflict markers
+.How can conflict markers be found quickly?
 NOTE: When searching a large file for the merge conflict markers you should
 enter `<<<<` into your text editor's find tool to quickly locate them.
 
@@ -590,7 +583,7 @@ they had to resolve.
 A _rebase_ is a method of history rewriting in Git that is similar to a merge.
 A rebase involves changing the parent of a commit to point to another.
 
-.Rebasing branches
+.Rebasing a branch on top of master
 image::diagrams/01-Rebasing.png[]
 
 Figure 1.12 shows a rebase of the `seperate-files` branch onto the `master`
@@ -605,9 +598,6 @@ remember for now is that it's a different approach to a merge that can be used
 for a similar outcome (pulling changes from one branch into another).
 
 === Remote Repositories: exchanging commits with another computer
-.Remote workflow
-image::diagrams/01-RemoteWorkflow.png[]
-
 Typically when using version control you will want to share your commits (or
 branches) with other people using other computers. With a traditional,
 _centralized version control system_ (such as Subversion or CVS) the repository
@@ -622,8 +612,14 @@ that people send their commits to it will not be accessed unless specifically
 requested. All commits, branches and history are stored offline unless users
 choose to send or receive commits from another repository.
 
+.Git add/commit/push/pull/checkout workflow
+image::diagrams/01-RemoteWorkflow.png[]
+
 A repository you send or receive commits to is known as a _remote repository_.
-You control when these changes are sent or received.
+You control when these changes are sent or received. Figure 1.13 shows
+the workflow for making commits in your local repository and then pushing them
+to a remote repository and pulling those made by others back to your local
+repository.
 
 ==== Communicating with a remote repository
 Changes are sent to a remote repository in a _push_ operation and received in a
