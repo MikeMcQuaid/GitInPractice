@@ -32,3 +32,5 @@ Target Readers:
   bit better and host Git-based utilities.
 * "Software Engineer" with experience using Git but wants to create and/or
   contribute to open-source projects.
+
+// Git: The Good Parts

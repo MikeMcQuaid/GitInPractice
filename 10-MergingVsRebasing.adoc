@@ -16,6 +16,20 @@ Why are there two strategies for accomplishing essentially the same task? Let's
 find out by comparing the Git history of two popular open-source projects and
 their branching strategies.
 
+// Have examples initially
+// explain both strategies first before pros and cons of either
+// 10.1 Why I should use merging
+// How branching/merging in CMake fails (rather than just succeeds)
+// Need an example of bad things happening
+// Homebrew and CMake both need separate workflow diagrams for how branches are handled
+// Discuss Homebrew having very few people needed with commit access
+// Dates aren't contiguous in either
+// Newsnight debat vs Newsround article; more Paxman needed!
+
+// I don’t know if the dichotomy is really “should you rebase/squash or should you branch” so much as it is “what should your branching strategy be?”
+
+// The way it was written, I got the impression that rebasing and squashing hadn’t really been covered yet - but if not, they probably should be.
+
 === CMake
 CMake is a cross-platform build-system created by Kitware. It has many
 contributors both inside and outside Kitware but relatively few contributions
@@ -35,6 +49,7 @@ in the Figure 10.1 are:
   be based off of `master`.
 * topic branches: used for development of all bug fixes and new
   features. Merged into `next` and deleted after merge.
+// Annotate these in diagram
 
 The regular merging of `master` into `next` ensures that any merge conflicts
 between `master` and `next` are resolved quickly in the `next` rather than
@@ -115,6 +130,8 @@ it is worth asking the following questions:
   have more advanced Git skills?
 * Are feature branches worked on by more than one person (the history rewriting
   with `rebase` can be problematic with multiple users sharing a branch)?
+
+// What do you do based on these answers?
 
 There are many more questions that could be asked but these are a good starting
 point. Whichever approach is adopted it's important to try and remain

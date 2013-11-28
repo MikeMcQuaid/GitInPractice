@@ -17,6 +17,9 @@ You may not be familiar with version control concepts or why version control
 systems are useful for managing changes to text. Let's start off by asking why
 you should use version control.
 
+// experience flavouring
+// make sure code listings are titled
+
 === Why use version control?
 A common problem when dealing with information stored on a computer is handling
 _changes_. For example, after adding, modifying or deleting text you may want
@@ -222,8 +225,8 @@ and stores a collection of objects when you commit. The object store is stored
 inside the Git _repository_. The repository is the local collection of all the
 files related to a particular Git version control system and is stored in a
 `.git` folder in the root of the project. If you were to explore under here (as
-we will do in Chapter 2) you would find objects, various pointers/references to
-objects and configuration files.
+we will do in Chapter 2) you would find objects, pointers/references to objects
+and configuration files.
 
 .commit, blob and tree objects
 image::diagrams/01-Objects.png[]
@@ -648,7 +651,7 @@ use of this to provide a network of trust and a more manageable way of merging
 changes. When Linus Torvalds, the self-named "benevolent dictator" of the
 project, tags a new release this is generally considered a new release of
 Linux. What is in his repository (well, his publicly accessible one; he will
-have multiple repositories between various person machines that he does not
+have multiple repositories between various personal machines that he does not
 make publicly accessible) is generally considered to be what is in Linux. Linus
 has trusted lieutenants from who he can pull and merge commits and branches.
 Rather than every single merge to Linux needing to be done by Linus he can
@@ -663,8 +666,8 @@ control.
 In this chapter you hopefully learned:
 
 * _Version control systems_ exist to manage a series of changes over time to
-  various files in a project. They commonly used by programmers and provide a
-  more robust alternative than manually renaming files to a form like `Document
+  files in a project. They commonly used by programmers and provide a more
+  robust alternative than manually renaming files to a form like `Document
   FINAL V4.txt`.
 * A _commit_ is a particular change to one or more files. As well as the
   changed file contents they also store the author, date and time, a unique

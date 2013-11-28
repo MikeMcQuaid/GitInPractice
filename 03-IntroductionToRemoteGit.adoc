@@ -13,23 +13,27 @@ if you are using a version control system you will want to share changes with
 others; from simply sending files to a remote server for backup to
 collaborating as part of a large development team. Team collaboration will also
 require knowledge of how to create and interact with branches for working on
-different features in parallel. Let's create by remote repository on GitHub and
+different features in parallel. Let's create a remote repository on GitHub and
 a GitHub account to be able to store changes on another computer.
+
+// # git command
+// experience flavouring
+// make sure code listings are titled
 
 === Creating a GitHub repository
 GitHub is a website that provides Git repository hosting as well as issue
 trackers, Git-backed wikis and a workflow to request a merge of the commits in
-a branch (which is known as a _pull request_). You can create free accounts for
-public remote repositories which are where everyone can see your code and
-commits. Typically these are used by open-source projects but it will also
-prove useful for your learning and experimentation. For private projects GitHub
-offers paid accounts.
+a branch (which is known as a _pull request_ and will be shown in Chapter 12).
+You can create free accounts for public remote repositories which are where
+everyone can see your code and commits. Typically these are used by open-source
+projects but it will also prove useful for your learning and experimentation.
+For private projects GitHub offers paid accounts.
 
-As mentioned in Chapter 2 there are various free and paid alternatives to
-GitHub. I've picked GitHub to walkthrough because, at the time of writing, it
-is the most popular hosted version control system for open-source projects and
-is probably the most popular Git hosting provider. Learning to use GitHub will
-bring immediate benefits in terms of facilitating open-source access and
+As mentioned in Chapter 2 there are free and paid alternatives to GitHub. I've
+picked GitHub to walkthrough because, at the time of writing, it is the most
+popular hosted version control system for open-source projects and is probably
+the most popular Git hosting provider. Learning to use GitHub will bring
+immediate benefits in terms of facilitating open-source access and
 contributions. While the GitHub UI may differ from the examples here or from
 other Git repository hosts the Git commands used will remain the same.
 
@@ -61,8 +65,8 @@ this book you will never have to commit anything private to a repository so you
 do not need to choose a paid plan. After you have selected a plan click the
 finish button to advance to the next screen.
 
-You have created a GitHub account and should see the GitHub dashboard. The next
-step is to create a new repository.
+You have created a GitHub account and the next step is to create a new
+repository.
 
 ==== Creating a new repository on GitHub
 .Dashboard buttons to create a new GitHub repository
@@ -75,6 +79,9 @@ the next screen.
 
 .Create a new GitHub repository
 image::diagrams/03-CreateNewGitHubRepository.png[]
+
+// Add annotation to not add README or gitignore
+// Reference numbers in text (and for previous diagrams?)
 
 Creating a new repository requires you to pick a name and optionally a
 description as in Figure 3.4. This name will be combined with the username you
@@ -112,6 +119,9 @@ checkout` to change to different local branches' versions of files.
 .Git add/commit/push/pull/checkout workflow
 image::diagrams/03-RemoteWorkflow.png[]
 
+// grey out irrelevant bits, add more captions
+// add git pull in diagram
+
 Figure 3.7 shows the remote Git workflow we will look at in this Chapter. As in
 the local workflow files are modified, added, committed and can be checked out.
 However there are now two repositories: a local repository and _remote
@@ -128,16 +138,17 @@ you've created a remote repository on GitHub so now let's connect the two
 together.
 
 ==== `git remote add` to add a new remote repository
-The `git remote` command is used to perform various actions around remote
-repositories (which are also known as _remotes_). The first action you're
-concerned with is adding a reference for your newly-created remote repository
-on GitHub in your previous local repository so you can push and fetch commits.
-To do this you'll use the `git remote add` subcommand.
+The `git remote` command is used to perform actions around remote repositories
+(which are also known as _remotes_). The first action you're concerned with is
+adding a reference for your newly-created remote repository on GitHub in your
+previous local repository so you can push and fetch commits. To do this you'll
+use the `git remote add` subcommand.
 
-You can have multiple remote repositories connected to your local repository so
-the remote repositories are named. Typically if you have a single remote
-repository it will be named `origin`. This will be explained more in section
-4.2.3.
+.What is the default name for a remote?
+NOTE: You can have multiple remote repositories connected to your local
+repository so the remote repositories are named. Typically if you have a single
+remote repository it will be named `origin`. This will be explained more in
+section 4.2.3.
 
 To add the new GitInPractice remote repository to your current repository:
 
@@ -162,6 +173,7 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 The "fetch URL (1)" specifies the URL that `git fetch` uses to fetch new remote
 commits. The "push URL (2)" specifies the URL that `git push` uses to send new
 local commits.
+// when will these differ?
 
 You have added a remote named `origin` that points to the remote
 `GitInPracticeRedux` repository belonging to the `GitInPractice` user on GitHub.
@@ -171,7 +183,7 @@ received yet; the new remote is effectively just a named URL pointing to the
 remote repository location. If you recall when we created the GitHub remote
 repository it was empty and told us to push changes to it so let's do that now.
 
-==== `git push` to push changes to another repository
+==== `git push` to push changes to a remote repository
 The `git push` command is used to send commits made in the local repository to
 a remote. Only changes specifically requested will be sent and the Git (which
 can operate over HTTP, SSH or it's own protocol (`git://`)) will ensure that
@@ -190,6 +202,7 @@ To push the changes from the local `GitInPracticeRedux` repository to the
 2.  Run `git push --set-upstream origin master` and enter your GitHub username
     and password when requested. The output should resemble:
 
+// remove all commands from captions, put inline.
 .`git push --set-upstream origin master` output
 ----
 Username for 'https://github.com': GitInPractice <1>
@@ -244,7 +257,7 @@ branch `master`. The `master` branch on the `origin` remote (which is often
 abbreviated as `origin/master`) is now known as the _tracking branch_ (or
 _upstream_) for your local `master` branch.
 
-A tracking branch is the default push or fetch location for a branch. This
+A _tracking branch_ is the default push or fetch location for a branch. This
 means in future you could run `git push` with no arguments on this branch and
 it will do the same thing as running `git push origin master` i.e. push the
 current branch to the `origin` remote's `master` branch.
@@ -264,6 +277,7 @@ Figure 3.9 shows the remote repository on GitHub after the `git push`. The
 latest commit SHA-1 there matches your current latest commit on the `master`
 branch seen in Figure 3.8. To update this in future you would run `git push`
 again to push any local changes to GitHub.
+// short sha-1s are different on GitHub/GitX. Explain.
 
 ==== Cloning a remote/GitHub repository onto your local machine
 It is useful to learn how to create a new Git repository locally and push it to
@@ -285,10 +299,11 @@ remove the local repository and recreate it by cloning the repository on GitHub.
 To remove the existing `GitInPracticeRedux` local repository and recreate it by
 cloning from GitHub:
 
+// Would you delete it first?
 1.  Change to the directory where you want the new `GitInPracticeRedux`
     repository to be created e.g. `cd /Users/mike/` to create the new local
     repository in `/Users/mike/GitInPracticeRedux`.
-2.  Run `rm -rf `GitInPracticeRedux` to remove the existing
+2.  Run `rm -rf GitInPracticeRedux` to remove the existing
     `GitInPracticeRedux` repository.
 3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`.
     The output should resemble:
@@ -308,10 +323,12 @@ Checking connectivity... done
 The "destination directory (1)" is the folder in which the new
 `GitInPracticeRedux` local repository was created. The "object
 preparation/transmission (2)" can be safely ignored again.
+// but why 6 objects for one file?
 
 You have cloned the `GitInPracticeRedux` remote repository and created a new
 local repository containing all its commits in `/Users/mike/GitInPracticeRedux`.
 
+// Reword so not a direct copy of what was said earlier
 Cloning a repository has also created a new remote called `origin`. `origin` is
 the default remote and references the repository that the clone originated from
 (which is https://github.com/GitInPractice/GitInPracticeRedux.git in this case).
@@ -349,6 +366,7 @@ since.
 To test `git pull` let's create another clone of the same repository, make a
 new commit and `git push` it. This will allow downloading new changes with `git
 pull` on the original remote repository.
+// a diagram here showing what we're going to do, perhaps.
 
 To create another cloned, local repository and push a commit from it:
 
@@ -417,6 +435,7 @@ the new commit (`85a5db1`). The "merge type (5)" was a _fast-forward merge_
 which means that no merge commit was made. Fast-forward merges will be fully
 explained in section 3.4.1.
 
+// doesn't seem to answer the actual question, bit confusing.
 .Why did a merge happen?
 NOTE: It may be confusing that a merge has happened here. Didn't you just ask
 for the updates from that branch? You haven't created any other branches so why
@@ -498,6 +517,7 @@ merge origin/master`.
 
 .Local repository after `git fetch`
 image::screenshots/03-GitXFetch.png[]
+// Local? But You've got the remote origin/master branch highlighted.
 
 You can see from Figure 3.12 that another new commit has been added to the
 repository but this time only `origin/master` has been updated but `master` has
@@ -556,12 +576,14 @@ Remember from Chapter 1 that branches are widely used in multiple-programmer
 projects but can still be useful for single-programmer projects. In this
 section we'll use the example of a branch for a new chapter for our book in our
 `GitInPracticeRedux` repository.
+// Perhaps bring forward branch example from Chapter 1 again to refresh
 
 ==== Create a new local branch from the current branch
 The `git branch` command is used to create new branches in Git. A branch in Git
 (unlike other version control systems like Subversion) is simply a pointer to a
 single commit. This pointer is updated as you make more commits on that branch.
 
+// The .. isn't in chapter 2
 .Can branches be named anything?
 NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name
 so `chapter..two` would be an invalid branch name and `git branch` will refuse
@@ -575,6 +597,7 @@ branch:
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git branch chapter-two`. There will be no output.
 
+// prefix command output
 You can verify the branch was created by running `git branch` which should have
 the following output:
 ----
@@ -602,11 +625,13 @@ You can see from Figure 3.14 that there is a new, green branch label for the
 * green: a non-checked-out local branch
 * blue: a remote branch
 
+// Add HEAD pointer
 .Branch pointers
 image::diagrams/03-BranchPointers.png[]
 
 Figure 3.15 shows how these two branch pointers point to the same commit.
 
+// Point out this lack of changing branch
 You've seen `git branch` creates a local branch it does not change to it. To do
 that requires using `git checkout`.
 
@@ -641,6 +666,7 @@ image::screenshots/03-GitXCheckout.png[]
 The only difference between Figure 3.16 and Figure 3.14 is that the
 `chapter-two` branch is now orange and the `master` is green. Remember this
 means the `chapter-two` branch is currently checked out and `master` is not.
+// anontate this due to b&w printing
 
 .Why do Subversion and Git use `checkout` to mean different things?
 NOTE: As mentioned earlier some other version control systems (e.g. Subversion)
@@ -657,6 +683,7 @@ version control repository into the working directory but Subversion's
 repository is remote and Git's repository is local. In this case `git checkout`
 is requesting the checkout of a particular branch so the current state of that
 branch is checked out into the working directory.
+// This wants to be pulled into svn note/sidebar
 
 .HEAD pointer with multiple branches
 image::diagrams/03-HEAD-Branches.png[]
@@ -786,6 +813,7 @@ The "lines changed in file <3>" and "diff summary <4>" are showing a summary of
 the changes that have been merged into your `master` branch from the
 `chapter-two` branch.
 
+// We never saw this commit only in chapter-two branch; add screenshot for this.
 You have merged the `chapter-two` branch into the `master` branch. This brings
 the commit that was made in the `chapter-two` branch into the `master` branch.
 
@@ -799,6 +827,9 @@ point to the same commit once more.
 We now want to delete the `chapter-two` branch from the remote repository now
 it is merged into the `master` branch and we do not want to make any more
 changes to it.
+
+// This is all very confusing, apparently.
+// Don't rely on colours in diagrams (everywhere).
 
 To push the current `master` branch and delete the branch named `chapter-two`
 on the remote `origin`:
@@ -844,7 +875,7 @@ image::screenshots/03-GitXPushDelete.png[]
 In Figure 3.21 you can see that the `origin/master` has been updated to the
 same commit as `master` and that `origin/chapter-two` has now been removed.
 
-==== Deleting the current branch after merging
+==== Deleting the current local branch after merging
 The `chapter-two` branch has all its commits merged into the `master` branch
 and the remote branch deleted so the local branch can now be deleted too as we
 don't wish to make any more commits to it but instead will continue any work on

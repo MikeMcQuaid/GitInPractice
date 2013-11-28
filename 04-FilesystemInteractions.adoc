@@ -10,22 +10,28 @@ In this chapter you will learn about interacting with files and directories in y
 When working with a project in Git you will sometimes wish to move, delete,
 change and/or ignore certain files in your working directory. You could
 mentally keep track of the state of which files and changes are important but
-this is not a sustainable approach. Instead, Git provides various commands for
-performing various filesystem operations for you.
+this is not a sustainable approach. Instead, Git provides commands for
+performing filesystem operations for you.
 
-Understanding the various filesystem commands around Git will allow you to
-quickly perform these operations rather than being slowed down by Git's
-interactions.
+Understanding the filesystem commands around Git will allow you to quickly
+perform these operations rather than being slowed down by Git's interactions.
 
 Let's start with the most basic file operations: renaming or moving a file.
+
+// TODO: caption commands with comments typed like Chap 1-2
+// Needs more experience flavouring (and check for chapter 1-3 too); present actual examples of when I've needed to do that.
+// Open with scenarios in background rather than discussion.
+// Perhaps split into more subsections? e.g. renaming... etc.
+// Use same files as Chap 1-3
 
 === Rename or move a file
 ==== Background
 Git keeps track of the changes to files in the working directory of a
-repository by their name. When you move a file, Git does not see that at file
+repository by their name. When you move a file, Git does not see that a file
 was moved but that a file was deleted and a new file was created even if the
 contents remains the same. As a result renaming or moving a file in Git is
 essentially the same operation.
+// I didn’t understand the sentence “as a result….” at the end of the first paragraph - I didn’t see why this conclusion followed from what was described in the first paragraph. I think the point being made is "When you move or rename a file, Git sees that as a deletion and an add, whether the file was moved or renamed in place.” Is that right?
 
 Sometimes you will still need to rename or move files in your Git repository
 and you wish to preserve the history of the files after the rename or move
@@ -42,24 +48,24 @@ renamed file.
 
 ==== Solution
 1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`
+    e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git mv Chapter1.asciidoc 01-FirstChapter.asciidoc`.
     There should be no output.
 3.  Run `git commit --message 'Rename Chapter 1 file.'`
     The output should resemble:
 
 .Renamed commit output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git mv Chapter1.asciidoc 01-FirstChapter.asciidoc
 # git commit --message 'Rename Chapter 1 file.'
 [separate-files 6d249cd] Rename Chapter 1 file. <1>
  1 file changed, 0 insertions(+), 0 deletions(-) <2>
  rename Chapter1.asciidoc => 01-FirstChapter.asciidoc (100%) <3>
-------------------------------------------------
-1. commit message
-2. no insertions/deletions
-3. old => new filename
+----
+<1> commit message
+<2> no insertions/deletions
+<3> old => new filename
 
 You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and
 committed it.
@@ -86,8 +92,9 @@ directories or symlinks into other directories inside the Git repository using
 the `git mv` command and the same syntax as above. If you wish to move files
 into or out of a repository you must use a different, non-Git command (such as
 `mv`).
+// Not clear whether talking about Linux mv or Git mv
 
-.Overwriting existing files
+.What if the new filename already exists?
 NOTE: If the filename that you move to already exists you will need to use the
 `git mv -f` (or `--force`) option to state to Git that you wish to overwrite
 whatever file is at the destination. If the destination file has not already
@@ -116,7 +123,7 @@ your Git working directory and commit the removed file.
     The output should resemble:
 
 .Removed commit output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git rm Chapter1.asciidoc 01-FirstChapter.asciidoc
 rm 'Chapter2.asciidoc.tmp'
@@ -125,10 +132,10 @@ rm 'Chapter2.asciidoc.tmp'
 [master facf575] Remove Chapter 2 temporary file. <1>
  1 file changed, 2 deletions(-) <2>
  delete mode 100644 Chapter2.asciidoc.tmp <3>
-------------------------------------------------
-1. commit message
-2. 2 lines deleted
-3. deleted filename
+----
+<1> commit message
+<2> 2 lines deleted
+<3> deleted filename
 
 You have removed `Chapter2.asciidoc.tmp` and committed it.
 
@@ -139,6 +146,7 @@ you have made changes to files but will not do anything with this information
 until you notify it. The `git rm` command is not just indicating to Git that
 you wish for a file to be removed but also (like `git mv`) that this removal
 should be part of the next commit.
+// I didn’t understand the importance of the first paragraph - what’s running in the background got to do with removing a file from source control? This was confusing. I felt like I must have missed some obvious connection, but I couldn’t find it.
 
 If you wish to see a simulated run of `git rm` without actually removing the
 requested file then you can use `git rm -n` (or `--dry-run`). This will print
@@ -149,8 +157,9 @@ To remove a directory and all the files and subdirectories within it you will
 need to use `git rm -r` (where the `-r` stands for 'recursive'). When run this
 will delete the directory and all files under it. This is combined well with
 `--dry-run` if you want to see what would be removed before removing it.
+// Perhaps a full listing example for this?
 
-.Remove a changed file
+.What if a file has uncommitted changes?
 NOTE: If a file has uncommited changes but you still wish to remove it you will
 need to use the `git rm -f` (or `--force`) option to indicate to Git you wish
 to remove it before committing the changes.
@@ -179,13 +188,15 @@ directory.
 2.  Run `git clean --force`.
     The output should resemble:
 
+// Check people don't have gitignore file setup already or remove it
+
 .Force cleaned files output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git clean --force
 Removing out.tmp <1>
-------------------------------------------------
-1. removed file
+----
+<1> removed file
 
 You have removed `out.tmp` from the Git working directory.
 
@@ -233,7 +244,7 @@ You wish to ignore all files with the extension `.tmp` in a Git repository.
     The output should resemble:
 
 .Ignore file commit output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 ## .gitignore file created in your favourite editor
 # git add .gitignore
@@ -241,10 +252,10 @@ You wish to ignore all files with the extension `.tmp` in a Git repository.
 [master 0b4087c] Ignore .tmp files. <1>
  1 file changed, 1 insertion(+) <2>
  create mode 100644 .gitignore <3>
-------------------------------------------------
-1. commit message
-2. 1 line added
-3. created filename
+----
+<1> commit message
+<2> 1 line added
+<3> created filename
 
 You have added a `.gitignore` file with instructions to ignore all `.tmp` files
 in the Git working directory.
@@ -255,6 +266,8 @@ committing _output files_ to a version control repository. Output files are
 those that are the created from input files that are stored within the version
 control repository.
 
+// you can find more .gitignore files online etc
+
 For example, I may have a `hello.c` file which is compiled into `hello.o`
 object file. The `hello.c` _input file_ should be committed to the version
 control system but the `hello.o` _output file_ should not.
@@ -264,16 +277,16 @@ of expected output files so that they can be shared between all the users of a
 repository and not accidentally committed.
 
 If you try to use `git add` to add an ignored file named `out.tmp` the output should resemble:
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git add fish.tmp
 The following paths are ignored by one of your .gitignore files:
 out.tmp <1>
 Use -f if you really want to add them.
 fatal: no files added <2>
-------------------------------------------------
-1. ignored file
-2. error message
+----
+<1> ignored file
+<2> error message
 
 The "(1) ignored file" `out.tmp` was not added as its addition would contradict
 your `.gitignore` rules. As no files were added the "(2)" error message was
@@ -288,9 +301,9 @@ successfully add all other that should not be ignored.
 ==== Background
 When files have been successfully ignored by the addition of a `.gitignore`
 file you will sometimes with to delete them all. For example, you may have a
-project in a Git repository which compiles various input files into output
-files and wish to remove all of these output files from the working directory
-to perform a new build from scratch.
+project in a Git repository which compiles input files into output files and
+wish to remove all of these output files from the working directory to perform
+a new build from scratch.
 
 ==== Problem
 You wish to delete all ignored files from a Git working directory.
@@ -302,13 +315,13 @@ You wish to delete all ignored files from a Git working directory.
     The output should resemble:
 
 .Force clean of ignored files output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git clean --force
 Removing out.tmp <1>
 Removing out2.tmp
-------------------------------------------------
-1. removed file
+----
+<1> removed file
 
 You have removed all ignored files from the Git working directory.
 
@@ -324,14 +337,18 @@ files and directories from a working directory. This will remove all files and
 directories for a Git repository that were not previously committed. Please
 take care when running this; there will be no prompt and all the files will be
 quickly deleted.
+// explain which bits of xdf does which
 
 === Resetting files to the last commit
 ==== Background
-There are times when you have made some changes to various files in the working
+There are times when you have made some changes to files in the working
 directory but you do not wish to commit these changes. Perhaps you added
-debugging statements to files and have now committing a fix so want to reset
-all of the files that have not been committed to their last committed state on
-this branch.
+debugging statements to files and have now committed a fix so want to reset all
+of the files that have not been committed to their last committed state on this
+branch.
+
+// Probably move before clean
+// Combine reset and clean to state how they can be combined nicely
 
 ==== Problem
 You wish to reset the state of all the files in your working directory to their
@@ -344,12 +361,12 @@ last committed state.
     The output should resemble:
 
 .Hard reset output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git reset --hard
 HEAD is now at 0b4087c Ignore .tmp files. <1>
-------------------------------------------------
-1. Reset commit
+----
+<1> Reset commit
 
 You have reset the Git working directory to the last committed state.
 
@@ -391,14 +408,16 @@ You wish to stash all your uncommitted changes for later retrieval.
 2.  Run `git stash save`.
     The output should resemble:
 
+// Does git stash need `git add` or not? Check.
+
 .Stashing uncommitted changes output
-------------------------------------------------
+----
 # git stash save
 Saved working directory and index state WIP on master:
 0b4087c Ignore .tmp files.
 HEAD is now at 0b4087c Ignore .tmp files. <1>
-------------------------------------------------
-1. Current commit
+----
+<1> Current commit
 
 You have stashed your uncommitted changes.
 
@@ -411,13 +430,15 @@ only do so through `git stash` to avoid confusion.
 If `git stash` is run with no "save" argument it performs the same operation;
 the "save" argument is therefore not needed but is useful when being explicit
 or adding clarity.
+// how does it add clarity?
+// Talk about stack here instead?
 
 === Reapply stashed changes
 ==== Background
 When you have stashed your temporary changes and performed whatever the
 operations that required a clean working directory you will want to reapply the
 changes (as otherwise you could have just run `git reset --hard`). When you've
-checked out the correct branch again (which may be differ from the original
+checked out the correct branch again (which may differ from the original
 branch) you can request for the changes to be taken from the stash and applied
 onto the working directory.
 
@@ -432,30 +453,30 @@ current working directory.
     The output should resemble:
 
 .Reapply stashed changes output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git stash pop
 
 # On branch master <1>
-# Changes not staged for commit:
+# Changes not staged for commit: <2>
 #   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working
 #    directory)
 #
 #	modified:   Chapter2.asciidoc
 #
-no changes added to commit (use "git add" and/or "git commit -a") <2>
-Dropped refs/stash@{0} (846a96717ae3f758ae2d1c4af76d99a3e2634f22) <3>
-------------------------------------------------
-1. current branch output
-2. begin status output
-3. end status output
-4. stashed commit
+no changes added to commit (use "git add" and/or "git commit -a") <3>
+Dropped refs/stash@{0} (846a96717ae3f758ae2d1c4af76d99a3e2634f22) <4>
+----
+<1> current branch output
+<2> begin status output
+<3> end status output
+<4> stashed commit
 
 You have reapplied the changes from the last `git stash save`.
 
 ==== Discussion
-.`git stash` stack
+.How does `git stash` store stashes?
 NOTE: `git stash save` and `git stash pop` operate on a _stack_ of stashes. This
 means that the last stash you `git stash save` will be the first stash you `git
 stash pop`. This is known as "First In, Last Out" (or "FILO").
@@ -478,6 +499,9 @@ stack are now unnecessary so wish to get rid of them all. You could do this by
 popping each change off the stack and then deleting it but it would be good if
 there was a command that allowed you to do this in a single step. Thankfully,
 `git stash clear` allows you to do just this.
+
+// How can you list stashes to e.g. check it worked before and after
+// Can you recover cleared stashes?
 
 ==== Problem
 You wish to clear all previously stashed changes.
@@ -505,6 +529,7 @@ these particular changes.
 An example might be you are modifying a versioned configuration file to test a
 particular new configuration but don't wish to commit these changes to the
 repository yet.
+// Open with example
 
 ==== Problem
 You wish for Git to assume there have been no changes made to
@@ -528,10 +553,12 @@ not normally a problem on normal filesystems on which Git can quickly query if
 a file is modified by checking the "file modified" timestamp (rather than
 having to read the entire file and compare it).
 
-The `git update-index` command has various other complex options but we will
-only cover those around the "assume" logic. The rest of the behavior is better
-accessed through the `git add` command; a higher-level and more user-friendly
-way of modifying the state of the index.
+The `git update-index` command has other complex options but we will only cover
+those around the "assume" logic. The rest of the behavior is better accessed
+through the `git add` command; a higher-level and more user-friendly way of
+modifying the state of the index.
+
+// lead into unassume
 
 === List assumed unchanged files
 ==== Background
@@ -541,6 +568,7 @@ up modifying a file and wondering why Git does not seem to want to show you
 these changes. Additionally, you could forget that you had made these changes
 at all and be very confused as to why the state in your text editor does not
 seem to match the state that Git is seeing.
+// Put this section after unassume
 
 ==== Problem
 You wish for Git to list all the files that it has been told to assume haven't
@@ -553,26 +581,25 @@ changed.
     The output should resemble:
 
 .Assumed unchanged files listing output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git ls-files -v
 H .gitignore <1>
 H 01-FirstChapter.asciidoc
 H Chapter2.asciidoc
 h GitInPractice.asciidoc <2>
-------------------------------------------------
-1. committed file
-2. assumed unchanged file
+----
+<1> committed file
+<2> assumed unchanged file
 
 ==== Discussion
 Like `git update-index`, `git ls-files -v` is a low level command that you will
 typically not run often. `git ls-files` without any arguments lists the files
 in the current directory that Git knows about but the `-v` argument means that
-it is followed by various tags which indicate file state. I will not detail
-these here as it is not important to understand the tags beyond that in Listing
-4.9 the "(1) committed files" are indicated by an uppercase `H` tag at the
-beginning of the line and the "(2) assumed unchanged file" has a lowercase `h`
-tag.
+it is followed by tags which indicate file state. I will not detail these here
+as it is not important to understand the tags beyond that in Listing 4.9 the
+"(1) committed files" are indicated by an uppercase `H` tag at the beginning of
+the line and the "(2) assumed unchanged file" has a lowercase `h` tag.
 
 Rather than reading through the output for this command you could instead run
 `git ls-files -v | grep '^[hsmrck?]' | cut -c 3-`. This makes use of Unix pipes
@@ -583,18 +610,19 @@ with any of the lowercase `hsmrck?` characters.
 
 `cut -c 3-` filters the first two characters of each of the output lines so
 e.g. `h` followed by a space in the above example.
+// do you need all this discussion?
 
 With these combined the output should resemble:
 
 .Assumed unchanged files output
-------------------------------------------------
+----
 # cd /Users/mike/GitInPracticeRedux/
 # git ls-files -v | grep '^[hsmrck?]' | cut -c 3-
 GitInPractice.asciidoc <1>
-------------------------------------------------
-1. assumed unchanged file
+----
+<1> assumed unchanged file
 
-.Don't understand how pipes, `grep` and `cut` work?
+.How do pipes, `grep` and `cut` work?
 NOTE: Do not worry if you don't understand quite how Unix pipes, `grep` or
 `cut` work; this book is about Git rather than shell scripting after all! Feel
 free to just use the above command as-is as a quick way of listing files that
@@ -606,6 +634,8 @@ Usually telling Git to assume there have been no changes made to a particular
 file is a temporary option; if you have to keep files changed long-term they
 should probably be committed. At some point you will wish to tell Git to
 monitor any changes that are made to these files once more.
+
+// Give an example of why/when you might do this. Rails configuration?
 
 ==== Problem
 You wish for Git to stop assuming there have been no changes made to
