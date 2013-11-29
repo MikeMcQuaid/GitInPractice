@@ -174,7 +174,7 @@ Git user), Perl, PostgreSQL, Android, Ruby on Rails, Qt, GNOME, KDE, Eclipse
 and X.org.
 
 Many of the above projects and many users of Git have also been introduced to
-Git and use it regularly through a Git hosting provider. My favourite is GitHub
+Git and use it regularly through a Git hosting provider. My favorite is GitHub
 but there are alternatives such as Gitorious, Bitbucket, SourceForge, Google
 Code and others.
 
@@ -338,6 +338,10 @@ displaying diffs in version control typically allow you to narrow them down
 per-file, folder and even committer.
 
 ==== Default diff format
+Diffs are typically shown by version control systems in a format that is known
+as a _unified diff_.
+
+.Unified diff from Git
 ----
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc <1>
 index 7bd3fb8..7230cbf 100644 <2>
@@ -360,29 +364,26 @@ index 7bd3fb8..7230cbf 100644 <2>
 <7> deleted line
 <8> inserted line
 
-Diffs are typically shown by version control systems in a format that is known
-as a _unified diff_. This indicates what lines have been changed in what files
-and details the inserted or deleted lines. The above example shows a change to
-a `GitInPractice.asciidoc` deleting multiple lines of text and replacing them
-with a comment.
+Listing 1.1 shows a change to a `GitInPractice.asciidoc` deleting multiple
+lines of text and replacing them with a comment.
 
-The "(1) diff command" shows an example `diff` command that may have been used
+The "diff command (1)" shows an example `diff` command that may have been used
 to output these changes (although in reality this is done by Git internally).
-The "(2) staging area SHA-1" shows the changes that were made to the `index
+The "staging area SHA-1 (2)" shows the changes that were made to the `index
 staging area` by this commit; in short the changes to the actual contents of
 files in this commit. The staging area will be explained more in Chapter 2. The
-"(3) old file version" and "(4) new file version" show virtual file names
+"old file version (3)" and "new file version (4)" show virtual file names
 relating to the diff command; as if instead of comparing multiple versions in
 the version control repository multiple versions of the files in different
-folders (`a` and `b` were compared). The "(5) file changes range" is used by
+folders (`a` and `b` were compared). The "file changes range (5)" is used by
 the `diff` tool to find the locations in the file this diff refers to. In this
 example you can see the entire file and all the changes made to it. If this
 were a file with thousands of lines but only five lines were changed then the
 diff would only show the five lines that were changed with some surrounding
 context. These range markers would allow a `diff` tool to find what lines
-should be changed. Lines that are "(6) unchanged" are displayed as-is, "(7)
-deleted" lines are prefixed with a `-` and "(8) inserted" lines are prefixed
-with a `+`.
+should be changed. Lines that are " unchanged (6)" are displayed as-is,
+"deleted (7)" lines are prefixed with a `-` and "inserted (8)" lines are
+prefixed with a `+`.
 
 .How do diffs show changed lines?
 NOTE: changed lines are displayed in a unified diff as a deletion of the
@@ -398,6 +399,7 @@ book and when using Git.
 Sometimes it is desirable to display diffs in slightly differing formats. Two
 common alternatives to a typical unified diff are a _diffstat_ and _word diff_.
 
+.Diffstat from Git
 ----
  GitInPractice.asciidoc | 4 +--- <1>
  1 file changed, 1 insertion(+), 3 deletions(-) <2>
@@ -405,21 +407,22 @@ common alternatives to a typical unified diff are a _diffstat_ and _word diff_.
 <1> one file's changes
 <2> all files' changes
 
-The above example is a diffstat for the same changes as the previous unified
-diff. Rather than showing the breakdown of exactly what has changed it
-indicates what files have changed and a brief overview of how many lines were
-involved in the changes. This can be useful when getting a quick overview of
-what has changed without needing all the detail of a normal unified diff.
+Listing 1.2 is a diffstat for the same changes as the unified diff in Listing
+1.1. Rather than showing the breakdown of exactly what has changed it indicates
+what files have changed and a brief overview of how many lines were involved in
+the changes. This can be useful when getting a quick overview of what has
+changed without needing all the detail of a normal unified diff.
 
-The "one file's changes" shows the filename that has been changed, the number
-of lines changed in that file and `+`/`-` characters summarising the overall
+The "one file's changes (1)" shows the filename that has been changed, the number
+of lines changed in that file and `+`/`-` characters summarizing the overall
 changes to the file. If multiple files were changed this would show there would
 be multiple filenames listed and each would have the lines changed in that file
 and `+`/`-` characters.
 
-The "all files' changes" shows a summary of totals of the number of files
+The "all files' changes (2)" shows a summary of totals of the number of files
 changes and lines inserted/deleted across all files.
 
+.Word diff from Git
 ----
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc
 index 7bd3fb8..7230cbf 100644
@@ -437,12 +440,12 @@ will approve.+} <2>
 <2> modified line
 
 A word diff is similar to a unified diff but shows modifications per-word
-rather than per-line. The above example shows that most of the sentence
-remained the same except for a few changed words. This is particularly useful
-when viewing changes that are not to code but plain text; in README files we
-probably care more about individual word choices than knowing that an entire
-line has changed and the special characters (`[-]{+}`) are not used as often in
-prose than in code.
+rather than per-line. Listing 1.3 shows that most of the sentence remained the
+same except for a few changed words. This is particularly useful when viewing
+changes that are not to code but plain text; in README files we probably care
+more about individual word choices than knowing that an entire line has changed
+and the special characters (`[-]{+}`) are not used as often in prose than in
+code.
 
 The "deleted line" is surrounded by `[-]` shows a line that was completed
 removed. The "modified line" has some characters that were removed surrounded
@@ -533,6 +536,7 @@ changes were not too near each other in the same file. If the version control
 system fails to perform the merge without human intervention it produces a
 merge conflict.
 
+.Merge conflict resolution with Git
 ----
 = Git In Practice <1>
 <<<<<<< HEAD <2>
@@ -556,14 +560,14 @@ When a merge conflict occurs the version control system will go through any
 files that have conflicts and insert something similar to the above markers.
 These markers indicate the versions of the file on each branch.
 
-The "unchanged line" is one that, like in the unified diff earlier, is one that
-is provided only for context in this example. The "previous changes marker"
-shows the beginning of where new the lines from the previous commit (referenced
-by `HEAD` here; `HEAD` will be explained more in Chapter 2). The "previous line
-version" shows a line that was from the previous commit. The "changes
-separator" separates the previous and new changes. The "new changes" marker
-shows the end of the new changes and the name of the branch that has been
-merged in; `separate-files` in this case.
+The "unchanged line (1)" is one that, like in the Listing 1.1 unified diff, is
+one that is provided only for context in this example. The "previous changes
+marker (2)" shows the beginning of where new the lines from the previous commit
+(referenced by `HEAD` here; `HEAD` will be explained more in Chapter 2). The
+"previous line version (3)" shows a line that was from the previous commit. The
+"changes separator (4)" separates the previous and new changes. The "new
+changes (5)" marker shows the end of the new changes and the name of the branch
+that has been merged in; `separate-files` in this case.
 
 .How can conflict markers be found quickly?
 NOTE: When searching a large file for the merge conflict markers you should

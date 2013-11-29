@@ -17,19 +17,15 @@ connection. For these reasons Git is fast and is useful for storing versions of
 files on your local machine. Let's start using Git by getting it installed.
 
 // manpage level syntax? Explain mandatory syntax or step 1 or 2 up from that.
-// # git command
-// experience flavouring
-// make sure code listings are titled
+// more experience flavoring
 
 === Installation
+Let's see if Git is already installed on your local machine and install it if
+needed. The method to do so varies depending on your operating system of choice.
+
 .Why do I need to install Git?
 NOTE: Git does not come pre-installed on many operating systems as it is a tool
 typically used by programmers rather than non-technical computer users.
-
-// Don't start with a note, always start with text.
-
-Let's see if Git is already installed on your local machine and install it if
-needed. The method to do so varies depending on your operating system of choice.
 
 .Why are there different versions of Git in this section?
 NOTE: The different installation methods and operating systems install
@@ -113,9 +109,8 @@ resemble Figure 2.4.
 ==== Verifying Git has installed correctly.
 To run Git commands you will need to open a Terminal application, console or
 command-prompt (depending on your platform). To verify that Git has installed
-correctly run `git --version` which should output `git version 1.8.4.3` or
-similar.
-// Version for Linux people
+correctly run `git --version` which should output `git version 1.8.4.3` (or
+another version).
 
 ==== Gitk/GitX tools
 .`gitk` on Windows 8.1
@@ -129,17 +124,16 @@ branches). It can be seen running on Windows 8.1 in Figure 2.5.
 
 There are attractive, up-to-date and platform-native alternatives to `gitk`. On
 Linux/Unix there are tools such as `gitg` for gtk+/GNOME integration and `QGit`
-for Qt/KDE integration. These can be installed using your package manager. On
-OS X there are tools such as `GitX` (and various forks of the project).
-// Refer to Figure 2.6
+for Qt/KDE integration. These can be installed using your package manager.
 
 .GitX-dev on OS X Mavericks
 image::screenshots/02-GitX.png[]
 
-As OS X is my platform of choice I'll be using screenshots of the `GitX-dev`
-fork of `GitX` to discuss history in this book and would recommend you use it
-too if you use OS X. `GitX-dev` is available at https://github.com/rowanj/gitx
-and can be seen in Figure 2.6.
+On OS X there are tools such as `GitX` (and various forks of the project). As
+OS X is my platform of choice I'll be using screenshots of the `GitX-dev` fork
+of `GitX` to discuss history in this book and would recommend you use it too if
+you use OS X. `GitX-dev` is available at https://github.com/rowanj/gitx and can
+be seen in Figure 2.6.
 
 === Creating a repository
 Once you've installed Git the first thing you need to do to use it on your
@@ -182,6 +176,7 @@ Let's view the contents of the new Git repository by changing to directory
 containing the Git repository directory and running the `find` command e.g. `cd
 /Users/mike/ && find GitInPracticeRedux`
 
+.Files created in a new Git repository
 ----
 GitInPracticeRedux/.git/config <1>
 GitInPracticeRedux/.git/description <2>
@@ -206,19 +201,24 @@ GitInPracticeRedux/.git/refs/tags <9>
 <3> HEAD pointer
 <4> event hooks
 <5> excluded files
-<6> info packs?
+<6> object information
 <7> pack files
 <8> branch pointers
 <9> tag pointers
 
 The purpose of some of these files (seen in Listing 2.1) may be obvious to you
-if you have prior experience of version control. Git has created files for
-configuration, description (typically only used on repositories created for use
-on a server), sample _hooks_ (scripts that run on defined events e.g.
-pre-commit is run before a new commit is made) and directories used for object
-storage and reference. If you remember in the previous chapter we discussed
-what branches and tags are. These are stored under the refs folder.
-// turn into bulleted list instead and use (1) to refer to listing
+if you have prior experience of version control. Git has created files for:
+
+* "local configuration (1)" of the local Git repository
+* "description file (2)" to describe the repository for those created for use
+  on a server
+* "HEAD pointer (3)", "branch pointers (8)" and "tag pointers (9)" which point to commits
+* "_event hooks_ (4)" samples; scripts that run on defined events e.g.
+  pre-commit is run before every new commit is made
+* "excluded files (5)" which manages files which should be excluded from the
+  repository
+* "object information (6)" and "pack files (7)" which are used for object
+  storage and reference
 
 You shouldn't edit any of these files directly until you have a more advanced
 understanding of Git (or perhaps never at all). You will instead modify these
@@ -241,7 +241,6 @@ add/commit/checkout workflow can be seen in Figure 2.7.
 
 .Git add/commit/checkout workflow
 image::diagrams/02-Workflow.png[]
-// git checkout wants an action verb like the others
 
 Git does not add anything to the index without your instruction. As a result,
 the first thing you have to do with a file we want to include in a Git
@@ -260,8 +259,11 @@ To add an existing file `GitInPractice.asciidoc` to the index:
 
 You have added the `GitInPractice.asciidoc` to the index. If this has been
 successful then the output of running `git status` should resemble:
-// add commands before all listings
+
+.Adding a file to the index
 ----
+# git add GitInPractice.asciidoc
+
 # On branch master <1>
 #
 # Initial commit <2>
@@ -383,8 +385,10 @@ To view the commit history (also known as log):
 2.  Run `git log`.
     The output should resemble:
 
-.`git log` output
+.History output
 ----
+# git log
+
 commit 6b437c7739d24e29c8ded318e683eca8f03a5260 <1>
 Author: Mike McQuaid <mike@mikemcquaid.com> <2>
 Date:   Sun Sep 29 11:30:00 2013 +0100 <3>
@@ -427,10 +431,8 @@ image::screenshots/02-GitX-history-full.png[]
 
 The GitX history (seen in Figure 2.10) shows similar output to `git log` but in
 a different format. You can also see the current branch and the contents of the
-current commit including the diff, parent SHA-1 and a Gravatar image (obtained
-from the commit author's email address). There's a lot of information that
-doesn't differ between commits, however.
-// no gravatar?
+current commit including the diff and parent SHA-1. There's a lot of
+information that doesn't differ between commits, however.
 
 .GitX history graph output
 image::diagrams/02-GitX-history.png[]
@@ -465,9 +467,8 @@ The first ref you have already seen is by the branch (which is `master` by
 default if you haven't created any other branches). If you remember from the
 previous chapter, branches are actually pointers to a specific commit.
 Therefore referencing the SHA-1 of commit at the top of the master branch (the
-short version from the last example being `6b437c7`) is the same as referencing
-// 2.12 doesn't have the trailing 7 in it?
-the branch name `master`. In this case whenever you might type `6b437c7` to a
+short version from the last example being `6b437c`) is the same as referencing
+the branch name `master`. In this case whenever you might type `6b437c` to a
 command (such as `git diff` as we will see later this section) you could
 instead type `master`. Using branch names is quicker and easier to remember for
 referencing commits than always using SHA-1s.
@@ -517,8 +518,10 @@ penultimate commit:
 2.  Run `git diff HEAD^`.
     The output should resemble:
 
-.`git diff HEAD^` (the commit before `HEAD`) output
+.The differences to the commit before `HEAD` output
 ----
+# git diff HEAD^
+
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc <1>
 index 48f7a8a..b14909f 100644 <2>
 --- a/GitInPractice.asciidoc <3>
@@ -568,8 +571,10 @@ previous revision by providing two arguments to `git diff`:
 2.  Run `git diff HEAD HEAD^`.
     The output should resemble:
 
-.`git diff HEAD HEAD^` (`HEAD` to the commit before `HEAD`) output
+.The difference from `HEAD` to the commit before `HEAD` output
 ----
+# git diff HEAD HEAD^
+
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc
 index b14909f..48f7a8a 100644
 --- a/GitInPractice.asciidoc

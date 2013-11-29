@@ -16,9 +16,7 @@ require knowledge of how to create and interact with branches for working on
 different features in parallel. Let's create a remote repository on GitHub and
 a GitHub account to be able to store changes on another computer.
 
-// # git command
-// experience flavouring
-// make sure code listings are titled
+// more experience flavoring
 
 === Creating a GitHub repository
 GitHub is a website that provides Git repository hosting as well as issue
@@ -120,7 +118,6 @@ checkout` to change to different local branches' versions of files.
 image::diagrams/03-RemoteWorkflow.png[]
 
 // grey out irrelevant bits, add more captions
-// add git pull in diagram
 
 Figure 3.7 shows the remote Git workflow we will look at in this Chapter. As in
 the local workflow files are modified, added, committed and can be checked out.
@@ -162,8 +159,11 @@ To add the new GitInPractice remote repository to your current repository:
 
 You can verify this remote has been created successfully by running `git
 remote --verbose`. The output should resemble:
-.`git remote --verbose` output
+
+.Remote repositories output
 ----
+# git remote --verbose
+
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (fetch) <1>
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 ----
@@ -202,9 +202,10 @@ To push the changes from the local `GitInPracticeRedux` repository to the
 2.  Run `git push --set-upstream origin master` and enter your GitHub username
     and password when requested. The output should resemble:
 
-// remove all commands from captions, put inline.
-.`git push --set-upstream origin master` output
+.Push and set upstream branch output
 ----
+# git push --set-upstream origin master
+
 Username for 'https://github.com': GitInPractice <1>
 Password for 'https://GitInPractice@github.com': <2>
 Counting objects: 6, done. <3>
@@ -275,9 +276,9 @@ image::screenshots/03-GitHubPush.png[]
 
 Figure 3.9 shows the remote repository on GitHub after the `git push`. The
 latest commit SHA-1 there matches your current latest commit on the `master`
-branch seen in Figure 3.8. To update this in future you would run `git push`
-again to push any local changes to GitHub.
-// short sha-1s are different on GitHub/GitX. Explain.
+branch seen in Figure 3.8 (although they are different lengths; remember SHA-1s
+can always be shortened as long as they remain unique). To update this in
+future you would run `git push` again to push any local changes to GitHub.
 
 ==== Cloning a remote/GitHub repository onto your local machine
 It is useful to learn how to create a new Git repository locally and push it to
@@ -308,8 +309,10 @@ cloning from GitHub:
 3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`.
     The output should resemble:
 
-.`git clone https://github.com/GitInPractice/GitInPracticeRedux.git` output
+.Cloning a remote repository output
 ----
+# git clone https://github.com/GitInPractice/GitInPracticeRedux.git
+
 Cloning into 'GitInPracticeRedux'... <1>
 remote: Counting objects: 6, done. <2>
 remote: Compressing objects: 100% (5/5), done.
@@ -335,8 +338,11 @@ the default remote and references the repository that the clone originated from
 
 You can verify this remote has been created successfully by running `git
 remote --verbose`. The output should resemble:
-.`git remote --verbose` output
+
+.Remote repositories output
 ----
+# git remote --verbose
+
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (fetch) <1>
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 ----
@@ -395,8 +401,10 @@ repository from the remote repository on GitHub:
 2.  Run `git pull`.
     The output should resemble:
 
-.`git pull` output
+.Pulling new changes output
 ----
+# git pull
+
 remote: Counting objects: 5, done. <1>
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
@@ -495,8 +503,10 @@ To fetch new commits to the local `GitInPracticeRedux` repository from the
 2.  Run `git fetch`.
     The output should resemble:
 
-.`git fetch` output
+.Fetching new changes output
 ----
+# git fetch
+
 remote: Counting objects: 5, done. <1>
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
@@ -515,9 +525,8 @@ is doing. If your `master` branch is tracking the `master` branch on the remote
 `origin` then `git pull` is directly equivalent to running `git fetch && git
 merge origin/master`.
 
-.Local repository after `git fetch`
+.Remote repository after `git fetch`
 image::screenshots/03-GitXFetch.png[]
-// Local? But You've got the remote origin/master branch highlighted.
 
 You can see from Figure 3.12 that another new commit has been added to the
 repository but this time only `origin/master` has been updated but `master` has
@@ -538,8 +547,10 @@ repository from the remote repository on GitHub:
 2.  Run `git pull`.
     The output should resemble:
 
-.`git pull` (after `git fetch`) output
+.Pull after fetch output
 ----
+# git pull
+
 Updating 85a5db1..07fc4c3 <1>
 Fast-forward <2>
  GitInPractice.asciidoc | 4 +--- <3>
@@ -597,10 +608,13 @@ branch:
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git branch chapter-two`. There will be no output.
 
-// prefix command output
 You can verify the branch was created by running `git branch` which should have
 the following output:
+
+.List branches output
 ----
+# git branch
+
   chapter-two <1>
 * master <2>
 ----
@@ -666,24 +680,22 @@ image::screenshots/03-GitXCheckout.png[]
 The only difference between Figure 3.16 and Figure 3.14 is that the
 `chapter-two` branch is now orange and the `master` is green. Remember this
 means the `chapter-two` branch is currently checked out and `master` is not.
-// anontate this due to b&w printing
+// annotate this due to B&W printing
+
+.Git add/commit/checkout workflow
+image::diagrams/02-Workflow.png[]
 
 .Why do Subversion and Git use `checkout` to mean different things?
 NOTE: As mentioned earlier some other version control systems (e.g. Subversion)
 use `checkout` to refer to the initial download from a remote repository but
 `git checkout` is used here to change branches. This may be slightly confusing
-until we look at Git's full remote workflow.
-
-.Git add/commit/checkout workflow
-image::diagrams/02-Workflow.png[]
-
-Figure 3.17 shows Git's local workflow again. Under closer examination `git
-checkout` and `svn checkout` behave similarly; both check out the contents of a
-version control repository into the working directory but Subversion's
-repository is remote and Git's repository is local. In this case `git checkout`
-is requesting the checkout of a particular branch so the current state of that
-branch is checked out into the working directory.
-// This wants to be pulled into svn note/sidebar
+until we look at Git's full remote workflow. Figure 3.17 shows Git's local
+workflow again. Under closer examination `git checkout` and `svn checkout`
+behave similarly; both check out the contents of a version control repository
+into the working directory but Subversion's repository is remote and Git's
+repository is local. In this case `git checkout` is requesting the checkout of
+a particular branch so the current state of that branch is checked out into the
+working directory.
 
 .HEAD pointer with multiple branches
 image::diagrams/03-HEAD-Branches.png[]
@@ -709,8 +721,10 @@ branch `chapter-two` on GitHub:
 3.  Run `git push --set-upstream origin chapter-two`.
     The output should resemble:
 
-.`git push --set-upstream origin chapter-two` output
+.Push and set upstream branch output
 ----
+git push --set-upstream origin chapter-two
+
 Total 0 (delta 0), reused 0 (delta 0) <1>
 To https://github.com/GitInPractice/GitInPracticeRedux.git <2>
  * [new branch]      chapter-two -> chapter-two <3>
@@ -779,8 +793,10 @@ into the `master` branch:
 5.  Run `git merge chapter-two`.
     The output should resemble:
 
-.`git merge` output
+.Merge branch output
 ----
+# git merge chapter-two
+
 Updating 07fc4c3..ac14a50 <1>
 Fast-forward <2>
  GitInPractice.asciidoc | 2 ++ <3>
@@ -829,7 +845,7 @@ it is merged into the `master` branch and we do not want to make any more
 changes to it.
 
 // This is all very confusing, apparently.
-// Don't rely on colours in diagrams (everywhere).
+// Don't rely on colors in diagrams (everywhere).
 
 To push the current `master` branch and delete the branch named `chapter-two`
 on the remote `origin`:
@@ -842,8 +858,10 @@ on the remote `origin`:
 4.  Run `git push origin :chapter-two`.
     The output should resemble:
 
-.`git push origin :chapter-two` output
+.Delete remote branch output
 ----
+# git push origin :chapter-two
+
 To https://github.com/GitInPractice/GitInPracticeRedux.git <1>
  - [deleted]         chapter-two <2>
 ----

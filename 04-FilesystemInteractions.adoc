@@ -358,9 +358,9 @@ fatal: no files added <2>
 <1> ignored file
 <2> error message
 
-The "(1) ignored file" `GitInPractiseGoodIdeas.tmp` was not added as its
+The "ignored file (1)" `GitInPractiseGoodIdeas.tmp` was not added as its
 addition would contradict your `.gitignore` rules. As no files were added the
-"(2)" error message was printed.
+"error message (2)" was printed.
 
 This interaction between `.gitignore` and `git add` is particularly useful when
 adding subdirectories of files and directories which may contain files that
@@ -647,8 +647,8 @@ typically not run often. `git ls-files` without any arguments lists the files
 in the current directory that Git knows about but the `-v` argument means that
 it is followed by tags which indicate file state. I will not detail these here
 as it is not important to understand the tags beyond that in Listing 4.9 the
-"(1) committed files" are indicated by an uppercase `H` tag at the beginning of
-the line and the "(2) assumed unchanged file" has a lowercase `h` tag.
+"committed files (1)" are indicated by an uppercase `H` tag at the beginning of
+the line and the "assumed unchanged file (2)" has a lowercase `h` tag.
 
 Rather than reading through the output for this command you could instead run
 `git ls-files -v | grep '^[hsmrck?]' | cut -c 3-`. This makes use of Unix pipes
