@@ -84,18 +84,17 @@ After running `git mv` the move or rename will be added to Git's index staging
 area which, if you remember from Chapter 2, means that the change has been
 staged for inclusion in the next commit.
 
-It's also possible to rename files, directories or symlinks and move files,
-directories or symlinks into other directories inside the Git repository using
-the `git mv` command and the same syntax as above. If you wish to move files
-into or out of a repository you must use a different, non-Git command (such as
-a Unix `mv` command).
+It's also possible to rename files or directories and move files or directories
+into other directories inside the Git repository using the `git mv` command and
+the same syntax as above. If you wish to move files into or out of a repository
+you must use a different, non-Git command (such as a Unix `mv` command).
 
 .What if the new filename already exists?
 NOTE: If the filename that you move to already exists you will need to use the
-`git mv -f` (or `--force`) option to state to Git that you wish to overwrite
-whatever file is at the destination. If the destination file has not already
-been added or committed to Git that it will not be possible to retrieve the
-contents if you erroneously asked Git to overwrite it.
+`git mv -f` (or `--force`) option to request Git to overwrite whatever file is
+at the destination. If the destination file has not already been added or
+committed to Git then it will not be possible to retrieve the contents if you
+erroneously asked Git to overwrite it.
 
 === Remove a file
 ==== Background
@@ -111,6 +110,7 @@ Sometimes tools that don't interact with Git may remove files for you and
 require you to manually indicate to Git that you wish these files to be removed.
 
 For testing purposes let's create and commit a temporary file to be removed:
+
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `echo Git Sandwich > GitInPracticeReviews.tmp`. This will create a new file named `GitInPracticeReviews.tmp` with the contents "Git Sandwich".
@@ -204,8 +204,8 @@ The `--hard` argument signals to `git reset` that you wish it to reset both the
 index staging area and the working directory to the state of the previous
 commit on this branch. If run without an argument it defaults to `git reset
 --mixed` which will reset the index staging area but not the contents of the
-working directory. In short, `git reset --mixed` only undoes `git add`s but
-`git reset --hard` undoes `git add`s and all file modifications.
+working directory. In short, `git reset --mixed` only undoes `git add` but
+`git reset --hard` undoes `git add` and all file modifications.
 
 `git reset` will be used to perform more operations (including those that alter
 history) in Chapter 7.
@@ -215,8 +215,9 @@ WARNING: Care should be used with `git reset --hard`; it will immediately and
 without prompting remove all your uncommitted changes to any file in your
 working directory. This is probably the command which has caused me more regret
 than any other; I've typed it accidentally and removed work I hadn't intended
-to. Safer options may be to only reset files you have open in an editor (so you
-can undo) or use Git's stash functionality instead.
+to. Remember in Chapter 1 we learnt that it's very hard to lose work with Git?
+If you have uncommitted work this is one of the easiest ways to lose it! A
+safer option may be to use Git's stash functionality instead.
 
 === Delete untracked files
 ==== Background
@@ -225,16 +226,17 @@ your working directory.
 
 Some text editors may use temporary files, operating systems may write
 thumbnail cache files or programs may write crash dumps. Alternatively,
-sometimes there may be files that are desirable but you do not wish to check
-them into your version control system and wish to remove them and build clean
-versions (although this is generally better handled by _ignoring_ these files
-as in Section 4.5).
+sometimes there may be files that are desirable but you do not wish to commit
+them to your version control system and instead wish to remove them to build
+clean versions (although this is generally better handled by _ignoring_ these
+files as in Section 4.5).
 
 When you wish to remove these files you could remove them manually but it's
 easier to ask Git to do so as it already knows which files in the working
 directory are versioned and which are _untracked_.
 
 For testing purposes let's create a temporary file to be removed:
+
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `echo Needs more cowbell > GitInPracticeIdeas.tmp`. This will create a
@@ -326,7 +328,7 @@ in the Git working directory.
 ==== Discussion
 A good and widely-held principle for version control systems is to avoid
 committing _output files_ to a version control repository. Output files are
-those that are the created from input files that are stored within the version
+those that are created from input files that are stored within the version
 control repository.
 
 For example, I may have a `hello.c` file which is compiled into `hello.o`
@@ -358,9 +360,11 @@ fatal: no files added <2>
 <1> ignored file
 <2> error message
 
-The "ignored file (1)" `GitInPractiseGoodIdeas.tmp` was not added as its
-addition would contradict your `.gitignore` rules. As no files were added the
-"error message (2)" was printed.
+From the add output:
+
+* "ignored file (1)" `GitInPractiseGoodIdeas.tmp` was not added as its addition
+  would contradict your `.gitignore` rules.
+* "error message (2)" was printed as no files were added.
 
 This interaction between `.gitignore` and `git add` is particularly useful when
 adding subdirectories of files and directories which may contain files that
@@ -487,8 +491,9 @@ NOTE: No, `git add` is not needed. `git stash` will stash your changes whether
 or not they have been added to the index staging area by `git add` or not.
 
 .Does `git stash` work without the `save` argument?
-If `git stash` is run with no "save" argument it performs the same operation;
-the "save" argument is not needed. I've used it in the examples as it's more explicit and easier to remember.
+NOTE: If `git stash` is run with no "save" argument it performs the same
+operation; the "save" argument is not needed. I've used it in the examples as
+it's more explicit and easier to remember.
 
 === Reapply stashed changes
 ==== Background
@@ -641,14 +646,17 @@ H 01-IntroducingGitInPractice.asciidoc <2>
 <1> committed file
 <2> assumed unchanged file
 
+From the listed files:
+
+* "committed files (1)" are indicated by an uppercase `H` tag at the beginning
+  of the line.
+* "assumed unchanged file (2)" is indicated by a lowercase `h` tag.
+
 ==== Discussion
 Like `git update-index`, `git ls-files -v` is a low level command that you will
 typically not run often. `git ls-files` without any arguments lists the files
 in the current directory that Git knows about but the `-v` argument means that
-it is followed by tags which indicate file state. I will not detail these here
-as it is not important to understand the tags beyond that in Listing 4.9 the
-"committed files (1)" are indicated by an uppercase `H` tag at the beginning of
-the line and the "assumed unchanged file (2)" has a lowercase `h` tag.
+it is followed by tags which indicate file state.
 
 Rather than reading through the output for this command you could instead run
 `git ls-files -v | grep '^[hsmrck?]' | cut -c 3-`. This makes use of Unix pipes

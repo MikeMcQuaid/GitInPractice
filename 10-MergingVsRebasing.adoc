@@ -23,7 +23,8 @@ contributors both inside and outside Kitware but relatively few contributions
 from those without direct push access to the Kitware Git repository.
 
 CMake's Git repository is available to access at
-https://github.com/Kitware/CMake.
+https://github.com/Kitware/CMake. Please clone it and examine it while reading
+this chapter.
 
 .CMake repository history
 image::diagrams/10-CMakeGitX.png[]
@@ -67,7 +68,8 @@ very small number of people with commit access to the main repository (five at
 the time of writing).
 
 Homebrew's main Git repository is available to access at
-https://github.com/mxcl/homebrew.
+https://github.com/Homebrew/homebrew. Please clone it and examine it while
+reading this chapter.
 
 .Homebrew repository history
 image::diagrams/10-HomebrewGitX.png[]
@@ -217,10 +219,10 @@ NOTE: Although I've committed to both projects most of my open-source time is
 spent working on Homebrew. It will probably come as no surprise to hear
 therefore that I prefer Homebrew's approach. Maintaining a simple and readable
 history has frequently paid off in terms of quickly being able to `git bisect`
-or `git revert` commits with problems. Also, I prefer software release
-processes that favor lots of small updates rather than fewer, large updates. I
-think these processes are easier to test as they encourage incremental
-improvements rather than huge, sweeping changes.
+or `git revert` problematic commits. Also, I prefer software release processes
+that favor lots of small updates rather than fewer, large updates. I think
+these processes are easier to test as they encourage incremental improvements
+rather than huge, sweeping changes.
 
 === Summary
 In this chapter you hopefully learned:

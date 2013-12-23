@@ -1,4 +1,4 @@
-== Rewriting History
+== Rewriting History and Disaster Recovery
 Modifying existing commits and recovering from history rewrites. Advises
 on when history rewriting is useful, basic methods of rewriting history
 and how to avoid losing data when doing so.
