@@ -298,9 +298,9 @@ commit it.
 
 === Committing changes to files: git commit
 ==== Background
-A _commit_ is a collection of changes to one or more files. Each commit
-contains a message entered by the author, details of the author of the commit,
-a unique commit reference (in Git these are _SHA-1 hashes_ e.g.
+Making _commit_ stores the changes to one or more files. Each commit contains a
+message entered by the author, details of the author of the commit, a unique
+commit reference (in Git these are _SHA-1 hashes_ e.g.
 `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit
 (known as the _parent commit_), the date the commit was created and a pointer
 to the contents of files when the commit was made. The file contents are
@@ -620,8 +620,9 @@ commit for the window feature. We'd only rewrite history like this if working
 on a separate branch that hadn't had other work from other people relying on it
 yet as it has changed some parent commits (so, without intervention, other
 people's commits may point to commits that no longer exist). Don't worry too
-much about squashing work for now; just this as a situation where you may want
-to rewrite history. In Chapter 6 we'll learn how to rewrite history and the cases where it is useful and safe to do so.
+much about squashing work for now; just remember this as a situation where you
+may want to rewrite history. In Chapter 6 we'll learn how to rewrite history
+and the cases where it is useful and safe to do so.
 
 What we're generally interested in when reading the history (and why we clean
 it up) is ensuring the changes between commits are relevant (for example don't

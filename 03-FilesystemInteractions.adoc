@@ -641,7 +641,7 @@ changed.
 # git ls-files -v
 
 H .gitignore <1>
-H 01-IntroducingGitInPractice.asciidoc <2>
+h 01-IntroducingGitInPractice.asciidoc <2>
 ----
 <1> committed file
 <2> assumed unchanged file
