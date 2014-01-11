@@ -93,7 +93,7 @@ listing.
 Now Git is setup to use Git you need to initialize a Git _repository_ on your
 local machine.
 
-=== Creating a repository
+=== Creating a repository: git init
 ==== Background
 A Git _repository_ is the local collection of all the files related to a
 particular Git version control system and contains a `.git` subdirectory in its
@@ -209,7 +209,7 @@ understanding of Git (or, in my experience, never at all). You will instead
 modify these files and directories by interacting with the Git repository
 through Git's filesystem commands introduced in Chapter 3.
 
-=== Staging changes to files for inclusion in a new commit
+=== Staging changes to files for inclusion in a new commit: git add
 ==== Background
 To do anything useful in Git we first need one or more commits in our
 repository.
@@ -296,7 +296,7 @@ index staging area to build the next commit.
 Now that the contents of the file have been added to the index you're ready to
 commit it.
 
-=== Committing changes to files
+=== Committing changes to files: git commit
 ==== Background
 A _commit_ is a collection of changes to one or more files. Each commit
 contains a message entered by the author, details of the author of the commit,
@@ -458,7 +458,7 @@ image::diagrams/01-ParentCommit.png[]
 Now that we have two commits and have learned how they are stored we can start
 looking at Git's history.
 
-=== Viewing history
+=== Viewing history: git log, gitk, gitx
 ==== Background
 The _history_ in Git is the complete list of all commits made since the
 repository was created. The history also contains the references to any
@@ -631,7 +631,7 @@ The history can give us a quick overview of all the previous commits. However,
 querying the differences between any two arbitrary commits can also sometimes
 be useful so let's learn how to do that.
 
-=== Viewing the differences between commits
+=== Viewing the differences between commits: git diff
 ==== Background
 A _diff_ (also known as a _change_ or _delta_) is the difference between two
 commits. In a Git you can request a diff between any two commits, branches or

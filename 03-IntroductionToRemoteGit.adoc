@@ -15,7 +15,7 @@ collaborating as part of a large development team. Team collaboration will also
 require knowledge of how to create and interact with branches for working on
 different features in parallel. Let's start by adding a remote repository.
 
-=== Adding a remote repository
+=== Adding a remote repository: git remote add
 ==== Background
 Typically when using version control you will want to share your commits with
 other people using other computers. With a traditional, _centralized version
@@ -154,7 +154,7 @@ in many organizations but it demonstrates how distributed version control
 systems can allow different ways of managing merges to centralized version
 control.
 
-=== Pushing changes to a remote repository
+=== Pushing changes to a remote repository: git push
 ==== Background
 You will eventually wish to send commits made in the local repository to a
 remote. To do this always requires an explicit action. Only changes
@@ -267,7 +267,7 @@ branch seen in Figure 2.3 (although they are different lengths; remember SHA-1s
 can always be shortened as long as they remain unique). To update this in
 future you would run `git push` again to push any local changes to GitHub.
 
-=== Cloning a remote/GitHub repository onto your local machine
+=== Cloning a remote/GitHub repository onto your local machine: git clone
 ==== Background
 It is useful to learn how to create a new Git repository locally and push it to
 GitHub. However, you will usually be downloading an existing repository to use
@@ -363,7 +363,7 @@ the default remote and references the repository that the clone originated from
 
 Now let's learn how to pull new commits from the remote repository.
 
-=== Pulling changes from another repository
+=== Pulling changes from another repository: git pull
 ==== Background
 `git pull` downloads the new commits from another repository and merges the
 remote branch into the current branch.
@@ -479,7 +479,7 @@ into your local repository and Git has merged them into your `master` branch.
 Now let's learn how to download changes without applying them onto your master
 branch.
 
-=== Fetching changes from a remote without modifying local branches
+=== Fetching changes from a remote without modifying local branches: git fetch
 ==== Background
 Remember that `git pull` performs two actions: fetching the changes from a
 remote repository and merging them into the current branch. Sometimes you may
@@ -603,7 +603,7 @@ We've talked about local branches and remote branches but haven't actually
 created any ourselves yet. Let's learn about how branches work and how to
 create them.
 
-=== Creating a new local branch from the current branch
+=== Creating a new local branch from the current branch: git branch
 ==== Background
 When committing in Git the history continues linearly; what was the most recent
 commit becomes the parent commit for the new commit. This parenting continues
@@ -735,7 +735,7 @@ referencing the second chapter. I recommend a format of describing the branch's
 purpose in multiple words separated by hyphens. For example, a branch that is
 performing cleanup on the test suite should be named `test-suite-cleanup`.
 
-=== Checking out a local branch
+=== Checking out a local branch: git checkout
 ==== Background
 Once you've created a local branch you will want to check out the contents of
 another branch into Git's working directory. The state of all the current files
@@ -843,7 +843,7 @@ image::screenshots/03-GitXPushBranch.png[]
 As you'll hopefully have anticipated Figure 2.15 shows the addition of another
 remote branch named `origin/chapter-two`.
 
-=== Merging an existing branch into the current branch
+=== Merging an existing branch into the current branch: git merge
 ==== Background
 At some point we have a branch that we're done with and we want to bring all
 the commits made on it into another branch. This process is known as a `merge`.
