@@ -209,7 +209,7 @@ understanding of Git (or, in my experience, never at all). You will instead
 modify these files and directories by interacting with the Git repository
 through Git's filesystem commands introduced in Chapter 3.
 
-=== Staging changes to files for inclusion in a new commit: git add
+=== Building a new commit in the index staging area: git add
 ==== Background
 To do anything useful in Git we first need one or more commits in our
 repository.
