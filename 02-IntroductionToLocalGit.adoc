@@ -310,10 +310,11 @@ the files after the commit).
 .A typical commit broken down into its parts
 image::diagrams/01-Commit.png[]
 
-As you may have noticed Figure 1.2 uses arrows pointing from commits to their
-previous commit. The reason for this is that commits contain a pointer to the
-_parent commit_ and not the other way round; when a commit is made it has no
-idea what the next commit will be yet.
+.Why do the arrows point backwards?
+NOTE: As you may have noticed Figure 1.2 uses arrows pointing from commits to
+their previous commit. The reason for this is that commits contain a pointer to
+the _parent commit_ and not the other way round; when a commit is made it has
+no idea what the next commit will be yet.
 
 ==== Problem
 You wish to commit the contents of an existing file `GitInPractice.asciidoc`
