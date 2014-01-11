@@ -16,7 +16,7 @@ image::diagrams/15-MultipleFiles.png[]
 A naive method for handling multiple file versions is often simply creating
 duplicate files with differing filenames and contents (`Important Document V4
 FINAL FINAL.doc` may sound sadly familiar). An example of this approach can be
-seen in Figure 1.1.
+seen in Figure 15.1.
 
 At a more advanced level you may be sharing a document with other people and,
 rather than just undoing and redoing changes, wish to know who made a change,
@@ -34,7 +34,7 @@ version and specifying a message stating the reason for their change or what it
 accomplishes. When another commit is made then the previous version would
 remain in _history_ where its changes can be examined at a later time. Version
 control systems can therefore solve the problem of reviewing and retrieving
-previous changes and allow single files to be used rather than duplicated. This workflow can be seen in Figure 1.2.
+previous changes and allow single files to be used rather than duplicated. This workflow can be seen in Figure 15.2.
 
 When editing a file in a version control system you will always
 edit/save/commit the same file on disk. It will not move location either
@@ -59,7 +59,7 @@ the versions' files (known as _diffs_) can be queried.
 .Git add/commit/checkout workflow
 image::diagrams/15-Workflow.png[]
 
-Figure 1.3 shows the workflow you will use when using a version control system.
+Figure 15.3 shows the workflow you will use when using a version control system.
 After adding new changes to versioned files you will create new commits
 containing these changes and commit the changes to the repository. At a later
 point you can checkout different versions of files. This allows you to have
@@ -95,13 +95,8 @@ would include all the changes made in one to be included into the other.
 .Committing on multiple branches
 image::diagrams/15-SimpleBranches.png[]
 
-In Figure 1.4 you can see a simple example of using multiple branches when
-writing a book. We'll cover this in more detail in Section 1.4.1 but you should
-already be able to see how they allow multiple tracks of development in a
-project.
-
-Now you've learnt why programmers use version control let's see why they use
-Git specifically.
+In Figure 15.4 you can see a simple example of using multiple branches when
+writing a book.
 
 [appendix]
 == Installation
@@ -200,7 +195,7 @@ another version).
 == Creating a GitHub repository
 GitHub is a website that provides Git repository hosting as well as issue
 trackers, Git-backed wikis and a workflow to request a merge of the commits in
-a branch (which is known as a _pull request_ and will be shown in Chapter 12).
+a branch (which is known as a _pull request_ and is shown in Chapter 12).
 You can create free accounts for public remote repositories which are where
 everyone can see your code and commits. Typically these are used by open-source
 projects but it will also prove useful for your learning and experimentation.
