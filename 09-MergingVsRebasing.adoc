@@ -27,7 +27,7 @@ https://github.com/Kitware/CMake. Please clone it and examine it while reading
 this chapter.
 
 .CMake repository history
-image::diagrams/10-CMakeGitX.png[]
+image::diagrams/09-CMakeGitX.png[]
 
 CMake makes heavy use of branching and merges. Several of the branches visible
 or implied in the Figure 10.1 are:
@@ -54,7 +54,7 @@ branch name used in the merge commit helps indicate what feature or bug the
 commit was in relation to.
 
 .CMake branch/merge workflow
-image::diagrams/10-CMakeWorkflow.png[]
+image::diagrams/09-CMakeWorkflow.png[]
 
 Figure 10.2 focuses on the interactions between branches in the CMake workflow
 (rather than the interactions between commits and branches in Figure 10.1). For
@@ -72,7 +72,7 @@ https://github.com/Homebrew/homebrew. Please clone it and examine it while
 reading this chapter.
 
 .Homebrew repository history
-image::diagrams/10-HomebrewGitX.png[]
+image::diagrams/09-HomebrewGitX.png[]
 
 Homebrew has very few merge commits within the repository (remember that _fast
 forward merges_ do not produce merge commits). In Figure 10.3 you can see the
@@ -84,7 +84,7 @@ branches and temporary commits (that e.g. fix up previous commits on the same
 branch) from the `master` branch.
 
 .Homebrew's branch/rebase/squash workflow
-image::diagrams/10-HomebrewWorkflow.png[]
+image::diagrams/09-HomebrewWorkflow.png[]
 
 Figure 10.4 focuses on the branches and repositories in the Homebrew workflow.
 New commits can end up on master either by being directly committed by those

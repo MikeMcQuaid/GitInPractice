@@ -226,7 +226,7 @@ files to be added incrementally to the index. The add/commit/checkout workflow
 can be seen in Figure 1.1.
 
 .Git add/commit/checkout workflow
-image::diagrams/02-Workflow.png[]
+image::diagrams/01-Workflow.png[]
 
 Git does not add anything to the index without your instruction. As a result,
 the first thing you have to do with a file we want to include in a Git
@@ -544,7 +544,7 @@ branch in reverse chronological order i.e. the most recent commit comes first.
 It's also useful to graphically visualize history.
 
 .`gitk` on Windows 8.1
-image::screenshots/02-gitk.png[]
+image::screenshots/01-gitk.png[]
 
 `gitk` is a tool for viewing the history of Git repositories. It is usually
 installed with Git but may need installed by your package manager or
@@ -558,7 +558,7 @@ gtk+/GNOME integration and `QGit` for Qt/KDE integration. These can be
 installed using your package manager.
 
 .GitX-dev on OS X Mavericks
-image::screenshots/02-GitX.png[]
+image::screenshots/01-GitX.png[]
 
 On OS X there are tools such as `GitX` (and various forks of the project). As
 OS X is my platform of choice I'll be using screenshots of the `GitX-dev` fork
@@ -573,7 +573,7 @@ To view the commit history with gitk or GitX:
 2.  Run `gitk` or `gitx`.
 
 .GitX history output
-image::diagrams/02-GitX-history-full.png[]
+image::diagrams/01-GitX-history-full.png[]
 
 The GitX history (seen in Figure 1.7) shows similar output to `git log` but in
 a different format. You can also see the current branch and the contents of the
@@ -581,7 +581,7 @@ current commit including the diff and parent SHA-1. There's a lot of
 information that doesn't differ between commits, however.
 
 .GitX history graph output
-image::diagrams/02-GitX-history.png[]
+image::diagrams/01-GitX-history.png[]
 
 In Figure 1.8 you can see the GitX history graph output. This format will be
 used throughout the book to show the current state of the repository and/or the
@@ -801,7 +801,7 @@ Another equivalent syntax is `master^` which is the same as `master~1` (and
 `master^^` equivalent to `master~2`).
 
 .HEAD, master and modified refs
-image::diagrams/02-HEAD.png[]
+image::diagrams/01-HEAD.png[]
 
 The second ref is the string `HEAD`. The `HEAD` always points to the top of
 whatever you have currently checked out so almost always be the top commit of

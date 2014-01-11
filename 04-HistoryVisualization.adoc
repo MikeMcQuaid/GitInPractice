@@ -363,7 +363,7 @@ As you may have noticed this format is quite similar to that of the first two
 columns of GitX:
 
 .GitX graph output
-image::screenshots/05-GitXGraph.png[]
+image::screenshots/04-GitXGraph.png[]
 
 The `GitInPracticeRedux` repository does not currently have any merge commits.
 Let's see what the graph log output looks like with some of them.

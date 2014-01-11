@@ -31,7 +31,7 @@ requested. All commits, branches and history are stored offline unless users
 choose to send or receive commits from another repository.
 
 .Git add/commit/checkout cycle
-image::diagrams/02-Workflow.png[]
+image::diagrams/01-Workflow.png[]
 
 Figure 2.1 shows the local Git cycle we used in Chapter 1. Files in the
 local working directory are modified and added with `git add` to the index
@@ -42,7 +42,7 @@ of files using `git diff`. In Section 2.7 you will also see how to use `git
 checkout` to change to different local branches' versions of files.
 
 .Git add/commit/push/pull/checkout cycle
-image::diagrams/03-RemoteWorkflow.png[]
+image::diagrams/02-RemoteWorkflow.png[]
 
 Figure 2.2 shows the remote Git cycle we will look at in this chapter. As in
 the local workflow files are modified, added, committed and can be checked out.
@@ -251,7 +251,7 @@ it will do the same thing as running `git push origin master` i.e. push the
 current branch to the `origin` remote's `master` branch.
 
 .Local repository after `git push`
-image::screenshots/03-GitXPush.png[]
+image::screenshots/02-GitXPush.png[]
 
 Figure 2.3 shows the state of the repository after the `git push`. There is one
 addition since we last looked at it in Figure 2.10: the `origin/master` label.
@@ -259,7 +259,7 @@ This is attached to the commit which matches the currently known state of the
 `origin` remote's `master` branch.
 
 .GitHub repository after `git push`
-image::screenshots/03-GitHubPush.png[]
+image::screenshots/02-GitHubPush.png[]
 
 Figure 2.4 shows the remote repository on GitHub after the `git push`. The
 latest commit SHA-1 there matches your current latest commit on the `master`
@@ -350,7 +350,7 @@ will initialize all the Git submodules in the repository. Submodules will be
 covered in Chapter 12.
 
 .Local repository after `git clone`
-image::screenshots/03-GitXPush.png[]
+image::screenshots/02-GitXPush.png[]
 
 Figure 2.5 shows the state of the repository after the `git clone`. It is
 identical to the state after the `git push` in Figure 2.3. This shows that the
@@ -469,7 +469,7 @@ changes. In this case a merge must be made to reconcile the differing local and
 remote branch.
 
 .Local repository after `git pull`
-image::screenshots/03-GitXPull.png[]
+image::screenshots/02-GitXPull.png[]
 
 You can see from Figure 2.6 that a new commit has been added to the repository
 and that both `master` and `origin/master` have been updated.
@@ -545,7 +545,7 @@ repository without not merging them into your `master` branch.
 
 ==== Discussion
 .Remote repository after `git fetch`
-image::screenshots/03-GitXFetch.png[]
+image::screenshots/02-GitXFetch.png[]
 
 You can see from Figure 2.7 that another new commit has been added to the
 repository but this time only `origin/master` has been updated but `master` has
@@ -584,7 +584,7 @@ not been updated. As a result this `git pull` behaved the same as running `git
 merge origin/master`.
 
 .Local repository after `git fetch` then `git pull`
-image::screenshots/03-GitXFetchPull.png[]
+image::screenshots/02-GitXFetchPull.png[]
 
 Figure 2.8 shows that the `master` branch has now been updated to match the
 `origin/master` latest commit once more.
@@ -611,7 +611,7 @@ back to the initial commit in the repository. You saw an example of this in
 Figure 2.9.
 
 .Committing without using branches
-image::diagrams/01-WithoutBranches.png[]
+image::diagrams/02-WithoutBranches.png[]
 
 Sometimes this linear approach is not enough for software projects. Sometimes
 you may need to make new commits which are not yet ready for public
@@ -627,7 +627,7 @@ ready to integrate them into their branch. Figure 2.10 shows the same commits
 as Figure 2.9 if they were split between two branches instead for isolation.
 
 .Committing to multiple branches
-image::diagrams/01-Branches.png[]
+image::diagrams/02-Branches.png[]
 
 When a branch is created and new commits are made that branch advances forward
 to include the new commits. In Git a branch is actually no more than a pointer
@@ -705,7 +705,7 @@ point, will set the upstream for the branch (similarly to `git push
 --set-upstream` but without pushing anything remotely yet).
 
 .Local repository after `git branch chapter-two`
-image::screenshots/03-GitBranch.png[]
+image::screenshots/02-GitBranch.png[]
 
 You can see from Figure 2.11 that there is a new branch label for the
 `chapter-two` branch. In the GitX GUI the label colors indicate:
@@ -715,7 +715,7 @@ You can see from Figure 2.11 that there is a new branch label for the
 * blue: a remote branch
 
 .Branch pointers
-image::diagrams/03-BranchPointers.png[]
+image::diagrams/02-BranchPointers.png[]
 
 Figure 2.12 shows how these two branch pointers point to the same commit.
 
@@ -756,7 +756,7 @@ You've checked out the local branch named `chapter-two` and moved from the
 
 ==== Discussion
 .Git add/commit/checkout workflow
-image::diagrams/02-Workflow.png[]
+image::diagrams/01-Workflow.png[]
 
 .Why do Subversion and Git use `checkout` to mean different things?
 NOTE: As mentioned earlier some other version control systems (e.g. Subversion)
@@ -771,7 +771,7 @@ a particular branch so the current state of that branch is checked out into the
 working directory.
 
 .HEAD pointer with multiple branches
-image::diagrams/03-HEAD-Branches.png[]
+image::diagrams/02-HEAD-Branches.png[]
 
 Afterwards the HEAD pointer (seen in Figure 2.14) is updated to point to the
 current, `chapter-two` branch pointer which in turn points to the top commit of
@@ -838,7 +838,7 @@ Remember that now the local `chapter-two` branch is tracking the remote
 `chapter-two` branch will use the `origin` remote's `chapter-two` branch.
 
 .Local repository after `git push --set-upstream origin chapter-two`
-image::screenshots/03-GitXPushBranch.png[]
+image::screenshots/02-GitXPushBranch.png[]
 
 As you'll hopefully have anticipated Figure 2.15 shows the addition of another
 remote branch named `origin/chapter-two`.
@@ -849,7 +849,7 @@ At some point we have a branch that we're done with and we want to bring all
 the commits made on it into another branch. This process is known as a `merge`.
 
 .Merging a branch into master
-image::diagrams/01-Merging.png[]
+image::diagrams/02-Merging.png[]
 
 When a merge is requested all the commits from another branch are pulled into
 the current branch. Those commits then become part of the history of the
@@ -913,7 +913,7 @@ You have merged the `chapter-two` branch into the `master` branch.
 This brings the commit that was made in the `chapter-two` branch into the `master` branch.
 
 .Local repository after `git merge chapter-two`
-image::screenshots/03-GitXMerge.png[]
+image::screenshots/02-GitXMerge.png[]
 
 You can see from Figure 2.17 that now the `chapter-two` and `master` branches
 point to the same commit once more.
@@ -986,7 +986,7 @@ A _rebase_ is a method of history rewriting in Git that is similar to a merge.
 A rebase involves changing the parent of a commit to point to another.
 
 .Rebasing a branch on top of master
-image::diagrams/01-Rebasing.png[]
+image::diagrams/02-Rebasing.png[]
 
 Figure 2.20 shows a rebase of the `seperate-files` branch onto the `master`
 branch. The rebase operation has changed the parent of the first commit in the
@@ -1051,7 +1051,7 @@ You have deleted the `chapter-two` branch from the remote repository.
 
 ==== Discussion
 .Local repository after `git push origin :chapter-two`
-image::screenshots/03-GitXPushDelete.png[]
+image::screenshots/02-GitXPushDelete.png[]
 
 In Figure 2.19 you can see that the `origin/master` has been updated to the
 same commit as `master` and that `origin/chapter-two` has now been removed.
@@ -1076,7 +1076,7 @@ You've deleted the `chapter-two` branch from the local repository.
 
 ==== Discussion
 .Local repository after `git branch --delete chapter-two`
-image::screenshots/03-GitXBranchDelete.png[]
+image::screenshots/02-GitXBranchDelete.png[]
 
 Figure 2.18 shows the final state with all evidence of the `chapter-two` branch
 now removed (other than the commit message).

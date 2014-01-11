@@ -12,7 +12,7 @@ action); after new words are added it may be necessary to undo these changes by
 pressing undo repeatedly until you return to the desired previous state.
 
 .Versioning with multiple files
-image::diagrams/01-MultipleFiles.png[]
+image::diagrams/15-MultipleFiles.png[]
 A naive method for handling multiple file versions is often simply creating
 duplicate files with differing filenames and contents (`Important Document V4
 FINAL FINAL.doc` may sound sadly familiar). An example of this approach can be
@@ -25,7 +25,7 @@ multiple versions of the document in parallel. A _version control system_ (such
 as Git) allows all these operations and more.
 
 .Versioning with a version control system
-image::diagrams/01-VersionedFile.png[]
+image::diagrams/15-VersionedFile.png[]
 
 In a version control system instead of just saving a document after your
 changes have been made you would _commit_ it. This involves a save-like
@@ -57,7 +57,7 @@ from a commit can be compared to a previous version and the difference between
 the versions' files (known as _diffs_) can be queried.
 
 .Git add/commit/checkout workflow
-image::diagrams/01-Workflow.png[]
+image::diagrams/15-Workflow.png[]
 
 Figure 1.3 shows the workflow you will use when using a version control system.
 After adding new changes to versioned files you will create new commits
@@ -93,7 +93,7 @@ new feature to occur in parallel. These branches could be later _merged_ which
 would include all the changes made in one to be included into the other.
 
 .Committing on multiple branches
-image::diagrams/01-SimpleBranches.png[]
+image::diagrams/15-SimpleBranches.png[]
 
 In Figure 1.4 you can see a simple example of using multiple branches when
 writing a book. We'll cover this in more detail in Section 1.4.1 but you should
@@ -124,7 +124,7 @@ and run `git --version`. If Git is already installed the output should resemble
 Figure 2.1:
 
 .`git --version` in Terminal.app on OS X Mavericks
-image::screenshots/02-OSX-GitVersion.png[]
+image::screenshots/15-OSX-GitVersion.png[]
 
 ==== Installing Git on Apple OS X Mavericks or newer
 If you are running OS X Mavericks (10.9) or newer and Git was not already
@@ -132,7 +132,7 @@ installed when you ran `git --version` it will prompt to download and install
 Git similarly to to Figure 2.2:
 
 .OS X Mavericks Git installation
-image::screenshots/02-OSX-Mavericks-Git-Install.png[]
+image::screenshots/15-OSX-Mavericks-Git-Install.png[]
 
 ==== Installing Git on Apple OS X Mountain Lion or older
 If you are running OS X Mountain Lion (10.8) or older and you have a package
@@ -152,7 +152,7 @@ and run `git --version`. If Git is already installed the output should resemble
 Figure 2.3:
 
 .`git --version` in XFCE Terminal on Debian 7.2 (Wheezy)
-image::screenshots/02-Linux-GitVersion.png[]
+image::screenshots/15-Linux-GitVersion.png[]
 
 On Linux or Unix you can install Git directly from your package manager. How to
 do this varies from system to system but some of the popular options are below:
@@ -181,7 +181,7 @@ To run Git commands open the 'Git Bash' shortcut from the Start Menu. This will
 open a Unix shell in a Windows Command Prompt.
 
 .`git --version` in Git Bash on Windows 8.1
-image::screenshots/02-Windows-GitVersion.png[]
+image::screenshots/15-Windows-GitVersion.png[]
 
 With the Git shell open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
@@ -219,7 +219,7 @@ Let's sign up for a new GitHub account. Please browse to
 https://github.com/join where you should see something like Figure 3.1:
 
 .Join GitHub form
-image::diagrams/03-JoinGitHub.png[]
+image::diagrams/15-JoinGitHub.png[]
 
 This form allows you to create a new GitHub account which will allow you to
 access the service and create new repositories. The username you pick will
@@ -232,7 +232,7 @@ Enter your username, email and password and click the create button to advance
 to the next screen.
 
 .Choose GitHub plan
-image::diagrams/03-GitHubPlan.png[]
+image::diagrams/15-GitHubPlan.png[]
 
 The form in Figure 3.2 allows you to select your GitHub payment plan. The only
 differences between plans are the number of private repositories you can
@@ -247,7 +247,7 @@ repository.
 
 === Creating a new repository on GitHub
 .Dashboard buttons to create a new GitHub repository
-image::diagrams/03-CreateNewGitHubRepositoryButton.png[]
+image::diagrams/15-CreateNewGitHubRepositoryButton.png[]
 
 After signing up for your new GitHub account you should see your dashboard
 which should resemble Figure 3.3. From the dashboard there are two buttons you
@@ -255,7 +255,7 @@ can click to create a new GitHub repository. Click either of them to advance to
 the next screen.
 
 .Create a new GitHub repository
-image::diagrams/03-CreateNewGitHubRepository.png[]
+image::diagrams/15-CreateNewGitHubRepository.png[]
 
 // Add annotation to not add README or gitignore
 // Reference numbers in text (and for previous diagrams?)
@@ -270,7 +270,7 @@ After entering the repository details click the create button to advance to the
 next screen.
 
 .A new GitHub repository
-image::diagrams/03-NewGitHubRepository.png[]
+image::diagrams/15-NewGitHubRepository.png[]
 
 You have created a GitHub repository and should see something similar to Figure
 3.5. Now let's push the repository you created in Chapter 2 onto your local
