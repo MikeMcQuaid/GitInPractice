@@ -209,16 +209,14 @@ understanding of Git (or, in my experience, never at all). You will instead
 modify these files and directories by interacting with the Git repository
 through Git's filesystem commands introduced in Chapter 3.
 
-=== Building a new commit in the index staging area: git add
-==== Background
+=== Creating a new commit: git add, git commit
 To do anything useful in Git we first need one or more commits in our
 repository.
 
-A _commit_ is made up of the changes to one or more files on disk. The typical
-workflow is that you will change the contents of files inside a repository and,
-after making all necessary changes, review the _diffs_, and add them to a new
-commit. Often all the _diffs_ made will turn into one commit and then the cycle
-will repeat.
+A _commit_ is created from the changes to one or more files on disk. The
+typical workflow is that you will change the contents of files inside a
+repository, review the _diffs_, add them to the _index_, create a new commit
+from the contents of the index and repeat this cycle.
 
 Git's index is a staging area used to build up new commits. Rather than
 requiring all changes in the working tree make up the next commit Git allows
@@ -228,15 +226,17 @@ can be seen in Figure 1.1.
 .Git add/commit/checkout workflow
 image::diagrams/01-Workflow.png[]
 
+==== Building a new commit in the index staging area: git add
+===== Background
 Git does not add anything to the index without your instruction. As a result,
-the first thing you have to do with a file we want to include in a Git
-repository is request Git to add it to the index.
+the first thing you have to do with a file you want to include in a Git
+repository is request Git add it to the index.
 
-==== Problem
+===== Problem
 You wish to add an existing file `GitInPractice.asciidoc` to the index staging
 area for inclusion in the next commit.
 
-==== Solution
+===== Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory.
@@ -275,7 +275,7 @@ In the status output:
 * "new file in index (3)" shows the new file that you've just added to the
   index (the staging area for the next commit).
 
-==== Discussion
+===== Discussion
 `git add` can also be passed directories as arguments instead of files. You can add everything in the current directory and its subdirectories by running `git add .`.
 
 When a file is added to the index a file named `.git/index` is created (if it
@@ -296,8 +296,8 @@ index staging area to build the next commit.
 Now that the contents of the file have been added to the index you're ready to
 commit it.
 
-=== Committing changes to files: git commit
-==== Background
+==== Committing changes to files: git commit
+===== Background
 Making _commit_ stores the changes to one or more files. Each commit contains a
 message entered by the author, details of the author of the commit, a unique
 commit reference (in Git these are _SHA-1 hashes_ e.g.
@@ -316,12 +316,12 @@ their previous commit. The reason for this is that commits contain a pointer to
 the _parent commit_ and not the other way round; when a commit is made it has
 no idea what the next commit will be yet.
 
-==== Problem
+===== Problem
 You wish to commit the contents of an existing file `GitInPractice.asciidoc`
 which has already been added to the index staging area. After this, you wish to
 make modifications to the file and commit them.
 
-==== Solution
+===== Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory and
@@ -399,7 +399,7 @@ From the second commit output:
 
 You have made modifications to `GitInPractice.asciidoc` and committed them.
 
-==== Discussion
+===== Discussion
 The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag
 is omitted then Git will open a text editor (specified by the `EDITOR` or
 `GIT_EDITOR` environment variables) to prompt you for the commit message. These
@@ -417,7 +417,7 @@ therefore worse) commits so I recommend avoiding their use until you've got
 used to using them separately. Reasons small commits are better than large ones
 are covered in Section 1.6.1.
 
-===== Object store
+====== Object store
 Git is a version control system built on top of an _object store_. Git creates
 and stores a collection of objects when you commit. The object store is stored
 inside the Git _repository_.
@@ -444,7 +444,7 @@ go well this should be unnecessary but when we start to delve into more
 advanced Git functionality or Git spits out a baffling error message then
 remembering _blobs_ and _trees_ may help you work out what has happened.
 
-===== Parent commits
+====== Parent commits
 Every commit object points to its _parent commit_. The parent commit in a
 linear, branch-less history will be the one that immediately preceded it. The
 only commit that lacks a parent commit is the _initial commit_; the first
