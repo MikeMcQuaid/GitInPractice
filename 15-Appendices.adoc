@@ -182,9 +182,6 @@ With the Git shell open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
 resemble Figure 2.4.
 
-// Is Powershell a sensible option to recommend/mention?
-// Speak to Phil Haack at GitHub
-
 === Verifying Git has installed correctly.
 To run Git commands you will need to open a Terminal application, console or
 command-prompt (depending on your platform). To verify that Git has installed
@@ -251,9 +248,6 @@ the next screen.
 
 .Create a new GitHub repository
 image::diagrams/15-CreateNewGitHubRepository.png[]
-
-// Add annotation to not add README or gitignore
-// Reference numbers in text (and for previous diagrams?)
 
 Creating a new repository requires you to pick a name and optionally a
 description as in Figure 3.4. This name will be combined with the username you
