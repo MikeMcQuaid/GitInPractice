@@ -56,9 +56,9 @@ new commits to it and `git fetch` retrieves any new commits made by others from
 it.
 
 In Chapter 1 you created a local repository on your machine. Please sign up for
-a GitHub account (detailed in Appendix C) and create a _remote repository_ on
-GitHub (detailed in Appendix D). You can use another Git hosting provider but
-this book will assume the use of GitHub (as it is the most widely used).
+a GitHub account and create a _remote repository_ on GitHub (detailed in
+Appendix D). You can use another Git hosting provider but this book will assume
+the use of GitHub (as it is the most widely used).
 
 The first action you're concerned with is adding a reference for your
 newly-created remote repository (also known as a _remote_) on GitHub to your
