@@ -541,7 +541,7 @@ You have reapplied the changes from the last `git stash save`.
 When running `git stash pop` the top stash on the stack (i.e. `stash@{0}`) will
 be applied to the working directory and removed from the stack. If there is a
 second stash in the stack (`stash@{1}`) then it will now be at the top (i.e.
-become `stash@{1}`). This means if you run `git stash pop` multiple times it
+become `stash@{0}`). This means if you run `git stash pop` multiple times it
 will keep working down the stack until no more stashes are found and it outputs
 `No stash found.`.
 
