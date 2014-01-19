@@ -13,7 +13,7 @@ pressing undo repeatedly until you return to the desired previous state.
 
 .Versioning with multiple files
 image::diagrams/A-MultipleFiles.png[]
-A naive method for handling multiple file versions is often simply creating
+A naïve method for handling multiple file versions is often simply creating
 duplicate files with differing filenames and contents (`Important Document V4
 FINAL FINAL.doc` may sound sadly familiar). An example of this approach can be
 seen in Figure A.1.
@@ -97,3 +97,10 @@ image::diagrams/A-SimpleBranches.png[]
 
 In Figure A.4 you can see a simple example of using multiple branches when
 writing a book.
+
+_Changes_, _commits_, _history_, a _repository_, _diffs_ and _branches_ are all
+typically provided by version control systems (such as Git). These features
+enable workflows where changes are logged for future reference, work can be be
+done in parallel and previous versions of files are kept. Hopefully this
+provides you with a basic understanding of why version control systems are
+useful.
