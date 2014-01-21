@@ -930,44 +930,46 @@ case produces a merge conflict.
 
 .Merge conflict resolution with Git
 ----
-= Git In Practice <1>
+== Chapter 1 <1>
 <<<<<<< HEAD <2>
-== Chapter 1 <3>
-It is a truth universally acknowledged, that a single person in
+It is a truth universally acknowledged, that a single person in <3>
 possession of good source code, must be in want of a version control
 system.
 
 == Chapter 2
-// TODO: write second chapter.
+// TODO: write two chapters
 ======= <4>
->>>>>>> separate-files <5>
+// TODO: think of funny first line that editor will approve. <5>
+>>>>>>> separate-files <6>
 ----
 <1> unchanged line
-<2> previous changes marker
-<3> previous line version
-<4> changes separator
-<5> new changes marker
+<2> incoming marker
+<3> incoming line
+<4> branch separator
+<5> current version
+<6> current marker
 
 When a merge conflict occurs the version control system will go through any
 files that have conflicts and insert something similar to the above markers.
 These markers indicate the versions of the file on each branch.
 
 * "unchanged line (1)" is provided only for context in this example
-* "previous changes marker (2)" starts the section containing the lines from
-  the previous commit (referenced by `HEAD` here).
-* "previous line version (3)" shows a line from the previous commit.
-* "changes separator (4)" starts the section containing the lines from the new
-  branch.
-* "new changes (5)" marker ends the section containing the lines from the new
-  branch (referenced by `separate-files`; the name of the branch being merged
-  in).
+* "incoming marker (2)" starts the section containing the lines from
+  the current branch (referenced by `HEAD` here).
+* "incoming line (3)" shows a line from the incoming branch's commit(s).
+* "branch separator (4)" starts the section containing the lines from the
+  incoming branch.
+* "current version (5)" shows a line from the current branch's commit(s).
+* "current marker (6)" marker ends the section containing the lines from
+  the incoming branch (referenced by `separate-files`; the name of the branch
+  being merged in).
 
 .How can conflict markers be found quickly?
 NOTE: When searching a large file for the merge conflict markers you should
 enter `<<<<` into your text editor's find tool to quickly locate them.
 
 The person performing the merge will need to manually edit the file to produce
-the correctly merged output, save it and mark the commit as resolved. Sometimes
+the correctly merged output, save it and mark the merge as resolved. Sometimes
 resolving the conflict will involve picking all the lines of a single version;
 either the previous version's lines or the new branch's lines. Other times
 resolving the conflict will involve combining some lines from the previous
