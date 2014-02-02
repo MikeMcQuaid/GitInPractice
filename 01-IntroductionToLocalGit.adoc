@@ -17,22 +17,22 @@ creator of the Linux kernel, started writing Git in 2008 with the goal of
 having a distributed, open-source, high-performance and hard to corrupt version
 control system for the Linux kernel project to use. Within a week Git's source
 code was hosted inside the Git version control system and within two and a half
-months the version 2.6.12 of the Linux kernel was released using Git.
+months version 2.6.12 of the Linux kernel was released using Git.
 
-From its initial creation for the Linux kernel Git is now used by many other
+Since its initial creation for the Linux kernel Git is now used by many other
 open source projects, all sizes of companies and large "social coding" Git
 hosting sites such as GitHub.
 
-Git is my preferred method of software source code control. I also use it
-for versioning plain text files such as the text for this book. Git has many
+Git is my preferred method of software source code control. I also use it for
+versioning plain text files such as the text for this book. Git has many
 strengths over other methods of source control. Git stores all of the history,
 branches and commits locally. This means adding new versions or querying
-history doesn't require a network connection. Git's history log viewing and
-branch creation is near-instant compared to e.g. Subversion's which is sluggish
-even on a fast network connection. As Git stores changes locally you are not
-constrained by the work of others when working in a team. For example, remote
-branch updates and merges can be done independently so you can continue your
-edit/commit workflow without interruptions whilst still downloading and
+history doesn't require a network connection. Git's history-log viewing and
+branch creation is near-instant compared with e.g. Subversion's which is
+sluggish even on a fast network connection. As Git stores changes locally you
+are not constrained by the work of others when working in a team. For example,
+remote branch updates and merges can be done independently so you can continue
+your edit/commit workflow without interruptions while still downloading and
 examining any changes made by others. In Git you can modify the history of
 branches and even rewrite commit data across the entire repository. It's often
 useful to be able to make lots of small commits which are later turned into a
@@ -43,7 +43,7 @@ won't be purged until it's missing from all branches for at least 30 days. This
 means it's very hard to accidentally lose work if it has been committed.
 
 Git's main downsides are that the command-line application's interface is often
-counterintuitive; it makes frequent use of jargon that can only be adequately
+counterintuitive: it makes frequent use of jargon that can only be adequately
 explained by understanding Git's internals. Additionally Git's official
 documentation can be hard to follow; it also uses jargon and has to detail the
 large number of options for Git's commands. To the credit of the Git community
@@ -90,7 +90,7 @@ NOTE: You can follow listings as you work through the book by running the
 listed commands in a Terminal/console/Git Bash and comparing the output to the
 listing.
 
-Now Git is setup to use Git you need to initialize a Git _repository_ on your
+Now Git is set up, to use Git you need to initialize a Git _repository_ on your
 local machine.
 
 === Creating a repository: git init
