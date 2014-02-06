@@ -576,6 +576,7 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git bisect start`. There will be no output.
 3.  Run `git bisect bad`. There will be no output.
+//[DAN]: Why the 6576b6 below? It's not in listing 4.10
 4.  Run `git bisect good 6576b6`. The output should resemble Listing 4.10.
 5.  Run `git bisect good` when the filename is `GitInPractice.asciidoc` and `git
     bisect bad` when the filename is `01-IntroducingGitInPractice.asciidoc`. The
@@ -692,6 +693,7 @@ If it's difficult or impossible to tell if a particular commit is good or bad
 you can run `git bisect skip` which will ignore it. Given there are enough
 other commits then `git bisect` will use another to narrow the search instead.
 
+//[DAN]: Works as technique 2 here I think?
 ===== Automating git bisect
 Although `git bisect` is already useful wouldn't it be even better if, rather
 than having to keep typing `git bisect good` or `git bisect bad`, it could run
