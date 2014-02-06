@@ -4,20 +4,27 @@ repository in varying formats by learning the following topics:
 
 * How to filter `git log` output commits by various criteria
 * How to format `git log` output to display the information you care about
-* How to find who, why and when a line in a file was changed
-* How to identify which commit caused a particular bug
+* How to find why and when a line in a file was changed, and who changed it using `git blame`
+* How to identify which commit caused a particular bug using `git bisect`
+
+//[DAN]: No mention of git diff in the bullets but a mention in the para below?
+
 
 When working with Git repository on large, long-running software projects
 you'll sometimes want to dig through the history to identify old versions of
 code, work out why and by whom changes were made, analyze the changes to e.g.
 identify why a bug is occurring. You can do this to a limited extent already
-using the tools you've already learnt: `git log` and `git diff`.
+using the commands you've already learnt - `git log` and `git diff` - and with two more we'll cover in this chapter - `git blame` and `git bisect`
+
+//[DAN]: Last para doesn't seem to finish. Have added soething to change...
 
 Let's start by learning how to optimize our use of `git log` to only list only
 particular commits.
 
 === List only certain commits
-==== Background
+
+//[DAN]: I believe from talking to production (see email) that we don't need to add the Background header.
+
 Sometimes when examining history you will want to filter the commits that are
 display based on some of their metadata. Perhaps you are tracking down a commit
 that you can remember was made on a rough date, by a particular person or with
@@ -40,6 +47,8 @@ with the string "file." in their message.
 2.  Run `git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'`.
     The output should resemble:
 
+//[DAN]: No annotations for the listing below? You could point out individual commits, which time order they are in, ...
+
 .Filtered log output
 ----
 # git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'
@@ -48,6 +57,7 @@ commit 06b5eb58b62ba8bbbeee258705c636ca7ac20b49
 Author: Mike McQuaid <mike@mikemcquaid.com>
 Date:   Thu Nov 28 15:49:30 2013 +0000
 
+//[DAN]: Is this the standard output from git log or is it tailored?
     Remove unfavourable review file.
 
 commit fcd8f6e957a03061cdf411851fe38034a44c97ab
@@ -69,10 +79,16 @@ arguments.
 
 From the arguments provided to the log command:
 
+//[DAN]: I think --author description needs a reword.
+//[DAN]: Is there a --before (or equivalent to --since) that we shold mention here?
+//[DAN]: What are the valid date formats that git recognizes for --after?
+//[DAN]: What is the regexp flavour supported by git? 
+
+
 * `--author` specifies a regular expression that matches the contents of the
-  author. In this case it's searching the string `Mike McQuaid
+  author. In this case it's searching the author string `Mike McQuaid
   <mike@mikemcquaid.com>` and finding a match based on the 'Mike McQuaid' at
-  the beginning of the author string.
+  the beginning.
 * `--after` (or `--since`) specifies that the only commits shown should be
   those that were made after the specified date. These dates can be in any
   format that Git recognises such as `Nov 10 2013`, `2014-01-30`, `midnight` or
@@ -96,9 +112,15 @@ understand them; what you've seen above should be more than enough to work with
 Git and there are many resources online that can aid you if you wish to pursue
 them further.
 
+//[DAN]: Link for more regexp info?
+
 You have shown a subset of commits filtered by author, date and commit message.
 
 ==== Discussion
+//[DAN]: This list of argumetns for git log would do better as a bulleted lsit I think.
+//[DAN]: Not mentioning --reverse? You do elsewhere..
+//[DAN]: I get no sense here of your own experience with this. You could do with summarizing this better and adding in notes about what you use most often.
+
 `git log` can take a `--max-count` (or `-n`) argument to limit the number of
 commits that are shown in the log output.
 
@@ -109,6 +131,8 @@ Similarly to the `--after` argument `git log` can take a `--before` (or
 show merge commits i.e. commits that have at least 2 parents. If you adopt a
 branch-heavy workflow with Git then this will be very useful in identifying
 what branches were merged and when.
+
+//[DAN]: This note about git show strikes me as 'Technique 2' for this particualr task rather than an adjunct for the current one.
 
 `git show` is a command similar to `git log` but shows a single commit. It also
 defaults to showing what was changed in that commit. Remember from Chapter 2
@@ -147,8 +171,12 @@ From the show commit output:
 The `git show HEAD^` output is equivalent to to `git log --max-count=1 --patch
 HEAD^`.
 
+//[DAN]: Does git show have any other arguments worth mentioning here?
+
 === List commits with different formatting
-==== Background
+
+//[DAN]: I think that each 
+
 The default `git log` output format is helpful but takes a minimum of 6 lines
 of output to display each commit. It displays the commit SHA-1, author name and
 email, commit date and the full commit message (each additional line of which
@@ -160,6 +188,8 @@ currently is.
 Thankfully `git log` has some powerful formatting features with varied,
 sensible supplied options and the ability to completely customize the output to
 meet your needs.
+
+//[DAN]: Check ref. You say Chapter 2 below here but Chapter 1 at the bottom of the next bulleted list.
 
 .Why are commits structured like emails?
 NOTE: Remember in Chapter 2 I mentioned that commits are structured like
@@ -225,6 +255,8 @@ From the email formatted log output:
 * "commit subject (4)" is the first line of the commit message prefixed with
   "[PATCH]". This is another reason to structure your commit messages like
   emails (as mentioned in Chapter 1).
+  
+//[DAN]: Chapter 1 or 2 (see prev comment)
 
 If there is more than one line in a commit message then the other lines will be
 shown as the message body. Remember if you use the `--patch` (or `-p`) argument
@@ -232,14 +264,14 @@ then `git log` output will also include the changes made in the commit. With
 this argument provided each outputted `git log` entry will contain the commit
 and all the metadata necessary to convert it to or from an email.
 
-You have listed a subset of the commits with reversed ordering and different
-formatting.
-
 ==== Discussion
 If you specify the `--patch` (or `-p`) flag to `git log` then you can also
 format the diff output by specifying flags for `git diff` too. For example,
 `git log --patch --word-diff` will show the word diff (rather than unified
 diff) for each log entry.
+
+//[DAN]: Bring forward the word diff vs unified diff conversation from C1 for reference...
+//[DAN]: Bulleted list for "useful" date formats with a little mroe description to them?
 
 `git log` can take a `--date` flag which takes various parameters to display
 the output dates in different formats. For example, `--date=relative` displays
@@ -248,6 +280,7 @@ displays only the date e.g. `2013-11-28`. There is also `iso` (or iso8601),
 `rfc` (or `rfc2822`), `raw`, `local` and `default` formats available but I
 won't detail them all in this book.
 
+//[DAN]: If you lost this heading here, then all the other sub heads below work well as alternative techniques tothe problem rather than as you have them I think.
 ===== Output formats
 The `--format` (or `--pretty`) flag can take various parameters such as `email`
 that we've seen in this example, `medium` which is the default if no format was
@@ -255,6 +288,8 @@ specified or `oneline`, `short`, `full`, `fuller` or `raw`. I won't show every
 format in this book but please compare and contrast them on your local machine.
 Different formats are better used in different situations depending on how much
 of their displayed information you care about at that time.
+
+//[DAN]: Youve shown medium, and soon fuller and one line. Would it hurt to have a short description or extend listing 4.4 to show them all?
 
 You may have noticed the "full" output contains details about an author and a
 committer and the "fuller" output additionally contains details of the author
@@ -280,6 +315,8 @@ accessible at https://github.com/Homebrew/homebrew. This was used as in the
 `GitInPracticeRedux` repository all the previous commits will have the same
 author and committer, author date and commit date.
 
+//[DAN]: (Below first sentence) - which commit output? FUller?
+
 .Why do commits have an author and committer?
 NOTE:This commit output shows that for a commit there are two recorded actions:
 the original author of the commit and the committer; the person who added this
@@ -287,7 +324,10 @@ commit to the repository. These two attributes are both set at `git commit`
 time. If they are both set at once then why are they separate values? Remember
 that we've seen repeatedly that commits are like emails, can be formatted as
 emails and sent to others. If I have a public repository on GitHub then other
-users can clone my repository but cannot commit to it. In these cases they may
+users can clone my repository but cannot commit to it. 
+
+//[DAN]: Diagram for who can do waht to the repo?
+In these cases they may
 send me commits through a pull request (which will be discussed in Chapter 11)
 or by email. If I want include these in my repository the separation between
 committing and authoring means I can then include these commits and Git stores
@@ -365,7 +405,8 @@ From the short log output:
 The commit range (`HEAD~6..HEAD`) is optional but typically you'd want to use
 one to create a software release announcement for any version after the first.
 
-===== The ultimate log output
+//[DAN]: That is a massively subjective heading you've got there? :-)
+===== The ultimate log output  
 As mentioned previously often the `git log` output is too verbose or does not
 display all the information you wish to query in a compact format. It's also
 not obvious from the output how local or remote branches relate to the output.
@@ -424,14 +465,14 @@ made on the `testing` branch and then the `testing` branch was merged into
 deleted) and both have been pushed to their respective remote branches. All
 this from just three lines of ASCII output. Hopefully you can see why I love
 this presentation. As typing `git log --oneline --graph --decorate` is a bit
-unweildy we'll see in Chapter 7 how to shorten this using an alias to something
+unwieldy we'll see in Chapter 7 how to shorten this using an alias to something
 like `git l`.
 
 === Show who last changed each line of a file: git blame
 ==== Background
 I'm sure all developers have been in a situation where they've seen some line
 of code in a file and wonder why it is was written that way. As long as the
-file is stored in a Git it's easy to query who, when and why (given a good
+file is stored in a Git repository it's easy to query who, when and why (given a good
 commit message was used) a certain change is made.
 
 You could do this by using `git diff` or `git log --patch` but neither of these
@@ -445,6 +486,8 @@ use-case.
 ==== Problem
 You wish to show the commit, person and date in which each line of
 `GitInPractice.asciidoc` was changed.
+
+//[DAN]: Check the name of your target asciidoc file above and below. They disagree.
 
 ==== Solution
 1.  Change to the directory containing your repository
