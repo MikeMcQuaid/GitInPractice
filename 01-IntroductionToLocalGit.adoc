@@ -13,7 +13,7 @@ Let's start by learning why Git is so widely used by programmers.
 
 === Why do programmers use Git?
 Git was created by a programmer to be used by programmers. Linus Torvalds, the
-creator of the Linux kernel, started writing Git in 2008 with the goal of
+creator of the Linux kernel, started writing Git in 2005 with the goal of
 having a distributed, open-source, high-performance and hard to corrupt version
 control system for the Linux kernel project to use. Within a week Git's source
 code was hosted inside the Git version control system and within two and a half
