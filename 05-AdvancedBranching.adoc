@@ -1,3 +1,8 @@
+//[DAN]: General notes regarding gitx screenshots.
+//[DAN]: 1. Remember to crop out unnecessary things. Are the committer name and datetime actually necessary in any of the screenshots?
+//[DAN]: 2. Consider making each screenshot a before and after shot so the reader can actually see what effect the command has ahd on the timeline. Currently you only see the after shot which doesn't really help identify what has changed.
+//[DAN]: 3. Add annotations to highlight what has changed and how to interpret what we are seeing.
+
 == Advanced Branching
 You've already learnt the basics of branching in Chapter 2. In this chapter you
 will learn about more advanced branching techniques by learning the following
@@ -14,25 +19,32 @@ topics:
 
 When working as part of a team on a software project you will typically use
 branches to separate work between individuals, features, bug fixes and software
-releases. You should already be able to perform some basic branching actions
+releases. You should already be able to perform some basic branching actions //[DAN]: Care to list these basic actions?
 from Chapter 2. This chapter will expand on that so you can improve your
 branching workflow to be more effective.
+
+//[DAN]: It seems important enough here to re-establish what a merge commit is
 
 Let's start by learning how to use some of the parameters provided by `git
 merge`.
 
+//[DAN]: Why change the title here from that in the bullet list in the intro? How about "Merge branches more effectively : git merge re-examined" or something wtihout the 'different options' bit. That's not a recipe name at the mo. It's like saying "Bake a cake with different fillings". The recipe is Bake a Cake and the discussion looks at the different fillings. The whole bit about fast-forwarding commits etc in the background section means either the recipe should be called "Fast-forwaridng Merges" or that it is in the wrong place or that each of these different merge techniques is just that - a different technqiue, should be marked as such and have their own background and discussions. 
 === Merge branches with different options
-==== Background
-You learnt in Chapter 2 about how to perform a basic merge of two branches.
-Additionally to what you've seen already `git merge` provides various options
+You learnt in Chapter 2 how to perform a basic merge of two branches. //[DAN]: Quick summary here?
+Additionally, `git merge` provides various options
 for merging branches without creating merge commits, using various strategies
-or a graphical merge tool.
+or a graphical merge tool.  //[DAN]: Being picky here, but git merge is controlled by the tool not the other way round which si the implication in the text. Could you rephrase please? 
 
-Let's start by seeing how to perform a merge that could be a fast-forwarded but
+
+
+//[DAN]: I don't recall the concept of a fast-forwarded merge in Chapter 2.
+Let's start by seeing how to perform a merge that could be fast-forwarded but
 without creating a merge commit. Recall a fast-forward merge means that the
 incoming branch has the current branch as an ancestor i.e. no commits have been
-made on the current branch since the other branch branched from it.
+made on the current branch since the incoming branch branched from it.
+//[DAN]: What was the point of this branch then if nothing was committed.
 
+//[DAN]: WHy is this not here? I thought we were trying to establish the various possible options for merging. This note seems more apt if the whole discussion was on forcing the creation of a merge commit. Problem is that you haven't actually brought up the idea of forcing it.  
 .Why would you want to force creation of a merge commit?
 NOTE: While fast-forward merges can sometimes be useful in some Git workflows
 you will want to explicitly signify the merging of a branch, even if it was not
@@ -66,6 +78,7 @@ You've created a new branch named `chapter-spacing` that can be merged with a
 fast-forward merge into the `master` branch.
 
 ==== Problem
+//[DAN]: Having jsut set up a branch for fast-forwarding, you start with "not performing a fast-forward merge". That doesn't make a great deal of sense. 
 You wish to merge the `chapter-spacing` branch into the `master` branch and
 create a merge commit i.e. not perform a fast-forward merge.
 
@@ -104,6 +117,8 @@ You have merged the `chapter-spacing` branch into the `master` branch and
 forced a merge-commit to be created.
 
 ==== Discussion
+//[DAN]: Always start sections with text and not a browseable.
+//[DAN]: See general notes, but also, should we be comparing the branching here with a GUI that hs just had a ff commit?
 .Local repository after `git merge --no-ff chapter-spacing`
 image::screenshots/05-GitXMergeNoFF.png[]
 
@@ -112,7 +127,9 @@ fast-forward. A merge commit has two parents: the previous commit on the
 current branch (i.e. `master` in this case) and the previous commit on the
 incoming branch (i.e. `chapter-spacing` in this case). Even when the
 `chapter-spacing` branch was deleted the existence of the branch will remain
-implied by the visual branching and merging in GitX. In this case where the
+implied by the visual branching and merging in GitX. 
+//[DAN]: But there is no sign at least in GitX of what the branch was called?    
+In this case where the
 branch contained a single commit this may not be terribly useful but on larger
 features this explicit indication of branches can aid history visualization.
 
@@ -120,11 +137,12 @@ features this explicit indication of branches can aid history visualization.
 is never created. In the case that the merge can only be made with a merge
 commit (e.g. there are conflicts that need to be resolved) then it will not
 perform the merge.
+//[DAN]: The above paragraph just doe snot make sense to me even after rpeated reading. Can you try adn rephrase please?
 
 ===== Merge strategies
 The previous merge output state that it was using the _recursive_ merge
 strategy. A merge strategy is an algorithm that Git uses to decide how to
-perform a merge.
+perform a merge.  //[DAN]: This definition should be in italics or better still in the background section.
 
 Strategies can be selected by passing the `--strategy` (or `-s`) flag to `git
 merge` followed by the name of the strategy. For example, to select the
@@ -144,6 +162,7 @@ Some useful merge strategies are:
 * `octopus`: this strategy can merge multiple branches at once but will refuse
   to allow manual resolution of merge conflicts. This strategy is the default
   if you try and merge two or more branches into another.
+  //[DAN]: 3 or more branches in one merge? Really? You should have a whole section on that and not jsut a brief mention here.
 * `ours`: this strategy performs a normal merge but ignores all the changes
   from the incoming branch. This means the resulting tree is the same as it
   was before the merge. This can be useful when you wish to merge a branch and
@@ -180,7 +199,6 @@ I've found are most commonly used. All the merge strategies and options can be
 examined by running `git help merge`.
 
 === Resolve a merge conflict
-==== Background
 As mentioned previously sometimes when you merge one branch into another there
 will have been changes to the same part of the same file in both branches and
 Git cannot detect automatically which one is the desired change to include. In
@@ -420,7 +438,6 @@ Details for how to configure `git mergetool` to use your tool of choice are
 available by running `git help mergetool`.
 
 === Only resolve each merge conflict once: git rerere
-==== Background
 You may find yourself in a situation where you have a long-running branch where
 you have to keep merging in another branch and get the same merge conflicts
 every time.
@@ -488,7 +505,6 @@ above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`.
 There will be no output.
 
 === Create a tag: git tag
-==== Background
 Recall from Chapter 2 that a tag is another _ref_ (or pointer) for a single
 commit. Tags differ from branches in that they are (usually) permanent. Rather
 than pointing to the work-in-progress on a feature they are generally used to
