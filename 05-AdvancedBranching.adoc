@@ -61,6 +61,7 @@ Let's create a branch that can be merged with a fast-forward merge:
 2.  Run `git checkout -b chapter-spacing`.
 3.  Edit `01-IntroducingGitInPractice.asciidoc` to add a line-break between
     chapters.
+//[DAN]: No git add command?    
 4.  Run `git commit --message 'Add spacing between chapters'
     01-IntroducingGitInPractice.asciidoc`.
     The output should resemble:
