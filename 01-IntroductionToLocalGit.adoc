@@ -414,8 +414,8 @@ an add followed immediately by a commit. It can also take the `--all` (or `-a`)
 flags to add all changes to files tracked in the repository into a new commit.
 Although these methods all save time they tend to result in larger (and
 therefore worse) commits so I recommend avoiding their use until you've got
-used to using them separately. Reasons small commits are better than large ones
-are covered in Section 1.6.1.
+used to using them separately. Several reasons small commits are better than
+large ones are covered in Section 1.5.1.
 
 ====== Object store
 Git is a version control system built on top of an _object store_. Git creates
