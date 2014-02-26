@@ -374,7 +374,7 @@ Let's create another commit.
 
 1.  Modify `GitInPractice.asciidoc` and stage the changes in the index with `git
     add`.
-2.  Run `git commit --message 'Add opening joke. Funny?`.
+2.  Run `git commit --message 'Add opening joke. Funny?'`.
     The output should resemble:
 
 .Making a second commit
@@ -597,7 +597,7 @@ paths.
 
 `git log` can take a `--patch` (or `-p`) flag to show the _diff_ for each
 commit output. It can also take `--stat` or `--word-diff` flag to show a
-_diffstat_ or _word diff_. These terms will be explained in Section 1.7.4.
+_diffstat_ or _word diff_. These terms will be explained in Section 1.6.4.
 
 ===== Rewriting history
 Git is unusual compared to many other version control systems in that it allows
@@ -684,7 +684,7 @@ The diff output contains:
 * "git diff command (1)" requests Git to show the diff between the commit
   before the top of `master` (`master~1`) and the commit on top of `master`.
   Both `master~1` and `master` are _refs_ and will be explained later in
-  Section 1.7.4.
+  Section 1.6.4.
 * "virtual diff command (2)" is the invocation of the Unix `diff` command that
   Git is simulating. Git pretends that it is actually diffing the contents two
   directories the "old virtual path (4)" and the "new virtual path (5)" and the
