@@ -1,5 +1,6 @@
 ## Rewriting History and Disaster Recovery
 In Section 1.5.4 we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging.
+// TODO: point to Ch9/14
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
@@ -13,7 +14,9 @@ In this chapter you will learn about rewriting history by learning the following
 Before jumping in to rewriting history let's start by learning about how to avoid losing committed data using `git reflog`.
 
 ### List all changes including history rewrites: git reflog
-Recall from Section 1.5.4 that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. This is as if a previous commit changes in any way then any commits pointing to it will change also. This provides a good protection in Git from accidentally rewriting history as all commits effectively provide a checksum of the entire branch up until this point.
+Recall from Section 1.5.4 that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. This is as if a previous commit changes in any way then any commits pointing to it will change also.
+// TODO: crap sentence, reword.
+This provides a good protection in Git from accidentally rewriting history as all commits effectively provide a checksum of the entire branch up until this point.
 
 Git's _reflog_ (or _reference log_) is updated whenever a commit pointer is updated (e.g. `HEAD` pointer or branch pointer). This includes previous actions we've seen that don't involve rewriting history such as committing and changing branches.
 
@@ -43,6 +46,8 @@ dfe2377 HEAD@{2}: checkout: moving from master to v0.1-release
 <2> new commit
 <3> revert commit
 
+//TODO: note what order commits are in chronologically
+
 From the reflog output:
 
 * "change of branch (1)" shows that you called `git checkout` to move from the  `v0.1-release` branch to the `master` branch. This was the last action performed and it changed the `HEAD` pointer.
@@ -54,14 +59,18 @@ Let's compare this to the current GitX output:
 .GitX reflog comparison output
 image::screenshots/06-GitXReflog.png[]
 
+//TODO: Perhaps add captions to figure with HEAD@{0} and stuff?
+
 You can from Figure 6.1 that the SHA-1s match those in the `git reflog` output: the latest commit on the `master` branch (`3e3c417`, `HEAD@{0}`, `HEAD@{3}`), the latest commit on the `v0.1-release` branch (`a8200e1`, `HEAD@{1}` ) and the penultimate commit on the `v0.1-release` branch (`dfe2377`, `HEAD@{1}`).
+//TODO: perhaps annotations in the diagram instead.
 
 Recall from Section 1.6.4 you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
 
 You have viewed the changing state of the `HEAD` pointer by viewing the reflog.
 
 #### Discussion
-`git reflog` can also take all `git log` flags such as `--max-count` or `--patch`. Running `git reflog` is actually an alias for `git log --walk-reflogs --abbrev-commit --pretty=oneline`.
+Running `git reflog` is actually an alias for `git log --walk-reflogs --abbrev-commit --pretty=oneline`. `git reflog` can also take all `git log` flags such as `--max-count` or `--patch`.
+//TODO: where can we find git log flags in previous chapter?
 
 Like `git log` if `git reflog` can be passed a ref as the final argument. If this is not specified it defaults to `HEAD`. For example, you can view how the `master` branch has changed over time by using `git reflog master`.
 
@@ -127,12 +136,18 @@ From the reset commit output:
 .GitX after commit reset
 image::screenshots/06-GitXResetAfter.png[]
 
+//TODO: wrong diagram.
+
 In Figure 6.3 you can see the state of GitX after the `git reset`. The commit that was created by the `git commit` command has now disappeared from GitX.
 
 You have reset the `master` branch pointer to point to a previous commit.
 
 #### Discussion
 Remember that I said in the previous section that `git reflog` was useful in avoiding the loss of commits? Let's imagine that you reset the previous commit but later realized this was a mistake. Let's run `git reflog` and see if we can get anything useful from the output:
+
+//TODO: elaborate on --hard vs --mixed
+//TODO: changing the branch pointer; perhaps we need some alternate analogies.
+// tearing out pages of a book; hard vs mixed is keeping vs throwing away pages
 
 .Reflog output after reset commit
 ```
@@ -181,6 +196,8 @@ Recall from Chapter 2 that rebasing is similar to merging but requires rewriting
 image::diagrams/02-Rebasing.png[]
 
 We saw Figure 6.5 previously as Figure 2.20. It shows a rebase of the `seperate-files` branch onto the `master` branch. The rebase operation effectively destroys each of the existing commits on the `separate-files` branch only to recreate them with the same metadata with one difference: the first commit on the `separate-files` branch now points to the top of the `master` branch.
+
+// Remove this diagram from here and just point back to Chapter 2.
 
 Let's create a branch that we can rebase:
 
@@ -235,11 +252,16 @@ From the rebase output:
 .Rebased inspiration branch
 image::screenshots/06-GitXRebaseAfter.png[]
 
+// TODO: point out the commits that have changed, the branch color changes etc.
+// Explain reflowing of GitX
+
 In Figure 6.6 you can see the rebased `inspiration` branch. It still has a single commit but that commit's parent is now the latest commit on the `v0.1-release` branch rather than the commit tagged `v0.1`.
 
 You have rebased the `inspiration branch` on top of the `v0.1-release` branch.
 
 #### Discussion
+// TODO: explain ref argument and warn not to rebase on arbitrary commits
+
 Let's look at the reflog again to see what effects the rebase had:
 
 .Reflog output after rebase
@@ -359,6 +381,8 @@ pick 5d4ad83 Add Chapter 1 inspiration. <2>
 <9> exec command
 <10> empty commits
 
+//TODO: make an empty commit
+
 From the interactive rebase git-rebase-todo file:
 
 * "v0.1-release commit (1)" shows the last commit on the `v0.1-release` branch. This shows up here because we are rebasing back on top the `v0.1` tagged commit so the rebase operation will try to rebase any commit ancestors on the `inspiration` branch that are not ancestors of the `v0.1` tagged commit. It may be undesirable to have these commits on our new branch but, as mentioned in the file, if you remove this line from the file then the commit will be removed from the rebase. This is effectively the same as if there had been a conflict and you used `git rebase --skip` to skip this commit. Even more powerfully if you cut a line from here and perform another `git rebase --interactive` operation as long as the commit still exists (i.e. it hasn't been purged due to it being detached from any branch for 90 days) you can paste it back in and `rebase` will include it in this operation.
@@ -371,6 +395,8 @@ From the interactive rebase git-rebase-todo file:
 * "fixup command (8)" (or `f`) is very similar to the `squash` command but it does not prompt for a message and instead uses the commit message of the first commit. This is used in situations where you want to combine commits but don't need to change commit messages.
 * "exec command (9)" (or `x`) is different to the previous commands in that it does not operate on a commit. Instead the rest of the line after `exec` is run at that stage in the `rebase` process. This could be used to print debugging output while performing a rebase operation.
 * "empty commits (10)" will be commented out with a `#` character. You should never see empty commits so `rebase` is removing them for you automatically.
+
+// TODO: perhaps take out all the commands (or all the commands except pick/fixup) until the discussion section.
 
 Edit and save the file so the only uncommented lines are the following:
 
@@ -491,7 +517,9 @@ From the rebase pull output:
 .Commit before pull rebase
 image::screenshots/06-GitXPullRebaseBefore.png[]
 
-Figure 6.8 shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`).
+//TODO: pull rebase after diagram?
+
+Figure 6.9 shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`).
 
 You have pulled with a rebase. Now `git push` to send these commits upstream.
 
@@ -648,11 +676,17 @@ From the filter-branch file removal output:
 .GitX after filter-branch
 image::screenshots/06-GitXFilterBranch.png[]
 
+// Needs a "before filter branch" diagram
+
 Figure 6.9 shows the output from GitX after the `git filter-branch` command from the first point at which they diverge (which is the first commit containing the `00-Preface.asciidoc` file). All commits that referenced the file have been changed and all those that only changed this file have been pruned as they were empty. You can see the `origin/master` remote branch also has a identical ref named `refs/original/refs/heads/master`. This is used as a backup so the original `master` can be restored by `git branch --force master refs/original/refs/heads/master` if desired.
 
 You have removed all references to `00-Preface.asciidoc` on the `master` branch.
 
 #### Discussion
+`filter-branch` is a relatively niche command that is used only in fairly dramatic circumstances such as killing a project but extracting parts of it into a library, filtering history before open-sourcing a repository or removing confidential information that was accidentally committed over a long period of time.
+
+//TODO: bullet this
+
 `git filter-branch` can take a `--all` argument which runs it on every branch rather than just the named one. This can be used to rewrite entire repositories rather than just single branches.
 
 `git filter-branch` can take a `--force` (or `-f`) flag which is needed to perform a second `filter-branch` on the same branch in a repository (which would overwrite the backup). Otherwise the following message is output:
@@ -672,9 +706,10 @@ Force overwriting the backup with -f
 
 `git filter-branch` can take a `--parent-filter` flag which can change commit parents, `--commit-filter` flag which can vary commit commands and `--tag-name-filter` flag which modify tag names but these tend to be less widely used.
 
-This book does not want to cover all these flags in the same detail as this example. `filter-branch` is a relatively niche command that is used only in fairly dramatic circumstances such as killing a project but extracting parts of it into a library, filtering history before open-sourcing a repository or removing confidential information that was accidentally committed over a long period of time. The best approach to learn more about this functionality is to read `git filter-branch --help` and experiment on duplicated local repositories.
+This book does not want to cover all these flags in the same detail as this example. The best approach to learn more about this functionality is to read `git filter-branch --help` and experiment on duplicated local repositories.
 
 ### Avoiding and recovering from disasters
+// TODO: move to the beginning of the chapter
 Despite the scary phrase "rewriting history" we've actually seen throughout this chapter that any operation that acts on commits (such as `git rebase`) rather than the working directory (such as `git reset --hard` with uncommitted changes) is easily recoverable using `git reflog` for 90 days after the changes were made.
 
 The main rule to avoid data loss therefore is *commit early and commit often*. Now that you know how to rewrite history you should think of committing not as a complex operation but similar to a "Save" operation in most other pieces of software. Commit whenever you have written anything useful that you don't want to lose and then rewrite your history later into a small, readable commits.
@@ -695,4 +730,4 @@ In this chapter you hopefully learned:
 * How to use `git filter-branch` to rewrite the entire history of one or more branches
 * How to use avoid disaster by committing regularly
 
-Now let's learn how configure Git's settings so you can use it more efficiently.
+Now let's learn how to configure Git's settings so you can use it more efficiently.
