@@ -73,7 +73,7 @@ My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would r
 .Set name and email address
 ----
 # git config --global user.name "Mike McQuaid" <1>
-# git config --global user.email "mike@mikemcquaid.com"
+# git config --global user.email mike@mikemcquaid.com
 <2>
 ----
 <1> a run command
