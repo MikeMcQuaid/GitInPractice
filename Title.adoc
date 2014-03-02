@@ -3,3 +3,6 @@ Mike McQuaid <mike@mikemcquaid.com>
 :doctype: book
 :toc:
 :numbered:
+:idprefix:
+:idseparator: -
+:source-highlighter: pygments
