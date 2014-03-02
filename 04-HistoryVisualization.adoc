@@ -4,14 +4,15 @@ repository in varying formats by learning the following topics:
 
 * How to filter `git log` output commits by various criteria
 * How to format `git log` output to display the information you care about
-* How to find who, why and when a line in a file was changed
-* How to identify which commit caused a particular bug
+* How to find why and when a line in a file was changed, and who changed it using `git blame`
+* How to identify which commit caused a particular bug using `git bisect`
 
 When working with Git repository on large, long-running software projects
 you'll sometimes want to dig through the history to identify old versions of
 code, work out why and by whom changes were made, analyze the changes to e.g.
-identify why a bug is occurring. You can do this to a limited extent already
-using the tools you've already learnt: `git log` and `git diff`.
+identify why a bug is occurring. You can do this to a limited extent using the
+commands you've already learnt (`git log` and `git diff`) and extend this with
+two more we'll cover in this chapter: `git blame` and `git bisect`.
 
 Let's start by learning how to optimize our use of `git log` to only list only
 particular commits.
@@ -43,7 +44,7 @@ with the string "file." in their message.
 ----
 # git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'
 
-commit 06b5eb58b62ba8bbbeee258705c636ca7ac20b49
+commit 06b5eb58b62ba8bbbeee258705c636ca7ac20b49 <1>
 Author: Mike McQuaid <mike@mikemcquaid.com>
 Date:   Thu Nov 28 15:49:30 2013 +0000
 
@@ -55,12 +56,14 @@ Date:   Thu Nov 28 15:48:24 2013 +0000
 
     Add first review temporary file.
 
-commit c6eed6681efc8d0bff908e6dbb7d887c4b3fab3e
+commit c6eed6681efc8d0bff908e6dbb7d887c4b3fab3e <2>
 Author: Mike McQuaid <mike@mikemcquaid.com>
 Date:   Thu Nov 28 15:39:38 2013 +0000
 
     Rename book file to first part file.
 ----
+<1> most recent commit
+<2> least recent commit
 
 The filtered log output is the essentially the same as the `git log` output you
 saw in Chapter 2 but with only the commits that are matched by the specified
@@ -69,46 +72,50 @@ arguments.
 From the arguments provided to the log command:
 
 * `--author` specifies a regular expression that matches the contents of the
-  author. In this case it's searching the string `Mike McQuaid
-  <mike@mikemcquaid.com>` and finding a match based on the 'Mike McQuaid' at
-  the beginning of the author string.
+  author. In the previous case it was searching for the author string `Mike
+  McQuaid <mike@mikemcquaid.com>` and found a match as the string started with
+  the requested 'Mike McQuaid'.
 * `--after` (or `--since`) specifies that the only commits shown should be
   those that were made after the specified date. These dates can be in any
-  format that Git recognises such as `Nov 10 2013`, `2014-01-30`, `midnight` or
+  format that Git recognizes such as `Nov 10 2013`, `2014-01-30`, `midnight` or
   `yesterday`.
 * `--grep` specifies a regular expression that matches the contents of the
   commit message. `file\.` was used rather than `file.` to escape the `.`
   character.
 
+
 .What are regular expressions?
 NOTE: Regular expressions are search patterns that are typically used to match
-these patterns inside of strings. Git uses them for various filtering
-operations such as filtering by commit message or author as we saw previously.
-Characters either have literal meanings e.g. `a` which will always match a
-lowercase 'a' character or special meanings e.g. `.` which will match any
-character. For example, `file.` will match the strings `files` or `filed`. To
-turn a character with a special meaning into one with a literal meaning you can
-escape them with a backslash e.g. `file\.` will match the string `file.` but
-not the string `files`. I'm not going to cover regular expressions in detail
-because they are beyond the scope of this book. Don't worry if you don't fully
-understand them; what you've seen above should be more than enough to work with
-Git and there are many resources online that can aid you if you wish to pursue
-them further.
+these patterns inside of strings. There are multiple variants of regular
+expressions and Git uses the POSIX regular expression format. Git uses them for
+various filtering operations such as filtering by commit message or author as
+we saw previously. Characters either have literal meanings e.g. `a` which will
+always match a lowercase 'a' character or special meanings e.g. `.` which will
+match any character. For example, `file.` will match the strings `files` or
+`filed`. To turn a character with a special meaning into one with a literal
+meaning you can escape them with a backslash e.g. `file\.` will match the
+string `file.` but not the string `files`. I'm not going to cover regular
+expressions in detail because they are beyond the scope of this book. Don't
+worry if you don't fully understand them; what you've seen above should be more
+than enough to work with Git and there are many resources online that can aid
+you if you wish to pursue them further.
 
 You have shown a subset of commits filtered by author, date and commit message.
 
 ==== Discussion
-`git log` can take a `--max-count` (or `-n`) argument to limit the number of
-commits that are shown in the log output.
+`git log` can take:
 
-Similarly to the `--after` argument `git log` can take a `--before` (or
-`--until`) argument which will only show commits before the given date.
+* a `--max-count` (or `-n`) argument to limit the number of commits that are
+  shown in the log output. I tend to use this often when I know that I only care about something in the e.g. last 10 commits and don't want to scroll through more output than that.
+* a `--reverse` argument to show the commits in ascending chronological order (i.e. the oldest commit first)
+* a `--before` (or `--until`) argument which will only show commits before the
+  given date. This is the reverse of `--after`.
+* a `--merges` flag (or `--min-parents=2`) which will only show merge commits
+  i.e. commits that have at least 2 parents. If you adopt a branch-heavy
+  workflow with Git then this will be very useful in identifying what branches
+  were merged and when.
 
-`git log` can take a `--merges` flag (or `--min-parents=2`) which will only
-show merge commits i.e. commits that have at least 2 parents. If you adopt a
-branch-heavy workflow with Git then this will be very useful in identifying
-what branches were merged and when.
-
+===== `git show`
 `git show` is a command similar to `git log` but shows a single commit. It also
 defaults to showing what was changed in that commit. Remember from Chapter 2
 that `git log` has a `--patch` (or -p) argument to show what was changed by
@@ -160,7 +167,7 @@ sensible supplied options and the ability to completely customize the output to
 meet your needs.
 
 .Why are commits structured like emails?
-NOTE: Remember in Chapter 2 I mentioned that commits are structured like
+NOTE: Remember in Chapter 1 I mentioned that commits are structured like
 emails? This is because Git was initially created for use by the Linux kernel
 project which has a high-traffic mailing list. People frequently send commits
 (know as "patches") to the mailing list. Previously there was an implicit
@@ -230,14 +237,11 @@ then `git log` output will also include the changes made in the commit. With
 this argument provided each outputted `git log` entry will contain the commit
 and all the metadata necessary to convert it to or from an email.
 
-You have listed a subset of the commits with reversed ordering and different
-formatting.
-
 ==== Discussion
 If you specify the `--patch` (or `-p`) flag to `git log` then you can also
-format the diff output by specifying flags for `git diff` too. For example,
-`git log --patch --word-diff` will show the word diff (rather than unified
-diff) for each log entry.
+format the diff output by specifying flags for `git diff` too. Recall word
+diffs from Chapter 1. `git log --patch --word-diff` will show the word diff
+(rather than unified diff) for each log entry.
 
 `git log` can take a `--date` flag which takes various parameters to display
 the output dates in different formats. For example, `--date=relative` displays
@@ -246,7 +250,6 @@ displays only the date e.g. `2013-11-28`. There is also `iso` (or iso8601),
 `rfc` (or `rfc2822`), `raw`, `local` and `default` formats available but I
 won't detail them all in this book.
 
-===== Output formats
 The `--format` (or `--pretty`) flag can take various parameters such as `email`
 that we've seen in this example, `medium` which is the default if no format was
 specified or `oneline`, `short`, `full`, `fuller` or `raw`. I won't show every
@@ -279,24 +282,27 @@ accessible at https://github.com/Homebrew/homebrew. This was used as in the
 author and committer, author date and commit date.
 
 .Why do commits have an author and committer?
-NOTE:This commit output shows that for a commit there are two recorded actions:
-the original author of the commit and the committer; the person who added this
-commit to the repository. These two attributes are both set at `git commit`
-time. If they are both set at once then why are they separate values? Remember
-that we've seen repeatedly that commits are like emails, can be formatted as
-emails and sent to others. If I have a public repository on GitHub then other
-users can clone my repository but cannot commit to it. In these cases they may
-send me commits through a pull request (which will be discussed in Chapter 11)
-or by email. If I want include these in my repository the separation between
-committing and authoring means I can then include these commits and Git stores
-the person who e.g. made the code changes and the person who added these
-changes to the repository (hopefully after reviewing them). This means you can
-keep the original attribution for the person who did the work but still record
-the person who added the commit to the repository and (hopefully) reviewed it.
-This is particularly useful in open-source software; with other tools such as
-Subversion if you don't have commit access to a repository the best attribution
-you could hope for would be e.g. "Thanks to Mike McQuaid for this commit!" in
-the commit message.
+NOTE:This fuller commit output shows that for a commit there are two recorded
+actions: the original author of the commit and the committer; the person who
+added this commit to the repository. These two attributes are both set at `git
+commit` time. If they are both set at once then why are they separate values?
+Remember that we've seen repeatedly that commits are like emails, can be
+formatted as emails and sent to others. If I have a public repository on GitHub
+then other users can clone my repository but cannot commit to it.
+
+In these cases they may send me commits through a pull request (which will be
+discussed in Chapter 11) or by email. If I want include these in my repository
+the separation between committing and authoring means I can then include these
+commits and Git stores the person who e.g. made the code changes and the person
+who added these changes to the repository (hopefully after reviewing them).
+This means you can keep the original attribution for the person who did the
+work but still record the person who added the commit to the repository and
+(hopefully) reviewed it. This is particularly useful in open-source software;
+with other tools such as Subversion if you don't have commit access to a
+repository the best attribution you could hope for would be e.g. "Thanks to
+Mike McQuaid for this commit!" in the commit message.
+
+In Subversion the equivalent `git blame` command is `svn blame`. It also has an alias called `svn praise`. In Git there is no such alias by default (but Chapter 7 will show you how to create one yourself). I'm sure there's a joke to be made about the fact that Subversion offers praise and blame equally but Git offers only blame!
 
 ===== Custom output format
 If none of the `git log` output formats meets your needs you can create your
@@ -422,14 +428,14 @@ made on the `testing` branch and then the `testing` branch was merged into
 deleted) and both have been pushed to their respective remote branches. All
 this from just three lines of ASCII output. Hopefully you can see why I love
 this presentation. As typing `git log --oneline --graph --decorate` is a bit
-unweildy we'll see in Chapter 7 how to shorten this using an alias to something
+unwieldy we'll see in Chapter 7 how to shorten this using an alias to something
 like `git l`.
 
 === Show who last changed each line of a file: git blame
 I'm sure all developers have been in a situation where they've seen some line
 of code in a file and wonder why it is was written that way. As long as the
-file is stored in a Git it's easy to query who, when and why (given a good
-commit message was used) a certain change is made.
+file is stored in a Git repository it's easy to query who, when and why (given
+a good commit message was used) a certain change is made.
 
 You could do this by using `git diff` or `git log --patch` but neither of these
 tools are optimized for this particular use-case; they both usually require
@@ -437,7 +443,7 @@ reading through a lot of information you aren't interested in to find the
 information you are.
 
 Instead let's see how to use the command designed specifically for this
-use-case.
+use-case: `git blame`.
 
 ==== Problem
 You wish to show the commit, person and date in which each line of
@@ -464,6 +470,8 @@ ac14a504 GitInPractice.asciidoc (Mike McQuaid 2013-11-09 4)
 ac14a504 GitInPractice.asciidoc (Mike McQuaid 2013-11-09 5)
  // TODO: write two chapters
 ----
+
+Firstly, note that the output shows `GitInPractice.asciidoc` rather than `01-IntroducingGitInPractice.asciidoc`. This is because the filename has been changed since these changes were made. `git blame` is only showing changes to lines in the file and ignoring that the file was renamed. This is useful as it means you do not lose all blame data whenever you rename a file.
 
 From the blame output:
 
@@ -529,7 +537,7 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git bisect start`. There will be no output.
 3.  Run `git bisect bad`. There will be no output.
-4.  Run `git bisect good 6576b6`. The output should resemble Listing 4.10.
+4.  Run `git bisect good 6576b6` where `6576b6` is the SHA-1 of any commit that you know was before the rename. The output should resemble Listing 4.10.
 5.  Run `git bisect good` when the filename is `GitInPractice.asciidoc` and `git
     bisect bad` when the filename is `01-IntroducingGitInPractice.asciidoc`. The
     output should be similar each time.
@@ -595,6 +603,17 @@ From the final bisect output:
 You have located the commit that renamed `GitInPractice.asciidoc`.
 
 ==== Discussion
+.bisect binary search performance
+|===
+|Total commits|Max checked commits|
+
+|  10| 6|
+| 100|13|
+|1000|19|
+|===
+
+As you can see from the table above as the number of commits increases the max number of commits that need to be checked increases much more slowly. This algorithm means that you can quickly navigate through a huge numbers of commits with `git bisect` without too many steps.
+
 If you wish to examine the steps that you followed in a `git bisect` operation
 then you can run `git bisect log`:
 
