@@ -1,3 +1,8 @@
+//[DAN]: General notes regarding gitx screenshots.
+//[DAN]: 1. Remember to crop out unnecessary things. Are the committer name and datetime actually necessary in any of the screenshots?
+//[DAN]: 2. Consider making each screenshot a before and after shot so the reader can actually see what effect the command has ahd on the timeline. Currently you only see the after shot which doesn't really help identify what has changed.
+//[DAN]: 3. Add annotations to highlight what has changed and how to interpret what we are seeing.
+
 == Advanced Branching
 You've already learnt the basics of branching in Chapter 2. In this chapter you
 will learn about more advanced branching techniques by learning the following
@@ -14,25 +19,32 @@ topics:
 
 When working as part of a team on a software project you will typically use
 branches to separate work between individuals, features, bug fixes and software
-releases. You should already be able to perform some basic branching actions
+releases. You should already be able to perform some basic branching actions //[DAN]: Care to list these basic actions?
 from Chapter 2. This chapter will expand on that so you can improve your
 branching workflow to be more effective.
+
+//[DAN]: It seems important enough here to re-establish what a merge commit is
 
 Let's start by learning how to use some of the parameters provided by `git
 merge`.
 
+//[DAN]: Why change the title here from that in the bullet list in the intro? How about "Merge branches more effectively : git merge re-examined" or something wtihout the 'different options' bit. That's not a recipe name at the mo. It's like saying "Bake a cake with different fillings". The recipe is Bake a Cake and the discussion looks at the different fillings. The whole bit about fast-forwarding commits etc in the background section means either the recipe should be called "Fast-forwaridng Merges" or that it is in the wrong place or that each of these different merge techniques is just that - a different technqiue, should be marked as such and have their own background and discussions. 
 === Merge branches with different options
-==== Background
-You learnt in Chapter 2 about how to perform a basic merge of two branches.
-Additionally to what you've seen already `git merge` provides various options
+You learnt in Chapter 2 how to perform a basic merge of two branches. //[DAN]: Quick summary here?
+Additionally, `git merge` provides various options
 for merging branches without creating merge commits, using various strategies
-or a graphical merge tool.
+or a graphical merge tool.  //[DAN]: Being picky here, but git merge is controlled by the tool not the other way round which si the implication in the text. Could you rephrase please? 
 
-Let's start by seeing how to perform a merge that could be a fast-forwarded but
+
+
+//[DAN]: I don't recall the concept of a fast-forwarded merge in Chapter 2.
+Let's start by seeing how to perform a merge that could be fast-forwarded but
 without creating a merge commit. Recall a fast-forward merge means that the
 incoming branch has the current branch as an ancestor i.e. no commits have been
-made on the current branch since the other branch branched from it.
+made on the current branch since the incoming branch branched from it.
+//[DAN]: What was the point of this branch then if nothing was committed.
 
+//[DAN]: WHy is this not here? I thought we were trying to establish the various possible options for merging. This note seems more apt if the whole discussion was on forcing the creation of a merge commit. Problem is that you haven't actually brought up the idea of forcing it.  
 .Why would you want to force creation of a merge commit?
 NOTE: While fast-forward merges can sometimes be useful in some Git workflows
 you will want to explicitly signify the merging of a branch, even if it was not
@@ -49,6 +61,7 @@ Let's create a branch that can be merged with a fast-forward merge:
 2.  Run `git checkout -b chapter-spacing`.
 3.  Edit `01-IntroducingGitInPractice.asciidoc` to add a line-break between
     chapters.
+//[DAN]: No git add command?    
 4.  Run `git commit --message 'Add spacing between chapters'
     01-IntroducingGitInPractice.asciidoc`.
     The output should resemble:
@@ -66,6 +79,7 @@ You've created a new branch named `chapter-spacing` that can be merged with a
 fast-forward merge into the `master` branch.
 
 ==== Problem
+//[DAN]: Having jsut set up a branch for fast-forwarding, you start with "not performing a fast-forward merge". That doesn't make a great deal of sense. 
 You wish to merge the `chapter-spacing` branch into the `master` branch and
 create a merge commit i.e. not perform a fast-forward merge.
 
@@ -104,6 +118,8 @@ You have merged the `chapter-spacing` branch into the `master` branch and
 forced a merge-commit to be created.
 
 ==== Discussion
+//[DAN]: Always start sections with text and not a browseable.
+//[DAN]: See general notes, but also, should we be comparing the branching here with a GUI that hs just had a ff commit?
 .Local repository after `git merge --no-ff chapter-spacing`
 image::screenshots/05-GitXMergeNoFF.png[]
 
@@ -112,7 +128,9 @@ fast-forward. A merge commit has two parents: the previous commit on the
 current branch (i.e. `master` in this case) and the previous commit on the
 incoming branch (i.e. `chapter-spacing` in this case). Even when the
 `chapter-spacing` branch was deleted the existence of the branch will remain
-implied by the visual branching and merging in GitX. In this case where the
+implied by the visual branching and merging in GitX. 
+//[DAN]: But there is no sign at least in GitX of what the branch was called?    
+In this case where the
 branch contained a single commit this may not be terribly useful but on larger
 features this explicit indication of branches can aid history visualization.
 
@@ -120,11 +138,12 @@ features this explicit indication of branches can aid history visualization.
 is never created. In the case that the merge can only be made with a merge
 commit (e.g. there are conflicts that need to be resolved) then it will not
 perform the merge.
+//[DAN]: The above paragraph just doe snot make sense to me even after rpeated reading. Can you try adn rephrase please?
 
 ===== Merge strategies
 The previous merge output state that it was using the _recursive_ merge
 strategy. A merge strategy is an algorithm that Git uses to decide how to
-perform a merge.
+perform a merge.  //[DAN]: This definition should be in italics or better still in the background section.
 
 Strategies can be selected by passing the `--strategy` (or `-s`) flag to `git
 merge` followed by the name of the strategy. For example, to select the
@@ -144,6 +163,7 @@ Some useful merge strategies are:
 * `octopus`: this strategy can merge multiple branches at once but will refuse
   to allow manual resolution of merge conflicts. This strategy is the default
   if you try and merge two or more branches into another.
+  //[DAN]: 3 or more branches in one merge? Really? You should have a whole section on that and not jsut a brief mention here.
 * `ours`: this strategy performs a normal merge but ignores all the changes
   from the incoming branch. This means the resulting tree is the same as it
   was before the merge. This can be useful when you wish to merge a branch and
@@ -180,7 +200,6 @@ I've found are most commonly used. All the merge strategies and options can be
 examined by running `git help merge`.
 
 === Resolve a merge conflict
-==== Background
 As mentioned previously sometimes when you merge one branch into another there
 will have been changes to the same part of the same file in both branches and
 Git cannot detect automatically which one is the desired change to include. In
@@ -194,6 +213,7 @@ merged then a merge conflict will be created.
 
 Let's create a new branch and change the same files in both branches to produce
 a merge conflict.
+//[DAN]: Add alisting here of what the file look slike before tampering. That will help us mprehend what Listing 5.6 (the conflict) is showing us.
 
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
@@ -238,7 +258,7 @@ Now let's change the same file in the `master` branch.
 
 ==== Problem
 You wish to merge the `separate-files` branch into the `master` branch and
-resolve the merge conflict.
+resolve the resulting merge conflict.
 
 ==== Solution
 1.  Change to the directory containing your repository
@@ -283,6 +303,8 @@ system.
 // TODO: think of funny first line that editor will approve. <5>
 >>>>>>> separate-files <6>
 ----
+//[DAN]:These annotations aren't good enough. I just don't understand what they mean. Incomng marker? Why does it say head? Which branch is it coming from? Branch separator? What if you're not dealing with another branch and it's jsut two people conflictng on the same branch? I think we need to grok this listing and the annotations need to give us that confidence we know what we're looking at here. Currently they don't
+//[DAN]: Perhaps in further discussion of this listing, you could make a generalized listing with just the <<<  ==== >>> marks and a note saying what goes in between
 <1> unchanged line
 <2> incoming marker
 <3> incoming line
@@ -362,7 +384,7 @@ index 6a10e85,848ed39..c9cda9c
 <3> incoming delete
 <4> current delete
 <5> current insert
-
+//[DAN]: We need to annotate these two LHS columns of + and - in the listing. 
 From the merge commit output:
 
 * "merge subject (1)" shows the default commit message subject for merge
@@ -382,6 +404,7 @@ From the merge commit output:
   `master`) branch's commit(s).
 
 .Why are there two columns for +/- markers?
+//[DAN]: Bring forward some of the code from the listing to illustrate here. Perhaps as a hedghog diagram so you id which column represents what.
 NOTE: In this diff there are two columns (rather than the usual one) allocated
 for `-` and `+` markers. This is because where a normal diff is just indicating
 insertions and deletions to a file this _merge diff_ is showing insertions and
@@ -392,7 +415,7 @@ indicates a line inserted or deleted from the current branch (i.e. `master`).
 
 .Local repository after merge conflict resolution
 image::screenshots/05-GitXMergeConflict.png[]
-
+//[DAN]: As noted earlier, do you need the RHS of this diagram? Also, makig this a before and after diagram would work well here.
 You can see from Figure 5.2 that the changes from both branches are visible in
 the GitX output and that they are not always shown in chronological order; the
 `Add Chapter 1 content` commit occurs before the `Separate files.` commit even
@@ -402,7 +425,7 @@ although it was made 3 minutes later.
 Instead of manually editing the contents of the file you can instead run `git
 mergetool` which will run a graphical merge tool such as `emerge`, `gvimdiff`,
 `kdiff3`, `meld`, `vimdiff`, `opendiff` or `tortoisemerge`.
-
+//[DAN]: How is this configured? Should be a note here on how to set it up.
 Sometimes it can be more helpful to use a graphical merge tool to be able to
 visualize conflicts graphically and understand how they relate to the changes
 that have been made by viewing them e.g. side-by-side. Although I personally
@@ -410,17 +433,16 @@ tend not to use these tools any more I found them useful when learning how to
 use version control.
 
 .Opendiff merge conflict resolution
-image::screenshots/05-OpenDiff.png[]
+image::screenshots/05-OpenDiff.png[] //[DAN]: Annotate this with how it works. Can it be shrunk at all so it's readable?
 
 You can also customize the tool that is used to specify your own merge tools.
 In Figure 5.3 you can see the `opendiff` tool provided with OSX used to resolve
 the previous merge conflict.
 
 Details for how to configure `git mergetool` to use your tool of choice are
-available by running `git help mergetool`.
+available by running `git help mergetool`. //[DAN]:This should be a NOTE under the first para in the section.
 
 === Only resolve each merge conflict once: git rerere
-==== Background
 You may find yourself in a situation where you have a long-running branch where
 you have to keep merging in another branch and get the same merge conflicts
 every time.
@@ -436,7 +458,7 @@ Let's learn how to setup `git rerere`.
 You wish to setup `git rerere` to integrate with the merge workflow so you
 don't need to repeatedly resolve the same merges.
 
-==== Solution
+==== Solution //[DAN]: Markup a bit odd here in the listng...
 1.  Run `git config --global --add rerere.enabled 1`.
     There will be no output.
 
@@ -479,7 +501,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 the identical conflict. You still need to run `git add` to accept the conflict
 and can use `git diff` or edit the file to ensure the resolution was as
 expected and desired.
-
+//[DAN]: The para below should be a note or sidebar.
 Sometimes you may wish to make `git rerere` forget a resolution for a
 particular file because you resolved it incorrectly. In this case you can use
 `git rerere` with a path to forget any resolutions for that file or directory.
@@ -488,7 +510,6 @@ above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`.
 There will be no output.
 
 === Create a tag: git tag
-==== Background
 Recall from Chapter 2 that a tag is another _ref_ (or pointer) for a single
 commit. Tags differ from branches in that they are (usually) permanent. Rather
 than pointing to the work-in-progress on a feature they are generally used to
@@ -511,7 +532,7 @@ as version `v0.1`.
 
 v0.1 <1>
 ----
-<1> version tag
+<1> version tag //[DAN]: Will the output show all tags in the local repo or just in the current branch?
 
 From the tag listing output:
 
@@ -523,6 +544,7 @@ You have created a `v0.1` tag in the `GitInPracticeRedux` repository
 ==== Discussion
 .Local repository after `git tag`
 image::screenshots/05-GitXTag.png[]
+//[DAN]: Same as other screenshots. Crop out teh RHS side if not needed and make it a before and after shot...
 
 You can see from Figure 5.4 after the `git tag` there is a new `v0.1` ref on
 the latest commit on the master branch (in the GitX interface this will be
@@ -531,12 +553,12 @@ yellow). This indicates that this commit has been tagged `v0.1`.
 Note that, unlike branches, when new commits are made on the `master` branch
 the `v0.1` tag will not change. This is why tags are useful for versioning; they
 can record the significance of a particular commit without changing it.
-
+//[DAN]: The next four paras might work better as a bulleted list 
 You can list all the tags that match a given pattern by using the `--list` (or
 `-l`) flag. For example the tag `v0.1` would be matched and listed by `git tag
 list --v0.*`.
 
-On rare occasions you may release you have tagged the wrong commit. Tags can be
+On rare occasions you may realise you have tagged the wrong commit. Tags can be
 updated by passing the `--force` (or `-f`) flag to `git tag`. This will update
 the tag to point to the new commit.
 
@@ -549,7 +571,7 @@ verified it is pointing to the correct commit and has the correct name then you
 can push it using `git push --tags`. This will push all the tags you've created
 in the local repository to the remote repository. These tags will then be
 fetched by anyone using `git fetch` on the same repository in future.
-
+//[DAN]: Perhaps the para below should be a sidebar or note? It seems pretty important to notice.
 As you saw earlier it is possible to delete or modify tags locally. It's also
 possible to push these changes to the remote repository with `git push --tags
 --force` but this is not advised. For other users of the repository to have
@@ -562,22 +584,24 @@ pushing it's generally a better idea to just tag a new version and push that
 instead.
 
 === Generate a version number based on previous tags: git describe
-==== Background
 You've seen that `git tag` can be used to identify certain commits as released
 versions of a project. In some cases you may wish to generate versions for the
 software in between tags.
 
 I'm a passionate advocate of continuous integration systems and I've worked on
 desktop software projects with traditional semantic versioning (e.g. `1.0.0`).
+//[DAN]: Is there a non-traditional method of semver?
 On these projects I've setup continuous integration systems to create
-installers of the software on every commit to the `master` branch. However,
+installers of the software on every commit to the `master` branch. 
+//[DAN]: Ths next sentence doesn't make any sense.
+However,
 this software there is an "About" screen which displays the version number of
 the software. In this case I'd like to have a version number generated that
 makes sense but does not rely on auto-generating a tag for each version of the
 software.
 
 As the expected version number would be `v0.1` given that has just been tagged
-let's make another modification to the `GitInPracticeRedix` repository and
+let's make another modification to the `GitInPracticeRedux` repository and
 generate a version number for the new, untagged commit.
 
 1.  Change to the directory containing your repository
@@ -640,10 +664,9 @@ the `--abbrev` flag. For example, `git describe --tags --abbrev=5` will output
 uniquely identify a commit.
 
 === Add a single commit to the current branch: git cherry-pick
-==== Background
 Sometimes you may wish to include only a single commit from a branch onto the
 current branch rather than merging the entire branch. For example you may want
-to back-port a single bug fix commit from a development branch into an stable
+to back-port a single bug fix commit from a development branch into a stable
 release branch. You could do this by manually creating the same change on that
 branch but a better way would be using the tool that Git provides: `git
 cherry-pick`.
@@ -667,7 +690,7 @@ Let's create a new branch based off the `v0.1` tag that we'll call
 [v0.1-release dfe2377] Advanced practice technique.
  1 file changed, 1 insertion(+), 1 deletion(-)
 ----
-
+//[DAN]: There are no annotations in the above code and yet the SHA-1 above seems to be the key to identifying which commit to cherry-pick. Also there is no reference to identifying \ using this SHA-1 in the text other than t note it changes post cherry-pick.
 ==== Problem
 You wish to cherry-pick a commit from the `v0.1-release` branch to the `master`
 branch.
@@ -716,7 +739,7 @@ from a development branch to a stable branch. When this is done it's
 effectively duplicating the commits (rather than sharing them as with a merge).
 If you find yourself wanting to cherry-pick the entire contents of a branch you
 would be better to merge it instead.
-
+//[DAN]: Again, a bulleted list here rather than plain paras would seem to be a better option.
 If the `--edit` flag is passed to `git cherry-pick` it will prompt you for a
 commit message before committing.
 
@@ -743,7 +766,6 @@ this flag was used in the last example the commit message would have
 `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
 
 === Revert a previous commit: git revert
-==== Background
 You may occasionally make a commit that you regret. You would then wish to undo
 the commit until you can fix it so it works as intended.
 
@@ -820,7 +842,6 @@ commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>`
 appended to it.
 
 === List what branches contain a commit: git cherry
-==== Background
 If you have a workflow in which you do not merge your commits to other branches
 but have another person do it then you may wish to see which of your commits
 has been merged to another branch. Git has a tool to do this: `git cherry`.
