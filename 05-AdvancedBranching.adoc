@@ -22,7 +22,6 @@ Let's start by learning how to use some of the parameters provided by `git
 merge`.
 
 === Merge branches with different options
-==== Background
 You learnt in Chapter 2 about how to perform a basic merge of two branches.
 Additionally to what you've seen already `git merge` provides various options
 for merging branches without creating merge commits, using various strategies
@@ -180,7 +179,6 @@ I've found are most commonly used. All the merge strategies and options can be
 examined by running `git help merge`.
 
 === Resolve a merge conflict
-==== Background
 As mentioned previously sometimes when you merge one branch into another there
 will have been changes to the same part of the same file in both branches and
 Git cannot detect automatically which one is the desired change to include. In
@@ -420,7 +418,6 @@ Details for how to configure `git mergetool` to use your tool of choice are
 available by running `git help mergetool`.
 
 === Only resolve each merge conflict once: git rerere
-==== Background
 You may find yourself in a situation where you have a long-running branch where
 you have to keep merging in another branch and get the same merge conflicts
 every time.
@@ -488,7 +485,6 @@ above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`.
 There will be no output.
 
 === Create a tag: git tag
-==== Background
 Recall from Chapter 2 that a tag is another _ref_ (or pointer) for a single
 commit. Tags differ from branches in that they are (usually) permanent. Rather
 than pointing to the work-in-progress on a feature they are generally used to
@@ -562,7 +558,6 @@ pushing it's generally a better idea to just tag a new version and push that
 instead.
 
 === Generate a version number based on previous tags: git describe
-==== Background
 You've seen that `git tag` can be used to identify certain commits as released
 versions of a project. In some cases you may wish to generate versions for the
 software in between tags.
@@ -640,7 +635,6 @@ the `--abbrev` flag. For example, `git describe --tags --abbrev=5` will output
 uniquely identify a commit.
 
 === Add a single commit to the current branch: git cherry-pick
-==== Background
 Sometimes you may wish to include only a single commit from a branch onto the
 current branch rather than merging the entire branch. For example you may want
 to back-port a single bug fix commit from a development branch into an stable
@@ -743,7 +737,6 @@ this flag was used in the last example the commit message would have
 `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
 
 === Revert a previous commit: git revert
-==== Background
 You may occasionally make a commit that you regret. You would then wish to undo
 the commit until you can fix it so it works as intended.
 
@@ -820,7 +813,6 @@ commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>`
 appended to it.
 
 === List what branches contain a commit: git cherry
-==== Background
 If you have a workflow in which you do not merge your commits to other branches
 but have another person do it then you may wish to see which of your commits
 has been merged to another branch. Git has a tool to do this: `git cherry`.

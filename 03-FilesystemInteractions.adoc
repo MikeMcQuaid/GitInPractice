@@ -19,7 +19,6 @@ perform these operations rather than being slowed down by Git's interactions.
 Let's start with the most basic file operations: renaming or moving a file.
 
 === Rename or move a file: git mv
-==== Background
 Git keeps track of the changes to files in the working directory of a
 repository by their name. When you move or rename a file, Git does not see that
 a file was moved but that there is a file with a new filename and the file with
@@ -97,7 +96,6 @@ committed to Git then it will not be possible to retrieve the contents if you
 erroneously asked Git to overwrite it.
 
 === Remove a file: git rm
-==== Background
 Removing files from version control systems requires, like moving/renaming, not
 just performing the filesystem operation as usual but notifying Git and
 committing the file. Almost any version-controlled project will see you wanting
@@ -169,7 +167,6 @@ need to use the `git rm -f` (or `--force`) option to indicate to Git you wish
 to remove it before committing the changes.
 
 === Resetting files to the last commit: git reset
-==== Background
 There are times when you have made some changes to files in the working
 directory but you do not wish to commit these changes.
 
@@ -220,7 +217,6 @@ If you have uncommitted work this is one of the easiest ways to lose it! A
 safer option may be to use Git's stash functionality instead.
 
 === Delete untracked files: git clean
-==== Background
 When working in a Git repository some tools may output undesirable files into
 your working directory.
 
@@ -281,7 +277,6 @@ To remove untracked directories as well as untracked files you can use the `-d`
 (which stands for "directory") parameter.
 
 === Ignore files: .gitignore
-==== Background
 As discussed in the previous section, sometimes working directories will
 contain files which are _untracked_ by Git and you do not wish to add them to
 the repository.
@@ -372,7 +367,6 @@ should to be ignored. `git add` will not add these files but will still
 successfully add all other that should not be ignored.
 
 === Delete ignored files
-==== Background
 When files have been successfully ignored by the addition of a `.gitignore`
 file you will sometimes with to delete them all.
 
@@ -426,7 +420,6 @@ uncommitted files. This gets you a clean working directory; no added files or
 changes to any of those files.
 
 === Temporarily stash some changes: git stash
-==== Background
 There are times when you may find yourself working on a new commit and want to
 temporarily undo your current changes but redo them at a later point.
 
@@ -496,7 +489,6 @@ operation; the "save" argument is not needed. I've used it in the examples as
 it's more explicit and easier to remember.
 
 === Reapply stashed changes: git stash pop
-==== Background
 When you have stashed your temporary changes and performed whatever the
 operations that required a clean working directory (e.g. perhaps fixed and
 committed the urgent issue) you will want to reapply the changes (as
@@ -551,7 +543,6 @@ stash to the working tree as `git stash pop` does but keeps the top stack stash
 on the stack so it can be run again to reapply.
 
 === Clear stashed changes: git stash clear
-==== Background
 You may have stashed changes with the intent of popping them later but then
 realize that you no longer wish to do so. You know that the changes in the
 stack are now unnecessary so wish to get rid of them all. You could do this by
@@ -576,7 +567,6 @@ previous item from the stash so be careful when doing so. Cleared stashes
 cannot be recovered.
 
 === Assume files are unchanged
-==== Background
 Sometimes you may wish to make changes to files but have Git ignore the
 specific changes you have made so that operations such as `git stash` and `git
 diff` ignore these changes. In these cases you could just ignore them yourself
@@ -618,7 +608,6 @@ through the `git add` command; a higher-level and more user-friendly way of
 modifying the state of the index.
 
 === List assumed unchanged files
-==== Background
 When you have told Git to assume there are no changes made to particular files
 it can be hard to remember which files were updated. In this case you may end
 up modifying a file and wondering why Git does not seem to want to show you
@@ -685,7 +674,6 @@ free to just use the above command as-is as a quick way of listing files that
 are assumed to be unchanged.
 
 === Stop assuming files are unchanged
-==== Background
 Usually telling Git to assume there have been no changes made to a particular
 file is a temporary option; if you have to keep files changed long-term they
 should probably be committed. At some point you will wish to tell Git to

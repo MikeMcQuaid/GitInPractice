@@ -16,7 +16,6 @@ require knowledge of how to create and interact with branches for working on
 different features in parallel. Let's start by adding a remote repository.
 
 === Adding a remote repository: git remote add
-==== Background
 Typically when using version control you will want to share your commits with
 other people using other computers. With a traditional, _centralized version
 control system_ (such as Subversion or CVS) the repository is usually stored on
@@ -155,7 +154,6 @@ systems can allow different ways of managing merges to centralized version
 control.
 
 === Pushing changes to a remote repository: git push
-==== Background
 You will eventually wish to send commits made in the local repository to a
 remote. To do this always requires an explicit action. Only changes
 specifically requested will be sent and the Git (which can operate over HTTP,
@@ -268,7 +266,6 @@ can always be shortened as long as they remain unique). To update this in
 future you would run `git push` again to push any local changes to GitHub.
 
 === Cloning a remote/GitHub repository onto your local machine: git clone
-==== Background
 It is useful to learn how to create a new Git repository locally and push it to
 GitHub. However, you will usually be downloading an existing repository to use
 as your local repository. This process of creating a new local repository from
@@ -364,7 +361,6 @@ the default remote and references the repository that the clone originated from
 Now let's learn how to pull new commits from the remote repository.
 
 === Pulling changes from another repository: git pull
-==== Background
 `git pull` downloads the new commits from another repository and merges the
 remote branch into the current branch.
 
@@ -480,7 +476,6 @@ Now let's learn how to download changes without applying them onto your master
 branch.
 
 === Fetching changes from a remote without modifying local branches: git fetch
-==== Background
 Remember that `git pull` performs two actions: fetching the changes from a
 remote repository and merging them into the current branch. Sometimes you may
 wish to download the new commits from the remote repository without merging
@@ -604,7 +599,6 @@ created any ourselves yet. Let's learn about how branches work and how to
 create them.
 
 === Creating a new local branch from the current branch: git branch
-==== Background
 When committing in Git the history continues linearly; what was the most recent
 commit becomes the parent commit for the new commit. This parenting continues
 back to the initial commit in the repository. You saw an example of this in
@@ -736,7 +730,6 @@ purpose in multiple words separated by hyphens. For example, a branch that is
 performing cleanup on the test suite should be named `test-suite-cleanup`.
 
 === Checking out a local branch: git checkout
-==== Background
 Once you've created a local branch you will want to check out the contents of
 another branch into Git's working directory. The state of all the current files
 in the working directory will be replaced with the new state based on the
@@ -787,7 +780,6 @@ uncommitted changes. If you wish to overwrite these uncommitted changes anyway
 you can force this with `git checkout --force`.
 
 === Pushing a local branch remotely
-==== Background
 Now that you've created a new branch and checked it out it would be useful to
 push any new commits made to the remote repository. To do this requires using
 `git push` again.
@@ -844,7 +836,6 @@ As you'll hopefully have anticipated Figure 2.15 shows the addition of another
 remote branch named `origin/chapter-two`.
 
 === Merging an existing branch into the current branch: git merge
-==== Background
 At some point we have a branch that we're done with and we want to bring all
 the commits made on it into another branch. This process is known as a `merge`.
 
@@ -1002,7 +993,6 @@ remember for now is that it's a different approach to a merge that can be used
 for a similar outcome (pulling changes from one branch into another).
 
 === Deleting a remote branch
-==== Background
 Now that the `chapter-two` branch has been merged into the `master` branch the
 new commit that made in the `chapter-two` branch is now in the `master` branch.
 This means that we can push the `master` branch to push all the `chapter-two`
@@ -1059,7 +1049,6 @@ In Figure 2.19 you can see that the `origin/master` has been updated to the
 same commit as `master` and that `origin/chapter-two` has now been removed.
 
 === Deleting the current local branch after merging
-==== Background
 The `chapter-two` branch has all its commits merged into the `master` branch
 and the remote branch deleted so the local branch can now be deleted too.
 

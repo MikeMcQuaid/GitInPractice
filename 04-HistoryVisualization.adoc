@@ -17,7 +17,6 @@ Let's start by learning how to optimize our use of `git log` to only list only
 particular commits.
 
 === List only certain commits
-==== Background
 Sometimes when examining history you will want to filter the commits that are
 display based on some of their metadata. Perhaps you are tracking down a commit
 that you can remember was made on a rough date, by a particular person or with
@@ -148,7 +147,6 @@ The `git show HEAD^` output is equivalent to to `git log --max-count=1 --patch
 HEAD^`.
 
 === List commits with different formatting
-==== Background
 The default `git log` output format is helpful but takes a minimum of 6 lines
 of output to display each commit. It displays the commit SHA-1, author name and
 email, commit date and the full commit message (each additional line of which
@@ -428,7 +426,6 @@ unweildy we'll see in Chapter 7 how to shorten this using an alias to something
 like `git l`.
 
 === Show who last changed each line of a file: git blame
-==== Background
 I'm sure all developers have been in a situation where they've seen some line
 of code in a file and wonder why it is was written that way. As long as the
 file is stored in a Git it's easy to query who, when and why (given a good
@@ -506,7 +503,6 @@ already what subset of the file you care about and don't want to have to search
 through it again in the `git blame` output.
 
 === Find which commit caused a particular bug: git bisect
-==== Background
 The only thing worse than finding a bug in software and having to fix it is
 having to fix the same bug multiple times. A bug that was found, fixed and has
 appeared again is typically known as a _regression_.
