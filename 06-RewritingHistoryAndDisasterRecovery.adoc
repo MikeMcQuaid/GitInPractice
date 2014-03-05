@@ -1,5 +1,6 @@
 ## Rewriting History and Disaster Recovery
 In Section 1.5.4 we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging.
+//[Dan]: Somewhere here you need as cenario to back up ths last sentence - perhaps a workflow diagram - or a reference somewhere else in the book to more qualifying text about it. 
 // TODO: point to Ch9/14
 
 In this chapter you will learn about rewriting history by learning the following topics:
@@ -32,6 +33,7 @@ You wish to view the state of the reflog for the `HEAD` pointer.
 3.  Run `git reflog`
     The output should resemble:
 
+//[Dan]: Use the listing heading to indicate which commit below is the most recent.
 .The reflog output
 ```
 # git reflog
@@ -56,6 +58,7 @@ From the reflog output:
 
 Let's compare this to the current GitX output:
 
+//[Dan]: Again, annotate your screenshot to reflect which way is up so to speak and which is the most recent heading. Also consider retaking the screenshot as the matching SHA1s mentioned earlier are not in the screenshot.
 .GitX reflog comparison output
 image::screenshots/06-GitXReflog.png[]
 
@@ -63,6 +66,7 @@ image::screenshots/06-GitXReflog.png[]
 
 You can from Figure 6.1 that the SHA-1s match those in the `git reflog` output: the latest commit on the `master` branch (`3e3c417`, `HEAD@{0}`, `HEAD@{3}`), the latest commit on the `v0.1-release` branch (`a8200e1`, `HEAD@{1}` ) and the penultimate commit on the `v0.1-release` branch (`dfe2377`, `HEAD@{1}`).
 //TODO: perhaps annotations in the diagram instead.
+//[Dan]: Yes indeed, don't be shy to annotate your screenshots - the whole this para could be used to annotate it.
 
 Recall from Section 1.6.4 you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
 
@@ -145,6 +149,8 @@ You have reset the `master` branch pointer to point to a previous commit.
 #### Discussion
 Remember that I said in the previous section that `git reflog` was useful in avoiding the loss of commits? Let's imagine that you reset the previous commit but later realized this was a mistake. Let's run `git reflog` and see if we can get anything useful from the output:
 
+//[Dan]: So this resets a file(s) back one commit. Say a file has 3 non-pushed commits. Can you remove the middle one and leave th other two as is?
+
 //TODO: elaborate on --hard vs --mixed
 //TODO: changing the branch pointer; perhaps we need some alternate analogies.
 // tearing out pages of a book; hard vs mixed is keeping vs throwing away pages
@@ -194,7 +200,7 @@ Recall from Chapter 2 that rebasing is similar to merging but requires rewriting
 
 .Rebasing a branch
 image::diagrams/02-Rebasing.png[]
-
+//[Dan]: This diagram and the para below are brought forward which is good, but the diagram could be redrawn to bette rillustrate rebasing and there is perhaps scope for reannotating it to fit your "inspiration" branch rebase to come. Also, you could annotate it to indicate the steps in rebasing. Before, move the pointer, show after. 
 We saw Figure 6.5 previously as Figure 2.20. It shows a rebase of the `seperate-files` branch onto the `master` branch. The rebase operation effectively destroys each of the existing commits on the `separate-files` branch only to recreate them with the same metadata with one difference: the first commit on the `separate-files` branch now points to the top of the `master` branch.
 
 // Remove this diagram from here and just point back to Chapter 2.
@@ -248,6 +254,8 @@ From the rebase output:
 
 * "HEAD rewound (1)" shows that Git is moving the HEAD pointer to the latest commit on the `v0.1-release` branch. It is doing this so it can apply the newly created commit on the `inspiration` branch with the latest commit on the `v0.1-release` branch as its parent.
 * "applying commit (2)" shows a list of each of the commits (in this case only one) that are recreated on the branch. Effectively each commit on the branch being rebased is cherry-picked (recall from Chapter 5) on top of the new "base"; the latest commit on the `v0.1-release` branch. As their parent commits have changed so do the SHA-1s of all the commits.
+
+//[Dan]: If you committed several changes to a branch and then realised it was the worng branch, could you rebase those commits or would you need to do something else?
 
 .Rebased inspiration branch
 image::screenshots/06-GitXRebaseAfter.png[]
@@ -382,6 +390,7 @@ pick 5d4ad83 Add Chapter 1 inspiration. <2>
 <10> empty commits
 
 //TODO: make an empty commit
+//[Dan]: Consider moving some of the discussion of exactly what the commands do to the discussion and out of the bullet list.
 
 From the interactive rebase git-rebase-todo file:
 
@@ -431,7 +440,7 @@ From the interactive rebase output:
 .Rebased inspiration branch
 image::screenshots/06-GitXRebaseAfter.png[]
 
-Figure 6.7 shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase` it now has two commits, the latter of which was previously previously the prior and contains the contents of two commits.
+Figure 6.8 shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase` it now has two commits, the latter of which was previously previously the prior and contains the contents of two commits.
 
 You have successfully interactively rebased the `inspiration` branch on the `v0.1` tagged commit. Now push it using `git push --set-upstream origin inspiration`.
 
@@ -479,6 +488,7 @@ Now let's create a commit in our main, local repository:
 
 .Commit before pull rebase
 image::screenshots/06-GitXPullRebaseBefore.png[]
+//[Dan]: Figures 6.8 and 6.9 are the same and so are their captions. I'm guessing they should not be.
 
 Figure 6.8 shows the state of the `master` branch before the `git pull --rebase` operation. Now let's perform a pull with a rebase.
 
