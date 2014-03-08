@@ -22,9 +22,10 @@ CMake is a cross-platform build-system created by Kitware. It has many
 contributors both inside and outside Kitware but relatively few contributions
 from those without direct push access to the Kitware Git repository.
 
-CMake's Git repository is available to access at
-https://github.com/Kitware/CMake. Please clone it and examine it while reading
-this chapter.
+CMake's Git repository is available to access at `git://cmake.org/cmake.git`.
+It's also mirrored on GitHub at https://github.com/Kitware/CMake if you would
+rather browse or clone it from there. Please clone it and examine it while
+reading this chapter.
 
 .CMake repository history
 image::diagrams/09-CMakeGitX.png[]
@@ -62,6 +63,53 @@ a new commit to end up in `master` a new topic branch needs to be created,
 commits made on it, the topic branch merged to the `next` branch
 and the `next branch` merged to `master` for a release.
 
+==== Workflow commands
+The following commands are used by CMake developers to clone the repository,
+create new branches for review, merge them to `next` to be tested and CMake
+core maintainers to finally merge them into `master.`
+
+To setup the CMake repository on their local machine:
+
+1.  Clone the fetch-only CMake Git repository with
+    `git clone git://cmake.org/cmake.git`
+2.  Add the pushable staging repository with `git remote add stage
+    git@cmake.org:stage/cmake.git`. The staging repository is used for testing
+    and reviewing branches before they are ready to be merged. CMake developers
+    are given push access to it but only CMake core maintainers have push
+    access to the main repository.
+
+To make a new branch and submit it for review:
+
+1.  Fetch the remote branches with `git fetch origin`
+2.  Branch from `origin/master` with `git checkout -b branchname origin/master`
+3.  Make changes and commit them with `git add` and `git commit`
+4.  Push the branch to the staging repository with `git push --set-upstream
+    stage branchname`
+5.  Post an email to the CMake mailing list
+    (http://www.cmake.org/mailman/listinfo/cmake-developers) to ask other
+    CMake developers for review and feedback of the changes
+
+To merge a branch for nightly testing:
+
+1.  Tell the staging server to merge the branch to `next` with `ssh
+    git@cmake.org stage cmake merge -b next branchname`
+
+To make changes based on feedback from other CMake developers:
+
+1.  Checkout the branch with `git checkout branchname`
+2.  Make changes and commit them with `git add` and `git commit`
+3.  Push the new commits to the staging repository with `git push`
+4.  Post another email to the CMake mailing list
+    (http://www.cmake.org/mailman/listinfo/cmake-developers)
+
+For a CMake core maintainer to merge a branch into `master` after successful
+review:
+
+1.  Fetch the remote branches with `git fetch origin`
+2.  Checkout the `master` branch with `git checkout master`
+3.  Merge the remote branch with `git merge origin/branchname`
+4.  Push the `master` branch with `git push`
+
 === Homebrew's workflow
 Homebrew is a package manager for OSX. It has thousands of contributors but a
 very small number of people with commit access to the main repository (five at
@@ -96,6 +144,59 @@ core-repository (e.g. for heavy testing of the major refactor) then it will be
 kept as a branch in the main repository and then merged. This branch will not
 be used by users but may be committed to and tested by multiple core
 contributors.
+
+==== Workflow commands
+The following commands are used by Homebrew contributors to clone the
+repository, create new branches and pull requests and Homebrew core
+contributors to finally merge them into `master.`
+
+To setup the Homebrew repository on their local machine:
+
+1.  Clone the fetch-only Homebrew Git repository with
+    `git clone https://github.com/Homebrew/homebrew.git`
+2.  _Fork_ the Homebrew repository on GitHub. This creates a pushable, personal
+    remote repository. This is needed as only Homebrew core contributors have
+    push access to the main repository.
+3.  Add the pushable forked repository with `git remote add username
+    https://github.com/username/homebrew.git`
+
+To make a new branch and submit it for review:
+
+1.  Checkout the `master` branch with `git checkout master`
+2.  Retrieve new changes to the `master` branch with `git pull --rebase` (or
+    Homebrew's `brew update` command which calls `git pull`)
+3.  Branch from `master` with `git checkout -b branchname origin/master`
+4.  Make changes and commit them with `git add` and `git commit`
+5.  Push the branch to the fork with `git push --set-upstream username
+    branchname`
+6.  Create a _pull request_ on GitHub requesting review and merge of the
+    branch. Pull requests will be covered in more detail in Chapter 11.
+
+To make changes based on feedback:
+
+1.  Checkout the branch with `git checkout branchname`
+2.  Make changes and commit them with `git add` and `git commit`
+3.  Squash the new commits with `git rebase --interactive origin/master`
+4.  Update the remote branch and the pull request with `git push --force`
+
+For a Homebrew core contributor to merge a branch into `master`:
+
+1.  Checkout the `master` branch with `git checkout master`
+2.  Add the forked repository and cherry-pick the commit with `git add remote
+    username https://github.com/username/homebrew.git`, `git fetch username`
+    and `git merge username/branchname`. Alternatively, some core contributors
+    (including me) use Homebrew's `brew pull` command which pulls the contents
+    of a pull request onto a local branch by using patch files rather than
+    fetching from the forked repository. Approaches like this will be covered
+    more in Chapter 11.
+3.  Rebase, reword and cleanup the commits on `master` with `git rebase
+    --interactive origin/master`. It's common for Homebrew core contributors to
+    edit or squash commits and rewrite commit messages but preserve the
+    "author" metadata so the author retains credit. Often a commit will be
+    edited to contain a string like "Closes #123" which automatically closes
+    the pull request numbered 123 when the commit is merged to master. This
+    will also be covered more in Chapter 11.
+4.  Push the `master` branch with `git push`
 
 === CMake's workflow pros and cons
 CMake's approach makes it easy to keep track of what topic branches have been
