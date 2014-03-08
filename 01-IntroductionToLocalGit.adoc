@@ -703,8 +703,15 @@ The diff output contains:
 * "inserted line (9)" is a new line that was added in the latter commit.
 
 ==== Discussion
-`git diff` can take path arguments after to specify the differences only
-requested paths.
+`git diff` can take path arguments after a `--` to request only the differences
+between particular paths. For example, `git diff master~1 master --
+GitInPractice.asciidoc` will the differences to only the
+`GitInPractice.asciidoc` file between the previous and latest commits.
+
+`git diff` without an argument views the differences between the current
+working directory and the index staging area. `git diff master` views the
+differences between the current working directory and the last commit on the
+default `master` branch.
 
 If `git diff` is run with no arguments it shows the differences between the
 index staging area and the current state of the files tracked by Git i.e. any

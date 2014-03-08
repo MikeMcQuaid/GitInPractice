@@ -321,6 +321,11 @@ You have added a `.gitignore` file with instructions to ignore all `.tmp` files
 in the Git working directory.
 
 ==== Discussion
+Each line of a `.gitignore` file matches files with a pattern. For example, you
+can add comments by starting a line with a `#` character or negate patterns by
+starting a line with a `!` character. Read more about the pattern syntax in
+`git help gitignore`.
+
 A good and widely-held principle for version control systems is to avoid
 committing _output files_ to a version control repository. Output files are
 those that are created from input files that are stored within the version

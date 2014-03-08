@@ -252,7 +252,7 @@ current branch to the `origin` remote's `master` branch.
 image::screenshots/02-GitXPush.png[]
 
 Figure 2.3 shows the state of the repository after the `git push`. There is one
-addition since we last looked at it in Figure 2.10: the `origin/master` label.
+addition since we last looked at it in Figure 1.10: the `origin/master` label.
 This is attached to the commit which matches the currently known state of the
 `origin` remote's `master` branch.
 
@@ -777,7 +777,8 @@ NOTE: Make sure you've committed any changes on the current branch before
 checking out a new branch. If you do not do this `git checkout` will refuse to
 check out the new branch if there are changes in that branch to a file with
 uncommitted changes. If you wish to overwrite these uncommitted changes anyway
-you can force this with `git checkout --force`.
+you can force this with `git checkout --force`. Another solution is `git stash`
+which allows temporary storage of changes and will be covered in Chapter 3.
 
 === Pushing a local branch remotely
 Now that you've created a new branch and checked it out it would be useful to
@@ -981,7 +982,7 @@ A rebase involves changing the parent of a commit to point to another.
 .Rebasing a branch on top of master
 image::diagrams/02-Rebasing.png[]
 
-Figure 2.20 shows a rebase of the `seperate-files` branch onto the `master`
+Figure 2.18 shows a rebase of the `seperate-files` branch onto the `master`
 branch. The rebase operation has changed the parent of the first commit in the
 `separate-files` branch to be the last commit in the `master` branch. This
 means all the content changes from the `master` branch are now included in the
@@ -1069,7 +1070,7 @@ You've deleted the `chapter-two` branch from the local repository.
 .Local repository after `git branch --delete chapter-two`
 image::screenshots/02-GitXBranchDelete.png[]
 
-Figure 2.18 shows the final state with all evidence of the `chapter-two` branch
+Figure 2.20 shows the final state with all evidence of the `chapter-two` branch
 now removed (other than the commit message).
 
 .Why delete the remote branch before the local branch?

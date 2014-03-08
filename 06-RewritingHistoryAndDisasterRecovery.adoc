@@ -185,6 +185,14 @@ Now run `git push` to send the commit to the remote repository.
 .When are commits removed from the reflog?
 NOTE: Commits in the reflog that are older than 90 days and not ancestors of any other newer commit in the reflog will be removed by the `git gc` command. `git gc` can be run manually but never needs to be as it is run periodically by commands such as `git fetch`. In short, when you've removed a commit from all branches you have 90 days to recover the data before Git will destroy it. In my experience this is more than enough; typically if I haven't remembered that I accidentally removed a commit within a few days then I never will.
 
+.What's the difference between `git reset` and `git checkout`?
+NOTE: `git reset` modifies the current branch pointer so it points to another
+commit. `git checkout` modifies the `HEAD` pointer so it points to another
+branch (or, rarely, commit). If you are on the `master` branch then `git reset
+--hard v0.1-release` sets the `master` branch to point to the top of the
+`v0.1-release` branch whereas `git checkout v0.1-release` changes the current
+branch (i.e. the `HEAD` pointer) to point to the `v0.1-release` branch.
+
 `git reset` can also take a list of paths as the last arguments to the command. These can be separated using a `--` between the ref and the list of paths. The `--` is optional but makes more explicit the separation between the ref and paths. After all, it's possible (if unlikely) that you could have a file and path with the same name.
 
 For example to reset the contents of the `00-Preface.asciidoc` file to the previous commit you would run `git reset HEAD^ -- 00-Preface.asciidoc`.
