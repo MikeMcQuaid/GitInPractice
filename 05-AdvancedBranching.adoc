@@ -1,7 +1,8 @@
 == Advanced Branching
-You've already learnt the basics of branching in Chapter 2. In this chapter you
-will learn about more advanced branching techniques by learning the following
-topics:
+You've already learnt the basics of branching in
+<<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+In this chapter you will learn about more advanced branching
+techniques by learning the following topics:
 
 * How to configure `git merge` to behave differently
 * How to resolve merge conflicts
@@ -15,16 +16,18 @@ topics:
 When working as part of a team on a software project you will typically use
 branches to separate work between individuals, features, bug fixes and software
 releases. You should already be able to perform some basic branching actions
-from Chapter 2 e.g. create, delete, merge a branch. This chapter will expand on
-that so you can improve your branching workflow to be more effective.
+e.g. create, delete, merge a branch. This chapter will expand on that so you
+can improve your branching workflow to be more effective.
 
 Let's start by learning how to use some of the parameters provided by `git
 merge`.
 
 === Merge branches and always create a merge commit
-You learnt in Chapter 2 how to perform a basic merge of two branches by using
-`git merge branchname` where `branchname` is the name of the branch you wish to
-merge into the current branch.
+You learnt in
+<<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>
+how to perform a basic merge of two branches by using `git merge branchname`
+where `branchname` is the name of the branch you wish to merge into the current
+branch.
 
 Recall that a merge commit is one that has multiple parents and is displayed in
 GitX by the converging of two or more branch "tracks". `git merge` provides
@@ -42,10 +45,13 @@ testing and history visualization for this feature merge to be more explicit.
 
 Let's start by setting up how to perform a merge that could be made without
 creating a merge commit: a fast-forward merge. Recall a fast-forward merge
-means that the incoming branch has the current branch as an ancestor. This means
-commits have been made on the incoming branch but none have been made on the  on the current branch since the incoming branch from it.
+means that the incoming branch has the current branch as an ancestor. This
+means commits have been made on the incoming branch but none have been made on
+the on the current branch since the incoming branch from it.
 
-We're creating a branch that can have a fast-forward merge. This is so when we create a merge commit we know that it was because it was specifically requested and not because it was required.
+We're creating a branch that can have a fast-forward merge. This is so when we
+create a merge commit we know that it was because it was specifically requested
+and not because it was required.
 
 Let's create a branch that can be merged without a merge commit:
 
@@ -71,7 +77,9 @@ Let's create a branch that can be merged without a merge commit:
 [[GitXBeforeMergeNoFF]]
 image::screenshots/05-GitXBeforeMergeNoFF.png[]
 
-You can see from <<GitXBeforeMergeNoFF>> you've created a new branch named `chapter-spacing` that can be merged without a merge commit into the `master` branch.
+You can see from <<GitXBeforeMergeNoFF>> you've created a new branch named
+`chapter-spacing` that can be merged without a merge commit into the `master`
+branch.
 
 ==== Problem
 You wish to merge the `chapter-spacing` branch into the `master` branch and
@@ -129,7 +137,10 @@ In this case where the branch contained a single commit this may not be
 terribly useful but on larger features this explicit indication of branches can
 aid history visualization.
 
-`git merge` can also take a `--ff-only` flag which does the opposite to `no-ff`: it ensures that a merge commit is never created. If the merge can only be made with a merge commit (e.g. there are conflicts that need to be resolved and marked in a merge commit) then it will not perform the merge.
+`git merge` can also take a `--ff-only` flag which does the opposite to
+`no-ff`: it ensures that a merge commit is never created. If the merge can only
+be made with a merge commit (e.g. there are conflicts that need to be resolved
+and marked in a merge commit) then it will not perform the merge.
 
 ===== Merge strategies
 A _merge strategy_ is an algorithm that Git uses to decide how to perform a
@@ -153,7 +164,8 @@ Some useful merge strategies are:
   merge a single branch into another.
 * `octopus`: this strategy can merge multiple branches at once but will refuse
   to allow manual resolution of merge conflicts. This strategy is the default
-  if you try and merge two or more branches into another. I've never had to use this in my entire time using Git so I'm not going to detail how it is used.
+  if you try and merge two or more branches into another. I've never had to use
+  this in my entire time using Git so I'm not going to detail how it is used.
 * `ours`: this strategy performs a normal merge but ignores all the changes
   from the incoming branch. This means the resulting tree is the same as it
   was before the merge. This can be useful when you wish to merge a branch and
@@ -272,7 +284,8 @@ system.
 [[GitXBeforeMergeConflict]]
 image::screenshots/05-GitXBeforeMergeConflict.png[]
 
-You see from <<GitXBeforeMergeConflict>> the current state of the `master` and `separate-files` branches in GitX.
+You see from <<GitXBeforeMergeConflict>> the current state of the `master` and
+`separate-files` branches in GitX.
 
 ==== Problem
 You wish to merge the `separate-files` branch into the `master` branch and
@@ -328,10 +341,12 @@ system.
 <5> current version
 <6> current marker
 
-Recall this output and annotations from Chapter 2:
+Recall this output and annotations from
+<<02-IntroductionToRemoteGit#merge-conflicts>>:
 
 * "unchanged line (1)" is provided for context
-* "incoming marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
+* "incoming marker (2)" starts the current branch section containing the lines
+  from the current branch (referenced by `HEAD` here).
 * "incoming line (3)" shows a line from the incoming branch
 * "branch separator (4)" starts the section containing the lines from the
   incoming branch.
@@ -375,7 +390,8 @@ it's merged.
 You have merged two branches and resolved a merge conflict.
 
 ==== Discussion
-Merge commits have default commit message formats and slightly different diff output. Let's take a look at the merge commit by running `git show master`:
+Merge commits have default commit message formats and slightly different diff
+output. Let's take a look at the merge commit by running `git show master`:
 
 .Merge commit output
 ----
@@ -538,16 +554,17 @@ above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`.
 There will be no output.
 
 === Create a tag: git tag
-Recall from Chapter 2 that a tag is another _ref_ (or pointer) for a single
-commit. Tags differ from branches in that they are (usually) permanent. Rather
-than pointing to the work-in-progress on a feature they are generally used to
-describe a version of a software project.
+Remember refs from <<01-IntroductionToLocalGit#refs>>. A tag is another _ref_
+(or pointer) for a single commit. Tags differ from branches in that they are
+(usually) permanent. Rather than pointing to the work-in-progress on a feature
+they are generally used to describe a version of a software project.
 
 .Local repository before `git tag`
 [[GitXBeforeTag]]
 image::screenshots/05-GitXBeforeTag.png[]
 
-You can see from <<GitXBeforeTag>> the current state of the `master` branch in GitX before the tag has been created.
+You can see from <<GitXBeforeTag>> the current state of the `master` branch in
+GitX before the tag has been created.
 
 ==== Problem
 You wish to tag the current state of the `GitInPracticeRedux` `master` branch
@@ -626,7 +643,9 @@ versions of a project. In some cases you may wish to generate versions for the
 software in between tags.
 
 I'm a passionate advocate of continuous integration systems and I've worked on
-desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
+desktop software projects with semantic versioning (e.g. `1.0.0`). On these
+projects I've setup continuous integration systems to create installers of the
+software on every commit to the `master` branch.
 
 However, in some software there is an "About" screen which displays the
 software's version. In this case I'd like to have a version number generated
@@ -760,7 +779,8 @@ branch.
 ==== Discussion
 `git cherry-pick` (like many other Git commands) takes a ref as the parameter
 rather than a specific commit. As a result we could have interchangeably used
-`git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the `v0.1-release` branch) in the previous example for the same result.
+`git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the
+`v0.1-release` branch) in the previous example for the same result.
 
 You can pass multiple refs to `cherry-pick` and they will be cherry-picked onto
 the current branch in the order requested.
@@ -776,33 +796,37 @@ would be better to merge it instead.
 `git cherry-pick` can take various flags:
 
 * if the `--edit` flag is passed to `git cherry-pick` it will prompt you for a
-commit message before committing
+  commit message before committing
 * if you are cherry-picking from a public branch (i.e. one you will push
-remotely) to another public branch then you can use the `-x` flag to append a
-line to the cherry-picked commit's message saying which commit this change was
-picked from. For example if this flag was used in the last example the commit
-message would have `(cherry picked from commit
-dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
+  remotely) to another public branch then you can use the `-x` flag to append a
+  line to the cherry-picked commit's message saying which commit this change
+  was picked from. For example if this flag was used in the last example the
+  commit message would have `(cherry picked from commit
+  dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
 * when you want to indicate in the commit message which person cherry-picked a
-particular change more explicitly than the "Committer" metadata that will be
-set by default then you can use the `--signoff` (or `-s`) flag. This will
-append a Signed-off-by line to the end of the commit message. For example if
-this flag was used in the last example the commit message would have
-`Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
+  particular change more explicitly than the "Committer" metadata that will be
+  set by default then you can use the `--signoff` (or `-s`) flag. This will
+  append a Signed-off-by line to the end of the commit message. For example if
+  this flag was used in the last example the commit message would have
+  `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
 * if there is a merge conflict on a `cherry-pick` you will need to resolve it a
-similar fashion as a `git merge` (or the same fashion as `git rebase` which you
-will see in Chapter 6). This involves resolving the conflict, running `git add`
-but then `git cherry-pick --continue` instead of `git commit` to commit the
-changes. If you wish to abort the current cherry-pick as perhaps you've
-realized the merge-conflict is too complex you can do this using `git
-cherry-pick --abort`.
+  similar fashion as a `git merge` (or the same fashion as `git rebase` which
+  you will see in
+  <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>).
+  This involves resolving the conflict, running `git add` but
+  then `git cherry-pick --continue` instead of `git commit` to commit the
+  changes. If you wish to abort the current cherry-pick as perhaps you've
+  realized the merge-conflict is too complex you can do this using `git
+  cherry-pick --abort`.
+
 
 === Revert a previous commit: git revert
 You may occasionally make a commit that you regret. You would then wish to undo
 the commit until you can fix it so it works as intended.
 
-In Git you can rewrite history to hide such mistakes (as we will learn in
-Chapter 6) but this is generally considered bad practice if you have already
+In Git you can rewrite history to hide such mistakes (as we first will learn in
+<<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>)
+but this is generally considered bad practice if you have already
 pushed a commit publicly. In these cases you are better to instead use `git
 revert`.
 
@@ -928,8 +952,11 @@ If you omit the `--verbose` (or `-v`) flag from `git cherry` it will show just
 the `-`/`+` and the full SHA-1 but not the commit subject e.g. `-
 dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d`.
 
-When you learn about rebasing in Chapter 6 `git cherry` can be useful at
-showing what commits will be kept or dropped after a rebase operation.
+When you learn about rebasing in
+<<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>
+`git cherry` can be useful at showing what commits will be kept
+or dropped after a rebase operation.
+
 
 === Summary
 In this chapter you hopefully learned:

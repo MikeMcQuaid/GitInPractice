@@ -254,13 +254,14 @@ basic Git commands and without understanding merges.
 
 Homebrew's workflow makes use of multiple remote repositories. As only a few
 people have commit access to the core repository their approach is more like
-that of Linus on the Git project (as discussed in Chapter 1); often managing
-and including commits from others more than making their own commits. Many
-commits made to the repository are made by squashing and merging commits from
-forks into the `master` branch of the main repository. The squashing means that
-any fixes that needed to be made to the commit during the pull request process
-will not be seen in the `master` branch and each commit message can be tailored
-by the core team to communicate information in the best possible way.
+that of Linus on the Git project (as discussed in
+<<01-IntroductionToLocalGit#why-do-programmers-use-git>>); often managing and
+including commits from others more than making their own commits. Many commits
+made to the repository are made by squashing and merging commits from forks
+into the `master` branch of the main repository. The squashing means that any
+fixes that needed to be made to the commit during the pull request process will
+not be seen in the `master` branch and each commit message can be tailored by
+the core team to communicate information in the best possible way.
 
 This workflow means that only those on the core team can do anything dangerous
 to the on the main repository. Anyone else will need their commits reviewed

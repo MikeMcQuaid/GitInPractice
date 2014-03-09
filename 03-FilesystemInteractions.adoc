@@ -1,5 +1,6 @@
 == Filesystem Interactions
-In this chapter you will learn about interacting with files and directories in your Git working directory by learning the following topics:
+In this chapter you will learn about interacting with files and directories in
+your Git working directory by learning the following topics:
 
 * How to rename, move or remove versioned files or directories
 * How to tell Git to ignore certain files or changes
@@ -31,11 +32,12 @@ you and aren't aware of Git (so don't give Git the correct move instruction).
 
 Sometimes you will still need to manually rename or move files in your Git
 repository and you wish to preserve the history of the files after the rename
-or move operation. As you learnt in Chapter 1, readable history is one of the
-key benefits of a version control system so it's important to avoid losing it
-whenever possible. If a file has had 100 small changes made to it with good
-commit messages it would be a shame to undo all that work just by renaming or
-moving a file.
+or move operation. As you learnt in
+<<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>, readable
+history is one of the key benefits of a version control system so it's
+important to avoid losing it whenever possible. If a file has had 100 small
+changes made to it with good commit messages it would be a shame to undo all
+that work just by renaming or moving a file.
 
 ==== Problem
 You wish to rename a previously committed file in your Git working directory
@@ -80,7 +82,7 @@ consistent behavior across different versions of Git (which may have differing
 move autodetection behaviour).
 
 After running `git mv` the move or rename will be added to Git's index staging
-area which, if you remember from Chapter 2, means that the change has been
+area which, if you remember from Chapter 1, means that the change has been
 staged for inclusion in the next commit.
 
 It's also possible to rename files or directories and move files or directories
@@ -111,7 +113,8 @@ For testing purposes let's create and commit a temporary file to be removed:
 
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`
-2.  Run `echo Git Sandwich > GitInPracticeReviews.tmp`. This will create a new file named `GitInPracticeReviews.tmp` with the contents "Git Sandwich".
+2.  Run `echo Git Sandwich > GitInPracticeReviews.tmp`. This will create a new
+    file named `GitInPracticeReviews.tmp` with the contents "Git Sandwich".
 3.  Run `git add GitInPracticeReviews.tmp`.
 4.  Run `git commit --message 'Add review temporary file.'`
 
@@ -205,16 +208,18 @@ working directory. In short, `git reset --mixed` only undoes `git add` but
 `git reset --hard` undoes `git add` and all file modifications.
 
 `git reset` will be used to perform more operations (including those that alter
-history) in Chapter 7.
+history) in
+<<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>.
 
 .Dangers of using `git reset --hard`
 WARNING: Care should be used with `git reset --hard`; it will immediately and
 without prompting remove all your uncommitted changes to any file in your
 working directory. This is probably the command which has caused me more regret
 than any other; I've typed it accidentally and removed work I hadn't intended
-to. Remember in Chapter 1 we learnt that it's very hard to lose work with Git?
-If you have uncommitted work this is one of the easiest ways to lose it! A
-safer option may be to use Git's stash functionality instead.
+to. Remember in <<01-IntroductionToLocalGit#why-do-programmers-use-git>> we
+learnt that it's very hard to lose work with Git? If you have uncommitted work
+this is one of the easiest ways to lose it! A safer option may be to use Git's
+stash functionality instead.
 
 === Delete untracked files: git clean
 When working in a Git repository some tools may output undesirable files into
@@ -225,7 +230,7 @@ thumbnail cache files or programs may write crash dumps. Alternatively,
 sometimes there may be files that are desirable but you do not wish to commit
 them to your version control system and instead wish to remove them to build
 clean versions (although this is generally better handled by _ignoring_ these
-files as in Section 4.5).
+files as in <<ignore-files-gitignore>>).
 
 When you wish to remove these files you could remove them manually but it's
 easier to ask Git to do so as it already knows which files in the working
@@ -262,9 +267,9 @@ You have removed `GitInPracticeIdeas.tmp` from the Git working directory.
 ==== Discussion
 `git clean` requires the `--force` argument because this command is potentially
 dangerous; with a single command you can remove many, many files very quickly.
-Remember in Chapter 1 we learnt that accidentally losing any file or change
-committed to a version control system is very hard (and in Git, nearly
-impossible). This is the opposite situation; `git clean` will happily remove
+Remember in <<01-IntroductionToLocalGit#why-do-programmers-use-git>> we learnt
+that accidentally losing any file or change committed to Git system is nearly
+impossible. This is the opposite situation; `git clean` will happily remove
 thousands of files very quickly which cannot be easily recovered (unless backed
 up through another mechanism).
 
@@ -463,7 +468,8 @@ message and then returns your current branch to the state before the temporary
 commit was made. It's possibly to access this commit directly but you should
 only do so through `git stash` to avoid confusion.
 
-You can see all the stashes that have been made by running `git stash list`. The output will resemble:
+You can see all the stashes that have been made by running `git stash list`.
+The output will resemble:
 
 .List of stashes
 ----
@@ -684,12 +690,12 @@ file is a temporary option; if you have to keep files changed long-term they
 should probably be committed. At some point you will wish to tell Git to
 monitor any changes that are made to these files once more.
 
-With the example I gave previously in Section 4.10 eventually the Rails
-configuration file change I had been testing was deemed to be successful enough
-that I wanted to commit it so my coworkers and the servers could use it. If I
-merely used `git add` to make a new commit then the change would not show up so
-I had to stop Git ignoring this particular change before I could make a new
-commit.
+With the example I gave previously in <<assume-files-are-unchanged>> eventually
+the Rails configuration file change I had been testing was deemed to be
+successful enough that I wanted to commit it so my coworkers and the servers
+could use it. If I merely used `git add` to make a new commit then the change
+would not show up so I had to stop Git ignoring this particular change before I
+could make a new commit.
 
 ==== Problem
 You wish for Git to stop assuming there have been no changes made to

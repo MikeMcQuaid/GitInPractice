@@ -8,13 +8,15 @@ everyone can see your code and commits. Typically these are used by open-source
 projects but it will also prove useful for your learning and experimentation.
 For private projects GitHub offers paid accounts.
 
-As mentioned in Chapter 2 there are free and paid alternatives to GitHub. I've
-picked GitHub to walkthrough because, at the time of writing, it is the most
-popular hosted version control system for open-source projects and is probably
-the most popular Git hosting provider. Learning to use GitHub will bring
-immediate benefits in terms of facilitating open-source access and
-contributions. While the GitHub UI may differ from the examples here or from
-other Git repository hosts the Git commands used will remain the same.
+As mentioned in
+<<02-IntroductionToRemoteGit#adding-a-remote-repository-git-remote-add>> there
+are free and paid alternatives to GitHub. I've picked GitHub to walkthrough
+because, at the time of writing, it is the most popular hosted version control
+system for open-source projects and is probably the most popular Git hosting
+provider. Learning to use GitHub will bring immediate benefits in terms of
+facilitating open-source access and contributions. While the GitHub UI may
+differ from the examples here or from other Git repository hosts the Git
+commands used will remain the same.
 
 === Signing up for a GitHub account
 Let's sign up for a new GitHub account. Please browse to

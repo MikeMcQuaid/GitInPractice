@@ -63,12 +63,14 @@ and use Git through a Git hosting provider. My favorite is GitHub but there are
 various other paid and free alternatives available.
 
 === Initial setup
-Once you've installed Git (as detailed in Appendix B) the first thing you need
-to do is to tell Git your name and email (particularly before creating any
-commits). Rather than usernames Git uses a name and email address to identify
-the author of a commit.
+Once you've installed Git (as detailed in
+<<B-GitInstallation#git-installation>>) the first thing you need to do is to
+tell Git your name and email (particularly before creating any commits). Rather
+than usernames Git uses a name and email address to identify the author of a
+commit.
 
-My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would run:
+My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would
+run:
 
 .Set name and email address
 ----
@@ -106,8 +108,9 @@ operations much faster in Git than with centralized version control systems
 such as Subversion.
 
 Typically you create a new repository by downloading another repository that
-already exists (known as _cloning_ by Git and introduced in Chapter 2) but
-let's start by initializing an empty, new local repository.
+already exists (known as _cloning_ by Git and introduced in
+<<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>)
+but let's start by initializing an empty, new local repository.
 
 ==== Problem
 You wish to create a new local Git repository in a new subdirectory named
@@ -140,7 +143,8 @@ a given command by running the command suffixed with `--help` e.g. `git init
 --help`. This book will cover only the most common and useful commands and
 arguments.
 
-`git init` can be run without any arguments to create the local Git repository in the current directory.
+`git init` can be run without any arguments to create the local Git repository
+in the current directory.
 
 ===== .git subdirectory
 Under the new Git repository directory a `.git` subdirectory at e.g
@@ -206,7 +210,8 @@ Git has created files for:
 You shouldn't edit any of these files directly until you have a more advanced
 understanding of Git (or, in my experience, never at all). You will instead
 modify these files and directories by interacting with the Git repository
-through Git's filesystem commands introduced in Chapter 3.
+through Git's filesystem commands first introduced in
+<<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
 
 === Creating a new commit: git add, git commit
 To do anything useful in Git we first need one or more commits in our
@@ -267,14 +272,17 @@ In the status output:
 * "default branch output (1)" is the first line of `git status` output (which
   unfortunately, like the run commands, is also always prefixed with a `#`). It
   shows the current _branch_ which, by default, is always `master`. Do not
-  worry about creating branches for now, this will be covered in Chapter 2.
+  worry about creating branches for now, this will be covered in
+  <<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits
   have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the
   index (the staging area for the next commit).
 
 ===== Discussion
-`git add` can also be passed directories as arguments instead of files. You can add everything in the current directory and its subdirectories by running `git add .`.
+`git add` can also be passed directories as arguments instead of files. You can
+add everything in the current directory and its subdirectories by running `git
+add .`.
 
 When a file is added to the index a file named `.git/index` is created (if it
 does not already exist). The added file contents and metadata are then added to
@@ -365,7 +373,8 @@ before or after another commit on another machine so it cannot use ordered
 revision numbers. As the full 40 characters are rather unwieldy Git will often
 show shortened SHA-1s (as long as they are unique in the repository). Anywhere
 that Git accepts a SHA-1 unique commit reference it will also accept the
-shortened version (as long as the shortened version is still unique within the repository).
+shortened version (as long as the shortened version is still unique within the
+repository).
 
 Let's create another commit.
 
@@ -401,7 +410,9 @@ The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag
 is omitted then Git will open a text editor (specified by the `EDITOR` or
 `GIT_EDITOR` environment variables) to prompt you for the commit message. These
 variables will also be used by other commands later in the book (such as
-interactive rebase in Chapter 6) when requesting text input.
+interactive rebase in
+<<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>)
+when requesting text input.
 
 `git commit` can be called with `--author` and `--date` flags to override the
 auto-set metadata in the new commit.
@@ -412,7 +423,7 @@ flags to add all changes to files tracked in the repository into a new commit.
 Although these methods all save time they tend to result in larger (and
 therefore worse) commits so I recommend avoiding their use until you've got
 used to using them separately. Several reasons small commits are better than
-large ones are covered in Section 1.5.1.
+large ones are covered in <<viewing-history-git-log-gitk-gitx>>.
 
 ====== Object store
 Git is a version control system built on top of an _object store_. Git creates
@@ -424,13 +435,13 @@ image::diagrams/01-Objects.png[]
 
 In Figure 1.3 you can see the main Git objects we're concerned with: _commits_,
 _blobs_ and _trees_. There is also a _tag_ object but don't worry about tags
-until they are introduced in Chapter 2. Commit objects were covered in Figure
-1.2 and you saw that they store metadata and referenced file contents. The file
-contents reference is actually a reference to a _tree object_. A tree object
-stores a reference to all the _blob objects_ at a particular point in time and
-other tree objects if there are any subdirectories. A blob object stores the
-contents of a particular version of a particular single file in the Git
-repository.
+until they are introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>.
+Commit objects were covered in Figure 1.2 and you saw that they store metadata
+and referenced file contents. The file contents reference is actually a
+reference to a _tree object_. A tree object stores a reference to all the _blob
+objects_ at a particular point in time and other tree objects if there are any
+subdirectories. A blob object stores the contents of a particular version of a
+particular single file in the Git repository.
 
 .Should objects being interacted with directly?
 NOTE: When using Git you should never need to interact with objects or object
@@ -459,8 +470,11 @@ looking at Git's history.
 === Viewing history: git log, gitk, gitx
 The _history_ in Git is the complete list of all commits made since the
 repository was created. The history also contains the references to any
-_branches_, _tags_ and _merges_ made within the repository. These three will be
-covered in Chapter 2.
+_branches_, _merges_ and _tags_ made within the repository. These three will be
+covered in
+<<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>,
+<<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>
+and <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 When you are using Git you will find yourself regularly checking
 the history; sometimes to remind yourself of your own work, sometimes to see
@@ -535,7 +549,8 @@ branch in reverse chronological order i.e. the most recent commit comes first.
 * "commit author (2)" shows the name and email address set by the person who
   made the commit.
 * "committed date (3)" shows the date and time when the commit was made.
-* "full commit message (4)" first line is the commit message subject and remaining lines are the commit message body.
+* "full commit message (4)" first line is the commit message subject and
+  remaining lines are the commit message body.
 
 It's also useful to graphically visualize history.
 
@@ -593,7 +608,7 @@ paths.
 
 `git log` can take a `--patch` (or `-p`) flag to show the _diff_ for each
 commit output. It can also take `--stat` or `--word-diff` flag to show a
-_diffstat_ or _word diff_. These terms will be explained in Section 1.6.4.
+_diffstat_ or _word diff_. These terms will be explained in <<diff-formats>>.
 
 ===== Rewriting history
 Git is unusual compared to many other version control systems in that it allows
@@ -617,8 +632,10 @@ on a separate branch that hadn't had other work from other people relying on it
 yet as it has changed some parent commits (so, without intervention, other
 people's commits may point to commits that no longer exist). Don't worry too
 much about squashing work for now; just remember this as a situation where you
-may want to rewrite history. In Chapter 6 we'll learn how to rewrite history
-and the cases where it is useful and safe to do so.
+may want to rewrite history. In
+<<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>
+we'll first learn how to rewrite history and the cases where it is
+useful and safe to do so.
 
 What we're generally interested in when reading the history (and why we clean
 it up) is ensuring the changes between commits are relevant (for example don't
@@ -679,7 +696,7 @@ The diff output contains:
 * "git diff command (1)" requests Git to show the diff between the commit
   before the top of `master` (`master~1`) and the commit on top of `master`.
   Both `master~1` and `master` are _refs_ and will be explained later in
-  Section 1.6.4.
+  <<refs>>.
 * "virtual diff command (2)" is the invocation of the Unix `diff` command that
   Git is simulating. Git pretends that it is actually diffing the contents two
   directories the "old virtual path (4)" and the "new virtual path (5)" and the
@@ -835,8 +852,10 @@ ref expands to:
 6b437c7739d24e29c8ded318e683eca8f03a5260
 ----
 
-There are more types of refs (such as tags and remote references) but you don't
-need to worry about them just now; they will be introduced in Chapter 2.
+There are more types of refs such as remote branches and tags but you don't
+need to worry about them just now; they will be introduced in
+<<02-IntroductionToRemoteGit#adding-a-remote-repository-git-remote-add>> and
+<<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 === Summary
 In this chapter you hopefully learned:

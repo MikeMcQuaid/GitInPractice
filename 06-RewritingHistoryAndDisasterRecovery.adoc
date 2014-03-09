@@ -1,5 +1,5 @@
 ## Rewriting History and Disaster Recovery
-In Section 1.5.4 we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging.
+In <<01-IntroductionToLocalGit#rewriting-history>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging.
 // TODO: point to Ch9/14
 
 In this chapter you will learn about rewriting history by learning the following topics:
@@ -14,7 +14,7 @@ In this chapter you will learn about rewriting history by learning the following
 Before jumping in to rewriting history let's start by learning about how to avoid losing committed data using `git reflog`.
 
 ### List all changes including history rewrites: git reflog
-Recall from Section 1.5.4 that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. This is as if a previous commit changes in any way then any commits pointing to it will change also.
+Recall from <<01-IntroductionToLocalGit#parent-commits>> that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. This is as if a previous commit changes in any way then any commits pointing to it will change also.
 // TODO: crap sentence, reword.
 This provides a good protection in Git from accidentally rewriting history as all commits effectively provide a checksum of the entire branch up until this point.
 
@@ -64,7 +64,7 @@ image::screenshots/06-GitXReflog.png[]
 You can from Figure 6.1 that the SHA-1s match those in the `git reflog` output: the latest commit on the `master` branch (`3e3c417`, `HEAD@{0}`, `HEAD@{3}`), the latest commit on the `v0.1-release` branch (`a8200e1`, `HEAD@{1}` ) and the penultimate commit on the `v0.1-release` branch (`dfe2377`, `HEAD@{1}`).
 //TODO: perhaps annotations in the diagram instead.
 
-Recall from Section 1.6.4 you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
+Recall from <<01-IntroductionToLocalGit#refs>> you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
 
 You have viewed the changing state of the `HEAD` pointer by viewing the reflog.
 
@@ -78,7 +78,7 @@ Like `git log` if `git reflog` can be passed a ref as the final argument. If thi
 NOTE: Reflogs are per-repository. They are not shared with other repositories when you `git push` and are not fetched when you `git fetch`. As a result, they can only be used to see actions that were made within the Git repository on your local machine. Bear this in mind when we are rewriting history: you can easily view previous state on your current machine but not that from other machines.
 
 ### Resetting a branch to a previous commit: git reset
-In Section 3.7 you learned how to use `git revert` to revert a commit which made changes you wished to undo. I stated previously that rewriting history was a bad practice if the commit to be reverted had already been pushed publicly (I'll elaborate more on this in this chapter). However, what if the commit had not been pushed yet? In this case we can use a command we first saw in Section 3.3: `git reset`.
+In <<03-FilesystemInteractions#revert-a-previous-commit-git-revert>> you learned how to use `git revert` to revert a commit which made changes you wished to undo. I stated previously that rewriting history was a bad practice if the commit to be reverted had already been pushed publicly (I'll elaborate more on this in this chapter). However, what if the commit had not been pushed yet? In this case we can use a command we first saw in Section <<03-FilesystemInteractions#resetting-files-to-the-last-commit-git-reset>>: `git reset`.
 
 When we used `git reset` previously we used it either with no arguments (which implies `--mixed`) or with `--hard`. Remember `--hard` resets the index and the working directory and `--mixed` resets the index but not the working directory. In short, `--hard` will discard any uncommitted work whereas `--mixed` will simply unstage it (effectively reversing a `git add`).
 
@@ -198,7 +198,8 @@ branch (i.e. the `HEAD` pointer) to point to the `v0.1-release` branch.
 For example to reset the contents of the `00-Preface.asciidoc` file to the previous commit you would run `git reset HEAD^ -- 00-Preface.asciidoc`.
 
 ### Rebase commits on top of another branch: git rebase
-Recall from Chapter 2 that rebasing is similar to merging but requires rewriting history.
+Recall from <<02-IntroductionToRemoteGit#rebasing>> that rebasing is similar to
+merging but requires rewriting history.
 
 .Rebasing a branch
 image::diagrams/02-Rebasing.png[]
@@ -255,7 +256,7 @@ Applying: Add Chapter 1 inspiration. <2>
 From the rebase output:
 
 * "HEAD rewound (1)" shows that Git is moving the HEAD pointer to the latest commit on the `v0.1-release` branch. It is doing this so it can apply the newly created commit on the `inspiration` branch with the latest commit on the `v0.1-release` branch as its parent.
-* "applying commit (2)" shows a list of each of the commits (in this case only one) that are recreated on the branch. Effectively each commit on the branch being rebased is cherry-picked (recall from Chapter 5) on top of the new "base"; the latest commit on the `v0.1-release` branch. As their parent commits have changed so do the SHA-1s of all the commits.
+* "applying commit (2)" shows a list of each of the commits (in this case only one) that are recreated on the branch. Effectively each commit on the branch being rebased is cherry-picked (recall from <<05-AdvancedBranching#add-a-single-commit-to-the-current-branch-git-cherry-pick>>) on top of the new "base"; the latest commit on the `v0.1-release` branch. As their parent commits have changed so do the SHA-1s of all the commits.
 
 .Rebased inspiration branch
 image::screenshots/06-GitXRebaseAfter.png[]

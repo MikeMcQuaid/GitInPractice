@@ -7,7 +7,7 @@ users' Git repositories by learning the following topics:
 * How to create and receive branches
 * How to merge commits from one branch to another
 
-As you learned in Chapter 1 it's possible to work entirely with Git as a local
+As you learned in <<01-IntroductionToLocalGit#creating-a-repository-git-init>> it's possible to work entirely with Git as a local
 version control system and never share changes with others. Usually, however,
 if you are using a version control system you will want to share changes with
 others; from simply sending files to a remote server for backup to
@@ -32,12 +32,14 @@ choose to send or receive commits from another repository.
 .Git add/commit/checkout cycle
 image::diagrams/01-Workflow.png[]
 
-Figure 2.1 shows the local Git cycle we used in Chapter 1. Files in the
-local working directory are modified and added with `git add` to the index
-staging area. The contents of the index staging area is committed with `git
-commit` to form a new commit which is stored in the local repository directory.
-Later, this repository can be queried to view the differences between versions
-of files using `git diff`. In Section 2.7 you will also see how to use `git
+Figure 2.1 shows the local Git cycle we used in
+<<01-IntroductionToLocalGit#creating-a-new-commit-git-add-git-commit>>. Files
+in the local working directory are modified and added with `git add` to the
+index staging area. The contents of the index staging area is committed with
+`git commit` to form a new commit which is stored in the local repository
+directory. Later, this repository can be queried to view the differences
+between versions of files using `git diff`. In
+<<checking-out-a-local-branch-git-checkout>> you will also see how to use `git
 checkout` to change to different local branches' versions of files.
 
 .Git add/commit/push/pull/checkout cycle
@@ -54,10 +56,12 @@ is one that is typically stored on another computer. `git push` sends your
 new commits to it and `git fetch` retrieves any new commits made by others from
 it.
 
-In Chapter 1 you created a local repository on your machine. Please sign up for
-a GitHub account and create a _remote repository_ on GitHub (detailed in
-Appendix D). You can use another Git hosting provider but this book will assume
-the use of GitHub (as it is the most widely used).
+In <<01-IntroductionToLocalGit#creating-a-repository-git-init>> you created a
+local repository on your machine. Please sign up for a GitHub account and
+create a _remote repository_ on GitHub (detailed in
+<<C-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>).
+You can use another Git hosting provider but this book will assume the use
+of GitHub (as it is the most widely used).
 
 The first action you're concerned with is adding a reference for your
 newly-created remote repository (also known as a _remote_) on GitHub to your
@@ -115,7 +119,7 @@ remote.
 
 `git remote prune` will delete any remote references to branches that have been
 deleted from the remote repository by other users. Don't worry about this for
-now; remote branches will be covered in Section 2.8.
+now; remote branches will be covered in <<pushing-a-local-branch-remotely>>.
 
 .What is the default name for a remote?
 NOTE: You can have multiple remote repositories connected to your local
@@ -162,8 +166,9 @@ between the repositories are sent. As a result you can push small changes from
 a large local repository to a large remote repository very quickly as long as
 they have most commits in common.
 
-Let's push the changes you made in our repository in Chapter 1 to the newly
-created remote you made in Section 2.1.3.
+Let's push the changes you made in our repository in
+<<01-IntroductionToLocalGit#introduction-to-local-git>> to the newly created
+remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
 ==== Problem
 You wish to push the changes from the local `GitInPracticeRedux` repository to
@@ -218,7 +223,8 @@ From the push output you can see:
   of the two). This may seem redundant but it is shown as it is possible (but
   ill-advised due to the obvious confusion it causes) to have local and remote
   branches with different names. Don't worry about local or remote branches for
-  now as these will be covered in Section 2.6.
+  now as these will be covered in
+  <<creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "set tracking branch (6)" is shown because the `--set-upstream` option was
   passed to `git push`. By passing this option you have is told Git that you
   want the local `master` branch you have just pushed to _track_ the `origin`
@@ -241,7 +247,8 @@ in-progress.
 
 `git push` can take a `--force` flag which will disable some checks on the
 remote repository to allow rewriting of history. *This is very dangerous. Do
-not use this flag until after reading (and rereading) Chapter 6.*
+not use this flag until after reading (and rereading)
+<<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
 
 A _tracking branch_ is the default push or fetch location for a branch. This
 means in future you could run `git push` with no arguments on this branch and
@@ -314,7 +321,7 @@ From the clone output you can see:
   `GitInPracticeRedux` local repository was created.
 * "object preparation/transmission (2)" can be safely ignored again (although
   if you're wondering why there were 6 objects remember the different objects
-  in the object store in Chapter 1).
+  in the object store in <<01-IntroductionToLocalGit#object-store>>).
 
 You have cloned the `GitInPracticeRedux` remote repository and created a new
 local repository containing all its commits in `/Users/mike/GitInPracticeRedux`.
@@ -442,16 +449,25 @@ You can see from the pull output:
   case the SHA-1s match those in the "remote branch update (3)". It has been
   updated to include the new commit (`85a5db1`).
 * "merge type (5)" was a _fast-forward merge_ which means that no merge commit
-  was made. Fast-forward merges will be explained in Section 2.9.3.
+  was made. Fast-forward merges will be explained in
+  <<merging-an-existing-branch-into-the-current-branch-git-merge>>.
 * "lines changed in file <6>" is the same as the lines changed from `git
-  commit` or `git diff` in Chapter 1. It is showing a summary of the changes
+  commit` in
+  <<01-IntroductionToLocalGit#committing-changes-to-files-git-commit>> or `git
+  diff` in
+  <<01-IntroductionToLocalGit#viewing-the-differences-between-commits-git-diff>>.
+  It is showing a summary of the changes
   that have been pulled into your `master` branch.
-* "diff summary <7>" is the same as the diff summary from `git commit` or `git
-  diff` in Chapter 1.
+* "diff summary <7>" is the same as the diff summary from `git commit` in
+  <<01-IntroductionToLocalGit#committing-changes-to-files-git-commit>> or `git
+  diff` in
+  <<01-IntroductionToLocalGit#viewing-the-differences-between-commits-git-diff>>
+  .
 
 ==== Discussion
 `git pull` can take a `--rebase` flag which will perform a rebase rather than a
-merge. This will be covered in Chapter 6.
+merge. This will be covered in
+<<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
 
 .Why did a merge happen?
 NOTE: It may be confusing that a merge has happened here. Didn't you just ask
@@ -588,7 +604,8 @@ Figure 2.8 shows that the `master` branch has now been updated to match the
 NOTE: I prefer to use `git fetch` over `git pull`. It means I can continue to
 fetch regularly in the background and only include these changes in my local
 branches when it is convenient and in the method I find most appropriate which
-may be merging or rebasing (or resetting which you will see in Chapter 3).
+may be merging or rebasing (or resetting which you will see in
+<<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>).
 Additionally, I sometimes work in situations where I have no internet
 connection (such as on planes) and using `git fetch` is superior in these
 situations; it can fetch changes without requiring any human interaction in the
@@ -720,7 +737,8 @@ that requires using `git checkout`.
 NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name
 so `chapter..two` would be an invalid branch name and `git branch` will refuse
 to create it. This particular case is due to the special meaning of `..` for a
-commit range for the `git diff` command (which we saw used in Chapter 1).
+commit range for the `git diff` command (which we saw used in
+<<01-IntroductionToLocalGit#refs>>).
 
 .What names should I use for branches?
 NOTE: Name branches according to their contents. For example, the `chapter-two`
@@ -778,7 +796,8 @@ checking out a new branch. If you do not do this `git checkout` will refuse to
 check out the new branch if there are changes in that branch to a file with
 uncommitted changes. If you wish to overwrite these uncommitted changes anyway
 you can force this with `git checkout --force`. Another solution is `git stash`
-which allows temporary storage of changes and will be covered in Chapter 3.
+which allows temporary storage of changes and will be covered in
+<<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
 
 === Pushing a local branch remotely
 Now that you've created a new branch and checked it out it would be useful to
@@ -854,14 +873,16 @@ Alternatively, you may delete the branch and make future commits on the Git's
 default `master` branch and create another branch when needed in the future.
 
 ==== Problem
-You wish to make a commit on the local branch named `chapter-two` and merge this into into the `master` branch.
+You wish to make a commit on the local branch named `chapter-two` and merge
+this into into the `master` branch.
 
 ==== Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two`
     branch.
-3.  Modify the contents of `GitInPractice.asciidoc` and run `git add GitInPractice.asciidoc`.
+3.  Modify the contents of `GitInPractice.asciidoc` and run `git add
+    GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Start Chapter 2.'`.
 5.  Run `git checkout master`.
 6.  Run `git merge chapter-two`.
@@ -902,7 +923,8 @@ because `git pull` actually does a `git fetch && git merge`.
 You have merged the `chapter-two` branch into the `master` branch.
 
 ==== Discussion
-This brings the commit that was made in the `chapter-two` branch into the `master` branch.
+This brings the commit that was made in the `chapter-two` branch into the
+`master` branch.
 
 .Local repository after `git merge chapter-two`
 image::screenshots/02-GitXMerge.png[]
@@ -989,7 +1011,9 @@ means all the content changes from the `master` branch are now included in the
 `separate-files branch` and any conflicts were manually resolved but were not
 stored (as they would be in a merge conflict).
 
-We'll cover rebasing in more detail later in Chapter 6. All that's necessary to
+We'll cover rebasing in more detail later in
+<<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>.
+All that's necessary to
 remember for now is that it's a different approach to a merge that can be used
 for a similar outcome (pulling changes from one branch into another).
 

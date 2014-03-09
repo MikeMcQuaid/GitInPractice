@@ -34,7 +34,8 @@ version and specifying a message stating the reason for their change or what it
 accomplishes. When another commit is made then the previous version would
 remain in _history_ where its changes can be examined at a later time. Version
 control systems can therefore solve the problem of reviewing and retrieving
-previous changes and allow single files to be used rather than duplicated. This workflow can be seen in Figure A.2.
+previous changes and allow single files to be used rather than duplicated. This
+workflow can be seen in Figure A.2.
 
 When editing a file in a version control system you will always
 edit/save/commit the same file on disk. It will not move location either

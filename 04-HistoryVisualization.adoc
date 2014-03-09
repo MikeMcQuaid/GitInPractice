@@ -4,7 +4,8 @@ repository in varying formats by learning the following topics:
 
 * How to filter `git log` output commits by various criteria
 * How to format `git log` output to display the information you care about
-* How to find why and when a line in a file was changed, and who changed it using `git blame`
+* How to find why and when a line in a file was changed, and who changed it
+  using `git blame`
 * How to identify which commit caused a particular bug using `git bisect`
 
 When working with Git repository on large, long-running software projects
@@ -66,8 +67,8 @@ Date:   Thu Nov 28 15:39:38 2013 +0000
 <2> least recent commit
 
 The filtered log output is the essentially the same as the `git log` output you
-saw in Chapter 2 but with only the commits that are matched by the specified
-arguments.
+saw in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> but with
+only the commits that are matched by the specified arguments.
 
 From the arguments provided to the log command:
 
@@ -106,8 +107,11 @@ You have shown a subset of commits filtered by author, date and commit message.
 `git log` can take:
 
 * a `--max-count` (or `-n`) argument to limit the number of commits that are
-  shown in the log output. I tend to use this often when I know that I only care about something in the e.g. last 10 commits and don't want to scroll through more output than that.
-* a `--reverse` argument to show the commits in ascending chronological order (i.e. the oldest commit first)
+  shown in the log output. I tend to use this often when I know that I only
+  care about something in the e.g. last 10 commits and don't want to scroll
+  through more output than that.
+* a `--reverse` argument to show the commits in ascending chronological order
+  (i.e. the oldest commit first)
 * a `--before` (or `--until`) argument which will only show commits before the
   given date. This is the reverse of `--after`.
 * a `--merges` flag (or `--min-parents=2`) which will only show merge commits
@@ -117,9 +121,10 @@ You have shown a subset of commits filtered by author, date and commit message.
 
 ===== `git show`
 `git show` is a command similar to `git log` but shows a single commit. It also
-defaults to showing what was changed in that commit. Remember from Chapter 2
-that `git log` has a `--patch` (or -p) argument to show what was changed by
-each commit in its output.
+defaults to showing what was changed in that commit. Remember from
+<<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> that `git log`
+has a `--patch` (or -p) argument to show what was changed by each commit in its
+output.
 
 .Show commit output
 ----
@@ -167,20 +172,21 @@ sensible supplied options and the ability to completely customize the output to
 meet your needs.
 
 .Why are commits structured like emails?
-NOTE: Remember in Chapter 1 I mentioned that commits are structured like
-emails? This is because Git was initially created for use by the Linux kernel
-project which has a high-traffic mailing list. People frequently send commits
-(know as "patches") to the mailing list. Previously there was an implicit
-format that people used to turn a requested change into an email for the
-mailing list but Git can convert commits to and from an email format to
-facilitate this. Commands such as `git format-patch`, `git send-mail` and `git
-am` (an abbreviation for "apply mailbox") can work directly with email files to
-convert them to/from Git commits. This is particularly useful to open-source
-projects where everyone can access the Git repository but fewer people have
-write access to it. In this case someone could send me an email which contains
-all the metadata of a commit using one of these commands . Nowadays typically
-this will be done with a GitHub pull request instead (which we'll cover in
-Chapter 11).
+NOTE: Remember in
+<<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> I mentioned
+that commits are structured like emails? This is because Git was initially
+created for use by the Linux kernel project which has a high-traffic mailing
+list. People frequently send commits (know as "patches") to the mailing list.
+Previously there was an implicit format that people used to turn a requested
+change into an email for the mailing list but Git can convert commits to and
+from an email format to facilitate this. Commands such as `git format-patch`,
+`git send-mail` and `git am` (an abbreviation for "apply mailbox") can work
+directly with email files to convert them to/from Git commits. This is
+particularly useful to open-source projects where everyone can access the Git
+repository but fewer people have write access to it. In this case someone could
+send me an email which contains all the metadata of a commit using one of these
+commands . Nowadays typically this will be done with a GitHub pull request
+instead (which we'll cover in Chapter 11).
 
 Let's display some commits in an email-style format.
 
@@ -229,7 +235,8 @@ From the email formatted log output:
   date for the email in its headers.
 * "commit subject (4)" is the first line of the commit message prefixed with
   "[PATCH]". This is another reason to structure your commit messages like
-  emails (as mentioned in Chapter 1).
+  emails (as mentioned in
+  <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>).
 
 If there is more than one line in a commit message then the other lines will be
 shown as the message body. Remember if you use the `--patch` (or `-p`) argument
@@ -240,8 +247,9 @@ and all the metadata necessary to convert it to or from an email.
 ==== Discussion
 If you specify the `--patch` (or `-p`) flag to `git log` then you can also
 format the diff output by specifying flags for `git diff` too. Recall word
-diffs from Chapter 1. `git log --patch --word-diff` will show the word diff
-(rather than unified diff) for each log entry.
+diffs from <<01-IntroductionToLocalGit#diff-formats>>. `git log --patch
+--word-diff` will show the word diff (rather than unified diff) for each log
+entry.
 
 `git log` can take a `--date` flag which takes various parameters to display
 the output dates in different formats. For example, `--date=relative` displays
@@ -302,7 +310,11 @@ with other tools such as Subversion if you don't have commit access to a
 repository the best attribution you could hope for would be e.g. "Thanks to
 Mike McQuaid for this commit!" in the commit message.
 
-In Subversion the equivalent `git blame` command is `svn blame`. It also has an alias called `svn praise`. In Git there is no such alias by default (but Chapter 7 will show you how to create one yourself). I'm sure there's a joke to be made about the fact that Subversion offers praise and blame equally but Git offers only blame!
+In Subversion the equivalent `git blame` command is `svn blame`. It also has an
+alias called `svn praise`. In Git there is no such alias by default (but
+<<07-GitShortcuts#aliasing-commands>> will show you how to create one
+yourself). I'm sure there's a joke to be made about the fact that Subversion
+offers praise and blame equally but Git offers only blame!
 
 ===== Custom output format
 If none of the `git log` output formats meets your needs you can create your
@@ -419,17 +431,18 @@ Let's see what the graph log output looks like with some of them.
 ----
 
 Here you can see the branch graph indicator becoming more useful. Like the
-graphical tools we've seen in Chapter 1 this displays branch merges and the
-commits on different branches using ASCII symbols to draw lines. The `*` means
-a commit that was made. Each "line" follows a single branch. We can see from
-the above listing that there was a commit made on the `master` branch, a commit
-made on the `testing` branch and then the `testing` branch was merged into
-`master`. Both `testing` and `master` branches remain (i.e. haven't been
-deleted) and both have been pushed to their respective remote branches. All
-this from just three lines of ASCII output. Hopefully you can see why I love
-this presentation. As typing `git log --oneline --graph --decorate` is a bit
-unwieldy we'll see in Chapter 7 how to shorten this using an alias to something
-like `git l`.
+graphical tools we've seen in
+<<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> this displays
+branch merges and the commits on different branches using ASCII symbols to draw
+lines. The `*` means a commit that was made. Each "line" follows a single
+branch. We can see from the above listing that there was a commit made on the
+`master` branch, a commit made on the `testing` branch and then the `testing`
+branch was merged into `master`. Both `testing` and `master` branches remain
+(i.e. haven't been deleted) and both have been pushed to their respective
+remote branches. All this from just three lines of ASCII output. Hopefully you
+can see why I love this presentation. As typing `git log --oneline --graph
+--decorate` is a bit unwieldy we'll see in <<07-GitShortcuts#shorten-commands>>
+how to shorten this using an alias to something like `git l`.
 
 === Show who last changed each line of a file: git blame
 I'm sure all developers have been in a situation where they've seen some line
@@ -471,7 +484,11 @@ ac14a504 GitInPractice.asciidoc (Mike McQuaid 2013-11-09 5)
  // TODO: write two chapters
 ----
 
-Firstly, note that the output shows `GitInPractice.asciidoc` rather than `01-IntroducingGitInPractice.asciidoc`. This is because the filename has been changed since these changes were made. `git blame` is only showing changes to lines in the file and ignoring that the file was renamed. This is useful as it means you do not lose all blame data whenever you rename a file.
+Firstly, note that the output shows `GitInPractice.asciidoc` rather than
+`01-IntroducingGitInPractice.asciidoc`. This is because the filename has been
+changed since these changes were made. `git blame` is only showing changes to
+lines in the file and ignoring that the file was renamed. This is useful as it
+means you do not lose all blame data whenever you rename a file.
 
 From the blame output:
 
@@ -537,16 +554,18 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git bisect start`. There will be no output.
 3.  Run `git bisect bad`. There will be no output.
-4.  Run `git bisect good 6576b6` where `6576b6` is the SHA-1 of any commit that you know was before the rename. The output should resemble Listing 4.10.
+4.  Run `git bisect good 6576b6` where `6576b6` is the SHA-1 of any commit that
+    you know was before the rename. The output should resemble <<bisect-good>>.
 5.  Run `git bisect good` when the filename is `GitInPractice.asciidoc` and `git
     bisect bad` when the filename is `01-IntroducingGitInPractice.asciidoc`. The
     output should be similar each time.
 6.  Eventually the first bad commit will be found.
-    The output should resemble Listing 4.11.
+    The output should resemble <<bisect-bad>>.
 7.  Run `git bisect reset`.
-    The output should resemble Listing 4.12.
+    The output should resemble Listing <<bisect-log>>.
 
 .First good bisect output
+[[bisect-good]]
 ----
 # git bisect good
 
@@ -566,6 +585,7 @@ From the good bisect output:
   (the bug is present).
 
 .Final bad bisect output
+[[bisect-bad]]
 ----
 # git bisect bad
 
@@ -612,12 +632,16 @@ You have located the commit that renamed `GitInPractice.asciidoc`.
 |1000|19|
 |===
 
-As you can see from the table above as the number of commits increases the max number of commits that need to be checked increases much more slowly. This algorithm means that you can quickly navigate through a huge numbers of commits with `git bisect` without too many steps.
+As you can see from the table above as the number of commits increases the max
+number of commits that need to be checked increases much more slowly. This
+algorithm means that you can quickly navigate through a huge numbers of commits
+with `git bisect` without too many steps.
 
 If you wish to examine the steps that you followed in a `git bisect` operation
 then you can run `git bisect log`:
 
 .Bisect log output
+[[bisect-log]]
 ----
 # git bisect log
 
@@ -743,4 +767,5 @@ In this chapter you hopefully learned:
 * How to use `git bisect run` to search automatically through the history
   to identify regressions with a test
 
-Now that you've learned how to better understand history let's learn how to make it more complex but learning advanced branching techniques.
+Now that you've learned how to better understand history let's learn how to
+make it more complex but learning advanced branching techniques.
