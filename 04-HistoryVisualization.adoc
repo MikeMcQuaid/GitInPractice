@@ -155,7 +155,7 @@ From the show commit output:
   equivalent of typing `git diff HEAD^^..HEAD^` i.e. the difference between the
   previous commit and the one before it.
 
-The `git show HEAD^` output is equivalent to to `git log --max-count=1 --patch
+The `git show HEAD^` output is equivalent to `git log --max-count=1 --patch
 HEAD^`.
 
 === List commits with different formatting

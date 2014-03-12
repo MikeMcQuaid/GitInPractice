@@ -24,7 +24,7 @@ image::screenshots/B-OSX-GitVersion.png[]
 ==== Installing Git on Apple OS X Mavericks or newer
 If you are running OS X Mavericks (10.9) or newer and Git was not already
 installed when you ran `git --version` it will prompt to download and install
-Git similarly to to Figure B.2:
+Git similarly to Figure B.2:
 
 .OS X Mavericks Git installation
 image::screenshots/B-OSX-Mavericks-Git-Install.png[]
