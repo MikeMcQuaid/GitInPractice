@@ -435,14 +435,15 @@ graphical tools we've seen in
 <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> this displays
 branch merges and the commits on different branches using ASCII symbols to draw
 lines. The `*` means a commit that was made. Each "line" follows a single
-branch. We can see from the above listing that there was a commit made on the
-`master` branch, a commit made on the `testing` branch and then the `testing`
-branch was merged into `master`. Both `testing` and `master` branches remain
-(i.e. haven't been deleted) and both have been pushed to their respective
-remote branches. All this from just three lines of ASCII output. Hopefully you
-can see why I love this presentation. As typing `git log --oneline --graph
---decorate` is a bit unwieldy we'll see in <<07-GitShortcuts#shorten-commands>>
-how to shorten this using an alias to something like `git l`.
+branch. Reading from the bottom up e can see from the above listing that there
+was a commit made on the `master` branch, a commit made on the `testing` branch
+and then the `testing` branch was merged into `master`. Both `testing` and
+`master` branches remain (i.e. haven't been deleted) and both have been pushed
+to their respective remote branches. All this from just three lines of ASCII
+output. Hopefully you can see why I love this presentation. As typing `git log
+--oneline --graph --decorate` is a bit unwieldy we'll see in
+<<07-GitShortcuts#shorten-commands>> how to shorten this using an alias to
+something like `git l`.
 
 === Show who last changed each line of a file: git blame
 I'm sure all developers have been in a situation where they've seen some line
