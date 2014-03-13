@@ -136,6 +136,8 @@ You have initialized a new local Git repository named `GitInPracticeRedux`
 accessible at e.g. `/Users/mike/GitInPracticeRedux`.
 
 ==== Discussion
+We're calling the repository `GitInPracticeRedux` rather than `GitInPractice` to differentiate it from the book itself.
+
 .Where can I see the full syntax references for Git commands?
 NOTE: All `git` commands referenced in this book have complete references to
 all their possible syntax and arguments in Git's help. This can be accessed for
