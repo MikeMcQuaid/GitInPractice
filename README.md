@@ -4,29 +4,7 @@ Git In Practice is an intermediate-level Git book due to be published by Manning
 ## Status
 Git In Practice is a work in progress.
 
-Chapters currently ready for review are linked from the Table of Contents.
-
 I rewrite the history of this repository often. Sorry about that.
-
-## Table of Contents
-1. Introduction to Git
-	1. [Introduction to Distributed Version Control](https://github.com/mikemcquaid/GitInPractice/blob/master/01-IntroductionToDistributedVersionControl.adoc)
-	2. [Introduction to local Git](https://github.com/mikemcquaid/GitInPractice/blob/master/02-IntroductionToLocalGit.adoc)
-	3. [Introduction to remote Git](https://github.com/mikemcquaid/GitInPractice/blob/master/03-IntroductionToRemoteGit.adoc)
-2. Using Git
-	1. [Filesystem Interactions](https://github.com/mikemcquaid/GitInPractice/blob/master/04-FilesystemInteractions.adoc)
-	2. History Visualization
-	3. Advanced Branching
-	4. Rewriting History
-3. Git Workflows
-	1. Git Shortcuts
-	2. Creating a clean history
-	3. [Merging vs Rebasing](https://github.com/mikemcquaid/GitInPractice/blob/master/10-MergingVsRebasing.adoc)
-	4. Working with Subversion repositories
-	5. GitHub Pull Requests
-	6. Vendoring project dependencies as submodules
-	7. Hosting your own Git repository
-	8. A recommended Git workflow for programming teams
 
 ## Usage
 You can read all the AsciiDoc source files inline on GitHub.
