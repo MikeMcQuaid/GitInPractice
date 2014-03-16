@@ -7,11 +7,12 @@ by learning the following topics:
 * The pros and cons of each approach
 * How to decide what strategy to use for your project
 
-As seen in Chapters 3 and 7 merging and rebasing are two strategies for
-updating the contents of a branch based on the contents of another. Merging
-joins the history of two branches together with a merge commit (a commit with
-two parent commits) and rebasing creates new, reparented commits on top of the
-existing commits.
+As seen in <<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>
+and <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>
+merging and rebasing are two strategies for updating the contents of a branch
+based on the contents of another. Merging joins the history of two branches
+together with a merge commit (a commit with two parent commits) and rebasing
+creates new, reparented commits on top of the existing commits.
 
 Why are there two strategies for accomplishing essentially the same task? Let's
 find out by comparing the Git history of two popular open-source projects and
@@ -28,10 +29,11 @@ rather browse or clone it from there. Please clone it and examine it while
 reading this chapter.
 
 .CMake repository history
+[[cmake-gitx]]
 image::diagrams/09-CMakeGitX.png[]
 
 CMake makes heavy use of branching and merges. Several of the branches visible
-or implied in the Figure 10.1 are:
+or implied in <<cmake-gitx>> are:
 
 * `next`: Shown in the figure as `origin/next`. Used for integration of _topic
   branches_ when developing a new version of CMake. `master` is merged in here
@@ -55,13 +57,14 @@ branch name used in the merge commit helps indicate what feature or bug the
 commit was in relation to.
 
 .CMake branch/merge workflow
+[[cmake-workflow]]
 image::diagrams/09-CMakeWorkflow.png[]
 
-Figure 10.2 focuses on the interactions between branches in the CMake workflow
-(rather than the interactions between commits and branches in Figure 10.1). For
-a new commit to end up in `master` a new topic branch needs to be created,
-commits made on it, the topic branch merged to the `next` branch
-and the `next branch` merged to `master` for a release.
+<<cmake-workflow>> focuses on the interactions between branches in the CMake
+workflow (rather than the interactions between commits and branches in
+<<cmake-gitx>>). For a new commit to end up in `master` a new topic branch
+needs to be created, commits made on it, the topic branch merged to the `next`
+branch and the `next branch` merged to `master` for a release.
 
 ==== Workflow commands
 The following commands are used by CMake developers to clone the repository,
@@ -120,24 +123,27 @@ https://github.com/Homebrew/homebrew. Please clone it and examine it while
 reading this chapter.
 
 .Homebrew repository history
+[[homebrew-gitx]]
 image::diagrams/09-HomebrewGitX.png[]
 
 Homebrew has very few merge commits within the repository (remember that _fast
-forward merges_ do not produce merge commits). In Figure 10.3 you can see the
-history is entirely continuous despite multiple commits in a row from the same
-author and non-continuous dates. Branches are still used by individual
+forward merges_ do not produce merge commits). In <<homebrew-gitx>> you can see
+the history is entirely continuous despite multiple commits in a row from the
+same author and non-continuous dates. Branches are still used by individual
 contributors (with and without push access to the repository) but branches are
 rebased and squashed before being merged. This hides merge commits, evidence of
 branches and temporary commits (that e.g. fix up previous commits on the same
 branch) from the `master` branch.
 
 .Homebrew's branch/rebase/squash workflow
+[[homebrew-workflow]]
 image::diagrams/09-HomebrewWorkflow.png[]
 
-Figure 10.4 focuses on the branches and repositories in the Homebrew workflow.
-New commits can end up on master either by being directly committed by those
-with main repository access, a feature branch being squashed and picked from a
-forked repository or, very rarely, through a major refactor branch being merged.
+<<homebrew-workflow>> focuses on the branches and repositories in the Homebrew
+workflow. New commits can end up on master either by being directly committed
+by those with main repository access, a feature branch being squashed and
+picked from a forked repository or, very rarely, through a major refactor
+branch being merged.
 
 On the very infrequent occasions that a major refactor branch is needed on the
 core-repository (e.g. for heavy testing of the major refactor) then it will be
@@ -216,7 +222,7 @@ important to ensure that testing is done frequently and sufficiently before
 releasing.
 
 CMake's approach produces a history that contains a lot of information but, as
-seen from the plethora of lines in Figure 10.1, can be hard to follow. Merge
+seen from the plethora of lines in <<cmake-gitx>>, can be hard to follow. Merge
 commits are frequent and commits with actual changes are harder to find as a
 result. This can make reverting individual commits tricky; using `git revert`
 on a merge commit is hard as Git does not know which side of the merge it
@@ -232,11 +238,11 @@ the `master` branch and circumvent the process. Everyone who commits to CMake
 needs to be made aware of the process and trusted not to break or circumvent it.
 
 === Homebrew's workflow pros and cons
-A major benefit of Homebrew's approach should be evidence from Figure 10.3; the
-history is very simple. The `master` branch contains no direct merges so
-ordering is easy to follow. Commits contain concise descriptions of exactly
-what they do and there are no commits that are fixing previous ones. Every
-commit communicates important information.
+A major benefit of Homebrew's approach should be evidence from
+<<homebrew-gitx>>; the history is very simple. The `master` branch contains no
+direct merges so ordering is easy to follow. Commits contain concise
+descriptions of exactly what they do and there are no commits that are fixing
+previous ones. Every commit communicates important information.
 
 As a result of commits being squashed it also makes it very easy to revert
 individual commits and, if necessary, reapply them at a later point. As

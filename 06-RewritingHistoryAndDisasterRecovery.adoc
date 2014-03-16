@@ -1,5 +1,5 @@
 ## Rewriting History and Disaster Recovery
-In Section 1.5.4 we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<09-MergingVsRebasing#homebrew-s-workflow>> and Chapter 14.
+In <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<09-MergingVsRebasing#homebrew-s-workflow>> and Chapter 14.
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
@@ -54,9 +54,10 @@ From the reflog output:
 Let's compare this to the current GitX output:
 
 .GitX reflog comparison output
+[[gitx-reflog]]
 image::diagrams/06-GitXReflog.png[]
 
-You can from Figure 6.1 that the SHA-1s match those in the `git reflog` output:
+You can from <<gitx-reflog>> that the SHA-1s match those in the `git reflog` output:
 
 * the latest commit on the `v0.1-release` branch (`a8200e1`, `HEAD@{1}` )
 * the penultimate commit on the `v0.1-release` branch (`dfe2377`, `HEAD@{2}`).
@@ -86,7 +87,7 @@ Another way of securing your data with Git is regularly pushing to remote, work 
 If things ever go really badly and you suffer disk corruption with important but unpushed commits in your repository you can run the `git fsck` tool. This will verify the integrity of the repository and print out any missing or corrupt objects that it finds. You can then remove these corrupt objects, restore them from backups or check if other users of the same repository have the same objects. Hopefully the corrupted objects are not those with the most recent work you are wishing to recover.
 
 ### Resetting a branch to a previous commit: git reset
-In <<03-FilesystemInteractions#revert-a-previous-commit-git-revert>> you learned how to use `git revert` to revert a commit which made changes you wished to undo. I stated previously that rewriting history was a bad practice if the commit to be reverted had already been pushed publicly (I'll elaborate more on this in this chapter). However, what if the commit had not been pushed yet? In this case we can use a command we first saw in Section <<03-FilesystemInteractions#resetting-files-to-the-last-commit-git-reset>>: `git reset`.
+In <<03-FilesystemInteractions#revert-a-previous-commit-git-revert>> you learned how to use `git revert` to revert a commit which made changes you wished to undo. I stated previously that rewriting history was a bad practice if the commit to be reverted had already been pushed publicly (I'll elaborate more on this in this chapter). However, what if the commit had not been pushed yet? In this case we can use a command we first saw in <<03-FilesystemInteractions#resetting-files-to-the-last-commit-git-reset>>: `git reset`.
 
 When we used `git reset` previously we used it either with no arguments (which implies `--mixed`) or with `--hard`. Remember `--hard` resets the index and the working directory and `--mixed` resets the index but not the working directory. In short, `--hard` will discard any uncommitted work whereas `--mixed` will simply unstage it (effectively reversing a `git add`).
 
@@ -110,9 +111,10 @@ Let's create a temporary commit (that hasn't been pushed) that we can reset:
 ```
 
 .Commit to be reset in GitX
+[[gitx-reset-before]]
 image::screenshots/06-GitXResetBefore.png[]
 
-In Figure 6.2 you can see the state of GitX after the `git commit`.
+In <<gitx-reset-before>> you can see the state of GitX after the `git commit`.
 
 In this case let's try resetting to the previous commit on the same branch; an alternative to using `git revert`.
 
@@ -142,14 +144,15 @@ From the reset commit output:
 * "uncommitted changes (2)" shows that the `00-Preface.asciidoc` file is currently in a modified state after the reset operation.
 
 .GitX after commit reset
+[[gitx-reset-after]]
 image::screenshots/06-GitXResetAfter.png[]
 
-In Figure 6.3 you can see the state of GitX after the `git reset`. The commit that was created by the `git commit` command has now disappeared from GitX.
+In <<gitx-reset-after>> you can see the state of GitX after the `git reset`. The commit that was created by the `git commit` command has now disappeared from GitX.
 
 You have reset the `master` branch pointer to point to a previous commit.
 
 #### Discussion
-Remember that I said in the previous section that `git reflog` was useful in avoiding the loss of commits? Let's imagine that you reset the previous commit but later realized this was a mistake. Let's run `git reflog` and see if we can get anything useful from the output:
+Remember that I said in <<list-all-changes-including-history-rewrites-git-reflog>> that `git reflog` was useful in avoiding the loss of commits? Let's imagine that you reset the previous commit but later realized this was a mistake. Let's run `git reflog` and see if we can get anything useful from the output:
 
 .Reflog output after reset commit
 ```
@@ -178,9 +181,10 @@ You can see the reflog has kept the record that this reset was made and the SHA-
     There will be no output.
 
 .Restored commit in GitX
+[[gitx-reset-restored]]
 image::screenshots/06-GitXResetBefore.png[]
 
-If we now examine Figure 6.4 we'll see that the commit has been restored and the state is exactly the same as that when it was made. The only record that the reset was ever made is now in the `git reflog`.
+If we now examine <<gitx-reset-restored>> we'll see that the commit has been restored and the state is exactly the same as that when it was made. The only record that the reset was ever made is now in the `git reflog`.
 
 Now run `git push` to send the commit to the remote repository.
 
@@ -222,9 +226,10 @@ Let's create a branch that we can rebase:
 ```
 
 .Newly created inspiration branch
+[[gitx-rebase-before]]
 image::screenshots/06-GitXRebaseBefore.png[]
 
-In Figure 6.6 can see the new `inspiration` branch. It has a single commit and the parent of that commit is the commit that has the `v0.1` tag.
+In <<gitx-rebase-before>> can see the new `inspiration` branch. It has a single commit and the parent of that commit is the commit that has the `v0.1` tag.
 
 Now let's rebase this branch.
 
@@ -254,9 +259,10 @@ From the rebase output:
 * "applying commit (2)" shows a list of each of the commits (in this case only one) that are recreated on the branch. Effectively each commit on the branch being rebased is cherry-picked (recall from <<05-AdvancedBranching#add-a-single-commit-to-the-current-branch-git-cherry-pick>>) on top of the new "base"; the latest commit on the `v0.1-release` branch. As their parent commits have changed so do the SHA-1s of all the commits.
 
 .Rebased inspiration branch
+[[gitx-rebase-after]]
 image::screenshots/06-GitXRebaseAfter.png[]
 
-In Figure 6.6 you can see the rebased `inspiration` branch. It still has a single commit but that commit's parent is now the latest commit on the `v0.1-release` branch rather than the commit tagged `v0.1`. Note that GitX reflowed and recolored some of the branches; `master` is now to the right of `v0.1-release` and `v0.1-release` is now green. This doesn't have any significance beyond GitX trying to make the output more readable.
+In <<gitx-rebase-after>> you can see the rebased `inspiration` branch. It still has a single commit but that commit's parent is now the latest commit on the `v0.1-release` branch rather than the commit tagged `v0.1`. Note that GitX reflowed and recolored some of the branches; `master` is now to the right of `v0.1-release` and `v0.1-release` is now green. This doesn't have any significance beyond GitX trying to make the output more readable.
 
 You have rebased the `inspiration branch` on top of the `v0.1-release` branch.
 
@@ -441,10 +447,11 @@ From the interactive rebase output:
 * "fixup diff (2)" shows the diffstat for the new commit created by the `fixup` command.
 * "rebase success (3)" shows the successful result of the rebase operation.
 
-.Rebased inspiration branch
-image::screenshots/06-GitXRebaseAfter.png[]
+.Interactively rebased inspiration branch
+[[gitx-rebase-interactive-after]]
+image::screenshots/06-GitXRebaseInteractiveAfter.png[]
 
-Figure 6.8 shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase` it now has two commits, the latter of which was previously previously the prior and contains the contents of two commits.
+<<gitx-rebase-interactive-after>> shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase` it now has two commits, the latter of which was previously previously the prior and contains the contents of two commits.
 
 You have successfully interactively rebased the `inspiration` branch on the `v0.1` tagged commit. Now push it using `git push --set-upstream origin inspiration`.
 
@@ -491,9 +498,10 @@ Now let's create a commit in our main, local repository:
 ```
 
 .Commit before pull rebase
+[[gitx-pull-rebase-before]]
 image::screenshots/06-GitXPullRebaseBefore.png[]
 
-Figure 6.8 shows the state of the `master` branch before the `git pull --rebase` operation. Now let's perform a pull with a rebase.
+<<gitx-pull-rebase-before>> shows the state of the `master` branch before the `git pull --rebase` operation. Now let's perform a pull with a rebase.
 
 #### Problem
 You want to pull commits from `origin/master` and rebase your current commits in `master` on top of the upstream changes.
@@ -528,9 +536,10 @@ From the rebase pull output:
 * "rebase output (2)" shows the output of the successful rebase operation. The one commit that had already been made on your local `master` branch is rebased on top of the latest commit in the `origin/master` remote branch. This is the same as if you had run `git rebase origin/master` after `git fetch`.
 
 .Commit after pull rebase
+[[gitx-pull-rebase-after]]
 image::screenshots/06-GitXPullRebaseAfter.png[]
 
-Figure 6.9 shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`).
+<<gitx-pull-rebase-after>> shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`).
 
 You have pulled with a rebase. Now `git push` to send these commits upstream.
 
@@ -626,9 +635,10 @@ To avoiding messing up our current local repository lets create another cloned, 
     /Users/mike/GitInPracticeReduxFilterTest/`.
 
 .GitX before filter-branch
+[[gitx-filter-branch-before]]
 image::screenshots/06-GitXFilterBranchBefore.png[]
 
-Figure 6.9 shows the partial output from GitX after the `git clone` command focusing on the `master` branch. Now let's remove references to the preface file from the `master` branch.
+<<gitx-filter-branch-before>> shows the partial output from GitX after the `git clone` command focusing on the `master` branch. Now let's remove references to the preface file from the `master` branch.
 
 #### Problem
 You wish to remove all references to the file `00-Preface.asciidoc` on the `master` branch.
@@ -688,9 +698,10 @@ From the filter-branch file removal output:
 * "branch rewritten (5)" shows that the `master` branch was changed by the `git filter-branch` operation. If it was not instead it would show `WARNING: Ref 'refs/heads/master' is unchanged`.
 
 .GitX after filter-branch
+[[gitx-filter-branch-after]]
 image::screenshots/06-GitXFilterBranchAfter.png[]
 
-Figure 6.10 shows the output from GitX after the `git filter-branch` command from the first point at which they diverge (which is the first commit containing the `00-Preface.asciidoc` file). All commits that referenced the file have been changed and all those that only changed this file have been pruned as they were empty. You can see the `origin/master` remote branch also has a identical ref named `refs/original/refs/heads/master`. This is used as a backup so the original `master` can be restored by `git branch --force master refs/original/refs/heads/master` if desired.
+<<gitx-filter-branch-after>> shows the output from GitX after the `git filter-branch` command from the first point at which they diverge (which is the first commit containing the `00-Preface.asciidoc` file). All commits that referenced the file have been changed and all those that only changed this file have been pruned as they were empty. You can see the `origin/master` remote branch also has a identical ref named `refs/original/refs/heads/master`. This is used as a backup so the original `master` can be restored by `git branch --force master refs/original/refs/heads/master` if desired.
 
 You have removed all references to `00-Preface.asciidoc` on the `master` branch.
 

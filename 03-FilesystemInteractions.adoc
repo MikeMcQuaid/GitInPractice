@@ -82,8 +82,9 @@ consistent behavior across different versions of Git (which may have differing
 move autodetection behaviour).
 
 After running `git mv` the move or rename will be added to Git's index staging
-area which, if you remember from Chapter 1, means that the change has been
-staged for inclusion in the next commit.
+area which, if you remember from
+<<01-IntroductionToLocalGit#building-a-new-commit-in-the-index-staging-area-git-add>>,
+means that the change has been staged for inclusion in the next commit.
 
 It's also possible to rename files or directories and move files or directories
 into other directories inside the Git repository using the `git mv` command and
@@ -282,9 +283,9 @@ To remove untracked directories as well as untracked files you can use the `-d`
 (which stands for "directory") parameter.
 
 === Ignore files: .gitignore
-As discussed in the previous section, sometimes working directories will
-contain files which are _untracked_ by Git and you do not wish to add them to
-the repository.
+As discussed in <<delete-untracked-files-git-clean>>, sometimes working
+directories will contain files which are _untracked_ by Git and you do not wish
+to add them to the repository.
 
 Sometimes these files are one-off occurrences; you accidentally copy a file to
 the wrong directory and wish to delete it. Usually, however, they are the
@@ -417,12 +418,12 @@ files from the working directory. If you wish to remove the ignored files *and*
 all the untracked files (as `git clean --force` would do) you can instead use
 `git clean -x` (note the `-x` is lowercase rather than uppercase).
 
-The specified arguments can be combined with the others discussed in Section
-4.4.4. For example, `git clean -xdf` would remove all untracked or ignored
-files (`-x`) and directories (`-d`) from a working directory. This will remove
-all files and directories for a Git repository that were not previously
-committed. Please take care when running this; there will be no prompt and all
-the files will be quickly deleted.
+The specified arguments can be combined with the others discussed in
+<<delete-untracked-files-git-clean>>. For example, `git clean -xdf` would
+remove all untracked or ignored files (`-x`) and directories (`-d`) from a
+working directory. This will remove all files and directories for a Git
+repository that were not previously committed. Please take care when running
+this; there will be no prompt and all the files will be quickly deleted.
 
 Often `git clean -xdf` will be run after `git reset --hard`; this means that
 you will have reset all files to their last-committed state and removed all

@@ -16,17 +16,19 @@ messages. Version 1.8 or above should be fine for the needs of this book.
 To verify if Git is already installed open a Terminal (either the default OS X
 `/Applications/Utilities/Terminal.app` or an alternative such as `iTerm.app`)
 and run `git --version`. If Git is already installed the output should resemble
-Figure B.1:
+<<osx-git-version>>:
 
 .`git --version` in Terminal.app on OS X Mavericks
+[[osx-git-version]]
 image::screenshots/B-OSX-GitVersion.png[]
 
 ==== Installing Git on Apple OS X Mavericks or newer
 If you are running OS X Mavericks (10.9) or newer and Git was not already
 installed when you ran `git --version` it will prompt to download and install
-Git similarly to Figure B.2:
+Git similarly to <<mavericks-git-install>>:
 
 .OS X Mavericks Git installation
+[[mavericks-git-install]]
 image::screenshots/B-OSX-Mavericks-Git-Install.png[]
 
 ==== Installing Git on Apple OS X Mountain Lion or older
@@ -44,9 +46,10 @@ http://git-scm.com/download/mac.
 === How to install and run Git on Linux or Unix
 To verify if Git is already installed open a Terminal application or console
 and run `git --version`. If Git is already installed the output should resemble
-Figure B.3:
+<<linux-git-version>>:
 
 .`git --version` in XFCE Terminal on Debian 7.2 (Wheezy)
+[[linux-git-version]]
 image::screenshots/B-Linux-GitVersion.png[]
 
 On Linux or Unix you can install Git directly from your package manager. How to
@@ -76,11 +79,12 @@ To run Git commands open the 'Git Bash' shortcut from the Start Menu. This will
 open a Unix shell in a Windows Command Prompt.
 
 .`git --version` in Git Bash on Windows 8.1
+[[windows-gitversion]]
 image::screenshots/B-Windows-GitVersion.png[]
 
 With the Git shell open you can type in Git commands. To see what Git
 version you have installed type `git --version`. The output should
-resemble Figure 2.4.
+resemble <<windows-gitversion>>.
 
 === Verifying Git has installed correctly.
 To run Git commands you will need to open a Terminal application, console or

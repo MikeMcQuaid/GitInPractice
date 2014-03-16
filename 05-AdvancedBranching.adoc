@@ -458,12 +458,13 @@ Don't worry about identifying which column is which; it's not actually very
 important but just provides more context for changes.
 
 .Local repository after merge conflict resolution
+[[gitx-merge-conflict]]
 image::screenshots/05-GitXMergeConflict.png[]
 
-You can see from Figure 5.2 that the changes from both branches are visible in
-the GitX output and that they are not always shown in chronological order; the
-`Add Chapter 1 content` commit occurs before the `Separate files.` commit even
-although it was made 3 minutes later.
+You can see from <<gitx-merge-conflict>> that the changes from both branches
+are visible in the GitX output and that they are not always shown in
+chronological order; the `Add Chapter 1 content` commit occurs before the
+`Separate files.` commit even although it was made 3 minutes later.
 
 ===== Using a graphical merge tool
 Instead of manually editing the contents of the file you can instead run `git
@@ -479,11 +480,12 @@ tend not to use these tools any more I found them useful when learning how to
 use version control.
 
 .Opendiff merge conflict resolution
+[[opendiff]]
 image::screenshots/05-OpenDiff.png[]
 
 You can also customize the tool that is used to specify your own merge tools.
-In Figure 5.3 you can see the `opendiff` tool provided with OSX used to resolve
-the previous merge conflict.
+In <<opendiff>> you can see the `opendiff` tool provided with OSX used to
+resolve the previous merge conflict.
 
 === Only resolve each merge conflict once: git rerere
 You may find yourself in a situation where you have a long-running branch where
@@ -597,9 +599,10 @@ You have created a `v0.1` tag in the `GitInPracticeRedux` repository
 
 ==== Discussion
 .Local repository after `git tag`
+[[gitx-tag]]
 image::screenshots/05-GitXTag.png[]
 
-You can see from Figure 5.4 after the `git tag` there is a new `v0.1` ref on
+You can see from <<gitx-tag>> after the `git tag` there is a new `v0.1` ref on
 the latest commit on the master branch (in the GitX interface this will be
 yellow). This indicates that this commit has been tagged `v0.1`.
 

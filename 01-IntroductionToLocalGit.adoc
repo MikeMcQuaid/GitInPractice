@@ -227,9 +227,10 @@ from the contents of the index and repeat this cycle.
 Git's index is a staging area used to build up new commits. Rather than
 requiring all changes in the working tree make up the next commit Git allows
 files to be added incrementally to the index. The add/commit/checkout workflow
-can be seen in Figure 1.1.
+can be seen in <<commit-workflow>>:
 
 .Git add/commit/checkout workflow
+[[commit-workflow]]
 image::diagrams/01-Workflow.png[]
 
 ==== Building a new commit in the index staging area: git add
@@ -315,13 +316,14 @@ typically displayed as the _diff_ (the differences between the files before and
 the files after the commit).
 
 .A typical commit broken down into its parts
+[[typical-commit]]
 image::diagrams/01-Commit.png[]
 
 .Why do the arrows point backwards?
-NOTE: As you may have noticed Figure 1.2 uses arrows pointing from commits to
-their previous commit. The reason for this is that commits contain a pointer to
-the _parent commit_ and not the other way round; when a commit is made it has
-no idea what the next commit will be yet.
+NOTE: As you may have noticed <<typical-commit>> uses arrows pointing from
+commits to their previous commit. The reason for this is that commits contain a
+pointer to the _parent commit_ and not the other way round; when a commit is
+made it has no idea what the next commit will be yet.
 
 ===== Problem
 You wish to commit the contents of an existing file `GitInPractice.asciidoc`
@@ -433,15 +435,17 @@ and stores a collection of objects when you commit. The object store is stored
 inside the Git _repository_.
 
 .Commit, blob and tree objects
+[[git-objects]]
 image::diagrams/01-Objects.png[]
 
-In Figure 1.3 you can see the main Git objects we're concerned with: _commits_,
-_blobs_ and _trees_. There is also a _tag_ object but don't worry about tags
-until they are introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>.
-Commit objects were covered in Figure 1.2 and you saw that they store metadata
-and referenced file contents. The file contents reference is actually a
-reference to a _tree object_. A tree object stores a reference to all the _blob
-objects_ at a particular point in time and other tree objects if there are any
+In <<git-objects>> you can see the main Git objects we're concerned with:
+_commits_, _blobs_ and _trees_. There is also a _tag_ object but don't worry
+about tags until they are introduced in
+<<05-AdvancedBranching#create-a-tag-git-tag>>. Commit objects were covered in
+<<typical-commit>> and you saw that they store metadata and referenced file
+contents. The file contents reference is actually a reference to a _tree
+object_. A tree object stores a reference to all the _blob objects_ at a
+particular point in time and other tree objects if there are any
 subdirectories. A blob object stores the contents of a particular version of a
 particular single file in the Git repository.
 
@@ -460,10 +464,11 @@ linear, branch-less history will be the one that immediately preceded it. The
 only commit that lacks a parent commit is the _initial commit_; the first
 commit in the repository. By following the parent commit, its parent, its
 parent and so on you will always be able to get back from the current commit to
-the initial commit. You can see an example of parent commit pointers in Figure
-1.4.
+the initial commit. You can see an example of parent commit pointers in
+<<parent-commit>>:
 
 .Parent commit pointers
+[[parent-commit]]
 image::diagrams/01-ParentCommit.png[]
 
 Now that we have two commits and have learned how they are stored we can start
@@ -557,13 +562,14 @@ branch in reverse chronological order i.e. the most recent commit comes first.
 It's also useful to graphically visualize history.
 
 .`gitk` on Windows 8.1
+[[gitk]]
 image::screenshots/01-gitk.png[]
 
 `gitk` is a tool for viewing the history of Git repositories. It is usually
 installed with Git but may need installed by your package manager or
 separately. It's ability to graphically visualize Git's history is particularly
 helpful when history becomes more complex (e.g. with merges and remote
-branches). It can be seen running on Windows 8.1 in Figure 1.5.
+branches). It can be seen running on Windows 8.1 in <<gitk>>.
 
 There are more attractive, up-to-date and platform-native alternatives to
 `gitk`. On Linux/Unix I'd instead recommend using tools such as `gitg` for
@@ -571,13 +577,14 @@ gtk+/GNOME integration and `QGit` for Qt/KDE integration. These can be
 installed using your package manager.
 
 .GitX-dev on OS X Mavericks
+[[gitx]]
 image::screenshots/01-GitX.png[]
 
 On OS X there are tools such as `GitX` (and various forks of the project). As
 OS X is my platform of choice I'll be using screenshots of the `GitX-dev` fork
 of `GitX` to discuss history in this book and would recommend you use it too if
 you use OS X. `GitX-dev` is available at https://github.com/rowanj/gitx and can
-be seen in Figure 1.6.
+be seen in <<gitx>>.
 
 To view the commit history with gitk or GitX:
 
@@ -586,21 +593,23 @@ To view the commit history with gitk or GitX:
 2.  Run `gitk` or `gitx`.
 
 .GitX history output
+[[gitx-history-full]]
 image::diagrams/01-GitX-history-full.png[]
 
-The GitX history (seen in Figure 1.7) shows similar output to `git log` but in
-a different format. You can also see the current branch and the contents of the
-current commit including the diff and parent SHA-1. There's a lot of
-information that doesn't differ between commits, however.
+The GitX history (seen in <<gitx-history-full>>) shows similar output to `git
+log` but in a different format. You can also see the current branch and the
+contents of the current commit including the diff and parent SHA-1. There's a
+lot of information that doesn't differ between commits, however.
 
 .GitX history graph output
+[[gitx-history]]
 image::diagrams/01-GitX-history.png[]
 
-In Figure 1.8 you can see the GitX history graph output. This format will be
-used throughout the book to show the current state of the repository and/or the
-previous few commits. It concisely shows the unique SHA-1, all branches (only
-`master` in this case), the current local branch (shown in the GUI with an
-orange label), the commit message subject (the first line of the commit
+In <<gitx-history>> you can see the GitX history graph output. This format will
+be used throughout the book to show the current state of the repository and/or
+the previous few commits. It concisely shows the unique SHA-1, all branches
+(only `master` in this case), the current local branch (shown in the GUI with
+an orange label), the commit message subject (the first line of the commit
 message) and the commit's author, date and time.
 
 ==== Discussion
@@ -621,23 +630,24 @@ files in a version control system over a period of time instead of sharing ever
 single change that was made in reaching the final state.
 
 .Squashing multiple commits into a single commit
+[[squashing]]
 image::diagrams/01-Squashing.png[]
 
-In Figure 1.9 you see a fairly common use-case for rewriting history with Git.
-If you were working on some window code all morning and wanted your coworkers
-to see it later (or just include it in the project) then there's no need for
-everyone to see the mistakes you made along the way. In Figure 1.9 the commits
-are _squashed_ together so instead of three commits and the latter two fixing
-mistakes in the first commit we have squashed these together to create a single
-commit for the window feature. We'd only rewrite history like this if working
-on a separate branch that hadn't had other work from other people relying on it
-yet as it has changed some parent commits (so, without intervention, other
-people's commits may point to commits that no longer exist). Don't worry too
-much about squashing work for now; just remember this as a situation where you
-may want to rewrite history. In
+In <<squashing>> you see a fairly common use-case for rewriting history with
+Git. If you were working on some window code all morning and wanted your
+coworkers to see it later (or just include it in the project) then there's no
+need for everyone to see the mistakes you made along the way. In <<squashing>>
+the commits are _squashed_ together so instead of three commits and the latter
+two fixing mistakes in the first commit we have squashed these together to
+create a single commit for the window feature. We'd only rewrite history like
+this if working on a separate branch that hadn't had other work from other
+people relying on it yet as it has changed some parent commits (so, without
+intervention, other people's commits may point to commits that no longer
+exist). Don't worry too much about squashing work for now; just remember this
+as a situation where you may want to rewrite history. In
 <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>
-we'll first learn how to rewrite history and the cases where it is
-useful and safe to do so.
+we'll first learn how to rewrite history and the cases where it is useful and
+safe to do so.
 
 What we're generally interested in when reading the history (and why we clean
 it up) is ensuring the changes between commits are relevant (for example don't
@@ -823,13 +833,14 @@ Another equivalent syntax is `master^` which is the same as `master~1` (and
 `master^^` equivalent to `master~2`).
 
 .HEAD, master and modified refs
+[[HEAD]]
 image::diagrams/01-HEAD.png[]
 
 The second ref is the string `HEAD`. The `HEAD` always points to the top of
 whatever you have currently checked out so almost always be the top commit of
 the current branch you are on. Therefore if you have the `master` branch
 checked out then `master` and `HEAD` (and `6b437c7` in the last example) are
-equivalent. See the `master`/`HEAD` pointers demonstrated in Figure 1.10.
+equivalent. See the `master`/`HEAD` pointers demonstrated in <<HEAD>>.
 
 These `git diff` invocations are all equivalent:
 

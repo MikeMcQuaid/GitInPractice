@@ -19,7 +19,7 @@ When you ran `git config --global user.name "Mike McQuaid"` a file  named `.gitc
 .Where is the `$HOME` directory?
 NOTE: The `$HOME` directory is often signified with the tilde (`~`) character and will be in the rest of this chapter. If your username was `mike` the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on OSX and `/home/mike` on Linux/Unix.
 
-The filename is prefixed with a dot and this means on OSX and Linux it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal we can see the contents. Provided you ran `git config` as requested in previous chapters it should look something like this:
+The filename is prefixed with a dot and this means on OSX and Linux it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal we can see the contents. Provided you ran `git config` as requested in <<01-IntroductionToLocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>> it should look something like this:
 ```
 # cat ~/.gitconfig
 
