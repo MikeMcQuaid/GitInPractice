@@ -711,9 +711,9 @@ master branch. This can be used to create branches from previous commits which
 is sometimes useful if e.g. the current `master` branch state has broken unit
 tests that you need to be working.
 
-`git branch` can take a `--set-upstream` flag which, combined with a start
-point, will set the upstream for the branch (similarly to `git push
---set-upstream` but without pushing anything remotely yet).
+`git branch` can take a `--track` flag which, combined with a start point, will
+set the upstream for the branch (similarly to `git push --set-upstream` but
+without pushing anything remotely yet).
 
 .Local repository after `git branch chapter-two`
 image::screenshots/02-GitBranch.png[]
@@ -1004,7 +1004,7 @@ A rebase involves changing the parent of a commit to point to another.
 .Rebasing a branch on top of master
 image::diagrams/02-Rebasing.png[]
 
-Figure 2.18 shows a rebase of the `seperate-files` branch onto the `master`
+Figure 2.18 shows a rebase of the `separate-files` branch onto the `master`
 branch. The rebase operation has changed the parent of the first commit in the
 `separate-files` branch to be the last commit in the `master` branch. This
 means all the content changes from the `master` branch are now included in the
