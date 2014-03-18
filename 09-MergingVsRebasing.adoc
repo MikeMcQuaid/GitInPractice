@@ -238,7 +238,7 @@ the `master` branch and circumvent the process. Everyone who commits to CMake
 needs to be made aware of the process and trusted not to break or circumvent it.
 
 === Homebrew's workflow pros and cons
-A major benefit of Homebrew's approach should be evidence from
+A major benefit of Homebrew's approach should be evident from
 <<homebrew-gitx>>; the history is very simple. The `master` branch contains no
 direct merges so ordering is easy to follow. Commits contain concise
 descriptions of exactly what they do and there are no commits that are fixing
@@ -252,7 +252,7 @@ changes and fixes can be pushed quickly rather than having a stabilization or
 testing process.
 
 .Why is a readable history important for Homebrew?
-NOTE: For Homebrew readable history is a very important feature of there
+NOTE: For Homebrew readable history is a very important feature of their
 workflow. Homebrew uses Git not just as a version control system for developers
 but also as an update delivery mechanism for users. Presenting these users with
 a more readable history allows them to better grasp updates to Homebrew with
@@ -270,10 +270,10 @@ not be seen in the `master` branch and each commit message can be tailored by
 the core team to communicate information in the best possible way.
 
 This workflow means that only those on the core team can do anything dangerous
-to the on the main repository. Anyone else will need their commits reviewed
-before they are applied. This puts more responsibility on the shoulders of the
-core team but means that other contributors to Homebrew only need to know how
-to create a pull request and not how to e.g. squash or merge commits.
+to the the main repository. Anyone else will need their commits reviewed before
+they are applied. This puts more responsibility on the shoulders of the core
+team but means that other contributors to Homebrew only need to know how to
+create a pull request and not how to e.g. squash or merge commits.
 
 Unfortunately Homebrew's approach means that most branch information is
 (intentionally) lost. It's possible to guess at branches from multiple commits
@@ -299,7 +299,7 @@ it is worth considering the following:
   has a more time-consuming release process such as desktop or mobile software
   that needs to be compiled (and perhaps even submitted to an app store for
   review) then working across many branches may be more suitable. This applies
-  even more-so if you have to actively support many released versions of the
+  even more so if you have to actively support many released versions of the
   software simultaneously.
 * If it is important to be able to trivially revert merged changes on a branch
   (and perhaps remerge them later) then a squashing process may be more
