@@ -355,6 +355,7 @@ Let's try and add an ignored file.
     The output should resemble:
 
 .Trying to add an ignored file
+[.long-annotations]
 ----
 # git add GitInPractiseGoodIdeas.tmp
 
@@ -520,6 +521,7 @@ current working directory.
     The output should resemble:
 
 .Reapply stashed changes output
+[.long-annotations]
 ----
 # git stash pop
 

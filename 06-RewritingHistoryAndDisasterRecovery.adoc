@@ -32,6 +32,7 @@ You wish to view the state of the reflog for the `HEAD` pointer.
     The output should resemble:
 
 .The reflog output
+[.long-annotations]
 ```
 # git reflog
 
@@ -274,6 +275,7 @@ If you made multiple commits to the wrong branch you can't use `git rebase` as-i
 Let's look at the reflog again to see what effects the rebase had:
 
 .Reflog output after rebase
+[.long-annotations]
 ```
 # git reflog
 
@@ -307,6 +309,7 @@ The main difference when resolving a `git rebase` (or `git cherry-pick`) conflic
 If the above `rebase` had failed the output would look something like this:
 
 .rebase conflict output
+[.long-annotations]
 ```
 First, rewinding head to replay your work on top of it...
 Applying: Add Chapter 1 inspiration. <1>
@@ -369,6 +372,7 @@ You wish to interactively rebase the history of a branch.
     An editor will appear and the contents should resemble:
 
 .interactive rebase git-rebase-todo file
+[.long-annotations]
 ```
 pick dfe2377 Advanced practice technique.
 pick a8200e1 Add release preface. <1>
@@ -560,6 +564,7 @@ Let's try and rebase the `inspiration` branch again and push it:
     The output should resemble:
 
 .Rewritten history push failure output
+[.long-annotations]
 ```
 # git push
 

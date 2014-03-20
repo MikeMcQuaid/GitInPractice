@@ -339,6 +339,7 @@ make modifications to the file and commit them.
     The output should resemble:
 
 .Committing changes staged in the index
+[.long-annotations]
 ----
 # git commit --message 'Initial commit of book.'
 
@@ -388,6 +389,7 @@ Let's create another commit.
     The output should resemble:
 
 .Making a second commit
+[.long-annotations]
 ----
 # git add GitInPractice.asciidoc
 # git commit --message 'Add opening joke. Funny?'
@@ -679,6 +681,7 @@ You wish to view the differences between the previous commit and the latest.
     The output should resemble:
 
 .The differences between the previous commit and latest
+[.long-annotations]
 ----
 # git diff master~1 master <1>
 

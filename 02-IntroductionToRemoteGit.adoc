@@ -85,6 +85,7 @@ You can verify this remote has been created successfully by running `git
 remote --verbose`. The output should resemble:
 
 .Remote repositories
+[.long-annotations]
 ----
 # git remote --verbose
 
@@ -183,6 +184,7 @@ the `origin` remote on GitHub.
     and password when requested. The output should resemble:
 
 .Push and set upstream branch
+[.long-annotations]
 ----
 # git push --set-upstream origin master
 
@@ -306,6 +308,7 @@ recreate it by cloning from GitHub:
     The output should resemble:
 
 .Cloning a remote repository
+[.long-annotations]
 ----
 # git clone https://github.com/GitInPractice/GitInPracticeRedux.git
 
@@ -334,6 +337,7 @@ You can verify this remote has been created successfully by running `git
 remote --verbose`. The output should resemble:
 
 .Remote repositories
+[.long-annotations]
 ----
 # git remote --verbose
 
@@ -416,6 +420,7 @@ You wish to pull new commits into the current branch on the local
     The output should resemble:
 
 .Pulling new changes
+[.long-annotations]
 ----
 # git pull
 
@@ -583,6 +588,7 @@ repository from the remote repository on GitHub:
     The output should resemble:
 
 .Pull after fetch
+[.long-annotations]
 ----
 # git pull
 
@@ -906,6 +912,7 @@ this into into the `master` branch.
     The output should resemble:
 
 .Merge branch
+[.long-annotations]
 ----
 # git merge chapter-two
 

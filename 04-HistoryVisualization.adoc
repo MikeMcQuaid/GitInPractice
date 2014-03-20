@@ -127,6 +127,7 @@ has a `--patch` (or -p) argument to show what was changed by each commit in its
 output.
 
 .Show commit output
+[.long-annotations]
 ----
 # git show HEAD^
 
@@ -201,6 +202,7 @@ displayed first.
     The output should resemble:
 
 .Email formatted log output
+[.long-annotations]
 ----
 # git log --format=email --reverse --max-count 2
 
@@ -567,6 +569,7 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to
 
 .First good bisect output
 [[bisect-good]]
+[.long-annotations]
 ----
 # git bisect good
 
@@ -587,6 +590,7 @@ From the good bisect output:
 
 .Final bad bisect output
 [[bisect-bad]]
+[.long-annotations]
 ----
 # git bisect bad
 

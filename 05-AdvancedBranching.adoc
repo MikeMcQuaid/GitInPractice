@@ -394,6 +394,7 @@ Merge commits have default commit message formats and slightly different diff
 output. Let's take a look at the merge commit by running `git show master`:
 
 .Merge commit output
+[.long-annotations]
 ----
 # git show master
 
@@ -932,6 +933,7 @@ You wish to see what commits remain un-merged to the `master` branch from the
     The output should resemble:
 
 .Cherry output
+[.long-annotations]
 ----
 # git cherry --verbose master
 
