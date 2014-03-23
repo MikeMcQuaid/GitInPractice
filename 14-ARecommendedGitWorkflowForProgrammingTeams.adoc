@@ -1,1 +1,2 @@
 == A recommended Git workflow for programming teams
+Git Flow/GitHub Flow/Mike Flow
