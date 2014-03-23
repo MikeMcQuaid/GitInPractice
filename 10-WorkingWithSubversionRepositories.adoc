@@ -1,11 +1,373 @@
-== Working with Subversion repositories
-A workflow for interacting with Subversion repositories using git-svn
-rather than the svn command-line tool. This will be particularly useful
-for readers who have to still work with a Subversion repository at a
-place of work but want to try out Git while continuing to do so.
-Additionally cover how to migrate a Subversion repository's history into
-a new Git repository.
+## Working with Subversion repositories
+ifdef::env-github[:outfilesuffix: .adoc]
 
-=== Access an SVN repository with Git
+Despite the growth of Git, Subversion (also known as SVN) remains widely used across many projects. Many older open-source projects still continue to use Subversion as do many internal corporate projects.
 
-=== Migrating a Subversion repository to Git
+Thankfully Git provides functionality to allow you to interface with existing Subversion repositories through the `git svn` command. In this chapter you will learn about Git's Subversion integration by learning the following topics:
+
+* How to import an existing Subversion repository into a Git repository
+* How to fetch from and push changes to a Subversion repository for Git
+* How to access a GitHub repository using a Subversion client
+
+### Import a SVN repository into a Git repository
+Let's start by importing a Subversion repository from Google Code. I've selected one that is small but contains branches and tags so we can see how they are used. Clone the `google-enterprise-connector-notes` Subversion repository using:
+
+.Subversion repository clone output
+[[svn-clone-output]]
+[.long-annotations]
+```
+# git svn clone --prefix=origin/ --stdlayout <1>
+  http://google-enterprise-connector-notes.googlecode.com/svn/ <2>
+  google-notes <3>
+
+Initialized empty Git repository in /Users/mike/google-notes/.git/
+r1 = ec0d880208029f06e2181ce2241d5f950b77f8c2 <4>
+  (refs/remotes/origin/trunk)
+	A	domino_stylesheet.xslt <5>
+r2 = ad41618c83d7dfd2768c8668bfdce0a63ea6cfca
+  (refs/remotes/origin/trunk)
+	A	google-access-control-1_0.ntf
+...
+r381 = 750dd5077c4122bcc3a8a17a65088c0ebd85a2b6 <6>
+  (refs/remotes/origin/trunk)
+Checked out HEAD:
+  http://google-enterprise-connector-notes.googlecode.com/svn/trunk
+    r381 <7>
+```
+<1> clone command
+<2> SVN repository
+<3> directory name
+<4> first revision
+<5> added file
+<6> last revision
+<7> HEAD pointer
+
+From the Subversion repository clone output:
+
+* "clone command (1)" shows the `git svn clone` command used to clone the entire Subversion repository. The `--prefix` argument is only needed in Git versions before 2.0 and means that the Subversion remote branches will all be created under `origin/` (like a normal Git remote repository would do). The `--stdlayout` flag is used to say that the Subversion repository is in the usual format i.e. has the `branches`, `tags` and `trunk` as the subfolders of the root of the repository and they should all be imported.
+* "SVN repository (2)" shows the HTTP URL of the Subversion repository that we've cloned.
+* "directory name (3)" shows the name of the local directory which will contain the new Git repository created from the Subversion repository.
+* "first revision (4)" shows the first commit/revision (`r1`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`ec0d88...`) into the local Git repository.
+* "added file (5)" shows a new file added in the first imported commit.
+* "last revision (6)" shows the last commit/revision (`r381`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`750dd5...`) into the local Git repository.
+* "HEAD pointer (7)" shows that the current `HEAD` pointer position is pointing to the tip of the `trunk` remote branch (which is Subversion's `r381`).
+
+Recall from <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. Subversion's usual equivalent to `git clone` is `svn checkout` which only checks out the most recent revision. As we're importing the Subversion repository into Git we need to download all the previous revisions and all the branches and tags. Each new Git commit has metadata stored in the commit message containing the mapping between Git and Subversion commits.
+
+You can see from the listing above `git svn` is iterating through all the revisions in the Subversion repository and creating Git commits locally from the changes. This may take a long time on large repositories but will only need to be done once.
+
+.Subversion commit message in Git repository output
+[.long-annotations]
+```
+# git show --no-patch --format=%B master
+
+Log server and database in Lotus Notes errors (b/13059110)
+
+Changes:
+...
+
+git svn-id:
+  http://google-enterprise-connector-notes.googlecode.com/svn/trunk@381 <1>
+  43735464-b96a-11de-8be4-e1425cda3908 <2>
+```
+<1> SVN URL
+<2> UUID
+
+From the Subversion commit in Git repository output:
+
+* "SVN URL (1)" shows the full URL for this Subversion commit including the Subversion branch (`trunk`) and revision (`@381`).
+* "UUID (2)" shows a unique `git svn` identifier for this Subversion repository. This is used to ensure that the repository at the URL remains the same and is not replaced with another which could errors when you tried to update.
+
+#### Subversion branches and tags
+You may have also noticed from the clone output that it sometimes mentioned branches. A sample that was cut from <<svn-clone-output>> is shown below:
+
+.Clone branch detection output
+[.long-annotations]
+```
+Found merge parent (svn:mergeinfo prop): <1>
+  ae01454731b1603701c59b78c3a2a2801eb4115f <2>
+r378 = 677696fd7befaa4212e760d62ab281780469ea00
+  (refs/remotes/origin/3.2.x) <3>
+	M	projects/version.properties
+r379 = 818430013a86360963676c8ff979cf59b64121ef
+  (refs/remotes/origin/3.2.x)
+Found possible branch point:
+  http://google-enterprise-...googlecode.com/svn/branches/3.2.x => <4>
+  http://google-enterprise-...googlecode.com/svn/tags/3.2.4, 379 <5>
+Found branch parent: (refs/remotes/origin/tags/3.2.4) <6>
+  818430013a86360963676c8ff979cf59b64121ef <7>
+Following parent with do_switch
+Successfully followed parent
+```
+<1> merge found
+<2> branch parent
+<3> commit branch
+<4> branch URL
+<5> tag URL
+<6> tag found
+<7> tag parent
+
+From the clone branch detection output:
+
+* "merge found (1)" shows that `git svn` found one of the parent commits of a merge by looking at the `svn:mergeinfo` Subversion property on the commit.
+* "branch parent (2)" shows the SHA-1 of the found parent commit.
+* "commit branch (3)" shows that the found parent commit is for the `3.2.x` branch.
+* "branch URL (4)" shows the (abbreviated) URL for the branch that was used to create the tag commit.
+* "tag URL (5)" shows the (abbreviated) URL and revision number for the tag commit.
+* "tag found (6)" shows the parent commit that was found for the `3.2.4` tag commit.
+* "tag parent (7)" shows the SHA-1 of the found tag commit.
+
+Let's look at all the remote branches that have been added by running `git branch --remote`:
+
+.Remote branch output
+```
+# git branch --remote
+  origin/2.6.x
+  ...
+  origin/3.2.x <1>
+  origin/Notes-Connector
+  origin/dev <2>
+  origin/tags/1.0.0
+  origin/tags/2.8.4 <3>
+  origin/tags/2.8.4@273 <4>
+  ...
+  origin/tags/3.2.4
+  origin/tags/builds
+  origin/trunk
+```
+<1> 3.2 branch
+<2> work branch
+<3> branch tag
+<4> duplicate tag
+
+From the remote branch output:
+
+* "minor branch (1)" shows the stable 3.2 release branch named `3.2.x`. This will be used to create more patch tags in the 3.2 series e.g. `3.2.4`.
+* "work branch (2)" shows a named branch used for development work named `dev`.
+* "branch tag (3)" shows the branch for the `2.8.4` tag. Note that this has been imported as a branch and not a native Git tag. This will be explained later.
+* "duplicate tag (4)" shows the duplicate `2.8.4` tag named `2.8.4@273`. This is because it was revision `273` and the other `2.8.4` is at revision `274`.
+
+You may have noticed that tags from `git svn` are not the same as normal Git tags but instead are just branches with a `tags/` prefix. This is because in Subversion the only different between a tag and a branch is that of principle. Generally you do not update tags in Subversion but it is possible and has happened in this repository. The reason there is a duplicated `2.8.4` tag (named `2.8.4@273`) is because there was a commit made to create the `2.8.4` tag and another commit made on it. This would not really be possible in Git; you would need to use `git tag --force` to forcefully update the tag and then the previous tag would be lost. This is the reason that `git svn` does not import the Subversion tags as native Git tags.
+
+If you wished to create native Git tags from these anyway you could use the `git branch --remote --list 'origin/tags/*'` to only show Subversion tags and then create Git tags manually. For example, to create the `3.2.4` tag you could run `git tag 3.2.4 origin/tags/3.2.4`.
+
+#### Subversion ignore rules
+Recall from <<03-FilesystemInteractions#ignore-files-gitignore>> that `.gitignore` files can be used to ignore files in a Git repository. Subversion uses the `svn:ignore` property on directories instead. These are not imported by `git svn` into a `.gitignore` file automatically. This is because to do so would require adding a file to the repository.
+
+You can export the `svn:ignore` property values to a `.gitignore` file by using the `git svn show-ignore` command:
+
+.Subversion ignore rules output
+```
+# git svn show-ignore
+
+# /projects/ <1>
+/projects/build <2>
+/projects/install
+/projects/downloads
+
+# /projects/notes-client/
+...
+```
+<1> directory comment
+<2> directory ignore
+
+From the Subversion ignore rules output:
+
+* "directory comment (1)" shows a `.gitignore` comment line (comments are prefixed with `#`) for the `projects` directory's `svn:ignore` property value.
+* "directory ignore (2)" shows an ignore rule for the `projects` directory to ignore a file or directory named `build`.
+
+You can use the `git svn show-ignore` output to write a `.gitignore` file by running `git svn show-ignore > .gitignore`. The `>` redirects the output from the command from the terminal into the `.gitignore` file. You can then add and commit this file to the repository to share these rules with anyone else using `git svn`.
+
+In some cases you may not want people to know you are using `git svn` or not want to commit a `.gitignore` file to a Subversion repository. In this case you could just omit the `.gitignore` file or not add it to any commits but this could get irritating when files are not ignored. Instead you can make use of the `.git/info/exclude` we saw in <<01-IntroductionToLocalGit#creating-a-repository-git-init>> which operates like a local `.gitignore` file for a single repository. This file handily also uses the same syntax as `.gitignore`. You can write the ignore rules to it by running `git svn show-ignore > .git/info/exclude`.
+
+#### Updating a Subversion repository
+To update a Subversion repository you need to use the `git svn` command; you cannot use `git fetch` or `git pull` as `git svn` has not set up any remote Git repository references for you as it does not use the same transport mechanism.
+
+The equivalents to `git fetch` and `git pull --rebase` for Subversion repositories are `git svn fetch` and `git svn rebase`. There is no equivalent to `git pull` without `--rebase`. This is because Git and Subversion handle merges differently so it's important to avoid merge commits on updates as they will not (and should not) be seen by other users of the Subversion repository.
+
+If you run `git svn rebase` on the `master` branch and there are no outputs the output will be:
+
+.No new Subversion revisions output
+```
+# git svn rebase
+
+Current branch master is up to date.
+```
+
+If there was a single new revision (`r2`) the output might resemble:
+
+.One new Subversion revision output
+[.long-annotations]
+```
+# git svn rebase
+
+	M	README.txt <1>
+r2 = 685b522aebec94dc75d725c34c092d9be5f3fc39 (remotes/origin/trunk) <2>
+First, rewinding head to replay your work on top of it... <3>
+Fast-forwarded master to remotes/origin/trunk. <4>
+```
+<1> modified file
+<2> new revision
+<3> rebase begin
+<4> fast-forward
+
+From the one new Subversion revision output:
+
+* "modified file (1)" shows that a file named `README.txt` was modified in the new revision.
+* "new revision (2)" shows the new revision number (`r2`) and the new commit SHA-1 (`685b52...`).
+* "rebase begin (3)" shows the beginning of the `git rebase` operation that `git svn rebase` is running to rebase any commits made on this branch on top of the newly received commits.
+* "fast-forward (4)" shows that this `git rebase` was a fast-forward of the `HEAD` pointer to the latest new commit as there were no local commits that needed to be rebased.
+
+#### Subversion authors and committers
+Let's look at the metadata of a commit imported from a Subversion repository:
+
+.Subversion commit metadata in Git repository
+```
+# git show --no-patch --format=short master
+
+commit 750dd5077c4122bcc3a8a17a65088c0ebd85a2b6
+Author: tdnguyen@google.com <1>
+ <tdnguyen@google.com@43735464-b96a-11de-8be4-e1425cda3908> <2>
+
+    Log server and database in Lotus Notes errors (b/13059110)
+```
+<1> author name
+<2> author email
+
+From the Subversion commit metadata in Git repository output:
+
+* "author name (1)" shows an email address instead of the author name. This is the username of the user in the Subversion repository (which just happens to be an email address in this case).
+* "author email (2)" shows the author email address. In `git-svn` these are created from the username by appending the username with `@` followed by the UUID for the Subversion repository.
+
+It's possible to use a Subversion authors mapping file by passing the `--author-file`(or `-A`) flag to `git svn clone` when you first clone a Subversion repository.
+
+The authors file has the following syntax:
+```
+mikemcquaid = Mike McQuaid <mike@mikemcquaid.com>
+```
+
+If passed a valid file with this format when `git svn` reads a new revision it looks up the username in this file. If the username is `mikemcquaid` it will replace the author (or committer) name and email address with those specified in the file. If it cannot find an entry in the file it will stop the clone (or rebase) and you need to add the new author's details to the file.
+
+#### Viewing a Subversion repository in GitX
+As `git svn` creates a Git repository from a Subversion repository you can still use all the graphical tools you are used to.
+
+Additionally, GitX provides an additional column to display the Subversion revision number:
+
+.GitX on import Subversion repository
+[[gitx-subversion]]
+image::screenshots/10-GitXSubversion.png[]
+
+The Subversion revision number is shown in the `Git SVN Revision` column in <<gitx-subversion>>.
+
+#### Migrating a Subversion repository to Git
+Learning what you have already this section (cloning a Subversion repository, creating real Git tags, mapping authors) you can create a Git repository that contains all the information from a Subversion repository in the typical Git format.
+
+This may be useful if you want to migrate a project from Subversion to Git; you can import the entire history, migrate the tags and `git push` it to a new repository.
+
+### Commit and push to an SVN repository from a Git repository
+Remember that `svn commit` actually does the equivalent of a `git commit` and a `git push` to the remote server. As the repository created by `git svn` is a normal Git repository you can change files and commit as you might do with any other Git repository. The only differences are when you wish to push your changes to the Subversion repository and if you wish to interact with remote branches.
+
+To push commits on the current branch to a Subversion repository you use the `git svn dcommit` command. If you'd committed to the current branch of a `git svn` repository and ran `git svn dcommit` the output should resemble:
+
+.Subversion push output
+[.long-annotations]
+```
+# git commit --message "README.txt: improve grammar." README.txt
+
+[master bcd0a70] README.txt: improve grammar. <1>
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+# git svn dcommit
+
+Committing to http://svntest.com/svntest/ ...
+	M	README.txt
+Committed r3 <2>
+	M	README.txt
+r3 = da4cc700b6d5fe07ead532a34195b438680e7a71 (remotes/origin/trunk) <3>
+No changes between bcd0a70923a9b53cd98ccaeee1567ca95bb579c0 and <4>
+  remotes/origin/trunk
+Resetting to the latest remotes/origin/trunk <5>
+```
+<1> new commit
+<2> push success
+<3> new revision
+<4> commit diff
+<5> trunk reset
+
+From the Subversion push output:
+
+* "new commit (1)" shows the commit subject and SHA-1 of the new commit.
+* "push success (2)" shows that the new Subversion revision was committed successfully.
+* "new revision (3)" shows the new commit that was created from the new Subversion revision. Recall that commits all contain their revision numbers and repository UUIDs which requires rewriting the commit message. Also recall that rewriting the commit message changes the SHA-1 of a commit. As a result this new commit SHA-1 does not match the SHA-1 in "new commit (1)" although the actual changes are the same.
+* "commit diff (4)" shows `git svn` checking that there are no differences between the commit that was just created and the commit the Subversion repository returned.
+* "trunk reset (5)" shows that the `HEAD` and `master` branch pointers are being updated to the new commit. The old commit is still accessible before it was rewritten with the Subversion metadata.
+
+You can see that `git svn dcommit` also has to do some rewriting of commits similarly to `git svn rebase`. This is because the commit messages store additional metadata that can only be obtained from the Subversion server. The Subversion server may have had additional commits in the mean time which means the revision number may differ from the last one that was seen. If this has happened a rebase may need to be done by `git svn dcommit` after receiving the new commit from the server.
+
+#### Branching and tagging
+Subversion does not have the concept of local branches or tags. If a branch or tag needs to be created in Subversion then it the Subversion client has to speak to the server.
+
+As we have a local Git repository containing the contents of the Subversion repository we are not bound by the same constraints. We can create local branches and tags and use them as we wish and everything is fairly simple unless you wish to send or receive commits from the Subversion server.
+
+Recall that both `git svn rebase` and `git svn dcommit` perform rebasing operations on updates. As a result it becomes very difficult to correctly handle merges between Subversion branches with `git svn`. You can read how to do this in `git svn --help` using the `--mergeinfo` flag but I will not be covering this in this book.
+
+What I would advise is that you use local branches only for your own work and not for collaboration with others. When you are finished with a local branch and wish to merge it you should rebase the contents into the branch you wish to include it in. This means that others will not see your merge commits but you can still make use of the useful cheap local branches and history rewriting in Git.
+
+If you want to interact with Subversion remote branches or tags you should instead use the `git svn branch` and `git svn tag` commands. These are copies of Subversion's `svn branch` and `svn tag` commands and take the same parameters and use the same syntax.
+
+### Access a GitHub repository with Subversion
+So far this chapter has been concerned with accessing Subversion repositories using Git. This assumes a development team that is mostly using Subversion and a few users or single user using Git. Incidentally, this is how I learnt Git originally; I worked on Subversion projects but used Git locally.
+
+What if the situation were reversed and the majority of people on the project wanted to use Git and a minority wanted to use Subversion? This is made better if you host your Git repository on GitHub as GitHub provides a Subversion interface for every Git repository.
+
+Let's try checking out the `GitInPracticeRedux` repository from earlier chapters using `svn checkout`:
+
+.Checkout GitHub repository with Subversion partial output
+[.long-annotations]
+```
+# svn co https://github.com/GitInPractice/GitInPracticeRedux
+
+A    GitInPracticeRedux/branches
+A    GitInPracticeRedux/branches/inspiration
+A    GitInPracticeRedux/branches/inspiration/.gitignore
+A    GitInPracticeRedux/branches/inspiration/00-Preface.asciidoc <1>
+...
+A    GitInPracticeRedux/branches/v0.1-release/00-Preface.asciidoc <2>
+...
+A    GitInPracticeRedux/tags/v0.1/00-Preface.asciidoc <3>
+...
+A    GitInPracticeRedux/trunk/00-Preface.asciidoc <4>
+A    GitInPracticeRedux/trunk/01-IntroducingGitInPractice.asciidoc
+A    GitInPracticeRedux/trunk/02-AdvancedGitInPractice.asciidoc
+Checked out revision 26. <5>
+```
+<1> inspiration branch
+<2> v0.1-release branch
+<3> v0.1 tag
+<4> trunk
+<5> latest revision
+
+From the checkout GitHub repository with Subversion partial output:
+
+* "inspiration branch (1)" shows the `00-Preface.asciidoc` file in the `inspiration` branch.
+* "v0.1-release branch (2)" shows the `00-Preface.asciidoc` file in the `v0.1-release` branch.
+* "v0.1 tag (3)" shows the `00-Preface.asciidoc` file in the `v0.1` tag.
+* "trunk (4)" shows the `00-Preface.asciidoc` file in `trunk` (which is actually the renamed `master` branch).
+* "latest revision (5)" shows the latest revision number for the repository `(r26)`.
+
+As you can see the Git repository has been transformed into the traditional Subversion layout with `trunk`, `branches` and `tags` folders in the root. Typically you'd use `svn co https://github.com/GitInPractice/GitInPracticeRedux/trunk` instead and switch to the current branch of choice using `svn switch`.
+
+You can `svn commit`, `svn branch` and use any other Subversion commands with this repository and they are mapped on the GitHub servers into the corresponding Git commands.
+
+You can read more about the GitHub Subversion integration at https://help.github.com/articles/support-for-subversion-clients; the current implementation-specific details are beyond the scope of this book and not necessary for typical use.
+
+If you are already using or considering GitHub I would strongly recommend using the GitHub repository through Subversion rather than a Subversion repository through `git-svn`. This is because Subversion's functionality is effectively a subset of Git's functionality so using GitHub's Subversion support will not limit Git users as much (if at all) compared to using Git users using `git svn`.
+
+### Summary
+In this chapter you hopefully learned:
+
+* How to use `git svn clone` to import an existing Subversion repository
+* How to use `git svn rebase` to fetch from and `git svn dcommit` to push to an existing Subversion repository
+* How to use `svn checkout` to checkout GitHub repositories using Subversion
+
+Now let's learn how to interact with pull requests: GitHub's way of requesting another project include your changes.
