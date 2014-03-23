@@ -210,7 +210,7 @@ Git has created files for:
   storage and reference.
 
 You shouldn't edit any of these files directly until you have a more advanced
-understanding of Git (or, in my experience, never at all). You will instead
+understanding of Git (or never at all). You will instead
 modify these files and directories by interacting with the Git repository
 through Git's filesystem commands first introduced in
 <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
