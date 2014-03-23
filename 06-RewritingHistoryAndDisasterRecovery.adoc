@@ -10,6 +10,8 @@ In this chapter you will learn about rewriting history by learning the following
 * How to rewrite the entire history of a branch
 * How to avoid losing your work
 
+// git commit --amend?
+
 Before jumping in to rewriting history let's start by learning about how to avoid losing committed data using `git reflog`.
 
 ### List all changes including history rewrites: git reflog
