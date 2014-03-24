@@ -1,4 +1,4 @@
-== Introduction to remote Git
+## Introduction to remote Git
 In this chapter you will learn how to retrieve and share changes with other
 users' Git repositories by learning the following topics:
 
@@ -15,7 +15,7 @@ collaborating as part of a large development team. Team collaboration will also
 require knowledge of how to create and interact with branches for working on
 different features in parallel. Let's start by adding a remote repository.
 
-=== Adding a remote repository: git remote add
+### Adding a remote repository: git remote add
 Typically when using version control you will want to share your commits with
 other people using other computers. With a traditional, _centralized version
 control system_ (such as Subversion or CVS) the repository is usually stored on
@@ -69,10 +69,10 @@ The first action you're concerned with is adding a reference for your
 newly-created remote repository (also known as a _remote_) on GitHub to your
 previous local repository so you can push and fetch commits.
 
-==== Problem
+#### Problem
 You wish to add the new GitInPractice remote repository to your current repository.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git remote add origin` with your repository URL appended. e.g. if your
@@ -86,12 +86,12 @@ remote --verbose`. The output should resemble:
 
 .Remote repositories
 [.long-annotations]
-----
+```
 # git remote --verbose
 
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (fetch) <1>
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
-----
+```
 <1> fetch URL
 <2> push URL
 
@@ -113,7 +113,7 @@ GitHub. You can now send and receive changes from this remote. Nothing has been
 sent or received yet; the new remote is effectively just a named URL pointing
 to the remote repository location.
 
-==== Discussion
+#### Discussion
 `git remote` can also be called with the `rename` and `remove` (or `rm`)
 subcommands to alter remotes accordingly.
 
@@ -129,7 +129,7 @@ NOTE: You can have multiple remote repositories connected to your local
 repository so the remote repositories are named. Typically if you have a single
 remote repository it will be named `origin`.
 
-===== Authoritative version storage
+##### Authoritative version storage
 With centralized version control systems the central server always stores the
 authoritative version of the code. Clients to this repository will typically
 only store a small proportion of the history and require access to the server
@@ -160,7 +160,7 @@ in many organizations but it demonstrates how distributed version control
 systems can allow different ways of managing merges to centralized version
 control.
 
-=== Pushing changes to a remote repository: git push
+### Pushing changes to a remote repository: git push
 You will eventually wish to send commits made in the local repository to a
 remote. To do this always requires an explicit action. Only changes
 specifically requested will be sent and the Git (which can operate over HTTP,
@@ -173,11 +173,11 @@ Let's push the changes you made in our repository in
 <<01-IntroductionToLocalGit#introduction-to-local-git>> to the newly created
 remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
-==== Problem
+#### Problem
 You wish to push the changes from the local `GitInPracticeRedux` repository to
 the `origin` remote on GitHub.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git push --set-upstream origin master` and enter your GitHub username
@@ -185,7 +185,7 @@ the `origin` remote on GitHub.
 
 .Push and set upstream branch
 [.long-annotations]
-----
+```
 # git push --set-upstream origin master
 
 Username for 'https://github.com': GitInPractice <1>
@@ -198,7 +198,7 @@ Total 6 (delta 0), reused 0 (delta 0)
 To https://github.com/GitInPractice/GitInPracticeRedux.git <4>
  * [new branch]      master -> master <5>
 Branch master set up to track remote branch master from origin. <6>
-----
+```
 <1> username entry
 <2> password entry
 <3> object preparation/transmission
@@ -239,7 +239,7 @@ From the push output you can see:
 You have pushed your `master` branch's changes to the `origin` remote's
 `master` branch.
 
-==== Discussion
+#### Discussion
 The `git push` `--set-upstream` (or `-u`) flag and explicit specification of
 `origin` and `master` are only required the first time you push a branch. After
 that a `git push` with no arguments will default to running the equivalent of
@@ -278,7 +278,7 @@ branch seen in <<gitx-push>> (although they are different lengths; remember
 SHA-1s can always be shortened as long as they remain unique). To update this
 in future you would run `git push` again to push any local changes to GitHub.
 
-=== Cloning a remote/GitHub repository onto your local machine: git clone
+### Cloning a remote/GitHub repository onto your local machine: git clone
 It is useful to learn how to create a new Git repository locally and push it to
 GitHub. However, you will usually be downloading an existing repository to use
 as your local repository. This process of creating a new local repository from
@@ -295,7 +295,7 @@ the complete history of the repository onto your local machine.
 As you just pushed the entire contents of the local repository to GitHub let's
 remove the local repository and recreate it by cloning the repository on GitHub.
 
-==== Problem
+#### Problem
 You wish to remove the existing `GitInPracticeRedux` local repository and
 recreate it by cloning from GitHub:
 
@@ -309,7 +309,7 @@ recreate it by cloning from GitHub:
 
 .Cloning a remote repository
 [.long-annotations]
-----
+```
 # git clone https://github.com/GitInPractice/GitInPracticeRedux.git
 
 Cloning into 'GitInPracticeRedux'... <1>
@@ -318,7 +318,7 @@ remote: Compressing objects: 100% (5/5), done.
 remote: Total 6 (delta 0), reused 6 (delta 0)
 Unpacking objects: 100% (6/6), done.
 Checking connectivity... done
-----
+```
 <1> destination directory
 <2> object preparation/transmission
 
@@ -338,16 +338,16 @@ remote --verbose`. The output should resemble:
 
 .Remote repositories
 [.long-annotations]
-----
+```
 # git remote --verbose
 
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (fetch) <1>
 origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
-----
+```
 <1> fetch URL
 <2> push URL
 
-==== Discussion
+#### Discussion
 `git clone` can take `--bare` or `--mirror` flags which will create a
 repository suitable for hosting on a server. This will be covered more in
 Chapter 13.
@@ -376,7 +376,7 @@ the default remote and references the repository that the clone originated from
 
 Now let's learn how to pull new commits from the remote repository.
 
-=== Pulling changes from another repository: git pull
+### Pulling changes from another repository: git pull
 `git pull` downloads the new commits from another repository and merges the
 remote branch into the current branch.
 
@@ -409,11 +409,11 @@ Now that you've pushed a commit to the `GitInPracticeRedux` remote on GitHub
 you can change back to your original repository and `git pull` from it. Keep
 the `GitInPracticeReduxPushTest` directory around as we'll use it later.
 
-==== Problem
+#### Problem
 You wish to pull new commits into the current branch on the local
 `GitInPracticeRedux` repository from the remote repository on GitHub.
 
-==== Solution
+#### Solution
 1.  Change directory to the original Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git pull`.
@@ -421,7 +421,7 @@ You wish to pull new commits into the current branch on the local
 
 .Pulling new changes
 [.long-annotations]
-----
+```
 # git pull
 
 remote: Counting objects: 5, done. <1>
@@ -434,7 +434,7 @@ Updating 6b437c7..85a5db1 <4>
 Fast-forward <5>
  GitInPractice.asciidoc | 5 +++-- <6>
  1 file changed, 3 insertions(+), 2 deletions(-) <7>
-----
+```
 <1> object preparation/transmission
 <2> remote URL
 <3> remote branch update
@@ -474,7 +474,7 @@ You can see from the pull output:
   <<01-IntroductionToLocalGit#viewing-the-differences-between-commits-git-diff>>
   .
 
-==== Discussion
+#### Discussion
 `git pull` can take a `--rebase` flag which will perform a rebase rather than a
 merge. This will be covered in
 <<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
@@ -502,7 +502,7 @@ into your local repository and Git has merged them into your `master` branch.
 Now let's learn how to download changes without applying them onto your master
 branch.
 
-=== Fetching changes from a remote without modifying local branches: git fetch
+### Fetching changes from a remote without modifying local branches: git fetch
 Remember that `git pull` performs two actions: fetching the changes from a
 remote repository and merging them into the current branch. Sometimes you may
 wish to download the new commits from the remote repository without merging
@@ -529,19 +529,19 @@ GitHub you can change back to your original repository and `git fetch` from it.
 If you wish you can now delete the `GitInPracticeReduxPushTest` repository by
 running e.g. `rm -rf /Users/mike/GitInPracticeReduxPushTest/`
 
-==== Problem
+#### Problem
 You wish to fetch new commits to the local `GitInPracticeRedux` repository from
 the `GitInPracticeRedux` remote repository on GitHub without merging into your
 `master` branch.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git fetch`.
     The output should resemble:
 
 .Fetching new changes
-----
+```
 # git fetch
 
 remote: Counting objects: 5, done. <1>
@@ -550,7 +550,7 @@ remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From https://github.com/GitInPractice/GitInPracticeRedux <2>
    85a5db1..07fc4c3  master     -> origin/master <3>
-----
+```
 <1> object preparation/transmission
 <2> remote URL
 <3> remote branch update
@@ -565,7 +565,7 @@ origin/master`.
 You've fetched the new commits from the remote repository into your local
 repository without not merging them into your `master` branch.
 
-==== Discussion
+#### Discussion
 .Remote repository after `git fetch`
 [[gitx-fetch]]
 image::screenshots/02-GitXFetch.png[]
@@ -589,14 +589,14 @@ repository from the remote repository on GitHub:
 
 .Pull after fetch
 [.long-annotations]
-----
+```
 # git pull
 
 Updating 85a5db1..07fc4c3 <1>
 Fast-forward <2>
  GitInPractice.asciidoc | 4 +--- <3>
  1 file changed, 1 insertion(+), 3 deletions(-) <4>
-----
+```
 <1> local branch update
 <2> merge type
 <3> lines changed in file
@@ -629,7 +629,7 @@ We've talked about local branches and remote branches but haven't actually
 created any ourselves yet. Let's learn about how branches work and how to
 create them.
 
-=== Creating a new local branch from the current branch: git branch
+### Creating a new local branch from the current branch: git branch
 When committing in Git the history continues linearly; what was the most recent
 commit becomes the parent commit for the new commit. This parenting continues
 back to the initial commit in the repository. You can see an example of this in
@@ -688,11 +688,11 @@ critical error in your application needs fixed immediately. You could quickly
 create a new branch based off the version used by customers, fix the error and
 switch branch back to the branch you had been committing the new feature to.
 
-==== Problem
+#### Problem
 You wish to create a new local branch named `chapter-two` from the current
 (`master`) branch.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git branch chapter-two`. There will be no output.
@@ -701,12 +701,12 @@ You can verify the branch was created by running `git branch` which should have
 the following output:
 
 .List branches
-----
+```
 # git branch
 
   chapter-two <1>
 * master <2>
-----
+```
 <1> new branch
 <2> current branch
 
@@ -720,7 +720,7 @@ From the branch output:
 You have created a new local branch named `chapter-two` which currently points
 to the same commit as `master`.
 
-==== Discussion
+#### Discussion
 `git branch` can take a second argument with the _start point_ for the branch.
 This defaults to the current branch you are on e.g. `git branch chapter-two` is
 the equivalent of `git branch chapter-two master` if you're already on the
@@ -766,16 +766,16 @@ referencing the second chapter. I recommend a format of describing the branch's
 purpose in multiple words separated by hyphens. For example, a branch that is
 performing cleanup on the test suite should be named `test-suite-cleanup`.
 
-=== Checking out a local branch: git checkout
+### Checking out a local branch: git checkout
 Once you've created a local branch you will want to check out the contents of
 another branch into Git's working directory. The state of all the current files
 in the working directory will be replaced with the new state based on the
 revision that the new branch is currently pointing to.
 
-==== Problem
+#### Problem
 You wish to change to a local branch named `chapter-two` from the current (`master`) branch.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two`.
@@ -784,7 +784,7 @@ You wish to change to a local branch named `chapter-two` from the current (`mast
 You've checked out the local branch named `chapter-two` and moved from the
 `master` branch.
 
-==== Discussion
+#### Discussion
 .Git add/commit/checkout workflow
 [[git-subversion-workflow]]
 image::diagrams/01-Workflow.png[]
@@ -820,16 +820,16 @@ you can force this with `git checkout --force`. Another solution is `git stash`
 which allows temporary storage of changes and will be covered in
 <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
 
-=== Pushing a local branch remotely
+### Pushing a local branch remotely
 Now that you've created a new branch and checked it out it would be useful to
 push any new commits made to the remote repository. To do this requires using
 `git push` again.
 
-==== Problem
+#### Problem
 You wish to push the changes from the local `chapter-two` branch to create the
 remote branch `chapter-two` on GitHub.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two`
@@ -838,7 +838,7 @@ remote branch `chapter-two` on GitHub.
     The output should resemble:
 
 .Push and set upstream branch
-----
+```
 git push --set-upstream origin chapter-two
 
 Total 0 (delta 0), reused 0 (delta 0) <1>
@@ -846,7 +846,7 @@ To https://github.com/GitInPractice/GitInPracticeRedux.git
  * [new branch]      chapter-two -> chapter-two <2>
 Branch chapter-two set up to track remote branch
 chapter-two from origin. <3>
-----
+```
 <1> object preparation/transmission
 <2> local/remote branch
 <3> set tracking branch
@@ -865,7 +865,7 @@ The push output is much the same as the previous `git push` run:
 You have pushed your local `chapter-two` branch and created a new remote branch
 named `chapter-two` on the remote repository.
 
-==== Discussion
+#### Discussion
 Remember that now the local `chapter-two` branch is tracking the remote
 `chapter-two` branch so any future `git pull` or `git push` on the
 `chapter-two` branch will use the `origin` remote's `chapter-two` branch.
@@ -877,7 +877,7 @@ image::screenshots/02-GitXPushBranch.png[]
 As you'll hopefully have anticipated <<gitx-push-branch>> shows the addition of
 another remote branch named `origin/chapter-two`.
 
-=== Merging an existing branch into the current branch: git merge
+### Merging an existing branch into the current branch: git merge
 At some point we have a branch that we're done with and we want to bring all
 the commits made on it into another branch. This process is known as a `merge`.
 
@@ -895,11 +895,11 @@ again at a later point (only the new commits will need to be merged next time).
 Alternatively, you may delete the branch and make future commits on the Git's
 default `master` branch and create another branch when needed in the future.
 
-==== Problem
+#### Problem
 You wish to make a commit on the local branch named `chapter-two` and merge
 this into into the `master` branch.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two`
@@ -913,14 +913,14 @@ this into into the `master` branch.
 
 .Merge branch
 [.long-annotations]
-----
+```
 # git merge chapter-two
 
 Updating 07fc4c3..ac14a50 <1>
 Fast-forward <2>
  GitInPractice.asciidoc | 2 ++
  1 file changed, 2 insertions(+) <3>
-----
+```
 <1> local branch update
 <2> merge type
 <3> diff summary
@@ -946,7 +946,7 @@ because `git pull` actually does a `git fetch && git merge`.
 
 You have merged the `chapter-two` branch into the `master` branch.
 
-==== Discussion
+#### Discussion
 This brings the commit that was made in the `chapter-two` branch into the
 `master` branch.
 
@@ -957,7 +957,7 @@ image::screenshots/02-GitXMerge.png[]
 You can see from <<gitx-merge>> that now the `chapter-two` and `master` branches
 point to the same commit once more.
 
-===== Merge conflicts
+##### Merge conflicts
 So far merges may have sounded too good to be true; you can work on multiple
 things in parallel and combine them at any later point in any order. Not so
 fast my merge-happy friend; I haven't told you about merge conflicts yet.
@@ -968,19 +968,19 @@ conflicts but sometimes is unable to do so without human intervention. This
 case produces a merge conflict.
 
 .Merge conflict resolution with Git
-----
-== Chapter 1 <1>
+```
+## Chapter 1  <1>
 <<<<<<< HEAD <2>
 It is a truth universally acknowledged, that a single person in <3>
 possession of good source code, must be in want of a version control
 system.
 
-== Chapter 2
+## Chapter 2
 // TODO: write two chapters
 ======= <4>
 // TODO: think of funny first line that editor will approve. <5>
 >>>>>>> separate-files <6>
-----
+```
 <1> unchanged line
 <2> incoming marker
 <3> incoming line
@@ -1022,7 +1022,7 @@ inspected in the future. Unfortunately sometimes people will pick the wrong
 option or merge incorrectly so it's good to be able to later see what conflicts
 they had to resolve.
 
-===== Rebasing
+##### Rebasing
 A _rebase_ is a method of history rewriting in Git that is similar to a merge.
 A rebase involves changing the parent of a commit to point to another.
 
@@ -1043,7 +1043,7 @@ All that's necessary to
 remember for now is that it's a different approach to a merge that can be used
 for a similar outcome (pulling changes from one branch into another).
 
-=== Deleting a remote branch
+### Deleting a remote branch
 Now that the `chapter-two` branch has been merged into the `master` branch the
 new commit that made in the `chapter-two` branch is now in the `master` branch.
 This means that we can push the `master` branch to push all the `chapter-two`
@@ -1061,11 +1061,11 @@ history and the branch can be safely deleted as a merged branch is, at that
 point, just a ref to an existing commit in the history of the branch it was
 merged into.
 
-==== Problem
+#### Problem
 You wish to push the current `master` branch and delete the branch named
 `chapter-two` on the remote `origin`.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master` to ensure you are on the `master`
@@ -1075,12 +1075,12 @@ You wish to push the current `master` branch and delete the branch named
     The output should resemble:
 
 .Delete remote branch
-----
+```
 # git push origin :chapter-two
 
 To https://github.com/GitInPractice/GitInPracticeRedux.git <1>
  - [deleted]         chapter-two <2>
-----
+```
 <1> remote URL
 <2> deleted branch
 
@@ -1092,7 +1092,7 @@ From the deletion output:
 
 You have deleted the `chapter-two` branch from the remote repository.
 
-==== Discussion
+#### Discussion
 .Local repository after `git push origin :chapter-two`
 [[gitx-push-delete]]
 image::screenshots/02-GitXPushDelete.png[]
@@ -1101,14 +1101,14 @@ In <<gitx-push-delete>> you can see that the `origin/master` has been updated
 to the same commit as `master` and that `origin/chapter-two` has now been
 removed.
 
-=== Deleting the current local branch after merging
+### Deleting the current local branch after merging
 The `chapter-two` branch has all its commits merged into the `master` branch
 and the remote branch deleted so the local branch can now be deleted too.
 
-==== Problem
+#### Problem
 You wish to delete the local branch named `chapter-two`.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master` to ensure you are on the `master`
@@ -1118,7 +1118,7 @@ You wish to delete the local branch named `chapter-two`.
 
 You've deleted the `chapter-two` branch from the local repository.
 
-==== Discussion
+#### Discussion
 .Local repository after `git branch --delete chapter-two`
 [[gitx-branch-delete]]
 image::screenshots/02-GitXBranchDelete.png[]
@@ -1137,7 +1137,7 @@ that the local `chapter-two` branch can be deleted by `git branch --delete`
 without Git complaining that `chapter-two` has changes that need pushed to
 `origin/chapter-two`.
 
-=== Summary
+### Summary
 In this chapter you hopefully learned:
 
 * How to push your local repository to a remote repository

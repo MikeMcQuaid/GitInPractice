@@ -1,4 +1,4 @@
-== Merging vs Rebasing
+## Merging vs Rebasing
 In this chapter you will learn about the pros and cons of merging vs rebasing
 by learning the following topics:
 
@@ -18,7 +18,7 @@ Why are there two strategies for accomplishing essentially the same task? Let's
 find out by comparing the Git history of two popular open-source projects and
 their different branching strategies.
 
-=== CMake's workflow
+### CMake's workflow
 CMake is a cross-platform build-system created by Kitware. It has many
 contributors both inside and outside Kitware but relatively few contributions
 from those without direct push access to the Kitware Git repository.
@@ -66,7 +66,7 @@ workflow (rather than the interactions between commits and branches in
 needs to be created, commits made on it, the topic branch merged to the `next`
 branch and the `next branch` merged to `master` for a release.
 
-==== Workflow commands
+#### Workflow commands
 The following commands are used by CMake developers to clone the repository,
 create new branches for review, merge them to `next` to be tested and CMake
 core maintainers to finally merge them into `master.`
@@ -113,7 +113,7 @@ review:
 3.  Merge the remote branch with `git merge origin/branchname`
 4.  Push the `master` branch with `git push`
 
-=== Homebrew's workflow
+### Homebrew's workflow
 Homebrew is a package manager for OSX. It has thousands of contributors but a
 very small number of people with commit access to the main repository (five at
 the time of writing).
@@ -151,7 +151,7 @@ kept as a branch in the main repository and then merged. This branch will not
 be used by users but may be committed to and tested by multiple core
 contributors.
 
-==== Workflow commands
+#### Workflow commands
 The following commands are used by Homebrew contributors to clone the
 repository, create new branches and pull requests and Homebrew core
 contributors to finally merge them into `master.`
@@ -204,7 +204,7 @@ For a Homebrew core contributor to merge a branch into `master`:
     will also be covered more in Chapter 11.
 4.  Push the `master` branch with `git push`
 
-=== CMake's workflow pros and cons
+### CMake's workflow pros and cons
 CMake's approach makes it easy to keep track of what topic branches have been
 merged, when they were merged and by whom. Individual features and bug-fixes
 live in separate branches and are only integrated when and where it makes sense
@@ -237,7 +237,7 @@ rewrite history anyone with commit access could e.g. make commits directly to
 the `master` branch and circumvent the process. Everyone who commits to CMake
 needs to be made aware of the process and trusted not to break or circumvent it.
 
-=== Homebrew's workflow pros and cons
+### Homebrew's workflow pros and cons
 A major benefit of Homebrew's approach should be evident from
 <<homebrew-gitx>>; the history is very simple. The `master` branch contains no
 direct merges so ordering is easy to follow. Commits contain concise
@@ -283,7 +283,7 @@ Instead, metadata is inserted into commit messages which state that a commit
 was "Signed-off by" a particular core contributor and which pull request (or
 issue) this commit related to.
 
-=== Picking your strategy
+### Picking your strategy
 Organizations and open-source projects vary widely on branching approaches.
 When picking between a branch-and-merge or a branch-rebase-and-squash strategy
 it is worth considering the following:
@@ -332,7 +332,7 @@ that favor lots of small updates rather than fewer, large updates. I think
 these processes are easier to test as they encourage incremental improvements
 rather than huge, sweeping changes.
 
-=== Summary
+### Summary
 In this chapter you hopefully learned:
 
 * How CMake makes use of multiple branches to keep features developed in

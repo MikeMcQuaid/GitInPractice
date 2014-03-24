@@ -1,4 +1,4 @@
-== Introduction to local Git
+## Introduction to local Git
 In this chapter you will learn how and why to use Git as a local version
 control system by covering the following topics:
 
@@ -11,7 +11,7 @@ control system by covering the following topics:
 
 Let's start by learning why Git is so widely used by programmers.
 
-=== Why do programmers use Git?
+### Why do programmers use Git?
 Git was created by a programmer to be used by programmers. Linus Torvalds, the
 creator of the Linux kernel, started writing Git in 2005 with the goal of
 having a distributed, open-source, high-performance and hard to corrupt version
@@ -62,7 +62,7 @@ Many of the above projects and many users of Git have also been introduced to
 and use Git through a Git hosting provider. My favorite is GitHub but there are
 various other paid and free alternatives available.
 
-=== Initial setup
+### Initial setup
 Once you've installed Git (as detailed in
 <<B-GitInstallation#git-installation>>) the first thing you need to do is to
 tell Git your name and email (particularly before creating any commits). Rather
@@ -73,11 +73,11 @@ My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would
 run:
 
 .Set name and email address
-----
+```
 # git config --global user.name "Mike McQuaid" <1>
 # git config --global user.email mike@mikemcquaid.com
 <2>
-----
+```
 <1> a run command
 <2> command output
 
@@ -95,7 +95,7 @@ listing.
 Now Git is set up, to use Git you need to initialize a Git _repository_ on your
 local machine.
 
-=== Creating a repository: git init
+### Creating a repository: git init
 A Git _repository_ is the local collection of all the files related to a
 particular Git version control system and contains a `.git` subdirectory in its
 root. Git keeps track of the state of the files within the repository's
@@ -112,30 +112,30 @@ already exists (known as _cloning_ by Git and introduced in
 <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>)
 but let's start by initializing an empty, new local repository.
 
-==== Problem
+#### Problem
 You wish to create a new local Git repository in a new subdirectory named
 `GitInPracticeRedux.
 
-==== Solution
+#### Solution
 1.  Change to the directory you wish to contain your new repository directory
     e.g. `cd /Users/mike/`.
 2.  Run `git init GitInPracticeRedux`.
 
 .Initializing a Git repository
-----
+```
 # cd /Users/mike/
 # git init GitInPracticeRedux <1>
 
 Initialized empty Git repository in
 /Users/mike/GitInPracticeRedux/.git/ <2>
-----
+```
 <1> requested name
 <2> repository path
 
 You have initialized a new local Git repository named `GitInPracticeRedux`
 accessible at e.g. `/Users/mike/GitInPracticeRedux`.
 
-==== Discussion
+#### Discussion
 We're calling the repository `GitInPracticeRedux` rather than `GitInPractice` to differentiate it from the book itself.
 
 .Where can I see the full syntax references for Git commands?
@@ -148,7 +148,7 @@ arguments.
 `git init` can be run without any arguments to create the local Git repository
 in the current directory.
 
-===== .git subdirectory
+##### .git subdirectory
 Under the new Git repository directory a `.git` subdirectory at e.g
 `/Users/mike/GitInPracticeRedux/.git/` is created with various files and
 directories under it.
@@ -164,7 +164,7 @@ Let's view the contents of the new Git repository by changing to the directory
 containing the Git repository and running the `find` command.
 
 .Listing files created in a new repository
-----
+```
 # cd /Users/mike/ && find GitInPracticeRedux
 
 GitInPracticeRedux/.git/config <1>
@@ -184,7 +184,7 @@ GitInPracticeRedux/.git/objects/info <6>
 GitInPracticeRedux/.git/objects/pack <7>
 GitInPracticeRedux/.git/refs/heads <8>
 GitInPracticeRedux/.git/refs/tags <9>
-----
+```
 <1> local configuration
 <2> description file
 <3> HEAD pointer
@@ -215,7 +215,7 @@ modify these files and directories by interacting with the Git repository
 through Git's filesystem commands first introduced in
 <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
 
-=== Creating a new commit: git add, git commit
+### Creating a new commit: git add, git commit
 To do anything useful in Git we first need one or more commits in our
 repository.
 
@@ -233,16 +233,16 @@ can be seen in <<commit-workflow>>:
 [[commit-workflow]]
 image::diagrams/01-Workflow.png[]
 
-==== Building a new commit in the index staging area: git add
+#### Building a new commit in the index staging area: git add
 Git does not add anything to the index without your instruction. As a result,
 the first thing you have to do with a file you want to include in a Git
 repository is request Git add it to the index.
 
-===== Problem
+##### Problem
 You wish to add an existing file `GitInPractice.asciidoc` to the index staging
 area for inclusion in the next commit.
 
-===== Solution
+##### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory.
@@ -252,7 +252,7 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been
 successful then the output of running `git status` should resemble:
 
 .Adding a file to the index
-----
+```
 # git add GitInPractice.asciidoc
 # git status
 
@@ -265,7 +265,7 @@ successful then the output of running `git status` should resemble:
 #
 #	new file:   GitInPractice.asciidoc <3>
 #
-----
+```
 <1> default branch output
 <2> first commit
 <3> new file in index
@@ -282,7 +282,7 @@ In the status output:
 * "new file in index (3)" shows the new file that you've just added to the
   index (the staging area for the next commit).
 
-===== Discussion
+##### Discussion
 `git add` can also be passed directories as arguments instead of files. You can
 add everything in the current directory and its subdirectories by running `git
 add .`.
@@ -305,7 +305,7 @@ index staging area to build the next commit.
 Now that the contents of the file have been added to the index you're ready to
 commit it.
 
-==== Committing changes to files: git commit
+#### Committing changes to files: git commit
 Making _commit_ stores the changes to one or more files. Each commit contains a
 message entered by the author, details of the author of the commit, a unique
 commit reference (in Git these are _SHA-1 hashes_ e.g.
@@ -325,12 +325,12 @@ commits to their previous commit. The reason for this is that commits contain a
 pointer to the _parent commit_ and not the other way round; when a commit is
 made it has no idea what the next commit will be yet.
 
-===== Problem
+##### Problem
 You wish to commit the contents of an existing file `GitInPractice.asciidoc`
 which has already been added to the index staging area. After this, you wish to
 make modifications to the file and commit them.
 
-===== Solution
+##### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory and
@@ -340,13 +340,13 @@ make modifications to the file and commit them.
 
 .Committing changes staged in the index
 [.long-annotations]
-----
+```
 # git commit --message 'Initial commit of book.'
 
 [master (root-commit) 6576b68] Initial commit of book. <1>
  1 file changed, 2 insertions(+) <2>
  create mode 100644 GitInPractice.asciidoc <3>
-----
+```
 <1> branch, SHA-1, message
 <2> changed files, lines
 <3> new file created
@@ -390,13 +390,13 @@ Let's create another commit.
 
 .Making a second commit
 [.long-annotations]
-----
+```
 # git add GitInPractice.asciidoc
 # git commit --message 'Add opening joke. Funny?'
 
 [master 6b437c7] Add opening joke. Funny? <1>
  1 file changed, 3 insertions(+), 1 deletion(-) <2>
-----
+```
 <1> branch, SHA-1, message
 <2> changed files, lines
 
@@ -411,7 +411,7 @@ From the second commit output:
 
 You have made modifications to `GitInPractice.asciidoc` and committed them.
 
-===== Discussion
+##### Discussion
 The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag
 is omitted then Git will open a text editor (specified by the `EDITOR` or
 `GIT_EDITOR` environment variables) to prompt you for the commit message. These
@@ -431,7 +431,7 @@ therefore worse) commits so I recommend avoiding their use until you've got
 used to using them separately. Several reasons small commits are better than
 large ones are covered in <<viewing-history-git-log-gitk-gitx>>.
 
-====== Object store
+###### Object store
 Git is a version control system built on top of an _object store_. Git creates
 and stores a collection of objects when you commit. The object store is stored
 inside the Git _repository_.
@@ -460,7 +460,7 @@ go well this should be unnecessary but when we start to delve into more
 advanced Git functionality or Git spits out a baffling error message then
 remembering _blobs_ and _trees_ may help you work out what has happened.
 
-====== Parent commits
+###### Parent commits
 Every commit object points to its _parent commit_. The parent commit in a
 linear, branch-less history will be the one that immediately preceded it. The
 only commit that lacks a parent commit is the _initial commit_; the first
@@ -476,7 +476,7 @@ image::diagrams/01-ParentCommit.png[]
 Now that we have two commits and have learned how they are stored we can start
 looking at Git's history.
 
-=== Viewing history: git log, gitk, gitx
+### Viewing history: git log, gitk, gitx
 The _history_ in Git is the complete list of all commits made since the
 repository was created. The history also contains the references to any
 _branches_, _merges_ and _tags_ made within the repository. These three will be
@@ -521,17 +521,17 @@ the commit does in as much detail as is useful in the present tense.
 
 Let's learn how to view the history of a repository.
 
-==== Problem
+#### Problem
 You wish to view the commit history (also known as log) of a repository.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git log`.
     The output should resemble:
 
 .History output
-----
+```
 # git log
 
 commit 6b437c7739d24e29c8ded318e683eca8f03a5260 <1>
@@ -545,7 +545,7 @@ Author: Mike McQuaid <mike@mikemcquaid.com>
 Date:   Sun Sep 29 10:30:00 2013 +0100
 
     Initial commit of book.
-----
+```
 <1> unique SHA-1
 <2> commit author
 <3> committed date
@@ -614,7 +614,7 @@ the previous few commits. It concisely shows the unique SHA-1, all branches
 an orange label), the commit message subject (the first line of the commit
 message) and the commit's author, date and time.
 
-==== Discussion
+#### Discussion
 `git log` can take revision or path arguments to specify the output history be
 shown starting at the given revision or only include changes to the requested
 paths.
@@ -623,7 +623,7 @@ paths.
 commit output. It can also take `--stat` or `--word-diff` flag to show a
 _diffstat_ or _word diff_. These terms will be explained in <<diff-formats>>.
 
-===== Rewriting history
+##### Rewriting history
 Git is unusual compared to many other version control systems in that it allows
 history to be rewritten. This may seen surprising or worrying; after all did I
 not just tell you that the history contains the entire list of changes to the
@@ -660,7 +660,7 @@ The history can give us a quick overview of all the previous commits. However,
 querying the differences between any two arbitrary commits can also sometimes
 be useful so let's learn how to do that.
 
-=== Viewing the differences between commits: git diff
+### Viewing the differences between commits: git diff
 A _diff_ (also known as a _change_ or _delta_) is the difference between two
 commits. In a Git you can request a diff between any two commits, branches or
 tags. It's often useful to be able to request the difference between two parts
@@ -671,10 +671,10 @@ examine the diff between the the code in the different parts of the history to
 see what has changed. The various ways of displaying diffs in version control
 typically allow you to narrow them down per-file, directory and even committer.
 
-==== Problem
+#### Problem
 You wish to view the differences between the previous commit and the latest.
 
-==== Solution
+#### Solution
 1.  Change directory to the Git repository e.g. `cd
     /Users/mike/GitInPracticeRedux/`.
 2.  Run `git diff master~1 master`.
@@ -682,7 +682,7 @@ You wish to view the differences between the previous commit and the latest.
 
 .The differences between the previous commit and latest
 [.long-annotations]
-----
+```
 # git diff master~1 master <1>
 
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc <2>
@@ -695,7 +695,7 @@ index 48f7a8a..b14909f 100644 <3>
 +== Chapter 1 <8>
 +Git In Practice makes Git In Perfect! <9>
 +// TODO: Is this funny?
-----
+```
 <1> git diff command
 <2> virtual diff command
 <3> index SHA-1 changes
@@ -734,7 +734,7 @@ The diff output contains:
   between the commits.
 * "inserted line (9)" is a new line that was added in the latter commit.
 
-==== Discussion
+#### Discussion
 `git diff` can take path arguments after a `--` to request only the differences
 between particular paths. For example, `git diff master~1 master --
 GitInPractice.asciidoc` will the differences to only the
@@ -749,7 +749,7 @@ If `git diff` is run with no arguments it shows the differences between the
 index staging area and the current state of the files tracked by Git i.e. any
 changes you've made but not yet added with `git add`.
 
-===== Diff formats
+##### Diff formats
 Diffs are shown by default in Git (and in the above example) in a format that
 is known as a _unified format diff_. Diffs are used often by Git to indicate
 changes to files; for example when navigating through history or viewing what
@@ -759,12 +759,12 @@ Sometimes it is desirable to display diffs in different formats. Two common
 alternatives to a typical unified format diff are a _diffstat_ and _word diff_.
 
 .Diffstat format
-----
+```
 # git diff --stat master~1 master
 
  GitInPractice.asciidoc | 4 +++- <1>
  1 file changed, 3 insertion(+), 1 deletions(-) <2>
-----
+```
 <1> one file's changes
 <2> all files' changes
 
@@ -785,7 +785,7 @@ involved in the changes. This can be useful when getting a quick overview of
 what has changed without needing all the detail of a normal unified format diff.
 
 .Word diff format
-----
+```
 # git diff --word-diff master~1 master
 
 diff --git a/GitInPractice.asciidoc b/GitInPractice.asciidoc
@@ -797,7 +797,7 @@ index 48f7a8a..b14909f 100644
 {+== Chapter 1+}
 {+Git In Practice makes Git In Perfect!+} <1>
 // TODO: [-write book-]{+Is this funny?+} <2>
-----
+```
 <1> added line
 <2> modified line
 
@@ -816,7 +816,7 @@ probably care more about individual word choices than knowing that an entire
 line has changed and the special characters (`[-]{+}`) are not used as often in
 prose than in code.
 
-===== Refs
+##### Refs
 In Git _refs_ are the possible ways of addressing individual commits. They are
 an easier way to refer to a specific commit or branch when specifying an
 argument to a Git command.
@@ -858,7 +858,7 @@ You can also use the tool `git rev-parse` if you want to see what SHA-1 a given
 ref expands to:
 
 .Parsing refs
-----
+```
 # git rev-parse master
 
 6b437c7739d24e29c8ded318e683eca8f03a5260
@@ -866,14 +866,14 @@ ref expands to:
 # git rev-parse 6b437c7
 
 6b437c7739d24e29c8ded318e683eca8f03a5260
-----
+```
 
 There are more types of refs such as remote branches and tags but you don't
 need to worry about them just now; they will be introduced in
 <<02-IntroductionToRemoteGit#adding-a-remote-repository-git-remote-add>> and
 <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
-=== Summary
+### Summary
 In this chapter you hopefully learned:
 
 * Why Git is a good and high-performance version control system

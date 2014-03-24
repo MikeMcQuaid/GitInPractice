@@ -150,7 +150,7 @@ I performed the same actions with `git commit --patch` as with `git add --patch`
 
 Now run `git reset HEAD^` to undo the current commit so we can try and stage hunks graphically.
 
-=== Graphically building a commit from parts of files
+### Graphically building a commit from parts of files
 GitX provides a staging mode that also allows adding entire files or individual hunks to staging provides support for graphically staging hunks. If you click on the "Stage" in the top-right of GitX it should resemble the following:
 
 .GitX stage mode

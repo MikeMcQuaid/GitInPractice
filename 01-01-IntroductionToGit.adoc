@@ -1,4 +1,4 @@
-= Introduction to Git
+# Introduction to Git
 The first part of this book will give you an outline of the essential concepts
 required to understand how version control systems work and how to make Git
 perform the basic tasks expected of a version control system.

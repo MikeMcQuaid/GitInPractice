@@ -1,4 +1,4 @@
-= Git in Practice
+# Git in Practice
 Mike McQuaid <mike@mikemcquaid.com>
 :doctype: book
 :toc:

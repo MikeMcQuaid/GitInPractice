@@ -1,4 +1,4 @@
-== History Visualization
+## History Visualization
 In this chapter you will learn about visualizing the history of a Git
 repository in varying formats by learning the following topics:
 
@@ -18,7 +18,7 @@ two more we'll cover in this chapter: `git blame` and `git bisect`.
 Let's start by learning how to optimize our use of `git log` to only list only
 particular commits.
 
-=== List only certain commits
+### List only certain commits
 Sometimes when examining history you will want to filter the commits that are
 display based on some of their metadata. Perhaps you are tracking down a commit
 that you can remember was made on a rough date, by a particular person or with
@@ -31,18 +31,18 @@ its output.
 Let's start by trying to find a commit by author, date and commit message
 simultaneously.
 
-==== Problem
+#### Problem
 You wish to list the commits authored by Mike McQuaid, after 10th November 2013
 with the string "file." in their message.
 
-==== Solution
+#### Solution
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'`.
     The output should resemble:
 
 .Filtered log output
-----
+```
 # git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'
 
 commit 06b5eb58b62ba8bbbeee258705c636ca7ac20b49 <1>
@@ -62,7 +62,7 @@ Author: Mike McQuaid <mike@mikemcquaid.com>
 Date:   Thu Nov 28 15:39:38 2013 +0000
 
     Rename book file to first part file.
-----
+```
 <1> most recent commit
 <2> least recent commit
 
@@ -103,7 +103,7 @@ you if you wish to pursue them further.
 
 You have shown a subset of commits filtered by author, date and commit message.
 
-==== Discussion
+#### Discussion
 `git log` can take:
 
 * a `--max-count` (or `-n`) argument to limit the number of commits that are
@@ -119,7 +119,7 @@ You have shown a subset of commits filtered by author, date and commit message.
   workflow with Git then this will be very useful in identifying what branches
   were merged and when.
 
-===== `git show`
+##### `git show`
 `git show` is a command similar to `git log` but shows a single commit. It also
 defaults to showing what was changed in that commit. Remember from
 <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> that `git log`
@@ -128,7 +128,7 @@ output.
 
 .Show commit output
 [.long-annotations]
-----
+```
 # git show HEAD^
 
 commit 06b5eb58b62ba8bbbeee258705c636ca7ac20b49 <1>
@@ -144,7 +144,7 @@ index ebb69c3..0000000
 +++ /dev/null
 @@ -1 +0,0 @@
 -Git Sandwich
-----
+```
 <1> commit information
 <2> commit diff
 
@@ -159,7 +159,7 @@ From the show commit output:
 The `git show HEAD^` output is equivalent to `git log --max-count=1 --patch
 HEAD^`.
 
-=== List commits with different formatting
+### List commits with different formatting
 The default `git log` output format is helpful but takes a minimum of 6 lines
 of output to display each commit. It displays the commit SHA-1, author name and
 email, commit date and the full commit message (each additional line of which
@@ -191,11 +191,11 @@ instead (which we'll cover in Chapter 11).
 
 Let's display some commits in an email-style format.
 
-==== Problem
+#### Problem
 You wish to list the last two commits in an email format with the eldest
 displayed first.
 
-==== Solution
+#### Solution
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git log --format=email --reverse --max-count 2'`.
@@ -203,7 +203,7 @@ displayed first.
 
 .Email formatted log output
 [.long-annotations]
-----
+```
 # git log --format=email --reverse --max-count 2
 
 From 06b5eb58b62ba8bbbeee258705c636ca7ac20b49 Mon Sep 17 00:00:00 2001 <1>
@@ -216,7 +216,7 @@ From 36640a59af951a26e0793f8eb0f4cc8e4c030167 Mon Sep 17 00:00:00 2001
 From: Mike McQuaid <mike@mikemcquaid.com>
 Date: Thu, 28 Nov 2013 15:57:43 +0000
 Subject: [PATCH] Ignore .tmp files.
-----
+```
 <1> unix mailbox date
 <2> commit author
 <3> commit date
@@ -246,7 +246,7 @@ then `git log` output will also include the changes made in the commit. With
 this argument provided each outputted `git log` entry will contain the commit
 and all the metadata necessary to convert it to or from an email.
 
-==== Discussion
+#### Discussion
 If you specify the `--patch` (or `-p`) flag to `git log` then you can also
 format the diff output by specifying flags for `git diff` too. Recall word
 diffs from <<01-IntroductionToLocalGit#diff-formats>>. `git log --patch
@@ -272,7 +272,7 @@ committer and the "fuller" output additionally contains details of the author
 date and commit date.
 
 .Fuller log snippet
-----
+```
 # git log --format=fuller
 
 commit 334181a038e812050051776b69f0a80187abbeed
@@ -284,7 +284,7 @@ CommitDate: Fri Jan 10 08:19:50 2014 +0000
     rust: add 0.9 bottle.
 
 ...
-----
+```
 
 This snippet shows a single commit from Homebrew, an open-source project
 accessible at https://github.com/Homebrew/homebrew. This was used as in the
@@ -318,7 +318,7 @@ alias called `svn praise`. In Git there is no such alias by default (but
 yourself). I'm sure there's a joke to be made about the fact that Subversion
 offers praise and blame equally but Git offers only blame!
 
-===== Custom output format
+##### Custom output format
 If none of the `git log` output formats meets your needs you can create your
 own custom formats using a _format string_. The format string uses placeholders
 to fill in various attributes per commit.
@@ -326,7 +326,7 @@ to fill in various attributes per commit.
 Let's try and create a more prose-like format for `git log`:
 
 .Custom prose log format
-----
+```
 # git log --format="%ar %an did: %s"
 
 6 weeks ago Mike McQuaid did: Ignore .tmp files.
@@ -338,7 +338,7 @@ Let's try and create a more prose-like format for `git log`:
 3 months ago Mike McQuaid did: Improve joke comic timing.
 3 months ago Mike McQuaid did: Add opening joke. Funny?
 3 months ago Mike McQuaid did: Initial commit of book.
-----
+```
 
 Here we've specified the format string with `%ar %an did: %s`. In this format
 string:
@@ -354,13 +354,13 @@ are too many for me to detail them all in this book. The large number of
 placeholders should mean it you can customize `git log` output into almost any
 format.
 
-===== Release logs: git shortlog
+##### Release logs: git shortlog
 `git shortlog` shows the output of `git log` in a format that's typically used
 for open-source software release announcements. It displays commits grouped by
 author with one commit subject per line.
 
 .Short log output
-----
+```
 # git shortlog HEAD~6..HEAD
 
 Mike McQuaid (9):  <1>
@@ -370,7 +370,7 @@ Mike McQuaid (9):  <1>
       Add first review temporary file.
       Remove unfavourable review file.
       Ignore .tmp files.
-----
+```
 <1> commit author
 <2> commit message
 
@@ -383,7 +383,7 @@ From the short log output:
 The commit range (`HEAD~6..HEAD`) is optional but typically you'd want to use
 one to create a software release announcement for any version after the first.
 
-===== The ultimate log output
+##### The ultimate log output
 As mentioned previously often the `git log` output is too verbose or does not
 display all the information you wish to query in a compact format. It's also
 not obvious from the output how local or remote branches relate to the output.
@@ -392,7 +392,7 @@ I have a selection of format options I refer to as my "ultimate log output".
 Let's look at the output with these options:
 
 .Graph log output
-----
+```
 # git log --oneline --graph --decorate
 
 * 36640a5 (HEAD, origin/master, origin/HEAD, master) Ignore .tmp files.
@@ -404,7 +404,7 @@ Let's look at the output with these options:
 * 85a5db1 Improve joke comic timing.
 * 6b437c7 Add opening joke. Funny?
 * 6576b68 Initial commit of book.
-----
+```
 
 This output format displays each commit on a single line. The line begins with
 a branch graph indicator (which I will explain shortly), follows with the short
@@ -421,7 +421,7 @@ The `GitInPracticeRedux` repository does not currently have any merge commits.
 Let's see what the graph log output looks like with some of them.
 
 .Graph log merge commit snippet
-----
+```
 # git log --oneline --graph --decorate
 
 *   129cce6 (origin/master, origin/HEAD, master) Merge branch 'testing'
@@ -430,7 +430,7 @@ Let's see what the graph log output looks like with some of them.
 * | 1a36bd6 master branch commit
 
 ...
-----
+```
 
 Here you can see the branch graph indicator becoming more useful. Like the
 graphical tools we've seen in
@@ -447,7 +447,7 @@ output. Hopefully you can see why I love this presentation. As typing `git log
 <<07-GitShortcuts#shorten-commands>> how to shorten this using an alias to
 something like `git l`.
 
-=== Show who last changed each line of a file: git blame
+### Show who last changed each line of a file: git blame
 I'm sure all developers have been in a situation where they've seen some line
 of code in a file and wonder why it is was written that way. As long as the
 file is stored in a Git repository it's easy to query who, when and why (given
@@ -461,18 +461,18 @@ information you are.
 Instead let's see how to use the command designed specifically for this
 use-case: `git blame`.
 
-==== Problem
+#### Problem
 You wish to show the commit, person and date in which each line of
 `GitInPractice.asciidoc` was changed.
 
-==== Solution
+#### Solution
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git blame --date=short 01-IntroducingGitInPractice.asciidoc`.
     The output should resemble:
 
 .Blame output
-----
+```
 # git blame --date=short 01-IntroducingGitInPractice.asciidoc
 
 ^6576b68 GitInPractice.asciidoc (Mike McQuaid 2013-09-29 1)
@@ -485,7 +485,7 @@ ac14a504 GitInPractice.asciidoc (Mike McQuaid 2013-11-09 4)
  == Chapter 2
 ac14a504 GitInPractice.asciidoc (Mike McQuaid 2013-11-09 5)
  // TODO: write two chapters
-----
+```
 
 Firstly, note that the output shows `GitInPractice.asciidoc` rather than
 `01-IntroducingGitInPractice.asciidoc`. This is because the filename has been
@@ -511,7 +511,7 @@ From the blame output:
 You have shown who changed each line of a file, in which commit and when the
 commit was made.
 
-==== Discussion
+#### Discussion
 `git blame` has a `--show-email` (or `-e`) flag which can show the email
 address of the author instead of the name.
 
@@ -530,7 +530,7 @@ then only the lines in that range will be shown. This can be useful if you know
 already what subset of the file you care about and don't want to have to search
 through it again in the `git blame` output.
 
-=== Find which commit caused a particular bug: git bisect
+### Find which commit caused a particular bug: git bisect
 The only thing worse than finding a bug in software and having to fix it is
 having to fix the same bug multiple times. A bug that was found, fixed and has
 appeared again is typically known as a _regression_.
@@ -548,11 +548,11 @@ commit as quickly as possible.
 For a simple example let's try and find a commit which renamed a particular
 file (without manually looking through the history).
 
-==== Problem
+#### Problem
 You wish to locate the commit that renamed `GitInPractice.asciidoc` to
 `01-IntroducingGitInPractice.asciidoc`.
 
-==== Solution
+#### Solution
 1.  Change to the directory containing your repository
     e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git bisect start`. There will be no output.
@@ -570,12 +570,12 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to
 .First good bisect output
 [[bisect-good]]
 [.long-annotations]
-----
+```
 # git bisect good
 
 Bisecting: 3 revisions left to test after this (roughly 2 steps) <1>
 [ac14a50465f37cfb038bdecd1293eb4c1d98a2ee] Start Chapter 2. <2>
-----
+```
 <1> steps remaining
 <2> new commit
 
@@ -591,7 +591,7 @@ From the good bisect output:
 .Final bad bisect output
 [[bisect-bad]]
 [.long-annotations]
-----
+```
 # git bisect bad
 
 c6eed6681efc8d0bff908e6dbb7d887c4b3fab3e is the first bad commit <1>
@@ -607,7 +607,7 @@ Date:   Thu Nov 28 15:39:38 2013 +0000
 :100644 000000 5e02125ebbc8384e8217d4370251268e867f8f03
  0000000000000000000000000000000000000000 D <4>
  GitInPractice.asciidoc
-----
+```
 <1> bisect result
 <2> commit information
 <3> new object metadata
@@ -627,7 +627,7 @@ From the final bisect output:
 
 You have located the commit that renamed `GitInPractice.asciidoc`.
 
-==== Discussion
+#### Discussion
 .bisect binary search performance
 |===
 |Total commits|Max checked commits|
@@ -647,7 +647,7 @@ then you can run `git bisect log`:
 
 .Bisect log output
 [[bisect-log]]
-----
+```
 # git bisect log
 
 git bisect start <1>
@@ -668,7 +668,7 @@ git bisect bad fcd8f6e957a03061cdf411851fe38034a44c97ab
 git bisect bad c6eed6681efc8d0bff908e6dbb7d887c4b3fab3e
 # first bad commit: [c6eed6681efc8d0bff908e6dbb7d887c4b3fab3e] <4>
  Rename book file to first part file.
-----
+```
 <1> bisect command
 <2> commit SHA-1
 <3> commit subject
@@ -693,7 +693,7 @@ If it's difficult or impossible to tell if a particular commit is good or bad
 you can run `git bisect skip` which will ignore it. Given there are enough
 other commits then `git bisect` will use another to narrow the search instead.
 
-===== Automating git bisect
+##### Automating git bisect
 Although `git bisect` is already useful wouldn't it be even better if, rather
 than having to keep typing `git bisect good` or `git bisect bad`, it could run
 automatically and tell you which commit caused the regression? This is possible
@@ -708,7 +708,7 @@ on success (when the file is present) and `1` on failure (when the file is
 not). Let's take advantage of this to use it with `git bisect run`:
 
 .Bisect run output
-----
+```
 # git bisect run ls GitInPractice.asciidoc
 
 Bisecting: 3 revisions left to test after this (roughly 2 steps) <1>
@@ -740,7 +740,7 @@ Date:   Thu Nov 28 15:39:38 2013 +0000
  0000000000000000000000000000000000000000 D
  GitInPractice.asciidoc
 bisect run success
-----
+```
 
 The output is identical to the `git bisect log` output or the combined output
 of all the other `git bisect` operations. No human intervention is required in
@@ -757,7 +757,7 @@ this is to make a copy of the test in another directory outside the Git working
 directory so `git bisect run` will not change its contents as it checks out
 different commits.
 
-=== Summary
+### Summary
 In this chapter you hopefully learned:
 
 * How to filter `git log` output by author, date, commit message, merge commits

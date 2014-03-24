@@ -1,5 +1,5 @@
 [appendix]
-== Why use version control?
+## Why use version control?
 You may not be familiar with version control concepts or why version control
 systems are useful for managing changes to text. Let's start off by asking why
 you should use version control.
@@ -49,7 +49,7 @@ This allows you to see exactly what may have changed between versions. When
 using multiple files you would have to manually compare each of the files to
 see differences and keep track of multiple files on your disk.
 
-=== Version control workflow
+### Version control workflow
 Version control systems work by maintaining a list of changes to files over
 time. Each time a file is modified and committed the new version of the file is
 stored in the _repository_; a centralized location where the version control
@@ -72,7 +72,7 @@ allows you to have confidence that, no matter what you may add, modify or
 delete, all committed versions of your files will remain in the version control
 system if you need to check their contents later.
 
-=== Version control for programmer collaboration
+### Version control for programmer collaboration
 Programmers spend most of their jobs editing text. This text is typically
 source code which will be interpreted by a computer to perform some task but
 could also be software configuration files, documentation or emails. As they
