@@ -1,9 +1,13 @@
+//[Dan]:Aren't we couching this as a typical workflow \ scenario? Currently it is written as a recipe chapter without it actually being a recipe chapter. How about rephrase it as "Your boss has just set you the task of converting a SVN repo to git and then keeping the old SVN repo in sync with the new git repo for legacy purposes. Let's see how we do this." However, I can't get around the idea that this is a recipe chapter and not a scenario. The scenarios build on the recipes already written and explained. This chapter just gives you new ones.
+
 ## Working with Subversion repositories
 ifdef::env-github[:outfilesuffix: .adoc]
 
 Despite the growth of Git, Subversion (also known as SVN) remains widely used across many projects. Many older open-source projects still continue to use Subversion as do many internal corporate projects.
 
-Thankfully Git provides functionality to allow you to interface with existing Subversion repositories through the `git svn` command. In this chapter you will learn about Git's Subversion integration by learning the following topics:
+Thankfully Git provides functionality to allow you to interface with existing Subversion repositories through the `git svn` command. 
+//[Dan]: What does 'interface' mean? interface and do what exactly?
+In this chapter you will learn about Git's Subversion integration by learning the following topics:
 
 * How to import an existing Subversion repository into a Git repository
 * How to fetch from and push changes to a Subversion repository for Git
@@ -11,6 +15,7 @@ Thankfully Git provides functionality to allow you to interface with existing Su
 
 ### Import a SVN repository into a Git repository
 Let's start by importing a Subversion repository from Google Code. I've selected one that is small but contains branches and tags so we can see how they are used. Clone the `google-enterprise-connector-notes` Subversion repository using:
+//[Dan]: Add a NOTE. What is the code in this repo for?
 
 .Subversion repository clone output
 [[svn-clone-output]]
@@ -26,7 +31,7 @@ r1 = ec0d880208029f06e2181ce2241d5f950b77f8c2 <4>
 	A	domino_stylesheet.xslt <5>
 r2 = ad41618c83d7dfd2768c8668bfdce0a63ea6cfca
   (refs/remotes/origin/trunk)
-	A	google-access-control-1_0.ntf
+	A	google-access-control-1_0.ntf  <5>
 ...
 r381 = 750dd5077c4122bcc3a8a17a65088c0ebd85a2b6 <6>
   (refs/remotes/origin/trunk)
@@ -40,7 +45,7 @@ Checked out HEAD:
 <4> first revision
 <5> added file
 <6> last revision
-<7> HEAD pointer
+<7> HEAD position
 
 From the Subversion repository clone output:
 
@@ -50,12 +55,13 @@ From the Subversion repository clone output:
 * "first revision (4)" shows the first commit/revision (`r1`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`ec0d88...`) into the local Git repository.
 * "added file (5)" shows a new file added in the first imported commit.
 * "last revision (6)" shows the last commit/revision (`r381`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`750dd5...`) into the local Git repository.
-* "HEAD pointer (7)" shows that the current `HEAD` pointer position is pointing to the tip of the `trunk` remote branch (which is Subversion's `r381`).
+* "HEAD position (7)" shows that the current `HEAD` pointer position is pointing to the tip of the `trunk` remote branch (which is Subversion's `r381`).
 
 Recall from <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. Subversion's usual equivalent to `git clone` is `svn checkout` which only checks out the most recent revision. As we're importing the Subversion repository into Git we need to download all the previous revisions and all the branches and tags. Each new Git commit has metadata stored in the commit message containing the mapping between Git and Subversion commits.
 
 You can see from the listing above `git svn` is iterating through all the revisions in the Subversion repository and creating Git commits locally from the changes. This may take a long time on large repositories but will only need to be done once.
 
+//[Dan]: There is no intoduction or explanation of what this is? Delete it?
 .Subversion commit message in Git repository output
 [.long-annotations]
 ```
@@ -118,6 +124,7 @@ From the clone branch detection output:
 * "tag parent (7)" shows the SHA-1 of the found tag commit.
 
 Let's look at all the remote branches that have been added by running `git branch --remote`:
+//[Dan]: Let's try and keep the segues between sections in keeping with the scenario. For example, "If you're unclear how the SVN repo was structured you can use git branch --remote to view all the branches", or osmething similar.
 
 .Remote branch output
 ```
@@ -143,16 +150,20 @@ Let's look at all the remote branches that have been added by running `git branc
 From the remote branch output:
 
 * "minor branch (1)" shows the stable 3.2 release branch named `3.2.x`. This will be used to create more patch tags in the 3.2 series e.g. `3.2.4`.
+//[Dan]: How do you know the 3.2 branch is stable?
 * "work branch (2)" shows a named branch used for development work named `dev`.
 * "branch tag (3)" shows the branch for the `2.8.4` tag. Note that this has been imported as a branch and not a native Git tag. This will be explained later.
 * "duplicate tag (4)" shows the duplicate `2.8.4` tag named `2.8.4@273`. This is because it was revision `273` and the other `2.8.4` is at revision `274`.
 
+//[Dan]: The two paragraphs below work better I think as a sidebar? 
 You may have noticed that tags from `git svn` are not the same as normal Git tags but instead are just branches with a `tags/` prefix. This is because in Subversion the only different between a tag and a branch is that of principle. Generally you do not update tags in Subversion but it is possible and has happened in this repository. The reason there is a duplicated `2.8.4` tag (named `2.8.4@273`) is because there was a commit made to create the `2.8.4` tag and another commit made on it. This would not really be possible in Git; you would need to use `git tag --force` to forcefully update the tag and then the previous tag would be lost. This is the reason that `git svn` does not import the Subversion tags as native Git tags.
 
 If you wished to create native Git tags from these anyway you could use the `git branch --remote --list 'origin/tags/*'` to only show Subversion tags and then create Git tags manually. For example, to create the `3.2.4` tag you could run `git tag 3.2.4 origin/tags/3.2.4`.
 
 #### Subversion ignore rules
-Recall from <<03-FilesystemInteractions#ignore-files-gitignore>> that `.gitignore` files can be used to ignore files in a Git repository. Subversion uses the `svn:ignore` property on directories instead. These are not imported by `git svn` into a `.gitignore` file automatically. This is because to do so would require adding a file to the repository.
+Recall from <<03-FilesystemInteractions#ignore-files-gitignore>> that `.gitignore` files can be used to ignore files in a Git repository. 
+//[Dan]: Bring forward some of that discussion so the reader doesn't need to look backwards in the book and losehis flow.
+Subversion uses the `svn:ignore` property on directories instead. These are not imported by `git svn` into a `.gitignore` file automatically. This is because to do so would require adding a file to the repository.
 
 You can export the `svn:ignore` property values to a `.gitignore` file by using the `git svn show-ignore` command:
 
