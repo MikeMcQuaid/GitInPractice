@@ -1,3 +1,6 @@
+//[Dan]: A couple of contrasting thoughts. 1. This isn't a discussion or a debate - it's more like a miscellanoeus recipe bucket. So should it be in Section 2, and not here? 2. This seems to be the wrong title for the chapter. Based on what we know in previous cahpters, you create a clean history using merges and rebases \ rewriting history. Shouldn't this chapter be after merging vs rebasing?
+//[Dan]: Either way, this isn't a standalone "scenario" or "workflow" chapter as I understood them to be. 
+
 ## Creating a clean history
 ifdef::env-github[:outfilesuffix: .adoc]
 
@@ -8,12 +11,17 @@ In this chapter you will learn how to create a clean history by learning the fol
 * How to build a commit using a graphical application
 * How to avoid committing bad whitespace
 
+//[Dan]: So why is a clean historya good idea? Bring this discussion here from previous chapters. 
+//[Dan}; Also, I don't understand why 8.1 isn't just part of the intro. It makes sense for it to be so.
+
 ### Writing a good commit message
 We saw already in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
 
 Below is an example of a good commit message format. It's strongly influenced by
-a guide written by Time Pope which is now at
+a guide written by Tim Pope which is now at
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html.
+
+//[Dan]: So is the lsiting below a listing purely because it is monospaced or is that incidental? If the latter, then this is  not a listing. It's a note, or a quote.
 
 .Good commit message format
 ```
@@ -45,11 +53,16 @@ with e.g. `1.`. You shouldn't go overboard with this but it can add
 some useful, basic formatting.
 ```
 
-### Building a commit from parts of files
+//[Dan]: 8.2 and 8.3 are two techniques in the same recipe. It's not a discussion fo workflow. It's a recipe. Treat it as such.
+
+### Building a commit from parts of files : git patch
 We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
 `git add` has a `--patch` (or -`p`) flag that provides an interactive menu in which you can select what parts of files you want to add. Make some changes to every file in the `GitInPracticeRedux` repository and run `git add --patch`:
 
+//[Dan]: First off, as this is a recipe, tell the user what two files to change - be specific so they will match your output (more or less) - so that git log will see one file needs to be committed and one file is half patched.
+//[Dan]: Second, lead into the listing from the para above. "You'll see something like Listing 8.2 asking about the first change in the file.."
+ 
 .Patch add output
 ```
 # git add --patch
@@ -119,6 +132,8 @@ Changes not staged for commit:
 
 From the status output after patch add:
 
+//[Dan]:So the file we change must have two changes in it or else waht's the point of the demo? You'd just commit the one change....
+
 * "staged file (1)" shows the file that had a hunk staged. If there was more than one hunk in this file and we only staged one then it would be shown in both the "Changes to be committed" and "Changes not staged for commit" sections.
 * "unstaged file (2)" shows the two files that have changes but none of them were staged.
 
@@ -146,10 +161,14 @@ Stage this hunk [y,n,q,a,d,/,e,?]? y
 ```
 <1> new commit
 
-I performed the same actions with `git commit --patch` as with `git add --patch`; I staged the first hunk with `y` and then did not stage any of the others with `q`. The output is appended with the "new commit (1)" information that we'd expect from `git commit` but otherwise identical to that from `git add --patch`.
+I performed the same actions with `git commit --patch` as with `git add --patch`; 
+//[Dan]: This seems counter-intuitive. Are you saying that in this case git commit performs git add as well?
+
+I staged the first hunk with `y` and then did not stage any of the others with `q`. The output is appended with the "new commit (1)" information that we'd expect from `git commit` but otherwise identical to that from `git add --patch`.
 
 Now run `git reset HEAD^` to undo the current commit so we can try and stage hunks graphically.
 
+//[Dan]:I'm wondering if this whole section is apprpriate to include ere as the process is specific to gitx. Thus far we have only used gitx for history screenshots and not "used it" per se else we'll get all the "what-about-my-tool" complaints \ queries again. You could take avery small part of this discussion and turn it into a note or sidebar saying that many Git UIs allow this functionality but then leave it at that. 
 ### Graphically building a commit from parts of files
 GitX provides a staging mode that also allows adding entire files or individual hunks to staging provides support for graphically staging hunks. If you click on the "Stage" in the top-right of GitX it should resemble the following:
 
@@ -201,7 +220,7 @@ image::screenshots/08-GitGUIBeforeCommit.png[]
 
 After pressing this there is no sign of the commit other than the `00-Preface.asciidoc` being removed from the `Staged Changes (Will Commit)` list. Like GitX though, it has successfully committed a file.
 
-### Avoiding whitespace issues
+### Avoiding whitespace issues : git diff --check
 Git expects certain whitespace usage in files.
 
 To ensure your whitespace matches good Git practice ensure:
@@ -230,11 +249,12 @@ From the diff whitespace check output:
 * "space before tab (2)" shows the on line 2 of `00-Preface.asciidoc` there was a space character before a tab character at the beginning of the line.
 
 Regular `git diff` (but, bizarrely, not `git diff --check`) will show `\ No newline at end of file` if the file's trailing newline is missing. If you have Git 2.0 or newer or enabled colored output in <<07-GitShortcuts#colored-output-in-git>> `git diff` will display whitespace errors with a red background.
+//[Dan]: Bring forward how to enable coloured output.
 
 It's also worth checking if you can configure your text editor of choice to fix any of these errors up for you when you save files. It is a fairly commonly available feature.
 
 ### Summary
-In this chapter you hopefully learned:
+In this chapter you learned:
 
 * How to use an email format and Markdown to write good commit messages
 * How to use `git add --patch` or `git commit --patch` to stage only chosen hunks for a new commit
@@ -242,3 +262,4 @@ In this chapter you hopefully learned:
 * How to use `git diff --check` to make sure you haven't added any bad whitespace changes
 
 Now let's compare the CMake and Homebrew open-source projects branching strategies to learn about merging vs rebasing.
+//[Dan]: If this chapter does stay here, you could link in C9 far better as it's all about creating an easy to reader log \ history - it's just at a somewhat different level.
