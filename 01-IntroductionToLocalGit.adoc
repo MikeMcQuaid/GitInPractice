@@ -190,7 +190,7 @@ When a file is added to the index a file named `.git/index` is created (if it do
 1.  for Git to track the contents of the file as it changes (this is not done without an explicit `git add`).
 2.  the contents of the file when `git add` was run should be added to the index, ready to create the next commit.
 
-.Does `git add` need run more than once?
+.Does `git add` need to be run more than once?
 NOTE: Unlike some other version control systems `git add` may need to be run more than once for any particular file. It is not saying just for Git to add this file to the repository but to add the current contents of the file to the index staging area to build the next commit.
 
 Now that the contents of the file have been added to the index you're ready to commit it.
