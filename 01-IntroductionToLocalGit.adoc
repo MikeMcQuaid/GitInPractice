@@ -43,7 +43,7 @@ All command output listings in this book show:
 * "command output (2)" following the run command. In this case there was no output so this line has been left intentionally blank.
 
 .How can I follow the listings?
-NOTE: You can follow listings as you work through the book by running the listed commands in a Terminal/console/Git Bash and comparing the output to the listing.
+NOTE: You can follow listings as you work through the book by running the listed commands (in a Terminal on Unix or Git Bash on Windows) and comparing the output to the listing. A POSIX incompatible shell (which includes the Windows Command Prompt without Git Bash) may work for some listings but will fail for others that rely on POSIX syntax (e.g. the use of single quotes).
 
 Now Git is set up, to use Git you need to initialize a Git _repository_ on your local machine.
 
@@ -191,7 +191,7 @@ When a file is added to the index a file named `.git/index` is created (if it do
 2.  the contents of the file when `git add` was run should be added to the index, ready to create the next commit.
 
 .Does `git add` need to be run more than once?
-NOTE: Unlike some other version control systems `git add` may need to be run more than once for any particular file. It is not saying just for Git to add this file to the repository but to add the current contents of the file to the index staging area to build the next commit.
+NOTE: After you have added changes for `GitInPractice.asciidoc` to the index staging area with `git add` they will be used in the next commit. After these changes to `GitInPractice.asciidoc` have been committed with `git commit` (introduced in <<committing-changes-to-files-git-commit>>) if you wish to add more changes to `GitInPractice.asciidoc` you will need to run `git add GitInPractice.asciidoc` again. This is because, unlike some version control systems, `git add` is used both to initially add a file to the Git repository but also to request the changes to the file be used in the next commit.
 
 Now that the contents of the file have been added to the index you're ready to commit it.
 
@@ -508,7 +508,7 @@ These `git diff` invocations are all equivalent:
 
 * `git diff master~1 master`
 * `git diff master~1..master`
-* `git diff master^ master`
+* `git diff master~1..`
 * `git diff master^ master`
 * `git diff master~1 HEAD`
 * `git diff 6576b68 6b437c7`
