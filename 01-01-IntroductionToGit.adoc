@@ -1,9 +1,6 @@
 # Introduction to Git
-The first part of this book will give you an outline of the essential concepts
-required to understand how version control systems work and how to make Git
-perform the basic tasks expected of a version control system.
+ifdef::env-github[:outfilesuffix: .adoc]
 
-I will start by explaining generic version control system concepts, how
-distributed version control differs from centralized version control, creating
-new versions in a version control system and finally how to share these changes
-with others.
+The first part of this book will give you an outline of the essential concepts required to understand how version control systems work and how to make Git perform the basic tasks expected of a version control system.
+
+I will start by explaining generic version control system concepts, how distributed version control differs from centralized version control, creating new versions in a version control system and finally how to share these changes with others.

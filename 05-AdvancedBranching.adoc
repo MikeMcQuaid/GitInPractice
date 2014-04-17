@@ -1,8 +1,7 @@
 ## Advanced Branching
-You've already learnt the basics of branching in
-<<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
-In this chapter you will learn about more advanced branching
-techniques by learning the following topics:
+ifdef::env-github[:outfilesuffix: .adoc]
+
+You've already learnt the basics of branching in <<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>. In this chapter you will learn about more advanced branching techniques by learning the following topics:
 
 * How to configure `git merge` to behave differently
 * How to resolve merge conflicts
@@ -13,56 +12,28 @@ techniques by learning the following topics:
 * How to revert a previous commit
 * How to list what branches contain a given commit
 
-When working as part of a team on a software project you will typically use
-branches to separate work between individuals, features, bug fixes and software
-releases. You should already be able to perform some basic branching actions
-e.g. create, delete, merge a branch. This chapter will expand on that so you
-can improve your branching workflow to be more effective.
+When working as part of a team on a software project you will typically use branches to separate work between individuals, features, bug fixes and software releases. You should already be able to perform some basic branching actions e.g. create, delete, merge a branch. This chapter will expand on that so you can improve your branching workflow to be more effective.
 
-Let's start by learning how to use some of the parameters provided by `git
-merge`.
+Let's start by learning how to use some of the parameters provided by `git merge`.
 
 ### Merge branches and always create a merge commit
-You learnt in
-<<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>
-how to perform a basic merge of two branches by using `git merge branchname`
-where `branchname` is the name of the branch you wish to merge into the current
-branch.
+You learnt in <<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> how to perform a basic merge of two branches by using `git merge branchname` where `branchname` is the name of the branch you wish to merge into the current branch.
 
-Recall that a merge commit is one that has multiple parents and is displayed in
-GitX by the converging of two or more branch "tracks". `git merge` provides
-various options for merging branches without creating merge commits, using
-various strategies or resolving conflicts with a graphical merge tool.
+Recall that a merge commit is one that has multiple parents and is displayed in GitX by the converging of two or more branch "tracks". `git merge` provides various options for merging branches without creating merge commits, using various strategies or resolving conflicts with a graphical merge tool.
 
 .Why would you want to force creation of a merge commit?
-NOTE: While fast-forward merges can sometimes be useful in some Git workflows
-you will want to explicitly signify the merging of a branch, even if it was not
-necessary to do so. This explicit indication of a merge through the creation of
-a merge commit can show all the metadata present in any other commit e.g. who
-performed the merge, when and why. In software projects merging a new feature
-will usually be done by merging a branch and it is useful for regression
-testing and history visualization for this feature merge to be more explicit.
+NOTE: While fast-forward merges can sometimes be useful in some Git workflows you will want to explicitly signify the merging of a branch, even if it was not necessary to do so. This explicit indication of a merge through the creation of a merge commit can show all the metadata present in any other commit e.g. who performed the merge, when and why. In software projects merging a new feature will usually be done by merging a branch and it is useful for regression testing and history visualization for this feature merge to be more explicit.
 
-Let's start by setting up how to perform a merge that could be made without
-creating a merge commit: a fast-forward merge. Recall a fast-forward merge
-means that the incoming branch has the current branch as an ancestor. This
-means commits have been made on the incoming branch but none have been made on
-the on the current branch since the incoming branch from it.
+Let's start by setting up how to perform a merge that could be made without creating a merge commit: a fast-forward merge. Recall a fast-forward merge means that the incoming branch has the current branch as an ancestor. This means commits have been made on the incoming branch but none have been made on the on the current branch since the incoming branch from it.
 
-We're creating a branch that can have a fast-forward merge. This is so when we
-create a merge commit we know that it was because it was specifically requested
-and not because it was required.
+We're creating a branch that can have a fast-forward merge. This is so when we create a merge commit we know that it was because it was specifically requested and not because it was required.
 
 Let's create a branch that can be merged without a merge commit:
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout -b chapter-spacing`.
-3.  Edit `01-IntroducingGitInPractice.asciidoc` to add a line-break between
-    chapters.
-4.  Run `git commit --message 'Add spacing between chapters'
-    01-IntroducingGitInPractice.asciidoc`.
-    The output should resemble:
+3.  Edit `01-IntroducingGitInPractice.asciidoc` to add a line-break between chapters.
+4.  Run `git commit --message 'Add spacing between chapters' 01-IntroducingGitInPractice.asciidoc`. The output should resemble:
 
 .Fast-forward branch commit output
 ```
@@ -77,21 +48,15 @@ Let's create a branch that can be merged without a merge commit:
 [[GitXBeforeMergeNoFF]]
 image::screenshots/05-GitXBeforeMergeNoFF.png[]
 
-You can see from <<GitXBeforeMergeNoFF>> you've created a new branch named
-`chapter-spacing` that can be merged without a merge commit into the `master`
-branch.
+You can see from <<GitXBeforeMergeNoFF>> you've created a new branch named `chapter-spacing` that can be merged without a merge commit into the `master` branch.
 
 #### Problem
-You wish to merge the `chapter-spacing` branch into the `master` branch and
-create a merge commit i.e. not perform a fast-forward merge.
+You wish to merge the `chapter-spacing` branch into the `master` branch and create a merge commit i.e. not perform a fast-forward merge.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
-3.  Run `git merge --no-ff chapter-spacing`. You will be prompted for a commit
-    message but can just accept the default.
-    The output should resemble:
+3.  Run `git merge --no-ff chapter-spacing`. You will be prompted for a commit message but can just accept the default. The output should resemble:
 
 .Forced merge commit output
 ```
@@ -104,129 +69,65 @@ Merge made by the 'recursive' strategy. <1>
 <1> merge type
 <2> diff summary
 
-You can now delete the merged `chapter-spacing` branch by running `git branch
---delete chapter-spacing` from the `master` branch.
+You can now delete the merged `chapter-spacing` branch by running `git branch --delete chapter-spacing` from the `master` branch.
 
 From the forced merge commit output:
 
-* "merge type (1)" shows that this was a merge (rather than a fast-forward) and
-  therefore produced a merge commit. It used the _recursive_ Git merge strategy
-  (we'll discuss strategies more in the Discussion section).
-* "diff summary (2)" shows a short summary of the changes that were made in
-  this merge commit i.e. all the differences between the `master` branch and
-  the `chapter-spacing` branch.
+* "merge type (1)" shows that this was a merge (rather than a fast-forward) and therefore produced a merge commit. It used the _recursive_ Git merge strategy (we'll discuss strategies more in the Discussion section).
+* "diff summary (2)" shows a short summary of the changes that were made in this merge commit i.e. all the differences between the `master` branch and the `chapter-spacing` branch.
 
-You have merged the `chapter-spacing` branch into the `master` branch and
-forced a merge-commit to be created.
+You have merged the `chapter-spacing` branch into the `master` branch and forced a merge-commit to be created.
 
 #### Discussion
-A merge commit has two parents: the previous commit on the current branch (i.e.
-`master` in this case) and the previous commit on the incoming branch (i.e.
-`chapter-spacing` in this case).
+A merge commit has two parents: the previous commit on the current branch (i.e. `master` in this case) and the previous commit on the incoming branch (i.e. `chapter-spacing` in this case).
 
 .Local repository after `git merge --no-ff chapter-spacing`
 [[GitXMergeNoFF]]
 image::screenshots/05-GitXMergeNoFF.png[]
 
-You can see from <<GitXMergeNoFF>> that GitX shows a merge commit differently
-from a fast-forward. Even when the `chapter-spacing` branch was deleted the
-existence of a branch will remain implied by the visual branching and merging
-in GitX.
+You can see from <<GitXMergeNoFF>> that GitX shows a merge commit differently from a fast-forward. Even when the `chapter-spacing` branch was deleted the existence of a branch will remain implied by the visual branching and merging in GitX.
 
-In this case where the branch contained a single commit this may not be
-terribly useful but on larger features this explicit indication of branches can
-aid history visualization.
+In this case where the branch contained a single commit this may not be terribly useful but on larger features this explicit indication of branches can aid history visualization.
 
-`git merge` can also take a `--ff-only` flag which does the opposite to
-`no-ff`: it ensures that a merge commit is never created. If the merge can only
-be made with a merge commit (e.g. there are conflicts that need to be resolved
-and marked in a merge commit) then it will not perform the merge.
+`git merge` can also take a `--ff-only` flag which does the opposite to `no-ff`: it ensures that a merge commit is never created. If the merge can only be made with a merge commit (e.g. there are conflicts that need to be resolved and marked in a merge commit) then it will not perform the merge.
 
 ##### Merge strategies
-A _merge strategy_ is an algorithm that Git uses to decide how to perform a
-merge. The previous merge output stated that it was using the _recursive_ merge
-strategy.
+A _merge strategy_ is an algorithm that Git uses to decide how to perform a merge. The previous merge output stated that it was using the _recursive_ merge strategy.
 
-Strategies can be selected by passing the `--strategy` (or `-s`) flag to `git
-merge` followed by the name of the strategy. For example, to select the
-default, recursive strategy you could also call `git merge
---strategy=recursive`.
+Strategies can be selected by passing the `--strategy` (or `-s`) flag to `git merge` followed by the name of the strategy. For example, to select the default, recursive strategy you could also call `git merge --strategy=recursive`.
 
-Certain strategies (such as recursive) can also take options by passing the
-`--strategy-option` (or `-X`) flag. For example, to set the patience diff
-option for the default, recursive strategy you would call `git merge
---strategy-option=patience`.
+Certain strategies (such as recursive) can also take options by passing the `--strategy-option` (or `-X`) flag. For example, to set the patience diff option for the default, recursive strategy you would call `git merge --strategy-option=patience`.
 
 Some useful merge strategies are:
 
-* `recursive`: this strategy can merge one branch into another and
-  automatically detect renames. This strategy is the default if you try and
-  merge a single branch into another.
-* `octopus`: this strategy can merge multiple branches at once but will refuse
-  to allow manual resolution of merge conflicts. This strategy is the default
-  if you try and merge two or more branches into another. I've never had to use
-  this in my entire time using Git so I'm not going to detail how it is used.
-* `ours`: this strategy performs a normal merge but ignores all the changes
-  from the incoming branch. This means the resulting tree is the same as it
-  was before the merge. This can be useful when you wish to merge a branch and
-  indicate this in the history without wanting to actually including any of its
-  changes. For example, you could use this to merge the results of a failed
-  experiment and then delete the experimental branch afterwards. In this case
-  the experiment would remain in the history without being in the current code.
-* `subtree`: this strategy is a modified version of the recursive strategy that
-  will detect if the tree structures are at different levels and adjust them if
-  needed. For example, if one branch had all the files in the directory `A/B/C`
-  and the other had all the same files in the directory `A/B` then the subtree
-  strategy would handle this case; `A/B/C/README.md` and `A/B/README.md` could
-  be merged despite their different tree locations.
+* `recursive`: this strategy can merge one branch into another and automatically detect renames. This strategy is the default if you try and merge a single branch into another.
+* `octopus`: this strategy can merge multiple branches at once but will refuse to allow manual resolution of merge conflicts. This strategy is the default if you try and merge two or more branches into another. I've never had to use this in my entire time using Git so I'm not going to detail how it is used.
+* `ours`: this strategy performs a normal merge but ignores all the changes from the incoming branch. This means the resulting tree is the same as it was before the merge. This can be useful when you wish to merge a branch and indicate this in the history without wanting to actually including any of its changes. For example, you could use this to merge the results of a failed experiment and then delete the experimental branch afterwards. In this case the experiment would remain in the history without being in the current code.
+* `subtree`: this strategy is a modified version of the recursive strategy that will detect if the tree structures are at different levels and adjust them if needed. For example, if one branch had all the files in the directory `A/B/C` and the other had all the same files in the directory `A/B` then the subtree strategy would handle this case; `A/B/C/README.md` and `A/B/README.md` could be merged despite their different tree locations.
 
-Some useful merge strategy options for a recursive merge (currently the only
-strategy with options) are:
+Some useful merge strategy options for a recursive merge (currently the only strategy with options) are:
 
-* `ours`: this option automatically solves any merge conflicts by always
-  selecting the previous version from the current branch (instead of the
-  version from the incoming branch).
-* `theirs`: this option is the reverse of `ours`; it automatically solves any
-  merge conflicts by always selecting the version from the incoming branch
-  (instead of the previous version from the current branch).
-* `patience`: this option uses a slightly more expensive `git diff` algorithm
-  to try and decrease the chance of a merge conflict.
-* `ignore-all-space`: this option ignores whitespace when selecting which
-  version should be chosen in case of a merge conflict. If the incoming branch
-  has made only whitespace changes to a line the change will be ignored. If the
-  current branch has introduced whitespace changes but the incoming branch has
-  made non-whitespace changes then their version will be used.
+* `ours`: this option automatically solves any merge conflicts by always selecting the previous version from the current branch (instead of the version from the incoming branch).
+* `theirs`: this option is the reverse of `ours`; it automatically solves any merge conflicts by always selecting the version from the incoming branch (instead of the previous version from the current branch).
+* `patience`: this option uses a slightly more expensive `git diff` algorithm to try and decrease the chance of a merge conflict.
+* `ignore-all-space`: this option ignores whitespace when selecting which version should be chosen in case of a merge conflict. If the incoming branch has made only whitespace changes to a line the change will be ignored. If the current branch has introduced whitespace changes but the incoming branch has made non-whitespace changes then their version will be used.
 
-Neither of these lists are exhaustive but these are the strategies and options
-I've found are most commonly used. All the merge strategies and options can be
-examined by running `git help merge`.
+Neither of these lists are exhaustive but these are the strategies and options I've found are most commonly used. All the merge strategies and options can be examined by running `git help merge`.
 
 ### Resolve a merge conflict
-As mentioned previously sometimes when you merge one branch into another there
-will have been changes to the same part of the same file in both branches and
-Git cannot detect automatically which one is the desired change to include. In
-this situation you have what is known as a _merge conflict_ which you will need
-to resolve manually.
+As mentioned previously sometimes when you merge one branch into another there will have been changes to the same part of the same file in both branches and Git cannot detect automatically which one is the desired change to include. In this situation you have what is known as a _merge conflict_ which you will need to resolve manually.
 
-These situations tend to occur more often in software projects where you have
-multiple users working on the same project at the same time. One user might
-make a bug fix to a file while another refactors it and when the branches are
-merged then a merge conflict will be created.
+These situations tend to occur more often in software projects where you have multiple users working on the same project at the same time. One user might make a bug fix to a file while another refactors it and when the branches are merged then a merge conflict will be created.
 
-Let's create a new branch and change the same files in both branches to produce
-a merge conflict.
+Let's create a new branch and change the same files in both branches to produce a merge conflict.
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout -b separate-files`.
 3.  Run `git mv 01-IntroducingGitInPractice.asciidoc 00-Preface.asciidoc`
-4.  Cut the "Chapter 2" section from `00-Preface.asciidoc` and paste it into a
-    new file named `02-AdvancedGitInPractice.asciidoc`.
-5.  Cut the "Chapter 1" section from `00-Preface.asciidoc` and paste it into a
-    new file named `01-IntroducingGitInPractice.asciidoc`.
+4.  Cut the "Chapter 2" section from `00-Preface.asciidoc` and paste it into a new file named `02-AdvancedGitInPractice.asciidoc`.
+5.  Cut the "Chapter 1" section from `00-Preface.asciidoc` and paste it into a new file named `01-IntroducingGitInPractice.asciidoc`.
 6.  Run `git add .`.
-7.  Run `git commit --message 'Separate files.'`.
-    The output should resemble:
+7.  Run `git commit --message 'Separate files.'`. The output should resemble:
 
 .Separate file commit output
 ```
@@ -240,13 +141,11 @@ a merge conflict.
 
 Now let's change the same file in the `master` branch.
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
 3.  Edit `01-IntroducingGitInPractice.asciidoc` to add contents for Chapter 1.
 4.  Run `git commit --message 'Add Chapter 1 content.'
-    01-IntroducingGitInPractice.asciidoc`.
-    The output should resemble:
+    01-IntroducingGitInPractice.asciidoc`. The output should resemble:
 
 .Chapter 1 content commit output
 ```
@@ -257,16 +156,14 @@ Now let's change the same file in the `master` branch.
  1 file changed, 3 insertions(+), 1 deletion(-)
 ```
 
-After these edits we can use the `git show` command with a
-`branchname:filename` argument to show the current state of the
-`01-IntroducingGitInPractice.asciidoc` file on each branch:
+After these edits we can use the `git show` command with a `branchname:filename` argument to show the current state of the `01-IntroducingGitInPractice.asciidoc` file on each branch:
 
 .Current state on branches
 ```
 # git show master:01-IntroducingGitInPractice.asciidoc
 
 = Git In Practice
-## Chapter 1 
+## Chapter 1
 It is a truth universally acknowledged, that a single person in
 possession of good source code, must be in want of a version control
 system.
@@ -276,7 +173,7 @@ system.
 
 # git show separate-files:01-IntroducingGitInPractice.asciidoc
 
-## Chapter 1 
+## Chapter 1
 // TODO: think of funny first line that editor will approve.
 ```
 
@@ -284,19 +181,15 @@ system.
 [[GitXBeforeMergeConflict]]
 image::screenshots/05-GitXBeforeMergeConflict.png[]
 
-You see from <<GitXBeforeMergeConflict>> the current state of the `master` and
-`separate-files` branches in GitX.
+You see from <<GitXBeforeMergeConflict>> the current state of the `master` and `separate-files` branches in GitX.
 
 #### Problem
-You wish to merge the `separate-files` branch into the `master` branch and
-resolve the resulting merge conflict.
+You wish to merge the `separate-files` branch into the `master` branch and resolve the resulting merge conflict.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
-3.  Run `git merge separate-files`.
-    The output should resemble:
+3.  Run `git merge separate-files`. The output should resemble:
 
 .Merge with conflict output
 ```
@@ -317,8 +210,7 @@ From the merge with conflict output:
 * "merge conflict (2)" shows that the merge strategy was unable to
   automatically solve the merge conflict so it requires human intervention.
 
-Now we need to edit `01-IntroducingGitInPractice.asciidoc` and solve the merge
-conflict. When you open the file you will see something resembling:
+Now we need to edit `01-IntroducingGitInPractice.asciidoc` and solve the merge conflict. When you open the file you will see something resembling:
 
 .Before merge conflict resolution
 ```
@@ -341,57 +233,44 @@ system.
 <5> current version
 <6> current marker
 
-Recall this output and annotations from
-<<02-IntroductionToRemoteGit#merge-conflicts>>:
+Recall this output and annotations from <<02-IntroductionToRemoteGit#merge-conflicts>>:
 
 * "unchanged line (1)" is provided for context
-* "incoming marker (2)" starts the current branch section containing the lines
-  from the current branch (referenced by `HEAD` here).
+* "incoming marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
 * "incoming line (3)" shows a line from the incoming branch
-* "branch separator (4)" starts the section containing the lines from the
-  incoming branch.
+* "branch separator (4)" starts the section containing the lines from the incoming branch.
 * "current version (5)" shows a line from the current branch
-* "current marker (6)" marker ends the section containing the lines from
-  the incoming branch (referenced by `separate-files`; the name of the branch
-  being merged in).
+* "current marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
 
-We now need to edit the file so it has the correct version. In this case this
-involves removing the Chapter 2 section as it was moved to another file in the
-`separate-files` branch and use the new Chapter 1 content that was entered in
-the `master` branch (here indicated by the `HEAD` section).
+We now need to edit the file so it has the correct version. In this case this involves removing the Chapter 2 section as it was moved to another file in the `separate-files` branch and use the new Chapter 1 content that was entered in the `master` branch (here indicated by the `HEAD` section).
 
 After editing the file should resemble:
 
 .After merge conflict resolution
 ```
-## Chapter 1 
+## Chapter 1
 It is a truth universally acknowledged, that a single person in
 possession of good source code, must be in want of a version control
 system.
 ```
 
-Now the merge conflict has been resolved the merge conflict can be marked as
-resolved with `git add` and then the merge commit committed.
+Now the merge conflict has been resolved the merge conflict can be marked as resolved with `git add` and then the merge commit committed.
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git add 01-IntroducingGitInPractice.asciidoc`.
-3.  Run `git commit`. Accept the default commit message.
-    The output should resemble:
+3.  Run `git commit`. Accept the default commit message. The output should resemble:
 
 .Merge conflict commit output
 ```
 [master 725c33a] Merge branch 'separate-files'
 ```
 
-You can now run `git branch --delete separate-files` to delete the branch now
-it's merged.
+You can now run `git branch --delete separate-files` to delete the branch now it's merged.
 
 You have merged two branches and resolved a merge conflict.
 
 #### Discussion
-Merge commits have default commit message formats and slightly different diff
-output. Let's take a look at the merge commit by running `git show master`:
+Merge commits have default commit message formats and slightly different diff output. Let's take a look at the merge commit by running `git show master`:
 
 .Merge commit output
 [.long-annotations]
@@ -448,73 +327,42 @@ From the merge commit output:
 * "current insert (5)" shows a line that was inserted in the current (i.e.
   `master`) branch's commit(s). The `+` is in the second column as a result.
 
-In this diff there are two columns (rather than the usual one) allocated
-for `-` and `+` markers. This is because where a normal diff is just indicating
-insertions and deletions to a file this _merge diff_ is showing insertions and
-deletions to a file and the branch they were inserted or removed in. For
-example, in the listing above the first column indicates a line inserted or
-deleted from the incoming branch (i.e. `separate-files`) and the second column
-indicates a line inserted or deleted from the current branch (i.e. `master`).
-Don't worry about identifying which column is which; it's not actually very
-important but just provides more context for changes.
+In this diff there are two columns (rather than the usual one) allocated for `-` and `+` markers. This is because where a normal diff is just indicating insertions and deletions to a file this _merge diff_ is showing insertions and deletions to a file and the branch they were inserted or removed in. For example, in the listing above the first column indicates a line inserted or deleted from the incoming branch (i.e. `separate-files`) and the second column indicates a line inserted or deleted from the current branch (i.e. `master`). Don't worry about identifying which column is which; it's not actually very important but just provides more context for changes.
 
 .Local repository after merge conflict resolution
 [[gitx-merge-conflict]]
 image::screenshots/05-GitXMergeConflict.png[]
 
-You can see from <<gitx-merge-conflict>> that the changes from both branches
-are visible in the GitX output and that they are not always shown in
-chronological order; the `Add Chapter 1 content` commit occurs before the
-`Separate files.` commit even although it was made 3 minutes later.
+You can see from <<gitx-merge-conflict>> that the changes from both branches are visible in the GitX output and that they are not always shown in chronological order; the `Add Chapter 1 content` commit occurs before the `Separate files.` commit even although it was made 3 minutes later.
 
 ##### Using a graphical merge tool
-Instead of manually editing the contents of the file you can instead run `git
-mergetool` which will run a graphical merge tool such as `emerge`, `gvimdiff`,
-`kdiff3`, `meld`, `vimdiff`, `opendiff` or `tortoisemerge`. Details for how to
-configure `git mergetool` to use your tool of choice are available by running
-`git help mergetool`.
+Instead of manually editing the contents of the file you can instead run `git mergetool` which will run a graphical merge tool such as `emerge`, `gvimdiff`, `kdiff3`, `meld`, `vimdiff`, `opendiff` or `tortoisemerge`. Details for how to configure `git mergetool` to use your tool of choice are available by running `git help mergetool`.
 
-Sometimes it can be more helpful to use a graphical merge tool to be able to
-visualize conflicts graphically and understand how they relate to the changes
-that have been made by viewing them e.g. side-by-side. Although I personally
-tend not to use these tools any more I found them useful when learning how to
-use version control.
+Sometimes it can be more helpful to use a graphical merge tool to be able to visualize conflicts graphically and understand how they relate to the changes that have been made by viewing them e.g. side-by-side. Although I personally tend not to use these tools any more I found them useful when learning how to use version control.
 
 .Opendiff merge conflict resolution
 [[opendiff]]
 image::screenshots/05-OpenDiff.png[]
 
-You can also customize the tool that is used to specify your own merge tools.
-In <<opendiff>> you can see the `opendiff` tool provided with OSX used to
-resolve the previous merge conflict.
+You can also customize the tool that is used to specify your own merge tools. In <<opendiff>> you can see the `opendiff` tool provided with OSX used to resolve the previous merge conflict.
 
 ### Only resolve each merge conflict once: git rerere
-You may find yourself in a situation where you have a long-running branch where
-you have to keep merging in another branch and get the same merge conflicts
-every time.
+You may find yourself in a situation where you have a long-running branch where you have to keep merging in another branch and get the same merge conflicts every time.
 
-Git has a command named `git rerere` (which stands for Reuse Recorded
-Resolution) which integrates with the normal `git merge` workflow to record the
-resolution of merge conflicts for later replay. In short, you only need to
-solve a particular merge conflict once.
+Git has a command named `git rerere` (which stands for Reuse Recorded Resolution) which integrates with the normal `git merge` workflow to record the resolution of merge conflicts for later replay. In short, you only need to solve a particular merge conflict once.
 
 Let's learn how to setup `git rerere`.
 
 #### Problem
-You wish to setup `git rerere` to integrate with the merge workflow so you
-don't need to repeatedly resolve the same merges.
+You wish to setup `git rerere` to integrate with the merge workflow so you don't need to repeatedly resolve the same merges.
 
 #### Solution
-1.  Run `git config --global --add rerere.enabled 1`.
-    There will be no output.
+1.  Run `git config --global --add rerere.enabled 1`. There will be no output.
 
-You have enabled `git rerere` to automatically save and retrieve merge conflict
-resolutions in all repositories.
+You have enabled `git rerere` to automatically save and retrieve merge conflict resolutions in all repositories.
 
 #### Discussion
-You do not need to run `git rerere manually` for it to store and retrieve merge
-conflicts. After enabling `git rerere` you will see some slightly different
-output the next time you run `git commit` after resolving a merge conflict:
+You do not need to run `git rerere manually` for it to store and retrieve merge conflicts. After enabling `git rerere` you will see some slightly different output the next time you run `git commit` after resolving a merge conflict:
 
 .rerere merge conflict storage
 ```
@@ -525,8 +373,7 @@ Recorded resolution for '01-IntroducingGitInPractice.asciidoc'. <1>
 ```
 <1> rerere storage
 
-`git rerere` has been run by `git commit` to store the conflict and resolution
-so it can recall the same resolution when it sees the same conflict.
+`git rerere` has been run by `git commit` to store the conflict and resolution so it can recall the same resolution when it sees the same conflict.
 
 If the same conflict is seen again:
 
@@ -543,39 +390,25 @@ Automatic merge failed; fix conflicts and then commit the result.
 ```
 <1> rerere retrieval
 
-`git rerere` has again been run by `git merge` to retrieve the resolution for
-the identical conflict. You still need to run `git add` to accept the conflict
-and can use `git diff` or edit the file to ensure the resolution was as
-expected and desired.
+`git rerere` has again been run by `git merge` to retrieve the resolution for the identical conflict. You still need to run `git add` to accept the conflict and can use `git diff` or edit the file to ensure the resolution was as expected and desired.
 
 .How can you make `git rerere` forget an incorrect resolution?
-NOTE: Sometimes you may wish to make `git rerere` forget a resolution for a
-particular file because you resolved it incorrectly. In this case you can use
-`git rerere` with a path to forget any resolutions for that file or directory.
-For example to forget the resolution on `01-IntroducingGitInPractice.asciidoc`
-above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`.
-There will be no output.
+NOTE: Sometimes you may wish to make `git rerere` forget a resolution for a particular file because you resolved it incorrectly. In this case you can use `git rerere` with a path to forget any resolutions for that file or directory. For example to forget the resolution on `01-IntroducingGitInPractice.asciidoc` above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 
 ### Create a tag: git tag
-Remember refs from <<01-IntroductionToLocalGit#refs>>. A tag is another _ref_
-(or pointer) for a single commit. Tags differ from branches in that they are
-(usually) permanent. Rather than pointing to the work-in-progress on a feature
-they are generally used to describe a version of a software project.
+Remember refs from <<01-IntroductionToLocalGit#refs>>. A tag is another _ref_ (or pointer) for a single commit. Tags differ from branches in that they are (usually) permanent. Rather than pointing to the work-in-progress on a feature they are generally used to describe a version of a software project.
 
 .Local repository before `git tag`
 [[GitXBeforeTag]]
 image::screenshots/05-GitXBeforeTag.png[]
 
-You can see from <<GitXBeforeTag>> the current state of the `master` branch in
-GitX before the tag has been created.
+You can see from <<GitXBeforeTag>> the current state of the `master` branch in GitX before the tag has been created.
 
 #### Problem
-You wish to tag the current state of the `GitInPracticeRedux` `master` branch
-as version `v0.1`.
+You wish to tag the current state of the `GitInPracticeRedux` `master` branch as version `v0.1`.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
 3.  Run `git tag v0.1`. There will be no output.
 4.  Run `git tag`. The output should resemble:
@@ -593,8 +426,7 @@ From the tag listing output:
 * "version tag (1)" shows that there is a tag named `v0.1` in the local
   repository.
 
-All the tags that are in the current repository (not just the current branch)
-will be listed by `git tag`.
+All the tags that are in the current repository (not just the current branch) will be listed by `git tag`.
 
 You have created a `v0.1` tag in the `GitInPracticeRedux` repository
 
@@ -603,68 +435,35 @@ You have created a `v0.1` tag in the `GitInPracticeRedux` repository
 [[gitx-tag]]
 image::screenshots/05-GitXTag.png[]
 
-You can see from <<gitx-tag>> after the `git tag` there is a new `v0.1` ref on
-the latest commit on the master branch (in the GitX interface this will be
-yellow). This indicates that this commit has been tagged `v0.1`.
+You can see from <<gitx-tag>> after the `git tag` there is a new `v0.1` ref on the latest commit on the master branch (in the GitX interface this will be yellow). This indicates that this commit has been tagged `v0.1`.
 
-Note that, unlike branches, when new commits are made on the `master` branch
-the `v0.1` tag will not change. This is why tags are useful for versioning; they
-can record the significance of a particular commit without changing it.
+Note that, unlike branches, when new commits are made on the `master` branch the `v0.1` tag will not change. This is why tags are useful for versioning; they can record the significance of a particular commit without changing it.
 
 git tag can take various flags:
 
-* the `--list` (or `-l`) flag lists all the tags that match a given pattern.
-  For example the tag `v0.1` would be matched and listed by `git tag list
-  --v0.*`.
-* the `--force` (or `-f`) flag updates a tag to point to the new commit. This
-  is useful occasions where you realize you have tagged the wrong commit.
-* the `--delete` (or `-d`) flag can delete a tag. This is useful if you've
-  created a tag with the wrong name rather than just pointing to the wrong
-  commit.
+* the `--list` (or `-l`) flag lists all the tags that match a given pattern. For example the tag `v0.1` would be matched and listed by `git tag list --v0.*`.
+* the `--force` (or `-f`) flag updates a tag to point to the new commit. This is useful occasions where you realize you have tagged the wrong commit.
+* the `--delete` (or `-d`) flag can delete a tag. This is useful if you've created a tag with the wrong name rather than just pointing to the wrong commit.
 
-Run `git push` to push the `master` branch to `origin/master`. You may have
-noticed that it did not push any of the tags. After you've tagged a version and
-verified it is pointing to the correct commit and has the correct name then you
-can push it using `git push --tags`. This will push all the tags you've created
-in the local repository to the remote repository. These tags will then be
-fetched by anyone using `git fetch` on the same repository in future.
+Run `git push` to push the `master` branch to `origin/master`. You may have noticed that it did not push any of the tags. After you've tagged a version and verified it is pointing to the correct commit and has the correct name then you can push it using `git push --tags`. This will push all the tags you've created in the local repository to the remote repository. These tags will then be fetched by anyone using `git fetch` on the same repository in future.
 
 .How can you update remote tags?
-NOTE: As you saw earlier it is possible to delete or modify tags locally. It's
-also possible to push these changes to the remote repository with `git push
---tags --force` but this is not advised. For other users of the repository to
-have their tags updated they will need to delete them locally and refetch. This
-is intentionally cumbersome as Git intends tags to be static so does not change
-them locally without users explicit intervention.
+NOTE: As you saw earlier it is possible to delete or modify tags locally. It's also possible to push these changes to the remote repository with `git push --tags --force` but this is not advised. For other users of the repository to have their tags updated they will need to delete them locally and refetch. This is intentionally cumbersome as Git intends tags to be static so does not change them locally without users explicit intervention.
 
-If you realize you've tagged the wrong commit and wish to update it after
-pushing it's generally a better idea to just tag a new version and push that
-instead.
+If you realize you've tagged the wrong commit and wish to update it after pushing it's generally a better idea to just tag a new version and push that instead.
 
 ### Generate a version number based on previous tags: git describe
-You've seen that `git tag` can be used to identify certain commits as released
-versions of a project. In some cases you may wish to generate versions for the
-software in between tags.
+You've seen that `git tag` can be used to identify certain commits as released versions of a project. In some cases you may wish to generate versions for the software in between tags.
 
-I'm a passionate advocate of continuous integration systems and I've worked on
-desktop software projects with semantic versioning (e.g. `1.0.0`). On these
-projects I've setup continuous integration systems to create installers of the
-software on every commit to the `master` branch.
+I'm a passionate advocate of continuous integration systems and I've worked on desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
 
-However, in some software there is an "About" screen which displays the
-software's version. In this case I'd like to have a version number generated
-that makes sense but does not rely on auto-generating a tag for each version of
-the software.
+However, in some software there is an "About" screen which displays the software's version. In this case I'd like to have a version number generated that makes sense but does not rely on auto-generating a tag for each version of the software.
 
-As the expected version number would be `v0.1` given that has just been tagged
-let's make another modification to the `GitInPracticeRedux` repository and
-generate a version number for the new, untagged commit.
+As the expected version number would be `v0.1` given that has just been tagged let's make another modification to the `GitInPracticeRedux` repository and generate a version number for the new, untagged commit.
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Add some content to the `00-Preface.asciidoc` file.
-3.  Run `git commit --message 'Add preface text.' 00-Preface.asciidoc`.
-    The output should resemble:
+3.  Run `git commit --message 'Add preface text.' 00-Preface.asciidoc`. The output should resemble:
 
 .Preface commit output
 ```
@@ -675,14 +474,11 @@ generate a version number for the new, untagged commit.
 ```
 
 #### Problem
-You wish to generate a version number for a software project based on existing
-tags in the repository.
+You wish to generate a version number for a software project based on existing tags in the repository.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git describe --tags`.
-    The output should resemble:
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git describe --tags`. The output should resemble:
 
 .Tag describe output
 ```
@@ -692,51 +488,30 @@ v0.1-1-g0a5e328 <1>
 ```
 <1> generated version
 
-"generated version (1)" shows the version generated from the state based on
-existing tags. It is hyphenated into three parts:
+"generated version (1)" shows the version generated from the state based on existing tags. It is hyphenated into three parts:
 
 * `v0.1` is the the most recent tag on the current branch.
-* `1` indicates that there has been one commit made since the most recent tag
-  (`v0.1`) on the current branch.
-* `g0a5e328` is the current commit SHA-1 prepended with a `g` (which stands for
-  `git`).
+* `1` indicates that there has been one commit made since the most recent tag (`v0.1`) on the current branch.
+* `g0a5e328` is the current commit SHA-1 prepended with a `g` (which stands for `git`).
 
-You have generated a version number based on the existing tags in the
-repository.
+You have generated a version number based on the existing tags in the repository.
 
 #### Discussion
-If `git describe` is passed a ref then it will generate the version number for
-that particular commit. For example, `git describe --tags v0.1` will output
-`v0.1`.
+If `git describe` is passed a ref then it will generate the version number for that particular commit. For example, `git describe --tags v0.1` will output `v0.1`.
 
-If you wish to generate the long-form versions for tagged commits you can pass
-the `--long` flag. For example, `git describe --tags --long v0.1` will output
-`v0.1-0-g725c33a`.
+If you wish to generate the long-form versions for tagged commits you can pass the `--long` flag. For example, `git describe --tags --long v0.1` will output `v0.1-0-g725c33a`.
 
-If you wish to use a longer or shorter SHA-1 ref you can configure this using
-the `--abbrev` flag. For example, `git describe --tags --abbrev=5` will output
-`v0.1-1-g0a5e3`. Note that if you use very low values (e.g. `--abbrev=1`) then
-`git describe` may use more than you have requested if it requires more to
-uniquely identify a commit.
+If you wish to use a longer or shorter SHA-1 ref you can configure this using the `--abbrev` flag. For example, `git describe --tags --abbrev=5` will output `v0.1-1-g0a5e3`. Note that if you use very low values (e.g. `--abbrev=1`) then `git describe` may use more than you have requested if it requires more to uniquely identify a commit.
 
 ### Add a single commit to the current branch: git cherry-pick
-Sometimes you may wish to include only a single commit from a branch onto the
-current branch rather than merging the entire branch. For example you may want
-to back-port a single bug fix commit from a development branch into a stable
-release branch. You could do this by manually creating the same change on that
-branch but a better way would be using the tool that Git provides: `git
-cherry-pick`.
+Sometimes you may wish to include only a single commit from a branch onto the current branch rather than merging the entire branch. For example you may want to back-port a single bug fix commit from a development branch into a stable release branch. You could do this by manually creating the same change on that branch but a better way would be using the tool that Git provides: `git cherry-pick`.
 
-Let's create a new branch based off the `v0.1` tag that we'll call
-`v0.1-release` so we have something we can cherry-pick.
+Let's create a new branch based off the `v0.1` tag that we'll call `v0.1-release` so we have something we can cherry-pick.
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout -b v0.1-release v0.1`
 3.  Add some content to the `02-AdvancedGitInPractice.asciidoc` file.
-4. Run `git commit --message 'Advanced practice technique.'
-02-AdvancedGitInPractice.asciidoc`.
-    The output should resemble:
+4.  Run `git commit --message 'Advanced practice technique.' 02-AdvancedGitInPractice.asciidoc`. The output should resemble:
 
 .Release branch commit output
 ```
@@ -748,15 +523,12 @@ Let's create a new branch based off the `v0.1` tag that we'll call
 ```
 
 #### Problem
-You wish to cherry-pick a commit from the `v0.1-release` branch to the `master`
-branch.
+You wish to cherry-pick a commit from the `v0.1-release` branch to the `master` branch.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
-3.  Run `git cherry-pick v0.1-release`.
-    The output should resemble:
+3.  Run `git cherry-pick v0.1-release`. The output should resemble:
 
 .Commit cherry-pick output
 ```
@@ -767,83 +539,40 @@ branch.
 ```
 <1> commit summary
 
-The "commit summary (1)" shows the result of the cherry-pick operation. Note
-that this is the same as the output for the previous `git commit` command with
-one difference: the SHA-1 has changed.
+The "commit summary (1)" shows the result of the cherry-pick operation. Note that this is the same as the output for the previous `git commit` command with one difference: the SHA-1 has changed.
 
 .Why does the SHA-1 change on a cherry-pick?
-NOTE: Recall that the SHA-1 of a commit is based on its tree and metadata
-(which includes the parent commit SHA-1). As resulting `master` branch
-cherry-picked commit has a difference parent to the commit that was
-cherry-picked from the `v0.1-release` branch the commit SHA-1 differs also.
+NOTE: Recall that the SHA-1 of a commit is based on its tree and metadata (which includes the parent commit SHA-1). As resulting `master` branch cherry-picked commit has a difference parent to the commit that was cherry-picked from the `v0.1-release` branch the commit SHA-1 differs also.
 
-You have cherry-picked a commit from the `v0.1-release` branch to the `master`
-branch.
+You have cherry-picked a commit from the `v0.1-release` branch to the `master` branch.
 
 #### Discussion
-`git cherry-pick` (like many other Git commands) takes a ref as the parameter
-rather than a specific commit. As a result we could have interchangeably used
-`git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the
-`v0.1-release` branch) in the previous example for the same result.
+`git cherry-pick` (like many other Git commands) takes a ref as the parameter rather than a specific commit. As a result we could have interchangeably used `git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the `v0.1-release` branch) in the previous example for the same result.
 
-You can pass multiple refs to `cherry-pick` and they will be cherry-picked onto
-the current branch in the order requested.
+You can pass multiple refs to `cherry-pick` and they will be cherry-picked onto the current branch in the order requested.
 
 .How many commits should I cherry pick?
-NOTE: Cherry-picking is best used for individual commits that may be out of
-sequence. The classic use-case highlighted earlier is back-porting bug fixes
-from a development branch to a stable branch. When this is done it's
-effectively duplicating the commits (rather than sharing them as with a merge).
-If you find yourself wanting to cherry-pick the entire contents of a branch you
-would be better to merge it instead.
+NOTE: Cherry-picking is best used for individual commits that may be out of sequence. The classic use-case highlighted earlier is back-porting bug fixes from a development branch to a stable branch. When this is done it's effectively duplicating the commits (rather than sharing them as with a merge). If you find yourself wanting to cherry-pick the entire contents of a branch you would be better to merge it instead.
 
 `git cherry-pick` can take various flags:
 
-* if the `--edit` flag is passed to `git cherry-pick` it will prompt you for a
-  commit message before committing
-* if you are cherry-picking from a public branch (i.e. one you will push
-  remotely) to another public branch then you can use the `-x` flag to append a
-  line to the cherry-picked commit's message saying which commit this change
-  was picked from. For example if this flag was used in the last example the
-  commit message would have `(cherry picked from commit
-  dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
-* when you want to indicate in the commit message which person cherry-picked a
-  particular change more explicitly than the "Committer" metadata that will be
-  set by default then you can use the `--signoff` (or `-s`) flag. This will
-  append a Signed-off-by line to the end of the commit message. For example if
-  this flag was used in the last example the commit message would have
-  `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
-* if there is a merge conflict on a `cherry-pick` you will need to resolve it a
-  similar fashion as a `git merge` (or the same fashion as `git rebase` which
-  you will see in
-  <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>).
-  This involves resolving the conflict, running `git add` but
-  then `git cherry-pick --continue` instead of `git commit` to commit the
-  changes. If you wish to abort the current cherry-pick as perhaps you've
-  realized the merge-conflict is too complex you can do this using `git
-  cherry-pick --abort`.
-
+* if the `--edit` flag is passed to `git cherry-pick` it will prompt you for a commit message before committing
+* if you are cherry-picking from a public branch (i.e. one you will push remotely) to another public branch then you can use the `-x` flag to append a line to the cherry-picked commit's message saying which commit this change was picked from. For example if this flag was used in the last example the commit message would have `(cherry picked from commit dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
+* when you want to indicate in the commit message which person cherry-picked a particular change more explicitly than the "Committer" metadata that will be set by default then you can use the `--signoff` (or `-s`) flag. This will append a Signed-off-by line to the end of the commit message. For example if this flag was used in the last example the commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
+* if there is a merge conflict on a `cherry-pick` you will need to resolve it a similar fashion as a `git merge` (or the same fashion as `git rebase` which you will see in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>). This involves resolving the conflict, running `git add` but then `git cherry-pick --continue` instead of `git commit` to commit the changes. If you wish to abort the current cherry-pick as perhaps you've realized the merge-conflict is too complex you can do this using `git cherry-pick --abort`.
 
 ### Revert a previous commit: git revert
-You may occasionally make a commit that you regret. You would then wish to undo
-the commit until you can fix it so it works as intended.
+You may occasionally make a commit that you regret. You would then wish to undo the commit until you can fix it so it works as intended.
 
-In Git you can rewrite history to hide such mistakes (as we first will learn in
-<<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>)
-but this is generally considered bad practice if you have already
-pushed a commit publicly. In these cases you are better to instead use `git
-revert`.
+In Git you can rewrite history to hide such mistakes (as we first will learn in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>) but this is generally considered bad practice if you have already pushed a commit publicly. In these cases you are better to instead use `git revert`.
 
 #### Problem
 You wish to revert a commit to reverse its changes.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
-3.  Run `git revert c18c9ef`. You will be prompted for a message. Accept the
-    default.
-    The output should resemble:
+3.  Run `git revert c18c9ef`. You will be prompted for a message. Accept the default. The output should resemble:
 
 .Revert output
 ```
@@ -884,36 +613,24 @@ index 0e0765f..7eb5017 100644
 
 From the revert show output:
 
-* "revert subject (1)" shows the reverted commit's subject prefixed with
-  "Revert". This should hopefully describe what has been reverted fairly
-  clearly and can be edited on commit if it does not.
-* "revert message (2)" shows the body of the reverted commit which shows the
-  full SHA-1 of the commit that was reverted.
-* "reversed diff (3)" shows the diff of the new commit; this will be the exact
-  opposite diff of the commit that was reverted.
+* "revert subject (1)" shows the reverted commit's subject prefixed with "Revert". This should hopefully describe what has been reverted fairly clearly and can be edited on commit if it does not.
+* "revert message (2)" shows the body of the reverted commit which shows the full SHA-1 of the commit that was reverted.
+* "reversed diff (3)" shows the diff of the new commit; this will be the exact opposite diff of the commit that was reverted.
 
 You have reverted a commit to reverse its changes.
 
 #### Discussion
-`git revert` can take a `--signoff` (or `-s`) flag which behaves similarly to
-that of `git cherry-pick`; it will append a Signed-off-by line to the end of
-the commit message. For example if this flag was used in the last example the
-commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>`
-appended to it.
+`git revert` can take a `--signoff` (or `-s`) flag which behaves similarly to that of `git cherry-pick`; it will append a Signed-off-by line to the end of the commit message. For example if this flag was used in the last example the commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
 
 ### List what branches contain a commit: git cherry
-If you have a workflow in which you do not merge your commits to other branches
-but have another person do it then you may wish to see which of your commits
-has been merged to another branch. Git has a tool to do this: `git cherry`.
+If you have a workflow in which you do not merge your commits to other branches but have another person do it then you may wish to see which of your commits has been merged to another branch. Git has a tool to do this: `git cherry`.
 
 Let's make another commit on the `v0.1-release` branch first:
 
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout v0.1-release`
 3.  Add some content to the `00-Preface.asciidoc` file.
-4.  Run `git commit --message 'Add release preface.' 00-Preface.asciidoc`.
-    The output should resemble:
+4.  Run `git commit --message 'Add release preface.' 00-Preface.asciidoc`. The output should resemble:
 
 .Release preface commit output
 ```
@@ -922,15 +639,12 @@ Let's make another commit on the `v0.1-release` branch first:
 ```
 
 #### Problem
-You wish to see what commits remain un-merged to the `master` branch from the
-`v0.1-release` branch.
+You wish to see what commits remain un-merged to the `master` branch from the `v0.1-release` branch.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout v0.1-release`.
-3.  Run `git cherry --verbose master`
-    The output should resemble:
+3.  Run `git cherry --verbose master`. The output should resemble:
 
 .Cherry output
 [.long-annotations]
@@ -945,23 +659,15 @@ You wish to see what commits remain un-merged to the `master` branch from the
 
 From the cherry output:
 
-* "droppable commit (1)" is prefixed with a `-` and shows a commit that has
-  been already included into the `master` branch.
-* "kept commit (2)" is prefixed with a `+` and shows a commit that has not yet
-  been included into the `master` branch.
+* "droppable commit (1)" is prefixed with a `-` and shows a commit that has been already included into the `master` branch.
+* "kept commit (2)" is prefixed with a `+` and shows a commit that has not yet been included into the `master` branch.
 
 You have seen which commits remain un-merged from the `master` branch.
 
 #### Discussion
-If you omit the `--verbose` (or `-v`) flag from `git cherry` it will show just
-the `-`/`+` and the full SHA-1 but not the commit subject e.g. `-
-dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d`.
+If you omit the `--verbose` (or `-v`) flag from `git cherry` it will show just the `-`/`+` and the full SHA-1 but not the commit subject e.g. `- dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d`.
 
-When you learn about rebasing in
-<<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>
-`git cherry` can be useful at showing what commits will be kept
-or dropped after a rebase operation.
-
+When you learn about rebasing in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>> `git cherry` can be useful at showing what commits will be kept or dropped after a rebase operation.
 
 ### Summary
 In this chapter you hopefully learned:
@@ -971,8 +677,7 @@ In this chapter you hopefully learned:
 * How to use `git rerere` to repeatedly replay merge conflict resolutions
 * How to use `git tag` to tag commits
 * How to use `git describe` to generate version numbers for commits
-* How to use `git cherry-pick` to bring individual commits from one branch to
-  another
+* How to use `git cherry-pick` to bring individual commits from one branch to another
 * How to use `git revert` to reverse individual commits
 * How to use `git cherry` to list what commits remain un-merged on a branch
 

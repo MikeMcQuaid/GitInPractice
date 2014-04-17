@@ -1,4 +1,6 @@
 ## Introduction to local Git
+ifdef::env-github[:outfilesuffix: .adoc]
+
 In this chapter you will learn how and why to use Git as a local version control system by covering the following topics:
 
 * Why Git was created

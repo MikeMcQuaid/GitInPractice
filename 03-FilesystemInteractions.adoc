@@ -1,4 +1,6 @@
 ## Filesystem Interactions
+ifdef::env-github[:outfilesuffix: .adoc]
+
 In this chapter you will learn about interacting with files and directories in your Git working directory by learning the following topics:
 
 * How to rename, move or remove versioned files or directories
@@ -26,7 +28,7 @@ You wish to rename a previously committed file in your Git working directory nam
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git mv GitInPractice.asciidoc 01-IntroducingGitInPractice.asciidoc`. There will be no output.
-3.  Run `git commit --message 'Rename book file to first part file.'` The output should resemble:
+3.  Run `git commit --message 'Rename book file to first part file.'`. The output should resemble:
 
 .Renamed commit output
 ```
@@ -69,11 +71,9 @@ For testing purposes let's create and commit a temporary file to be removed:
 You wish to remove a previously committed file named `GitInPracticeReviews.tmp` in your Git working directory and commit the removed file.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `git rm GitInPracticeReviews.tmp`.
-3.  Run `git commit --message 'Remove unfavourable review file.'`
-    The output should resemble:
+3.  Run `git commit --message 'Remove unfavourable review file.'`. The output should resemble:
 
 .Removed commit output
 ```
@@ -184,7 +184,7 @@ You wish to ignore all files with the extension `.tmp` in a Git repository.
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `echo \*.tmp > .gitignore`. This will create a new file named `.gitignore` with the contents "*.tmp".
 3.  Run `git add .gitignore` to add `.gitignore` to the index staging area for the next commit. There will be no output.
-4.  Run `git commit --message='Ignore .tmp files.'` The output should resemble:
+4.  Run `git commit --message='Ignore .tmp files.'`. The output should resemble:
 
 .Ignore file commit output
 ```
@@ -250,8 +250,7 @@ You wish to delete all ignored files from a Git working directory.
 
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
-2.  Run `git clean --force -X`.
-    The output should resemble:
+2.  Run `git clean --force -X`. The output should resemble:
 
 .Force clean of ignored files output
 ```
@@ -362,8 +361,7 @@ You may have stashed changes with the intent of popping them later but then real
 You wish to clear all previously stashed changes.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `git stash clear`. There will be no output.
 
 You have cleared all the previously stashed changes.
@@ -381,11 +379,8 @@ I've found myself in a situation in the past where I'm wanting to test a Rails c
 You wish for Git to assume there have been no changes made to `01-IntroducingGitInPractice.asciidoc`.
 
 #### Solution
-1.  Change to the directory containing your repository
-    e.g. `cd /Users/mike/GitInPracticeRedux/`
-2.  Run `git update-index --assume-unchanged
-    01-IntroducingGitInPractice.asciidoc`.
-    There will be no output.
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
+2.  Run `git update-index --assume-unchanged 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 
 Git will ignore any changes made to `01-IntroducingGitInPractice.asciidoc`.
 

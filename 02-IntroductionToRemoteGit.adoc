@@ -1,4 +1,6 @@
 ## Introduction to remote Git
+ifdef::env-github[:outfilesuffix: .adoc]
+
 In this chapter you will learn how to retrieve and share changes with other users' Git repositories by learning the following topics:
 
 * How to download a remote repository
@@ -232,8 +234,7 @@ You wish to pull new commits into the current branch on the local `GitInPractice
 
 #### Solution
 1.  Change directory to the original Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git pull`.
-    The output should resemble:
+2.  Run `git pull`. The output should resemble:
 
 .Pulling new changes
 [.long-annotations]
@@ -452,10 +453,8 @@ Once you've created a local branch you will want to check out the contents of an
 You wish to change to a local branch named `chapter-two` from the current (`master`) branch.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd
-    /Users/mike/GitInPracticeRedux/`.
-2.  Run `git checkout chapter-two`.
-    The output should be `Switched to branch 'chapter-two'`.
+1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git checkout chapter-two`. The output should be `Switched to branch 'chapter-two'`.
 
 You've checked out the local branch named `chapter-two` and moved from the `master` branch.
 
