@@ -1,4 +1,4 @@
-## Git Shortcuts
+## Personalizing Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
 Git is a heavily configurable tool. As we've seen previously in this book there's often times where you have multiple behaviors or choices for commands that you can select with flags or by using different commands. You may always want to run a command with a lengthy set of commands or want to set your preferred `difftool` or `mergetool` as a default. These tweaks can be done per-repository or globally and will allow you to maximize productivity when adopting a particular Git workflow.
