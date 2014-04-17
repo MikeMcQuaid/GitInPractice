@@ -1,6 +1,8 @@
 ## Creating a clean history
 ifdef::env-github[:outfilesuffix: .adoc]
 
+We saw in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> that a clean history can make it easier to find useful information. For a history to be clean it should use good, well-formatted commit messages for commits which are as small as possible.
+
 In this chapter you will learn how to create a clean history by learning the following topics:
 
 * How to write a good commit message
@@ -12,7 +14,7 @@ In this chapter you will learn how to create a clean history by learning the fol
 We saw already in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
 
 Below is an example of a good commit message format. It's strongly influenced by
-a guide written by Time Pope which is now at
+a guide written by Tim Pope which is now at
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html.
 
 .Good commit message format
@@ -45,21 +47,24 @@ with e.g. `1.`. You shouldn't go overboard with this but it can add
 some useful, basic formatting.
 ```
 
-### Building a commit from parts of files
+### Building a commit from parts of files: git add --patch
+// TODO: When turned into a recipe make this section and git commit --patch part of the same recipe.
 We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
-`git add` has a `--patch` (or -`p`) flag that provides an interactive menu in which you can select what parts of files you want to add. Make some changes to every file in the `GitInPracticeRedux` repository and run `git add --patch`:
+// TODO: The modified file should have more than one change in it
+`git add` has a `--patch` (or -`p`) flag that provides an interactive menu in which you can select what parts of files you want to add. Make some changes to `00-Preface.asciidoc`, `01-IntroducingGitInPractice.asciidoc` and `02-AdvancedGitInPractice.asciidoc` in the `GitInPracticeRedux` repository and run `git add --patch`. This will prompt for an action for the first change in `00-Preface.asciidoc` and should resemble the following:
 
 .Patch add output
 ```
 # git add --patch
 
 diff --git a/00-Preface.asciidoc b/00-Preface.asciidoc
-index d7aa4f8..2096879 100644
+index d7aa4f8..4b43488 100644
 --- a/00-Preface.asciidoc
 +++ b/00-Preface.asciidoc
-@@ -1,2 +1,4 @@
+@@ -1,2 +1,5 @@
  = Git In Practice
++// Git Through Praxis?
  The hotly anticipated sequel to Git In Paris.
 + <1>
 +Copyright Mike McQuaid
@@ -90,9 +95,24 @@ From the patch add output:
 * "stage question (2)" shows the available options for this particular hunk. I selected `?` which printed the shown help output.
 * "help lines (3)" shows the help output with all the different available options.
 
-You can see from the help lines there are many different options available at each stage. It's particularly worth noting `s`; it allows splitting hunks into smaller ones. If entered repeatedly this can allow staging any selection of individual lines. The other options are less widely used and should be fairly self-explanatory.
+You can see from the help lines there are many different options available at each stage. These options should be fairly self-explanatory.
 
-After viewing the help I answered `y` to stage the hunk shown in the above example and `q` to not stage any of the remaining hunks. After doing this the `git status` output should resemble:
+Let's use `s` to split this hunk into two hunks. After entering this you will see something resembling:
+
+.Patch split output
+```
+Stage this hunk [y,n,q,a,d,/,s,e,?]? s
+Split into 2 hunks.
+@@ -1,2 +1,3 @@
+ = Git In Practice
++// Git Through Praxis? <1>
+ The hotly anticipated sequel to Git In Paris.
+```
+<1> split hunk
+
+The patch split output shows that the previous hunk which contained two changes (`// Git Through Praxis?` and `Copyright Mike McQuaid`) has been split into a single hunk (shown by "split hunk (1)"). This allows the breaking up of hunks into smaller sections to allow the addition (and eventual committing) of individual lines.
+
+After viewing the help I answered `y` to stage the hunk shown in the above listing and `q` to not stage any of the remaining hunks. After doing this the `git status` output should resemble:
 
 .Status output after patch add
 ```
@@ -111,61 +131,79 @@ Changes not staged for commit:
   (use "git checkout -- <file>..." to discard changes in working
   directory)
 
+	modified:   00-Preface.asciidoc <2>
 	modified:   01-IntroducingGitInPractice.asciidoc <2>
-	modified:   02-AdvancedGitInPractice.asciidoc
+	modified:   02-AdvancedGitInPractice.asciidoc <2>
 ```
 <1> staged file
 <2> unstaged file
 
 From the status output after patch add:
 
-* "staged file (1)" shows the file that had a hunk staged. If there was more than one hunk in this file and we only staged one then it would be shown in both the "Changes to be committed" and "Changes not staged for commit" sections.
-* "unstaged file (2)" shows the two files that have changes but none of them were staged.
+* "staged file (1)" shows the file that had a hunk staged.
+* "unstaged file (2)" shows the two files that have changes but none of them were staged and the first file that had a single hunk staged and some hunks unstaged.
 
 Let's undo this add to the staging area now by running `git reset master`.
 
-`git commit` also has a `--patch` (or `-i` but, confusingly, not `-p`) flag. It also provides the same interactive menu. Now run `git commit --patch --message "Preface: add Copyright."`:
+`git commit` also has a `--patch` (or `-i` but, confusingly, not `-p`) flag. It also provides the same interactive menu. Now run `git commit --patch --message "Preface: add potential new title."`:
 
 .Patch commit output
 ```
-# git commit --patch --message "Preface: add Copyright."
+# git commit --patch --message "Preface: add potential new title."
 
 diff --git a/00-Preface.asciidoc b/00-Preface.asciidoc
-index d7aa4f8..2096879 100644
+index d7aa4f8..4b43488 100644
 --- a/00-Preface.asciidoc
 +++ b/00-Preface.asciidoc
-@@ -1,2 +1,4 @@
+@@ -1,2 +1,5 @@
  = Git In Practice
++// Git Through Praxis?
  The hotly anticipated sequel to Git In Paris.
 +
 +Copyright Mike McQuaid
-Stage this hunk [y,n,q,a,d,/,e,?]? y
-...
-[master da31662] Preface: add Copyright. <1>
- 1 file changed, 2 insertions(+)
+Stage this hunk [y,n,q,a,d,/,e,?]? s
+Split into 2 hunks.
+@@ -1,2 +1,3 @@
+ = Git In Practice
++// Git Through Praxis?
+ The hotly anticipated sequel to Git In Paris.
+Stage this hunk [y,n,q,a,d,/,j,J,g,e,?]? y
+@@ -2 +3,3 @@
+ The hotly anticipated sequel to Git In Paris.
++
++Copyright Mike McQuaid
+Stage this hunk [y,n,q,a,d,/,K,g,e,?]? q
+
+[master eec78b2] Preface: add potential new title. <1>
+ 1 file changed, 1 insertion(+)
 ```
 <1> new commit
 
-I performed the same actions with `git commit --patch` as with `git add --patch`; I staged the first hunk with `y` and then did not stage any of the others with `q`. The output is appended with the "new commit (1)" information that we'd expect from `git commit` but otherwise identical to that from `git add --patch`.
+`git commit --patch` is equivalent to `git add --patch && git commit`. I performed the same actions with `git commit --patch` as with `git add --patch`; I split the first hunk with `s`, staged the first hunk split with `y` and then did not stage any of the others with `q`. The output is appended with the "new commit (1)" information that we'd expect from `git commit` but otherwise identical to that from `git add --patch`. `
 
 Now run `git reset HEAD^` to undo the current commit so we can try and stage hunks graphically.
 
 ### Graphically building a commit from parts of files
+As you may have noticed throughout this book I mostly prefer to use (and therefore teach you to use) the Git command-line application rather than GUIs. There are a few exceptions: I use GitX (or `gitk`) (first seen in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) to easily visualize the history of a repository.
+
+We saw in <<building-a-commit-from-parts-of-files-git-add-patch>> how to build commits from parts of files from the Git command-line application but it's a task I've found is far easier using a graphical application. In this section I'll show you how to do this with GitX or `git-gui` (which provides this functionality in a separate application).
+
+#### Graphically building a commit in GitX
 GitX provides a staging mode that also allows adding entire files or individual hunks to staging provides support for graphically staging hunks. If you click on the "Stage" in the top-right of GitX it should resemble the following:
 
 .GitX stage mode
 [[gitx-stage]]
 image::diagrams/08-GitXBeforeStage.png[]
 
-You can see from <<gitx-stage>> the staging mode shows a selection of files to stage, the changes to the selected file and allows staging of hunks or selected lines through their respective buttons. Either select all the lines and click on the `Stage lines` button or click the `Stage` button in the top-right.
+You can see from <<gitx-stage>> the staging mode shows a selection of files to stage, the changes to the selected file and allows staging of hunks or selected lines through their respective buttons. Stage the `// Git Through Praxis?` line by clicking on it and then clicking the `Stage line` button that appears on the right of that line. If you had wanted to stage all the lines in a hunk you could have clicked the `Stage` button at the top-right of the hunk. If you had wanted to stage all changes in a file you could have right-clicked on the file name in the `Unstaged Changes` list and selected `Stage Changes` from the right-click menu.
 
 .GitX staged hunk
 [[gitx-staged-hunk]]
 image::screenshots/08-GitXAfterStaged.png[]
 
-<<gitx-staged-hunk>> shows after the changes to the file were staged and a commit message has been entered. The file has moved from the `Unstaged Changes` to the `Staged Changes` file list. If the file had some hunks that had been staged and some that had not it would be present in both file lists.
+<<gitx-staged-hunk>> shows after the changes to the file were staged and a commit message has been entered. The file now shows in both the `Unstaged Changes` and the `Staged Changes` file list. If the file had all its hunks staged and it would no longer be present in the `Unstaged Changes` list.
 
-The staging area used by GitX is the same staging area used by the rest of Git. If you quit GitX now and ran `git status` you would see the same result as before: `00-Preface.asciidoc` had been staged.
+The staging area used by GitX is the same staging area used by the rest of Git. If you quit GitX now and ran `git status` you would see the same result as before: some changes in `00-Preface.asciidoc` had been staged.
 
 Now that there are some staged changes the `Commit` button has become enabled. After the commit message has been entered you can click it.
 
@@ -175,23 +213,18 @@ image::screenshots/08-GitXStageCommit.png[]
 
 Now that the changes have been committed <<gitx-stage-commit>> shows a large message with the new SHA-1. The `Unstaged Changes` remain the same but the `Staged Changes` were used to create the new commit so have now been removed from this list.
 
+#### Graphically building a commit in `git gui`
 Although GitX combines staging and viewing history into one application by default Git provides two GUI applications for this: `gitk` (first seen in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) and `git gui`.
 
 Run `git reset HEAD^` to undo the current commit so we can try and stage hunks using Git GUI. Now run `git gui`:
 
-.Git GUI
+.Git GUI on Windows 8.1
 [[git-gui]]
 image::diagrams/08-GitGUIBeforeStage.png[]
 
 <<git-gui>> shows the Git GUI user interface. It is similar to GitX 's stage mode but the two `Unstaged Changes` and `Staged Changes (Will Commit)` file lists are shown on the left hand side rather than left and right of the commit message.
 
-You select the file whose changes you want to view by clicking on it in the `Unstaged Changes` list. To stage hunks requires you to right-click on the relevant hunk.
-
-.Git GUI right-click menu
-[[git-gui-right-click]]
-image::screenshots/08-GitGUIRightClickMenu.png[]
-
-The right-click menu should resemble <<git-gui-right-click>>. You can select individual hunks or lines and various other options. In this case click `Stage Line For Commit`.
+You select the file whose changes you want to view by clicking on it in the `Unstaged Changes` list. Stage the the `// Git Through Praxis?` line by right-clicking on it and selecting `Stage Line For Commit` from the right-click menu. If you had wanted to stage all the lines in a hunk you could have selected `Stage Hunk For Commit` from the right-click menu. If you had wanted to stage all changes in a file you could have selected the file name in the `Unstaged Changes` list, click the `Commit` menu and click `Stage To Commit`.
 
 .Git GUI staged
 [[git-gui-staged]]
@@ -201,10 +234,8 @@ image::screenshots/08-GitGUIBeforeCommit.png[]
 
 After pressing this there is no sign of the commit other than the `00-Preface.asciidoc` being removed from the `Staged Changes (Will Commit)` list. Like GitX though, it has successfully committed a file.
 
-### Avoiding whitespace issues
-Git expects certain whitespace usage in files.
-
-To ensure your whitespace matches good Git practice ensure:
+### Avoiding whitespace issues : git diff --check
+Git expects certain whitespace usage in files. As a result of this many Git users (and almost all Git-based open-source projects) want to try and avoid Git's whitespace warnings. As a result it's generally always a good idea to try and ensure your whitespace follows good Git practice. To do this ensure:
 
 * no lines in files end with whitespace i.e. trailing tab or space characters
 * no lines in files start the line with one or more space characters and follow it immediately with one or more tab characters
@@ -219,7 +250,7 @@ You can check you haven't violated any of these rules by running `git diff --che
 00-Preface.asciidoc:1: trailing whitespace. <1>
 += Git In Practice
 00-Preface.asciidoc:2: space before tab in indent. <2>
-+       The hotly anticipated sequel to Git In Paris.
++       // Git Through Praxis?
 ```
 <1> trailing whitespace
 <2> space before tab
@@ -234,7 +265,7 @@ Regular `git diff` (but, bizarrely, not `git diff --check`) will show `\ No newl
 It's also worth checking if you can configure your text editor of choice to fix any of these errors up for you when you save files. It is a fairly commonly available feature.
 
 ### Summary
-In this chapter you hopefully learned:
+In this chapter you learned:
 
 * How to use an email format and Markdown to write good commit messages
 * How to use `git add --patch` or `git commit --patch` to stage only chosen hunks for a new commit
