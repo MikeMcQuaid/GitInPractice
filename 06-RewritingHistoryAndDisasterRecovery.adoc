@@ -1,7 +1,7 @@
 ## Rewriting History and Disaster Recovery
 ifdef::env-github[:outfilesuffix: .adoc]
 
-In <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<09-MergingVsRebasing#homebrew-s-workflow>> and Chapter 14.
+In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing##homebrew-s-workflow>> and Chapter 14.
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
@@ -15,7 +15,7 @@ In this chapter you will learn about rewriting history by learning the following
 Before jumping in to rewriting history let's start by learning about how to avoid losing committed data using `git reflog`.
 
 ### List all changes including history rewrites: git reflog
-Recall from <<01-IntroductionToLocalGit#parent-commits>> that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. If a previous commit changes in any way then its SHA-1 hash changes too. This in turn affects the SHA-1 of all its descendent commits.
+Recall from <<01-LocalGit#parent-commits>> that each commit points to the previous (parent) commit and this is repeated all the way to the branch's initial commit. As a result the branch pointer can be used to reference not just the current commit it points to but every previous commit. If a previous commit changes in any way then its SHA-1 hash changes too. This in turn affects the SHA-1 of all its descendent commits.
 
 This provides a good protection in Git from accidentally rewriting history as all commits effectively provide a checksum of the entire branch up until this point.
 
@@ -64,7 +64,7 @@ You can from <<gitx-reflog>> that the SHA-1s match those in the `git reflog` out
 * the penultimate commit on the `v0.1-release` branch (`dfe2377`, `HEAD@{2}`).
 * the latest commit on the `master` branch (`3e3c417`, `HEAD@{0}`, `HEAD@{3}`),
 
-Recall from <<01-IntroductionToLocalGit#refs>> you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
+Recall from <<01-LocalGit#refs>> you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
 
 You have viewed the changing state of the `HEAD` pointer by viewing the reflog.
 
@@ -198,7 +198,7 @@ As well as `--hard` and `--mixed` `git reset` can also take a `--soft` argument.
 You can also perform a combined reset and commit operation to modify the previous commit using `git commit --amend`. `git commit --amend` resets to the previous commit and then creates a new commit with the same commit message as the commit that was just reset. It uses `git reset --soft HEAD^` and then runs `git commit --reedit-message` with the previous (now reset) commit as an argument. This means that it'll add anything you have currently added to the index staging area to the changes from the previous commit and prompt for a new commit message. I most commonly use this to adjust the previous commit message if I realize I've made a typo or omitted useful information.
 
 ### Rebase commits on top of another branch: git rebase
-Recall from <<02-IntroductionToRemoteGit#rebasing>> that rebasing is similar to merging but requires rewriting history.
+Recall from <<02-RemoteGit#rebasing>> that rebasing is similar to merging but requires rewriting history.
 
 Let's create a branch that we can rebase:
 
@@ -593,7 +593,7 @@ From the forced push output:
 You have rewritten the history on a remote branch.
 
 #### Discussion
-You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change in <<07-GitShortcuts#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
+You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change in <<07-PersonalizingGit#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
 
 Remember the reflog isn't pushed remotely so if you unintentionally rewrite history on the remote branch there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason you should be very careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that no-one else is using. Avoid doing it on shared branches and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to try and ensure you aren't rewriting commits that are on the remote branch that you don't have locally. Of course, it's still possible that someone pushes a commit just after you do a `git pull` which you overwrite (which is why `git push --force` is a dangerous operation).
 

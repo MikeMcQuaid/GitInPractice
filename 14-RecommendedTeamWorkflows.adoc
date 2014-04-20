@@ -1,4 +1,4 @@
-## A recommended Git workflow for programming teams
+## Recommended Team Workflows
 ifdef::env-github[:outfilesuffix: .adoc]
 
 * Git Flow/GitHub Flow/Mike Flow

@@ -1,4 +1,4 @@
-## Working with Subversion repositories
+## Working with Subversion
 ifdef::env-github[:outfilesuffix: .adoc]
 
 Despite the growth of Git, Subversion (also known as SVN) remains widely used across many projects. Many older open-source projects still continue to use Subversion as do many internal corporate projects.
@@ -74,7 +74,7 @@ W: Do not be alarmed at the above message git-svn is just searching
 
 As it states in the output: do not be alarmed by this. This is just `git svn` trying to access a higher-level directory than we have specified and being denied access. It's not a problem; this is why the message was removed from later versions.
 
-Recall from <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. Subversion's usual equivalent to `git clone` is `svn checkout` which only checks out the most recent revision. As we're importing the Subversion repository into Git we need to download all the previous revisions and all the branches and tags. Each new Git commit has metadata stored in the commit message containing the mapping between Git and Subversion commits.
+Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. Subversion's usual equivalent to `git clone` is `svn checkout` which only checks out the most recent revision. As we're importing the Subversion repository into Git we need to download all the previous revisions and all the branches and tags. Each new Git commit has metadata stored in the commit message containing the mapping between Git and Subversion commits.
 
 You can see from the listing above `git svn` is iterating through all the revisions in the Subversion repository and creating Git commits locally from the changes. This may take a long time on large repositories but will only need to be done once. After `git svn clone` has finished you now have a complete local copy of a Subversion repository.
 
@@ -205,16 +205,16 @@ From the Subversion ignore rules output:
 
 You can use the `git svn show-ignore` output to write a `.gitignore` file by running `git svn show-ignore > .gitignore`. The `>` redirects the output from the command from the terminal into the `.gitignore` file. You can then add and commit this file to the repository to share these rules with anyone else using `git svn`.
 
-In some cases you may not want people to know you are using `git svn` or not want to commit a `.gitignore` file to a Subversion repository. In this case you could just omit the `.gitignore` file or not add it to any commits but this could get irritating when files are not ignored. Instead you can make use of the `.git/info/exclude` we saw in <<01-IntroductionToLocalGit#creating-a-repository-git-init>> which operates like a local `.gitignore` file for a single repository. This file handily also uses the same syntax as `.gitignore`. You can write the ignore rules to it by running `git svn show-ignore > .git/info/exclude`.
+In some cases you may not want people to know you are using `git svn` or not want to commit a `.gitignore` file to a Subversion repository. In this case you could just omit the `.gitignore` file or not add it to any commits but this could get irritating when files are not ignored. Instead you can make use of the `.git/info/exclude` we saw in <<01-LocalGit#creating-a-repository-git-init>> which operates like a local `.gitignore` file for a single repository. This file handily also uses the same syntax as `.gitignore`. You can write the ignore rules to it by running `git svn show-ignore > .git/info/exclude`.
 
 #### Updating a Subversion repository
 To update a Subversion repository you need to use the `git svn` command; you cannot use `git fetch` or `git pull` as `git svn` has not set up any remote Git repository references for you as it does not use the same transport mechanism.
 
 .Git SVN add/commit/dcommit/rebase/checkout cycle
 [[gitsvn-workflow]]
-image::diagrams/10-GitSvnWorkflow.png[]
+image::diagrams/09-GitSvnWorkflow.png[]
 
-<<gitsvn-workflow>> shows the `git svn` cycle we will look at in this section. As in the local workflow in <<01-IntroductionToLocalGit#creating-a-new-commit-git-add-git-commit>> files are modified, added, committed and can be checked out. However, in comparison to <<02-IntroductionToRemoteGit#commit-workflow-again>> the remote repository is a Subversion repository so requires different commands.
+<<gitsvn-workflow>> shows the `git svn` cycle we will look at in this section. As in the local workflow in <<01-LocalGit#creating-a-new-commit-git-add-git-commit>> files are modified, added, committed and can be checked out. However, in comparison to <<02-RemoteGit#commit-workflow-again>> the remote repository is a Subversion repository so requires different commands.
 
 The equivalents to `git fetch` and `git pull --rebase` for Subversion repositories are `git svn fetch` and `git svn rebase`. There is no equivalent to `git pull` without `--rebase`. This is because Git and Subversion handle merges differently so it's important to avoid merge commits on updates as they will not (and should not) be seen by other users of the Subversion repository.
 
@@ -288,7 +288,7 @@ Additionally, GitX provides an additional column to display the Subversion revis
 
 .GitX on import Subversion repository
 [[gitx-subversion]]
-image::screenshots/10-GitXSubversion.png[]
+image::screenshots/09-GitXSubversion.png[]
 
 The Subversion revision number is shown in the `Git SVN Revision` column in <<gitx-subversion>>.
 

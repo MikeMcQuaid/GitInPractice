@@ -1,5 +1,5 @@
 [appendix]
-## Why use version control?
+## Why Use Version Control?
 ifdef::env-github[:outfilesuffix: .adoc]
 
 You may not be familiar with version control concepts or why version control systems are useful for managing changes to text. Let's start off by asking why you should use version control.

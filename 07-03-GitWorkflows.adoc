@@ -1,4 +1,0 @@
-# Git Workflows
-// TODO: Split into "Advanced Git" and "Git Best Practices"
-
-Part 3 description goes here.

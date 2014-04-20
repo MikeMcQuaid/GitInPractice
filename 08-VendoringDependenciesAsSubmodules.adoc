@@ -1,7 +1,5 @@
-## Vendoring project dependencies as submodules
+## Vendoring Dependencies as Submodules
 ifdef::env-github[:outfilesuffix: .adoc]
-
-// Make before PR chapter
 
 A Git repository can contain _submodules_. Submodules allow referencing other Git repositories at specific revisions another Git repository. This is most commonly used to reference external Git repositories that are dependencies for software projects e.g. external libraries or tools and ensure that all users of a Git repository have the same version of all these other software projects.
 

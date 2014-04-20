@@ -1,7 +1,7 @@
-## Creating a clean history
+## Creating a Clean History
 ifdef::env-github[:outfilesuffix: .adoc]
 
-We saw in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> that a clean history can make it easier to find useful information. For a history to be clean it should use good, well-formatted commit messages for commits which are as small as possible.
+We saw in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> that a clean history can make it easier to find useful information. For a history to be clean it should use good, well-formatted commit messages for commits which are as small as possible.
 
 In this chapter you will learn how to create a clean history by learning the following topics:
 
@@ -11,7 +11,7 @@ In this chapter you will learn how to create a clean history by learning the fol
 * How to avoid committing bad whitespace
 
 ### Writing a good commit message
-We saw already in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
+We saw already in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
 
 Below is an example of a good commit message format. It's strongly influenced by
 a guide written by Tim Pope which is now at
@@ -49,7 +49,7 @@ can add some useful, basic formatting.
 
 ### Building a commit from parts of files: git add --patch
 // TODO: When turned into a recipe make this section and git commit --patch part of the same recipe.
-We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
+We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
 // TODO: The modified file should have more than one change in it
 `git add` has a `--patch` (or -`p`) flag that provides an interactive menu in which you can select what parts of files you want to add. Make some changes to `00-Preface.asciidoc`, `01-IntroducingGitInPractice.asciidoc` and `02-AdvancedGitInPractice.asciidoc` in the `GitInPracticeRedux` repository and run `git add --patch`. This will prompt for an action for the first change in `00-Preface.asciidoc` and should resemble the following:
@@ -184,7 +184,7 @@ Stage this hunk [y,n,q,a,d,/,K,g,e,?]? q
 Now run `git reset HEAD^` to undo the current commit so we can try and stage hunks graphically.
 
 ### Graphically building a commit from parts of files
-As you may have noticed throughout this book I mostly prefer to use (and therefore teach you to use) the Git command-line application rather than GUIs. There are a few exceptions: I use GitX (or `gitk`) (first seen in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) to easily visualize the history of a repository.
+As you may have noticed throughout this book I mostly prefer to use (and therefore teach you to use) the Git command-line application rather than GUIs. There are a few exceptions: I use GitX (or `gitk`) (first seen in <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) to easily visualize the history of a repository.
 
 We saw in <<building-a-commit-from-parts-of-files-git-add-patch>> how to build commits from parts of files from the Git command-line application but it's a task I've found is far easier using a graphical application. In this section I'll show you how to do this with GitX or `git-gui` (which provides this functionality in a separate application).
 
@@ -193,13 +193,13 @@ GitX provides a staging mode that also allows adding entire files or individual 
 
 .GitX stage mode
 [[gitx-stage]]
-image::diagrams/08-GitXBeforeStage.png[]
+image::diagrams/12-GitXBeforeStage.png[]
 
 You can see from <<gitx-stage>> the staging mode shows a selection of files to stage, the changes to the selected file and allows staging of hunks or selected lines through their respective buttons. Stage the `// Git Through Praxis?` line by clicking on it and then clicking the `Stage line` button that appears on the right of that line. If you had wanted to stage all the lines in a hunk you could have clicked the `Stage` button at the top-right of the hunk. If you had wanted to stage all changes in a file you could have right-clicked on the file name in the `Unstaged Changes` list and selected `Stage Changes` from the right-click menu.
 
 .GitX staged hunk
 [[gitx-staged-hunk]]
-image::screenshots/08-GitXAfterStaged.png[]
+image::screenshots/12-GitXAfterStaged.png[]
 
 <<gitx-staged-hunk>> shows after the changes to the file were staged and a commit message has been entered. The file now shows in both the `Unstaged Changes` and the `Staged Changes` file list. If the file had all its hunks staged and it would no longer be present in the `Unstaged Changes` list.
 
@@ -209,18 +209,18 @@ Now that there are some staged changes the `Commit` button has become enabled. A
 
 .GitX stage mode commit
 [[gitx-stage-commit]]
-image::screenshots/08-GitXStageCommit.png[]
+image::screenshots/12-GitXStageCommit.png[]
 
 Now that the changes have been committed <<gitx-stage-commit>> shows a large message with the new SHA-1. The `Unstaged Changes` remain the same but the `Staged Changes` were used to create the new commit so have now been removed from this list.
 
 #### Graphically building a commit in `git gui`
-Although GitX combines staging and viewing history into one application by default Git provides two GUI applications for this: `gitk` (first seen in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>) and `git gui`.
+Although GitX combines staging and viewing history into one application by default Git provides two GUI applications for this: `gitk` (first seen in <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) and `git gui`.
 
 Run `git reset HEAD^` to undo the current commit so we can try and stage hunks using Git GUI. Now run `git gui`:
 
 .Git GUI on Windows 8.1
 [[git-gui]]
-image::diagrams/08-GitGUIBeforeStage.png[]
+image::diagrams/12-GitGUIBeforeStage.png[]
 
 <<git-gui>> shows the Git GUI user interface. It is similar to GitX 's stage mode but the two `Unstaged Changes` and `Staged Changes (Will Commit)` file lists are shown on the left hand side rather than left and right of the commit message.
 
@@ -228,7 +228,7 @@ You select the file whose changes you want to view by clicking on it in the `Uns
 
 .Git GUI staged
 [[git-gui-staged]]
-image::screenshots/08-GitGUIBeforeCommit.png[]
+image::screenshots/12-GitGUIBeforeCommit.png[]
 
 <<git-gui-staged>> shows that a line has been staged in `00-Preface.asciidoc` as it is now displayed in the `Staged Changes (Will Commit)` list. You can now enter a commit message and press `Commit`.
 
@@ -260,7 +260,7 @@ From the diff whitespace check output:
 * "trailing whitespace (1)" shows that on line 1 of `00-Preface.asciidoc` there was whitespace at the end of the line.
 * "space before tab (2)" shows the on line 2 of `00-Preface.asciidoc` there was a space character before a tab character at the beginning of the line.
 
-Regular `git diff` (but, bizarrely, not `git diff --check`) will show `\ No newline at end of file` if the file's trailing newline is missing. If you have Git 2.0 (which should be released around May 2014) or newer or enabled colored output in <<07-GitShortcuts#colored-output-in-git>> `git diff` will display whitespace errors with a red background.
+Regular `git diff` (but, bizarrely, not `git diff --check`) will show `\ No newline at end of file` if the file's trailing newline is missing. If you have Git 2.0 (which should be released around May 2014) or newer or enabled colored output in <<07-PersonalizingGit#colored-output-in-git>> `git diff` will display whitespace errors with a red background.
 
 It's also worth checking if you can configure your text editor of choice to fix any of these errors up for you when you save files. It is a fairly commonly available feature.
 

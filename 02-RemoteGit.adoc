@@ -1,4 +1,4 @@
-## Introduction to remote Git
+## Remote Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn how to retrieve and share changes with other users' Git repositories by learning the following topics:
@@ -8,7 +8,7 @@ In this chapter you will learn how to retrieve and share changes with other user
 * How to create and receive branches
 * How to merge commits from one branch to another
 
-As you learned in <<01-IntroductionToLocalGit#creating-a-repository-git-init>> it's possible to work entirely with Git as a local version control system and never share changes with others. Usually, however, if you are using a version control system you will want to share changes with others; from simply sending files to a remote server for backup to collaborating as part of a large development team. Team collaboration will also require knowledge of how to create and interact with branches for working on different features in parallel. Let's start by adding a remote repository.
+As you learned in <<01-LocalGit#creating-a-repository-git-init>> it's possible to work entirely with Git as a local version control system and never share changes with others. Usually, however, if you are using a version control system you will want to share changes with others; from simply sending files to a remote server for backup to collaborating as part of a large development team. Team collaboration will also require knowledge of how to create and interact with branches for working on different features in parallel. Let's start by adding a remote repository.
 
 ### Adding a remote repository: git remote add
 Typically when using version control you will want to share your commits with other people using other computers. With a traditional, _centralized version control system_ (such as Subversion or CVS) the repository is usually stored on another machine. As you make a commit it is sent over the network, checked that it can apply (there may be other changes since you last checked) and then committed to the version control system where others can see it.
@@ -19,7 +19,7 @@ With a _distributed version control system_ like Git every user has a complete r
 [[commit-workflow-again]]
 image::diagrams/01-Workflow.png[]
 
-<<commit-workflow-again>> shows the local Git cycle we used in <<01-IntroductionToLocalGit#creating-a-new-commit-git-add-git-commit>>. Files in the local working directory are modified and added with `git add` to the index staging area. The contents of the index staging area is committed with `git commit` to form a new commit which is stored in the local repository directory. Later, this repository can be queried to view the differences between versions of files using `git diff`. In <<checking-out-a-local-branch-git-checkout>> you will also see how to use `git checkout` to change to different local branches' versions of files.
+<<commit-workflow-again>> shows the local Git cycle we used in <<01-LocalGit#creating-a-new-commit-git-add-git-commit>>. Files in the local working directory are modified and added with `git add` to the index staging area. The contents of the index staging area is committed with `git commit` to form a new commit which is stored in the local repository directory. Later, this repository can be queried to view the differences between versions of files using `git diff`. In <<checking-out-a-local-branch-git-checkout>> you will also see how to use `git checkout` to change to different local branches' versions of files.
 
 .Git add/commit/push/pull/checkout cycle
 [[push-workflow]]
@@ -29,7 +29,7 @@ image::diagrams/02-RemoteWorkflow.png[]
 
 If your local repository needs to send or receive data to a repository on another machine it will need to add a _remote repository_. A remote repository is one that is typically stored on another computer. `git push` sends your new commits to it and `git fetch` retrieves any new commits made by others from it.
 
-In <<01-IntroductionToLocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<C-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider but this book will assume the use of GitHub (as it is the most widely used).
+In <<01-LocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<C-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider but this book will assume the use of GitHub (as it is the most widely used).
 
 The first action you're concerned with is adding a reference for your newly-created remote repository (also known as a _remote_) on GitHub to your previous local repository so you can push and fetch commits.
 
@@ -81,7 +81,7 @@ The lack of authority for a particular repository with distributed version contr
 ### Pushing changes to a remote repository: git push
 You will eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git (which can operate over HTTP, SSH or it's own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
 
-Let's push the changes you made in our repository in <<01-IntroductionToLocalGit#introduction-to-local-git>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
+Let's push the changes you made in our repository in <<01-LocalGit#introduction-to-local-git>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
 #### Problem
 You wish to push the changes from the local `GitInPracticeRedux` repository to the `origin` remote on GitHub.
@@ -136,7 +136,7 @@ A _tracking branch_ is the default push or fetch location for a branch. This mea
 [[gitx-push]]
 image::screenshots/02-GitXPush.png[]
 
-<<gitx-push>> shows the state of the repository after the `git push`. There is one addition since we last looked at it in <<01-IntroductionToLocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
+<<gitx-push>> shows the state of the repository after the `git push`. There is one addition since we last looked at it in <<01-LocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
 
 .GitHub repository after `git push`
 <<github-push>>
@@ -176,7 +176,7 @@ Checking connectivity... done
 From the clone output you can see:
 
 * "destination directory (1)" is the directory in which the new `GitInPracticeRedux` local repository was created.
-* "object preparation/transmission (2)" can be safely ignored again (although if you're wondering why there were 6 objects remember the different objects in the object store in <<01-IntroductionToLocalGit#object-store>>).
+* "object preparation/transmission (2)" can be safely ignored again (although if you're wondering why there were 6 objects remember the different objects in the object store in <<01-LocalGit#object-store>>).
 
 You have cloned the `GitInPracticeRedux` remote repository and created a new local repository containing all its commits in `/Users/mike/GitInPracticeRedux`.
 
@@ -267,8 +267,8 @@ You can see from the pull output:
 * "remote branch update (3)" shows how the state of the `origin` remote's `master` branch was updated and that this can be seen in `origin/master`. `origin/master` is a valid ref that can be used with tools such as `git diff` so `git diff origin/master` will show the differences between the current working tree state and the `origin` remote's `master` branch.
 * "local branch update (4)" shows that after `git pull` downloaded the changes from the other repository it merged the changes from the tracking branch into the current branch. In this case your `master` branch had the changes from the `master` branch on the remote `origin` merged in. You can see in this case the SHA-1s match those in the "remote branch update (3)". It has been updated to include the new commit (`85a5db1`).
 * "merge type (5)" was a _fast-forward merge_ which means that no merge commit was made. Fast-forward merges will be explained in <<merging-an-existing-branch-into-the-current-branch-git-merge>>.
-* "lines changed in file <6>" is the same as the lines changed from `git commit` in <<01-IntroductionToLocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-IntroductionToLocalGit#viewing-the-differences-between-commits-git-diff>>. It is showing a summary of the changes that have been pulled into your `master` branch.
-* "diff summary <7>" is the same as the diff summary from `git commit` in <<01-IntroductionToLocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-IntroductionToLocalGit#viewing-the-differences-between-commits-git-diff>> .
+* "lines changed in file <6>" is the same as the lines changed from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>>. It is showing a summary of the changes that have been pulled into your `master` branch.
+* "diff summary <7>" is the same as the diff summary from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>> .
 
 #### Discussion
 `git pull` can take a `--rebase` flag which will perform a rebase rather than a merge. This will be covered in <<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
@@ -443,7 +443,7 @@ image::diagrams/02-BranchPointers.png[]
 You've seen `git branch` creates a local branch it does not change to it. To do that requires using `git checkout`.
 
 .Can branches be named anything?
-NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. This particular case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-IntroductionToLocalGit#refs>>).
+NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. This particular case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
 
 .What names should I use for branches?
 NOTE: Name branches according to their contents. For example, the `chapter-two` branch we've created here describes that the commits in this branch will be referencing the second chapter. I recommend a format of describing the branch's purpose in multiple words separated by hyphens. For example, a branch that is performing cleanup on the test suite should be named `test-suite-cleanup`.

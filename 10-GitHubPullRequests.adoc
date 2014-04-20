@@ -15,7 +15,7 @@ One of the core components of most software project collaboration is some sort o
 
 There is a special type of issue known as a _pull request_ (or _PR_). This is an issue on a project with an attached branch of code changes. Pull requests are used to request that someone with commit access to the repository merge the code changes from the pull request branch into their the main repository. Once a PR has been received you can view the changes that have been requested and anyone who can view the PR can make comments either inline on the commit or generally on the PR. If there are comments that require changes to be made then they can be committed and pushed to the pull request branch and the pull request will be updated with these changes. Once the PR's changes have reached an acceptable standard to be included in the repository then they can be merged with the "Merge" button from the GitHub website which will merge the requested branch into the repository.
 
-Recall from <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. A _fork_ is similar to a clone but rather than downloading the repository to your local machine it creates a clone of a repository on GitHub's servers. This allows you to make any changes you wish to your _fork_ even if you do not have commit access to the original repository. Anyone with read access to a repository can fork it.
+Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. A _fork_ is similar to a clone but rather than downloading the repository to your local machine it creates a clone of a repository on GitHub's servers. This allows you to make any changes you wish to your _fork_ even if you do not have commit access to the original repository. Anyone with read access to a repository can fork it.
 
 PRs and forks can be combined so you can find a repository you wish to make changes to, fork it and make changes in your local fork. You can then create a PR to request the changes on the branch in your fork be merged into the original repository. This allows people to be able to contribute to a repository without having commit access; PRs from forks can only be merged by someone with commit access to the original repository.
 
@@ -89,7 +89,7 @@ Now that a pull request has been created you can view it in the GitHub web inter
 
 .New pull request
 [[new-pull-request]]
-image::diagrams/11-PullRequest.png[]
+image::diagrams/10-PullRequest.png[]
 
 <<new-pull-request>> shows the new pull request that has been created on GitHub. `gh` defaulted the pull request message to that of the single commit in this pull request. You can see the commit message subject was used for the title of the pull request and the commit message body was used as the initial comment on this pull request. Additionally the `master` branch was used as the "base branch" which is the branch which the PR requests the changes be merged into. The changes that should be merged in are those from the `pr-test` branch which is known as the "head branch".
 

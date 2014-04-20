@@ -1,4 +1,4 @@
-## Hosting your own Git repository
+## Hosting a Repository
 ifdef::env-github[:outfilesuffix: .adoc]
 
 How to host your own Git repository for either temporary access or as an alternative to services like GitHub.

@@ -1,7 +1,7 @@
 ## Advanced Branching
 ifdef::env-github[:outfilesuffix: .adoc]
 
-You've already learnt the basics of branching in <<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>. In this chapter you will learn about more advanced branching techniques by learning the following topics:
+You've already learnt the basics of branching in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>. In this chapter you will learn about more advanced branching techniques by learning the following topics:
 
 * How to configure `git merge` to behave differently
 * How to resolve merge conflicts
@@ -17,7 +17,7 @@ When working as part of a team on a software project you will typically use bran
 Let's start by learning how to use some of the parameters provided by `git merge`.
 
 ### Merge branches and always create a merge commit
-You learnt in <<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> how to perform a basic merge of two branches by using `git merge branchname` where `branchname` is the name of the branch you wish to merge into the current branch.
+You learnt in <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> how to perform a basic merge of two branches by using `git merge branchname` where `branchname` is the name of the branch you wish to merge into the current branch.
 
 Recall that a merge commit is one that has multiple parents and is displayed in GitX by the converging of two or more branch "tracks". `git merge` provides various options for merging branches without creating merge commits, using various strategies or resolving conflicts with a graphical merge tool.
 
@@ -233,7 +233,7 @@ system.
 <5> current version
 <6> current marker
 
-Recall this output and annotations from <<02-IntroductionToRemoteGit#merge-conflicts>>:
+Recall this output and annotations from <<02-RemoteGit#merge-conflicts>>:
 
 * "unchanged line (1)" is provided for context
 * "incoming marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
@@ -396,7 +396,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 NOTE: Sometimes you may wish to make `git rerere` forget a resolution for a particular file because you resolved it incorrectly. In this case you can use `git rerere` with a path to forget any resolutions for that file or directory. For example to forget the resolution on `01-IntroducingGitInPractice.asciidoc` above you would run `git rerere forget 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 
 ### Create a tag: git tag
-Remember refs from <<01-IntroductionToLocalGit#refs>>. A tag is another _ref_ (or pointer) for a single commit. Tags differ from branches in that they are (usually) permanent. Rather than pointing to the work-in-progress on a feature they are generally used to describe a version of a software project.
+Remember refs from <<01-LocalGit#refs>>. A tag is another _ref_ (or pointer) for a single commit. Tags differ from branches in that they are (usually) permanent. Rather than pointing to the work-in-progress on a feature they are generally used to describe a version of a software project.
 
 .Local repository before `git tag`
 [[GitXBeforeTag]]

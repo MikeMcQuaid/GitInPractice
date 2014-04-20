@@ -1,4 +1,4 @@
-## Merging vs Rebasing
+## Merging vs. Rebasing
 ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn about the pros and cons of merging vs rebasing by learning the following topics:
@@ -8,7 +8,7 @@ In this chapter you will learn about the pros and cons of merging vs rebasing by
 * The pros and cons of each approach
 * How to decide what strategy to use for your project
 
-As seen in <<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> and <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>> merging and rebasing are two strategies for updating the contents of a branch based on the contents of another. Merging joins the history of two branches together with a merge commit (a commit with two parent commits) and rebasing creates new, reparented commits on top of the existing commits.
+As seen in <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> and <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>> merging and rebasing are two strategies for updating the contents of a branch based on the contents of another. Merging joins the history of two branches together with a merge commit (a commit with two parent commits) and rebasing creates new, reparented commits on top of the existing commits.
 
 Why are there two strategies for accomplishing essentially the same task? Let's find out by comparing the Git history of two popular open-source projects and their different branching strategies.
 
@@ -26,13 +26,13 @@ CMake makes heavy use of branching and merges. Several of the branches visible o
 
 .CMake repository history
 [[cmake-gitx]]
-image::diagrams/09-CMakeGitX.png[]
+image::diagrams/13-CMakeGitX.png[]
 
 The regular merging of `master` into `next` ensures that any merge conflicts between `master` and `next` are resolved quickly in the `next` branch. The regular merging of topic branches into `next` allows integration testing before a new release is prepared and provides context for individual commits; the branch name used in the merge commit helps indicate what feature or bug the commit was in relation to.
 
 .CMake branch/merge workflow
 [[cmake-workflow]]
-image::diagrams/09-CMakeWorkflow.png[]
+image::diagrams/13-CMakeWorkflow.png[]
 
 <<cmake-workflow>> focuses on the interactions between branches in the CMake workflow (rather than the interactions between commits and branches in <<cmake-gitx>>). For a new commit to end up in `master` a new topic branch needs to be created, commits made on it, the topic branch merged to the `next` branch and the `next branch` merged to `master` for a release.
 
@@ -78,13 +78,13 @@ Homebrew's main Git repository is available to access at https://github.com/Home
 
 .Homebrew repository history
 [[homebrew-gitx]]
-image::diagrams/09-HomebrewGitX.png[]
+image::diagrams/13-HomebrewGitX.png[]
 
 Homebrew has very few merge commits within the repository (remember that _fast forward merges_ do not produce merge commits). In <<homebrew-gitx>> you can see the history is entirely continuous despite multiple commits in a row from the same author and non-continuous dates. Branches are still used by individual contributors (with and without push access to the repository) but branches are rebased and squashed before being merged. This hides merge commits, evidence of branches and temporary commits (that e.g. fix up previous commits on the same branch) from the `master` branch.
 
 .Homebrew's branch/rebase/squash workflow
 [[homebrew-workflow]]
-image::diagrams/09-HomebrewWorkflow.png[]
+image::diagrams/13-HomebrewWorkflow.png[]
 
 <<homebrew-workflow>> focuses on the branches and repositories in the Homebrew workflow. New commits can end up on master either by being directly committed by those with main repository access, a feature branch being squashed and picked from a forked repository or, very rarely, through a major refactor branch being merged.
 
@@ -139,7 +139,7 @@ As a result of commits being squashed it also makes it very easy to revert indiv
 .Why is a readable history important for Homebrew?
 NOTE: For Homebrew readable history is a very important feature of their workflow. Homebrew uses Git not just as a version control system for developers but also as an update delivery mechanism for users. Presenting these users with a more readable history allows them to better grasp updates to Homebrew with basic Git commands and without understanding merges.
 
-Homebrew's workflow makes use of multiple remote repositories. As only a few people have commit access to the core repository their approach is more like that of Linus on the Git project (as discussed in <<01-IntroductionToLocalGit#why-do-programmers-use-git>>); often managing and including commits from others more than making their own commits. Many commits made to the repository are made by squashing and merging commits from forks into the `master` branch of the main repository. The squashing means that any fixes that needed to be made to the commit during the pull request process will not be seen in the `master` branch and each commit message can be tailored by the core team to communicate information in the best possible way.
+Homebrew's workflow makes use of multiple remote repositories. As only a few people have commit access to the core repository their approach is more like that of Linus on the Git project (as discussed in <<01-LocalGit#why-do-programmers-use-git>>); often managing and including commits from others more than making their own commits. Many commits made to the repository are made by squashing and merging commits from forks into the `master` branch of the main repository. The squashing means that any fixes that needed to be made to the commit during the pull request process will not be seen in the `master` branch and each commit message can be tailored by the core team to communicate information in the best possible way.
 
 This workflow means that only those on the core team can do anything dangerous to the the main repository. Anyone else will need their commits reviewed before they are applied. This puts more responsibility on the shoulders of the core team but means that other contributors to Homebrew only need to know how to create a pull request and not how to e.g. squash or merge commits.
 

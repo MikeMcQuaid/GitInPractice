@@ -1,4 +1,4 @@
-## Introduction to local Git
+## Local Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn how and why to use Git as a local version control system by covering the following topics:
@@ -63,7 +63,7 @@ A Git _repository_ is the local collection of all the files related to a particu
 
 Git repositories store all their data on your local machine. Making commits, viewing history and requesting differences between commits are all local operations that do not require a network connection. This makes all these operations much faster in Git than with centralized version control systems such as Subversion.
 
-Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced in <<02-IntroductionToRemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
+Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
 
 #### Problem
 You wish to create a new local Git repository in a new subdirectory named `GitInPracticeRedux.
@@ -189,7 +189,7 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been succe
 
 In the status output:
 
-* "default branch output (1)" is the first line of `git status` output (which unfortunately, like the run commands, is also always prefixed with a `#`). It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "default branch output (1)" is the first line of `git status` output (which unfortunately, like the run commands, is also always prefixed with a `#`). It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the index (the staging area for the next commit).
 
@@ -301,7 +301,7 @@ image::diagrams/01-ParentCommit.png[]
 Now that we have two commits and have learned how they are stored we can start looking at Git's history.
 
 ### Viewing history: git log, gitk, gitx
-The _history_ in Git is the complete list of all commits made since the repository was created. The history also contains the references to any _branches_, _merges_ and _tags_ made within the repository. These three will be covered in <<02-IntroductionToRemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>, <<02-IntroductionToRemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
+The _history_ in Git is the complete list of all commits made since the repository was created. The history also contains the references to any _branches_, _merges_ and _tags_ made within the repository. These three will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>, <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 When you are using Git you will find yourself regularly checking the history; sometimes to remind yourself of your own work, sometimes to see why other changes were made in the past and sometimes reading new changes than have been made by others. In different situations different pieces of data will be interesting but all pieces of data will always be available for every commit.
 
@@ -537,7 +537,7 @@ You can also use the tool `git rev-parse` if you want to see what SHA-1 a given 
 6b437c7739d24e29c8ded318e683eca8f03a5260
 ```
 
-There are more types of refs such as remote branches and tags but you don't need to worry about them just now; they will be introduced in <<02-IntroductionToRemoteGit#adding-a-remote-repository-git-remote-add>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
+There are more types of refs such as remote branches and tags but you don't need to worry about them just now; they will be introduced in <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 ### Summary
 In this chapter you hopefully learned:

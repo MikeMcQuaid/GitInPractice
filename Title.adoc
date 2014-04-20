@@ -2,6 +2,7 @@
 Mike McQuaid <mike@mikemcquaid.com>
 :doctype: book
 :toc: left
+:toclevels: 1
 :numbered:
 :idprefix:
 :idseparator: -

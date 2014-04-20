@@ -20,7 +20,7 @@ Git keeps track of the changes to files in the working directory of a repository
 
 This may happen if you are working with tools (e.g. IDEs) which move files for you and aren't aware of Git (so don't give Git the correct move instruction).
 
-Sometimes you will still need to manually rename or move files in your Git repository and you wish to preserve the history of the files after the rename or move operation. As you learnt in <<01-IntroductionToLocalGit#viewing-history-git-log-gitk-gitx>>, readable history is one of the key benefits of a version control system so it's important to avoid losing it whenever possible. If a file has had 100 small changes made to it with good commit messages it would be a shame to undo all that work just by renaming or moving a file.
+Sometimes you will still need to manually rename or move files in your Git repository and you wish to preserve the history of the files after the rename or move operation. As you learnt in <<01-LocalGit#viewing-history-git-log-gitk-gitx>>, readable history is one of the key benefits of a version control system so it's important to avoid losing it whenever possible. If a file has had 100 small changes made to it with good commit messages it would be a shame to undo all that work just by renaming or moving a file.
 
 #### Problem
 You wish to rename a previously committed file in your Git working directory named `GitInPractice.asciidoc` to `01-IntroducingGitInPractice.asciidoc` and commit the newly renamed file.
@@ -48,7 +48,7 @@ You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and committed
 #### Discussion
 Moving and renaming files in version control systems rather than deleting and recreating them is done to preserve their history. For example, when a file has been moved into a new directory you will still be interested in the previous versions of the file before it was moved. In Git's case it will try and auto-detect renames or moves on `git add` or `git commit`; if a file is deleted and new file is created which has a majority of lines in common then Git will automatically detect the file was moved and `git mv` is not necessary. Despite this handy feature it's good practice to use `git mv` so you don't need to wait for a `git add` or `git commit` for Git to be aware of the move and to have consistent behavior across different versions of Git (which may have differing move auto-detection behavior).
 
-After running `git mv` the move or rename will be added to Git's index staging area which, if you remember from <<01-IntroductionToLocalGit#building-a-new-commit-in-the-index-staging-area-git-add>>, means that the change has been staged for inclusion in the next commit.
+After running `git mv` the move or rename will be added to Git's index staging area which, if you remember from <<01-LocalGit#building-a-new-commit-in-the-index-staging-area-git-add>>, means that the change has been staged for inclusion in the next commit.
 
 It's also possible to rename files or directories and move files or directories into other directories inside the Git repository using the `git mv` command and the same syntax as above. If you wish to move files into or out of a repository you must use a different, non-Git command (such as a Unix `mv` command).
 
@@ -134,7 +134,7 @@ The `--hard` argument signals to `git reset` that you wish it to reset both the 
 `git reset` will be used to perform more operations (including those that alter history) in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>.
 
 .Dangers of using `git reset --hard`
-WARNING: Care should be used with `git reset --hard`; it will immediately and without prompting remove all your uncommitted changes to any file in your working directory. This is probably the command which has caused me more regret than any other; I've typed it accidentally and removed work I hadn't intended to. Remember in <<01-IntroductionToLocalGit#why-do-programmers-use-git>> we learnt that it's very hard to lose work with Git? If you have uncommitted work this is one of the easiest ways to lose it! A safer option may be to use Git's stash functionality instead.
+WARNING: Care should be used with `git reset --hard`; it will immediately and without prompting remove all your uncommitted changes to any file in your working directory. This is probably the command which has caused me more regret than any other; I've typed it accidentally and removed work I hadn't intended to. Remember in <<01-LocalGit#why-do-programmers-use-git>> we learnt that it's very hard to lose work with Git? If you have uncommitted work this is one of the easiest ways to lose it! A safer option may be to use Git's stash functionality instead.
 
 ### Delete untracked files: git clean
 When working in a Git repository some tools may output undesirable files into your working directory.
@@ -168,7 +168,7 @@ Removing GitInPracticeIdeas.tmp <1>
 You have removed `GitInPracticeIdeas.tmp` from the Git working directory.
 
 #### Discussion
-`git clean` requires the `--force` argument because this command is potentially dangerous; with a single command you can remove many, many files very quickly. Remember in <<01-IntroductionToLocalGit#why-do-programmers-use-git>> we learnt that accidentally losing any file or change committed to Git system is nearly impossible. This is the opposite situation; `git clean` will happily remove thousands of files very quickly which cannot be easily recovered (unless backed up through another mechanism).
+`git clean` requires the `--force` argument because this command is potentially dangerous; with a single command you can remove many, many files very quickly. Remember in <<01-LocalGit#why-do-programmers-use-git>> we learnt that accidentally losing any file or change committed to Git system is nearly impossible. This is the opposite situation; `git clean` will happily remove thousands of files very quickly which cannot be easily recovered (unless backed up through another mechanism).
 
 To make `git clean` a bit safer you can preview what will be removed before doing so by using `git clean -n` (or `--dry-run`). This behaves like the `git rm --dry-run` in that it prints the output of the removals that would be performed but does not actually do so.
 

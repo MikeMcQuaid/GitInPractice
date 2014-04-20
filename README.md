@@ -10,26 +10,27 @@ I rewrite the history of this repository often. Sorry about that.
 
 ## Table of Contents
 1. Introduction to Git
-       1. [Introduction to local Git](01-IntroductionToLocalGit.adoc)
-       2. [Introduction to remote Git](02-IntroductionToRemoteGit.adoc)
-2. Using Git
+       1. [Local Git](01-LocalGit.adoc)
+       2. [Remote Git](02-RemoteGit.adoc)
+2. Git Essentials
        1. [Filesystem Interactions](03-FilesystemInteractions.adoc)
        2. [History Visualization](04-HistoryVisualization.adoc)
        3. [Advanced Branching](05-AdvancedBranching.adoc)
        4. [Rewriting History and Disaster Recovery](06-RewritingHistoryAndDisasterRecovery.adoc)
-3. Git Workflows
-       1. [Git Shortcuts](07-GitShortcuts.adoc)
-       2. [Creating a clean history](08-CreatingACleanHistory.adoc)
-       3. [Merging vs Rebasing](10-MergingVsRebasing.adoc)
-       4. [Working with Subversion repositories](10-WorkingWithSubversionRepositories.adoc)
-       5. [GitHub Pull Requests](11-GitHubPullRequests.adoc)
-       6. [Vendoring project dependencies as submodules](12-VendoringProjectDependenciesAsSubmodules.adoc)
-       7. Hosting your own Git repository
-       8. A recommended Git workflow for programming teams
-4. Appendices
-       1. [Why use version control?](A-WhyUseVersionControl.adoc)
+3. Advanced Git
+       1. [Personalizing Git](07-PersonalizingGit.adoc)
+       2. [Vendoring Dependencies as Submodules](08-VendoringDependenciesAsSubmodules.adoc)
+       3. [Working with Subversion](09-WorkingWithSubversion.adoc)
+       4. [GitHub Pull Requests](10-GitHubPullRequests.adoc)
+       5. Hosting a Repository
+4. Git Best Practices
+       1. [Creating a Clean History](12-CreatingACleanHistory.adoc)
+       2. [Merging vs. Rebasing](13-MergingVsRebasing.adoc)
+       3. Recommended Team Workflows
+5. Appendices
+       1. [Why Use Version Control?](A-WhyUseVersionControl.adoc)
        2. [Git Installation](B-GitInstallation.adoc)
-       3. [Creating a GitHub account and repository](C-CreatingAGitHubAccountAndRepository.adoc)
+       3. [Creating a GitHub Account and Repository](C-CreatingAGitHubAccountAndRepository.adoc)
 
 ## Usage
 You can read all the AsciiDoc source files inline on GitHub.
