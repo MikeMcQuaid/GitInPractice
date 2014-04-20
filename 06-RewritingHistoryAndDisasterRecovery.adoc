@@ -12,8 +12,6 @@ In this chapter you will learn about rewriting history by learning the following
 * How to rewrite the entire history of a branch
 * How to avoid losing your work
 
-// TODO: git commit --amend?
-
 Before jumping in to rewriting history let's start by learning about how to avoid losing committed data using `git reflog`.
 
 ### List all changes including history rewrites: git reflog
@@ -194,6 +192,10 @@ NOTE: `git reset` modifies the current branch pointer so it points to another co
 `git reset` can also take a list of paths as the last arguments to the command. These can be separated using a `--` between the ref and the list of paths. The `--` is optional but makes more explicit the separation between the ref and paths. After all, it's possible (if unlikely) that you could have a file and path with the same name.
 
 For example to reset the contents of the `00-Preface.asciidoc` file to the previous commit you would run `git reset HEAD^ -- 00-Preface.asciidoc`.
+
+As well as `--hard` and `--mixed` `git reset` can also take a `--soft` argument. The `--soft` can be compared to `--mixed` and `--hard` as seen earlier. Where `--hard` reset the index staging area and working tree (i.e. discards all the changes) and `--mixed` reset the staging area but not the working tree (i.e. leaves the changes but removes them from the staging area) `--soft` will reset neither the staging area or working tree but just changes the `HEAD` pointer to point to the previous commit. This means that if you ran `git commit` (with no other arguments) after a `git reset --soft HEAD^` the contents of the index staging area (and therefore the commit) would be the same as the commit that had just been reset.
+
+You can also perform a combined reset-and-commit operation to modify the previous commit using `git commit --amend`. `git commit --amend` resets to the previous commit and then creates a new commit with the same commit message as the previous. It uses `git reset --soft HEAD^` and then runs `git commit --reedit-message` with the now-reset commit as an argument. This in effect means that it'll add anything you have currently added to the index staging area to the changes of the previous commit and prompt for a new commit message. I most commonly use this to adjust the previous commit message if I realize I've made a typo or omitted useful information.
 
 ### Rebase commits on top of another branch: git rebase
 Recall from <<02-IntroductionToRemoteGit#rebasing>> that rebasing is similar to merging but requires rewriting history.
