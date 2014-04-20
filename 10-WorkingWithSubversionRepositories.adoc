@@ -15,7 +15,7 @@ In this chapter you will learn about Git's Subversion integration by learning th
 Let's start by importing the "Google Search Appliance connector for Lotus Notes" Subversion repository from Google Code. It was selected as it has a small history but still contains branches and tags so we can see how they are used.
 
 .How can I install `git-svn`?
-NOTE: `git svn` is usually installed as part of the default Git installation (and is in all of the official Git installers). If it has not been then when you run `git svn` you will see a message resembling: `WARNING: You called a Git command named 'svn', which does not exist.` In this case you will need to install `git-svn` separately. This can be done by installing `git-svn` (or similar) with your package manager e.g. on Debian or Ubuntu run `apt-get install git-svn`.
+NOTE: `git svn` is usually installed as part of the default Git installation (and is in all of the official Git installers). If it has not been then when you run `git svn` you will see a message resembling: `WARNING: You called a Git command named 'svn', which does not exist.` In this case you will need to install `git-svn` separately. This can be done by installing `git-svn` (or similar) with your package manager e.g. on Debian/Ubuntu run `apt-get install git-svn`.
 
 Clone the `google-enterprise-connector-notes` Subversion repository using:
 
@@ -51,7 +51,7 @@ Checked out HEAD:
 
 From the Subversion repository clone output:
 
-* "clone command (1)" shows the `git svn clone` command used to clone the entire Subversion repository. The `--prefix` argument is only needed in Git versions before 2.0 and means that the Subversion remote branches will all be created under `origin/` (like a normal Git remote repository would do). The `--stdlayout` flag is used to say that the Subversion repository is in the usual format i.e. has the `branches`, `tags` and `trunk` as the subfolders of the root of the repository and they should all be imported.
+* "clone command (1)" shows the `git svn clone` command used to clone the entire Subversion repository. The `--prefix` argument is only needed in Git versions before 2.0 (which should be released around May 2014) and means that the Subversion remote branches will all be created under `origin/` (like a normal Git remote repository would do). The `--stdlayout` flag is used to say that the Subversion repository is in the usual format i.e. has the `branches`, `tags` and `trunk` as the subfolders of the root of the repository and they should all be imported.
 * "SVN repository (2)" shows the HTTP URL of the Subversion repository that we've cloned.
 * "directory name (3)" shows the name of the local directory which will contain the new Git repository created from the Subversion repository.
 * "first revision (4)" shows the first commit/revision (`r1`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`ec0d88...`) into the local Git repository.
@@ -83,7 +83,7 @@ Let's see an example of how `git-svn` formats a commit message:
 .Subversion commit message in Git repository output
 [.long-annotations]
 ```
-# git show --no-patch --format=%B master
+# git show -s --format=%B master
 
 Log server and database in Lotus Notes errors (b/13059110)
 
@@ -99,7 +99,7 @@ git svn-id:
 
 From the Subversion commit in Git repository output:
 
-* "SVN URL (1)" shows the full URL for this Subversion commit including the Subversion branch (`trunk`) and revision (`@381`).
+* "SVN URL (1)" shows the full URL for this Subversion commit including the Subversion branch (`trunk`) and revision (`@381`). The `trunk` is automatically mapped to the `master` Git branch.
 * "UUID (2)" shows a unique `git svn` identifier for this Subversion repository. This is used to ensure that the repository at the URL remains the same and is not replaced with another which could errors when you tried to update.
 
 #### Subversion branches and tags
@@ -145,6 +145,8 @@ Let's examine the structure of the Subversion repository by running `git branch 
 
 .Remote branch output
 ```
+# cd google-notes/
+
 # git branch --remote
   origin/2.6.x
   ...
@@ -254,7 +256,7 @@ Let's look at the metadata of a commit imported from a Subversion repository:
 
 .Subversion commit metadata in Git repository
 ```
-# git show --no-patch --format=short master
+# git show -s --format=short master
 
 commit 750dd5077c4122bcc3a8a17a65088c0ebd85a2b6
 Author: tdnguyen@google.com <1>
@@ -298,7 +300,7 @@ This may be useful if you want to migrate a project from Subversion to Git; you 
 ### Commit and push to an SVN repository from a Git repository
 Remember that `svn commit` actually does the equivalent of a `git commit` and a `git push` to the remote server. As the repository created by `git svn` is a normal Git repository you can change files and commit as you might do with any other Git repository. The only differences are when you wish to push your changes to the Subversion repository and if you wish to interact with remote branches.
 
-To push commits on the current branch to a Subversion repository you use the `git svn dcommit` command. If you'd committed to the current branch of a `git svn` repository and ran `git svn dcommit` the output should resemble:
+To push all the unpushed commits on the current branch to a Subversion repository you use the `git svn dcommit` command. If you'd committed to the current branch of a `git svn` repository and ran `git svn dcommit` the output should resemble:
 
 .Subversion push output
 [.long-annotations]
@@ -342,9 +344,8 @@ As we have a local Git repository containing the contents of the Subversion repo
 
 Recall that both `git svn rebase` and `git svn dcommit` perform rebasing operations on updates. As a result it becomes very difficult to correctly handle merges between Subversion branches with `git svn`. You can read how to do this in `git svn --help` using the `--mergeinfo` flag but I will not be covering this in this book.
 
-What I would advise is that you use local branches only for your own work and not for collaboration with others. When you are finished with a local branch and wish to merge it you should rebase the contents into the branch you wish to include it in. This means that others will not see your merge commits but you can still make use of the useful cheap local branches and history rewriting in Git.
-
-If you want to interact with Subversion remote branches or tags you should instead use the `git svn branch` and `git svn tag` commands. These are copies of Subversion's `svn branch` and `svn tag` commands and take the same parameters and use the same syntax.
+.How should I collaborate when using Git SVN?
+NOTE: What I would advise is that you use local branches only for your own work and not for collaboration with others. When you are finished with a local branch and wish to merge it you should rebase the contents into the branch you wish to include it in. This means that others will not see your merge commits but you can still make use of the useful cheap local branches and history rewriting in Git. If you want to interact with Subversion remote branches or tags you should instead use the `git svn branch` and `git svn tag` commands. These are copies of Subversion's `svn branch` and `svn tag` commands and take the same parameters and use the same syntax.
 
 ### Access a GitHub repository with Subversion
 So far this chapter has been concerned with accessing Subversion repositories using Git. This assumes a development team that is mostly using Subversion and a few users or single user using Git. Incidentally, this is how I learnt Git originally; I worked on Subversion projects but used Git locally.
@@ -392,7 +393,9 @@ You can `svn commit`, `svn branch` and use any other Subversion commands with th
 
 You can read more about the GitHub Subversion integration at https://help.github.com/articles/support-for-subversion-clients; the current implementation-specific details are beyond the scope of this book and not necessary for typical use.
 
-If you are already using or considering GitHub I would strongly recommend using the GitHub repository through Subversion rather than a Subversion repository through `git-svn`. This is because Subversion's functionality is effectively a subset of Git's functionality so using GitHub's Subversion support will not limit Git users as much (if at all) compared to using Git users using `git svn`.
+If you are already using or considering GitHub I would strongly recommend using the GitHub repository through Subversion rather than a Subversion repository through `git-svn`. This is because Subversion's functionality is effectively a subset of Git's functionality so using GitHub's Subversion support will not limit Git users as much (if at all) compared to using Git users using `git svn`. For example, you can happily merge branches using Git and push them when using GitHub's Subversion integration whereas when using `git-svn` then, as mentioned in <<#commit-and-push-to-an-svn-repository-from-a-git-repository>>, you should do branch merges using Subversion's tools instead.
+
+If you are not using GitHub there are tools such as SubGit (http://subgit.com) that are beyond the scope of this book but may enabled you to work in teams with some users using Git and others using Subversion.
 
 ### Summary
 In this chapter you hopefully learned:

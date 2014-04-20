@@ -195,7 +195,7 @@ For example to reset the contents of the `00-Preface.asciidoc` file to the previ
 
 As well as `--hard` and `--mixed` `git reset` can also take a `--soft` argument. The `--soft` can be compared to `--mixed` and `--hard` as seen earlier. Where `--hard` reset the index staging area and working tree (i.e. discards all the changes) and `--mixed` reset the staging area but not the working tree (i.e. leaves the changes but removes them from the staging area) `--soft` will reset neither the staging area or working tree but just changes the `HEAD` pointer to point to the previous commit. This means that if you ran `git commit` (with no other arguments) after a `git reset --soft HEAD^` the contents of the index staging area (and therefore the commit) would be the same as the commit that had just been reset.
 
-You can also perform a combined reset-and-commit operation to modify the previous commit using `git commit --amend`. `git commit --amend` resets to the previous commit and then creates a new commit with the same commit message as the previous. It uses `git reset --soft HEAD^` and then runs `git commit --reedit-message` with the now-reset commit as an argument. This in effect means that it'll add anything you have currently added to the index staging area to the changes of the previous commit and prompt for a new commit message. I most commonly use this to adjust the previous commit message if I realize I've made a typo or omitted useful information.
+You can also perform a combined reset and commit operation to modify the previous commit using `git commit --amend`. `git commit --amend` resets to the previous commit and then creates a new commit with the same commit message as the commit that was just reset. It uses `git reset --soft HEAD^` and then runs `git commit --reedit-message` with the previous (now reset) commit as an argument. This means that it'll add anything you have currently added to the index staging area to the changes from the previous commit and prompt for a new commit message. I most commonly use this to adjust the previous commit message if I realize I've made a typo or omitted useful information.
 
 ### Rebase commits on top of another branch: git rebase
 Recall from <<02-IntroductionToRemoteGit#rebasing>> that rebasing is similar to merging but requires rewriting history.
@@ -252,6 +252,8 @@ From the rebase output:
 image::screenshots/06-GitXRebaseAfter.png[]
 
 In <<gitx-rebase-after>> you can see the rebased `inspiration` branch. It still has a single commit but that commit's parent is now the latest commit on the `v0.1-release` branch rather than the commit tagged `v0.1`. Note that GitX reflowed and recolored some of the branches; `master` is now to the right of `v0.1-release` and `v0.1-release` is now green. This doesn't have any significance beyond GitX trying to make the output more readable.
+
+Note that some editions of the book are in printed in grayscale so these colors may not be visible. Instead please compare them to GitX on your computer.
 
 You have rebased the `inspiration branch` on top of the `v0.1-release` branch.
 
@@ -591,9 +593,9 @@ From the forced push output:
 You have rewritten the history on a remote branch.
 
 #### Discussion
-You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once.
+You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change in <<07-GitShortcuts#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
 
-Remember the reflog isn't pushed remotely so if you unintentionally rewrite history on the remote branch there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason you should be very careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that no-one else is using. Avoid doing it on shared branches and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to ensure you aren't rewriting commits that are on the remote branch that you don't have locally.
+Remember the reflog isn't pushed remotely so if you unintentionally rewrite history on the remote branch there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason you should be very careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that no-one else is using. Avoid doing it on shared branches and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to try and ensure you aren't rewriting commits that are on the remote branch that you don't have locally. Of course, it's still possible that someone pushes a commit just after you do a `git pull` which you overwrite (which is why `git push --force` is a dangerous operation).
 
 ### Rewriting the entire history of a branch: git filter-branch
 There are times when rewriting a few commits is not enough; you want to rewrite the entire history of a branch. Perhaps there was confidential files that you committed accidentally early in the project that you want to remove or you want to split a large repository into multiple smaller ones.

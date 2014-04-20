@@ -1,4 +1,6 @@
 ## A recommended Git workflow for programming teams
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Git Flow/GitHub Flow/Mike Flow
+* Git Flow/GitHub Flow/Mike Flow
+* https://www.atlassian.com/git/workflows
+* Who resolves merge conflicts?

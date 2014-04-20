@@ -67,6 +67,8 @@ For testing purposes let's create and commit a temporary file to be removed:
 3.  Run `git add GitInPracticeReviews.tmp`.
 4.  Run `git commit --message 'Add review temporary file.'`
 
+Note that if the `git add` fails you may have `*.tmp` in a `.gitignore` file somewhere (introduced in <<ignore-files-gitignore>>). In this case add it using `git add --force GitInPracticeReviews.tmp`.
+
 #### Problem
 You wish to remove a previously committed file named `GitInPracticeReviews.tmp` in your Git working directory and commit the removed file.
 
@@ -140,6 +142,8 @@ When working in a Git repository some tools may output undesirable files into yo
 Some text editors may use temporary files, operating systems may write thumbnail cache files or programs may write crash dumps. Alternatively, sometimes there may be files that are desirable but you do not wish to commit them to your version control system and instead wish to remove them to build clean versions (although this is generally better handled by _ignoring_ these files as in <<ignore-files-gitignore>>).
 
 When you wish to remove these files you could remove them manually but it's easier to ask Git to do so as it already knows which files in the working directory are versioned and which are _untracked_.
+
+You can view the files that are currently tracked by running `git ls-files`. This will currently only show `01-IntroducingGitInPractice.asciidoc` as that is the only file that has been added to the Git repository. You can run `git ls-files --others` (or `-o`) to show the currently untracked files (which there should be none of).
 
 For testing purposes let's create a temporary file to be removed:
 
@@ -419,7 +423,7 @@ Like `git update-index`, `git ls-files -v` is a low level command that you will 
 
 Rather than reading through the output for this command you could instead run `git ls-files -v | grep '^[hsmrck?]' | cut -c 3-`. This makes use of Unix pipes where the output of each command is passed into the next and modified.
 
-`grep '^[hsmrck?]'` filters the output filenames to only show those that begin with any of the lowercase `hsmrck?` characters.
+`grep '^[hsmrck?]'` filters the output filenames to only show those that begin with any of the lowercase `hsmrck?` characters (the valid prefixes output by `git ls-files`). It's not important to understand the meanings of any prefixes other than `H` or `h` but you can read more about them by running `git ls-files --help`.
 
 `cut -c 3-` filters the first two characters of each of the output lines so e.g. `h` followed by a space in the above example.
 
@@ -434,7 +438,7 @@ With these combined the output should resemble:
 <1> assumed unchanged file
 
 .How do pipes, `grep` and `cut` work?
-NOTE: Do not worry if you don't understand quite how Unix pipes, `grep` or `cut` work; this book is about Git rather than shell scripting after all! Feel free to just use the above command as-is as a quick way of listing files that are assumed to be unchanged.
+NOTE: Do not worry if you don't understand quite how Unix pipes, `grep` or `cut` work; this book is about Git rather than shell scripting after all! Feel free to just use the above command as-is as a quick way of listing files that are assumed to be unchanged. To learn more about these I recommend the Wikipedia page on Unix filters: http://en.wikipedia.org/wiki/Filter_(Unix).
 
 ### Stop assuming files are unchanged
 Usually telling Git to assume there have been no changes made to a particular file is a temporary option; if you have to keep files changed long-term they should probably be committed. At some point you will wish to tell Git to monitor any changes that are made to these files once more.

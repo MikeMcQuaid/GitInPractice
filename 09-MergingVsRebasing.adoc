@@ -17,16 +17,16 @@ CMake is a cross-platform build-system created by Kitware. It has many contribut
 
 CMake's Git repository is available to access at `git://cmake.org/cmake.git`. It's also mirrored on GitHub at https://github.com/Kitware/CMake if you would rather browse or clone it from there. Please clone it and examine it while reading this chapter.
 
-.CMake repository history
-[[cmake-gitx]]
-image::diagrams/09-CMakeGitX.png[]
-
 CMake makes heavy use of branching and merges. Several of the branches visible or implied in <<cmake-gitx>> are:
 
 * `next`: Shown in the figure as `origin/next`. Used for integration of _topic branches_ when developing a new version of CMake. `master` is merged in here regularly to fix merge conflicts.
 * `nightly`: Shown in the figure as `origin/nightly`. Follows the `next` branch and is updated to the latest commit on `next` automatically at 01:00 UTC every day.
 * `master`: Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. Used for preparing a new release; development is merged into here. New topic branches are branched off of `master`.
 * topic branches: Seen in figure merged `Merged topic '...' next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on topic branches. Always merged into `next` and deleted after merge.
+
+.CMake repository history
+[[cmake-gitx]]
+image::diagrams/09-CMakeGitX.png[]
 
 The regular merging of `master` into `next` ensures that any merge conflicts between `master` and `next` are resolved quickly in the `next` branch. The regular merging of topic branches into `next` allows integration testing before a new release is prepared and provides context for individual commits; the branch name used in the merge commit helps indicate what feature or bug the commit was in relation to.
 

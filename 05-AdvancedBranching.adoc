@@ -101,7 +101,7 @@ Certain strategies (such as recursive) can also take options by passing the `--s
 Some useful merge strategies are:
 
 * `recursive`: this strategy can merge one branch into another and automatically detect renames. This strategy is the default if you try and merge a single branch into another.
-* `octopus`: this strategy can merge multiple branches at once but will refuse to allow manual resolution of merge conflicts. This strategy is the default if you try and merge two or more branches into another. I've never had to use this in my entire time using Git so I'm not going to detail how it is used.
+* `octopus`: this strategy can merge multiple branches at once but will refuse to allow manual resolution of merge conflicts. This strategy is the default if you try and merge two or more branches into another by running e.g. `git merge branch1 branch2 branch3`. You will never set it explicitly but it's worth remembering that you cannot manually resolve merge conflicts if you merge multiple branches at once. In my experience this means that it's worth always merging branches one at a time.
 * `ours`: this strategy performs a normal merge but ignores all the changes from the incoming branch. This means the resulting tree is the same as it was before the merge. This can be useful when you wish to merge a branch and indicate this in the history without wanting to actually including any of its changes. For example, you could use this to merge the results of a failed experiment and then delete the experimental branch afterwards. In this case the experiment would remain in the history without being in the current code.
 * `subtree`: this strategy is a modified version of the recursive strategy that will detect if the tree structures are at different levels and adjust them if needed. For example, if one branch had all the files in the directory `A/B/C` and the other had all the same files in the directory `A/B` then the subtree strategy would handle this case; `A/B/C/README.md` and `A/B/README.md` could be merged despite their different tree locations.
 
@@ -349,7 +349,7 @@ You can also customize the tool that is used to specify your own merge tools. In
 ### Only resolve each merge conflict once: git rerere
 You may find yourself in a situation where you have a long-running branch where you have to keep merging in another branch and get the same merge conflicts every time.
 
-Git has a command named `git rerere` (which stands for Reuse Recorded Resolution) which integrates with the normal `git merge` workflow to record the resolution of merge conflicts for later replay. In short, you only need to solve a particular merge conflict once.
+Git has a command named `git rerere` (which stands for Reuse Recorded Resolution) which integrates with the normal `git merge` workflow to record the resolution of merge conflicts for later replay. In short, you only need to solve a particular merge conflict once. I always tend to enable this when I use Git as it runs automatically to ensure that I don't need to solve the same merge conflicts multiple times if e.g. repeatedly merging the same branch which produces the same conflict.
 
 Let's learn how to setup `git rerere`.
 
@@ -448,12 +448,12 @@ git tag can take various flags:
 Run `git push` to push the `master` branch to `origin/master`. You may have noticed that it did not push any of the tags. After you've tagged a version and verified it is pointing to the correct commit and has the correct name then you can push it using `git push --tags`. This will push all the tags you've created in the local repository to the remote repository. These tags will then be fetched by anyone using `git fetch` on the same repository in future.
 
 .How can you update remote tags?
-NOTE: As you saw earlier it is possible to delete or modify tags locally. It's also possible to push these changes to the remote repository with `git push --tags --force` but this is not advised. For other users of the repository to have their tags updated they will need to delete them locally and refetch. This is intentionally cumbersome as Git intends tags to be static so does not change them locally without users explicit intervention.
+NOTE: You've seen that by using `git tag --delete` or `git tag --force` it is possible to delete or modify tags locally. It's also possible to push these changes to the remote repository with `git push --tags --force` but this is not advised. For other users of the repository to have their tags updated they will need to delete them locally and refetch. This is intentionally cumbersome as Git intends tags to be static so does not change them locally without users explicit intervention.
 
 If you realize you've tagged the wrong commit and wish to update it after pushing it's generally a better idea to just tag a new version and push that instead.
 
 ### Generate a version number based on previous tags: git describe
-You've seen that `git tag` can be used to identify certain commits as released versions of a project. In some cases you may wish to generate versions for the software in between tags.
+You've seen that `git tag` can be used to identify certain commits as released versions of a project.
 
 I'm a passionate advocate of continuous integration systems and I've worked on desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
 
@@ -547,7 +547,7 @@ NOTE: Recall that the SHA-1 of a commit is based on its tree and metadata (which
 You have cherry-picked a commit from the `v0.1-release` branch to the `master` branch.
 
 #### Discussion
-`git cherry-pick` (like many other Git commands) takes a ref as the parameter rather than a specific commit. As a result we could have interchangeably used `git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the `v0.1-release` branch) in the previous example for the same result.
+`git cherry-pick` (like many other Git commands) can take a ref as the parameter rather than only a specific commit. As a result we could have interchangeably used `git cherry-pick dfe2377` (where `dfe2377` is the most recent commit on the `v0.1-release` branch) in the previous example for the same result.
 
 You can pass multiple refs to `cherry-pick` and they will be cherry-picked onto the current branch in the order requested.
 
@@ -560,6 +560,9 @@ NOTE: Cherry-picking is best used for individual commits that may be out of sequ
 * if you are cherry-picking from a public branch (i.e. one you will push remotely) to another public branch then you can use the `-x` flag to append a line to the cherry-picked commit's message saying which commit this change was picked from. For example if this flag was used in the last example the commit message would have `(cherry picked from commit dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
 * when you want to indicate in the commit message which person cherry-picked a particular change more explicitly than the "Committer" metadata that will be set by default then you can use the `--signoff` (or `-s`) flag. This will append a Signed-off-by line to the end of the commit message. For example if this flag was used in the last example the commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
 * if there is a merge conflict on a `cherry-pick` you will need to resolve it a similar fashion as a `git merge` (or the same fashion as `git rebase` which you will see in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>). This involves resolving the conflict, running `git add` but then `git cherry-pick --continue` instead of `git commit` to commit the changes. If you wish to abort the current cherry-pick as perhaps you've realized the merge-conflict is too complex you can do this using `git cherry-pick --abort`.
+
+.When would you sign off a commit?
+NOTE: Signing-off a commit is generally used in projects to indicate that a commit was checked by someone else before being included. I'm a maintainer of the Homebrew open-source project and use sign-off to indicate to other maintainers that it was me who merged this commit. This information is also included as the "Author" metadata in the commit but the sign-off makes it more readily accessible. The same process could be used in companies when a developer reviews the work of another and wants to signify this in a commit message.
 
 ### Revert a previous commit: git revert
 You may occasionally make a commit that you regret. You would then wish to undo the commit until you can fix it so it works as intended.

@@ -126,7 +126,7 @@ You have pushed your `master` branch's changes to the `origin` remote's `master`
 #### Discussion
 The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch. After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
 
-`git push` can take an `--all` flag which will push all branches and tags at once. Be careful when doing this; you may push some branches with work in-progress.
+`git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
 
 `git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
 
@@ -147,7 +147,7 @@ image::screenshots/02-GitHubPush.png[]
 ### Cloning a remote/GitHub repository onto your local machine: git clone
 It is useful to learn how to create a new Git repository locally and push it to GitHub. However, you will usually be downloading an existing repository to use as your local repository. This process of creating a new local repository from an existing remote repository is known as _cloning_ a repository.
 
-Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is that Subversion is a centralized version control system so when you download a repository locally you are only actually downloading the latest revision from the repository. With Git it is known as _cloning_ because you are making a complete copy of that repository by downloading all commits, branches, tags; the complete history of the repository onto your local machine.
+Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is that Subversion is a centralized version control system so when you download a repository locally you are only actually downloading the latest revision from the repository. With Git it is known as _cloning_ because you are making a complete copy of that repository by downloading all commits, branches, tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>); the complete history of the repository onto your local machine.
 
 As you just pushed the entire contents of the local repository to GitHub let's remove the local repository and recreate it by cloning the repository on GitHub.
 
@@ -431,6 +431,8 @@ You can see from <<git-branch>> that there is a new branch label for the `chapte
 * orange: the currently checked-out local branch
 * green: a non-checked-out local branch
 * blue: a remote branch
+
+Note that some editions of the book are in printed in grayscale so these colors may not be visible. Instead please compare them to GitX on your computer.
 
 .Branch pointers
 [[branch-pointers]]

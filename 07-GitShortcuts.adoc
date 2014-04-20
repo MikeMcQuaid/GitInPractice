@@ -52,12 +52,12 @@ Options can also be unset by using the unset flag. For example, to unset the `gi
 Now that we've seen how to set and read some configuration settings for all repositories let's see how to do it for a single one.
 
 ### Set configuration for a single repository
-There are times when you may want to use different configuration settings for different repositories. For example, in the past I have used one email addresses when committing to open-source source repositories and another email address when committing to my employer's repositories. In this case you would set a different `user.email` value in the single repository configuration file to be used in preference to the global `~/.gitconfig`.
+There are times when you may want to use different configuration settings for different repositories on the same computer. For example, in the past I have used one email address when committing to open-source source repositories and another email address when committing to my employer's repositories. If you wanted to do both of these on the same computer case you could set a different `user.email` value in the single repository configuration file to be used in preference to the global `~/.gitconfig`.
 
 Recall that whenever we've used `git config` previously we've always used the `--global` flag. There's actually four different flags that can be used to affect the location of the configuration file that's used. These are:
 
 * `--global` which uses the `~/.gitconfig` file in your `$HOME` directory. For example, if your `$HOME` was `/Users/mike` then the global file would be at `/Users/mike/.gitconfig`.
-* `--system` which uses the `etc/gitconfig` file under wherever Git was installed. For example, if Git was installed into `/usr/local/` the system file would be at `/usr/local/etc/gitconfig`.
+* `--system` which uses the `etc/gitconfig` file under wherever Git was installed. For example, if Git was installed into `/usr/local/` the system file would be at `/usr/local/etc/gitconfig` or if installed into `/usr/` the system file would be at `/etc/gitconfig`.
 * `--local` which uses the `.git/config` file in a Git repository. For example, if a Git repository is at `/Users/mike/GitInPracticeRedux/.git` then the local file would be at `/Users/mike/GitInPracticeRedux/.git/config`. `.git/config` is the default if no other configuration location flags are provided.
 * `--file` (or `-f`) which takes another argument to specify an file path to write to. For example, you could specify a file using `git config --file /Users/mike/Documents/git.cfg`.
 
@@ -122,10 +122,10 @@ Git's output does not use colors by default on versions below 1.8.4. To enable c
 
 This will mean that Git will, if supported by your terminal and not writing to a file Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
 
-Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings.
+Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings (which are specific to the terminal software you are using).
 
 #### Using the new push defaults
-Git 2.0 defaults to the new push strategy (i.e. the `simple` push strategy). As a result, if your installed version of Git is 2.0 or above you can can skip this section.
+Git 2.0 (which should be released around May 2014) defaults to the new push strategy (i.e. the `simple` push strategy). As a result, if your installed version of Git is 2.0 or above you can can skip this section.
 
 Git's default push behavior uses the `matching` strategy on versions below 2.0. This means that when you run `git push` without arguments Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches then when you run `git push` any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch I would expect `git push` to only affect the branch that I am on.
 
@@ -187,7 +187,7 @@ Apple's Mac OS X operating system provides a system-wide secure keychain for eac
 
 After setting this, the next time you clone a private GitHub repository and asked for a password you will be prompted whether to allow `git-credential-osxkeychain` access to your keychain. You should allow this and then passwords will be stored and retrieved from here in future. This is useful on OSX as otherwise Git may prompt for the same passwords multiple times or write them unencrypted to disk.
 
-Alternatively on Windows there's a tool named `git-credential-winstore` and on Linux/Unix `git-credential-gnome-keyring`. Installing and configuring these should be similar to `git-credential-osxkeychain`.
+Alternatively on Windows there's a tool named `git-credential-winstore` (available at http://gitcredentialstore.codeplex.com) to store these credentials in the Windows Credential Store. On Linux/Unix there's a tool named `git-credential-gnome-keyring` (bundled with Git 1.8.0 and above) to store these credentials in the Gnome Keyring.
 
 #### Store arbitrary text in Git configuration
 As well as all the supported keys you can use any Git configuration file as an arbitrary key-value store. For example, if you ran `git config --global gitinpractice.status inprogress` these lines would be added to your `~/.gitconfig`:
@@ -265,7 +265,7 @@ As well as adding a longer version of the command you may wish to add comments i
   pretty-one-line-log = log --graph --oneline --decorate
 
   ## Shortened 'New' Commands
-  l = git pretty-one-line-log
+  l = pretty-one-line-log
 ```
 
 Using this format of comments, longer commands and shortened ones helps make your `.gitconfig` file easier to follow. When you or someone else looks back on the changes you made the comments and more verbose commands make it more obvious what your reasons were for adding each section.
@@ -326,6 +326,8 @@ The final version should look something like this:
 
 .Shell branch output
 image::screenshots/07-ShellBranch.png[]
+
+This prompt works by running the `git symbolic-ref --short HEAD` command every time a new prompt is displayed. In event of an error or no output (i.e. no checked out branch) it will not display any Git information in the prompt.
 
 ### Summary
 In this chapter you hopefully learned:

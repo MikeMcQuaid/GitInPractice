@@ -58,7 +58,7 @@ From the arguments provided to the log command:
 * `--grep` specifies a regular expression that matches the contents of the commit message. `file\.` was used rather than `file.` to escape the `.` character.
 
 .What are regular expressions?
-NOTE: Regular expressions are search patterns that are typically used to match these patterns inside of strings. There are multiple variants of regular expressions and Git uses the POSIX regular expression format. Git uses them for various filtering operations such as filtering by commit message or author as we saw previously. Characters either have literal meanings e.g. `a` which will always match a lowercase 'a' character or special meanings e.g. `.` which will match any character. For example, `file.` will match the strings `files` or `filed`. To turn a character with a special meaning into one with a literal meaning you can escape them with a backslash e.g. `file\.` will match the string `file.` but not the string `files`. I'm not going to cover regular expressions in detail because they are beyond the scope of this book. Don't worry if you don't fully understand them; what you've seen above should be more than enough to work with Git and there are many resources online that can aid you if you wish to pursue them further.
+NOTE: Regular expressions are search patterns that are typically used to match these patterns inside of strings. There are multiple variants of regular expressions and Git uses the POSIX regular expression format. Git uses them for various filtering operations such as filtering by commit message or author as we saw previously. Characters either have literal meanings e.g. `a` which will always match a lowercase 'a' character or special meanings e.g. `.` which will match any character. For example, `file.` will match the strings `files` or `filed`. To turn a character with a special meaning into one with a literal meaning you can escape them with a backslash e.g. `file\.` will match the string `file.` but not the string `files`. I'm not going to cover regular expressions in detail because they are beyond the scope of this book. Don't worry if you don't fully understand them; what you've seen above should be more than enough to work with Git. If you wish to learn more about them I recommend the Wikipedia Regular Expressions page: http://en.wikipedia.org/wiki/Regular_expression.
 
 You have shown a subset of commits filtered by author, date and commit message.
 
@@ -256,7 +256,7 @@ I have a selection of format options I refer to as my "ultimate log output". Let
 * 6576b68 Initial commit of book.
 ```
 
-This output format displays each commit on a single line. The line begins with a branch graph indicator (which I will explain shortly), follows with the short SHA-1 (which is useful for quickly copying-and-pasting), the branches, tags, HEAD that points to this commit in parentheses and ends with the commit subject.
+This output format displays each commit on a single line. The line begins with a branch graph indicator (which I will explain shortly), follows with the short SHA-1 (which is useful for quickly copying-and-pasting), the branches, tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>), HEAD that points to this commit in parentheses and ends with the commit subject.
 
 As you may have noticed this format is quite similar to that of the first two columns of GitX:
 
@@ -345,9 +345,10 @@ You wish to locate the commit that renamed `GitInPractice.asciidoc` to `01-Intro
 2.  Run `git bisect start`. There will be no output.
 3.  Run `git bisect bad`. There will be no output.
 4.  Run `git bisect good 6576b6` where `6576b6` is the SHA-1 of any commit that you know was before the rename. The output should resemble <<bisect-good>>.
-5.  Run `git bisect good` when the filename is `GitInPractice.asciidoc` and `git bisect bad` when the filename is `01-IntroducingGitInPractice.asciidoc`. The output should be similar each time.
-6.  Eventually the first bad commit will be found. The output should resemble <<bisect-bad>>.
-7.  Run `git bisect reset`. The output should resemble Listing <<bisect-log>>.
+5.  Check the names of the files in the directory by running `ls *.asciidoc*`.
+6.  When the `.asciidoc` file is named `GitInPractice.asciidoc` run `git bisect good` to indicate the file hasn't been renamed yet. When the `.asciidoc` file is named `01-IntroducingGitInPractice.asciidoc` run `git bisect bad` to indicate the file has been renamed. The output should be similar each time. No other parameters are required to `git bisect good` or `git bisect bad`; they will automatically checkout the next revision to be checked when they are run.
+7.  Eventually the first bad commit will be found. The output should resemble <<bisect-bad>>.
+8.  Run `git bisect reset`. The output should resemble Listing <<bisect-log>>.
 
 .First good bisect output
 [[bisect-good]]
@@ -400,9 +401,17 @@ From the final bisect output:
 * "old object metadata (4)" shows the old and new file mode and SHA-1 for the
   old object (i.e. before renaming).
 
+.GitX bisect output before `git bisect reset`
+[[gitx-bisect]]
+image::screenshots/04-GitXBisect.png[]
+
+From <<gitx-bisect>> you can see that `git bisect` creates new, temporary (they are removed by `git bisect reset`) as it is working. These indicate the commits that were marked by `git bisect bad` and `git bisect good` while working through the history. The `refs/bisect/bad` ref points to the final, bad commit that was detected.
+
 You have located the commit that renamed `GitInPractice.asciidoc`.
 
 #### Discussion
+Each time `git bisect good`, `git bisect bad` or `git bisect reset` is run Git may checkout the relevant next commit for examination. As a result it's important to ensure that all outstanding changes have been committed (or stashed) before you use `git bisect`.
+
 .bisect binary search performance
 |===
 |Total commits|Max checked commits|
@@ -459,10 +468,19 @@ If it's difficult or impossible to tell if a particular commit is good or bad yo
 ##### Automating git bisect
 Although `git bisect` is already useful wouldn't it be even better if, rather than having to keep typing `git bisect good` or `git bisect bad`, it could run automatically and tell you which commit caused the regression? This is possible with `git bisect run`.
 
-`git bisect run` is run instead of `git bisect good` or `git bisect bad` (i.e. after a `git bisect start` and before a `git bisect reset`) and automates the running of `git bisect good` and `git bisect bad`. It uses the exit code of a process to identify whether the command was successful or not. For example, if you run the command `ls GitInPractice.asciidoc` it returns an exit code of `0` on success (when the file is present) and `1` on failure (when the file is not). Let's take advantage of this to use it with `git bisect run`:
+`git bisect run` is run instead of `git bisect good` or `git bisect bad` (i.e. after a `git bisect start`, `git bisect good`, `git bisect bad` and before a `git bisect reset`) and automates the future runs of `git bisect good` and `git bisect bad`. It uses the exit code of a process to identify whether the command was successful or not. For example, if you run the command `ls GitInPractice.asciidoc` it returns an exit code of `0` on success (when the file is present) and `1` on failure (when the file is not). Let's take advantage of this to use it with `git bisect run`:
 
 .Bisect run output
 ```
+# git bisect start
+
+# git bisect bad
+
+# git bisect good
+
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[ac14a50465f37cfb038bdecd1293eb4c1d98a2ee] Start Chapter 2.
+
 # git bisect run ls GitInPractice.asciidoc
 
 Bisecting: 3 revisions left to test after this (roughly 2 steps) <1>
