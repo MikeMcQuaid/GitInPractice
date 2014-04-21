@@ -48,10 +48,8 @@ can add some useful, basic formatting.
 ```
 
 ### Building a commit from parts of files: git add --patch
-// TODO: When turned into a recipe make this section and git commit --patch part of the same recipe.
 We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
-// TODO: The modified file should have more than one change in it
 `git add` has a `--patch` (or -`p`) flag that provides an interactive menu in which you can select what parts of files you want to add. Make some changes to `00-Preface.asciidoc`, `01-IntroducingGitInPractice.asciidoc` and `02-AdvancedGitInPractice.asciidoc` in the `GitInPracticeRedux` repository and run `git add --patch`. This will prompt for an action for the first change in `00-Preface.asciidoc` and should resemble the following:
 
 .Patch add output

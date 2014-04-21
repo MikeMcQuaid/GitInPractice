@@ -152,8 +152,9 @@ Some other version control systems (such as Subversion) will use the terminology
 As you just pushed the entire contents of the local repository to GitHub let's remove the local repository and recreate it by cloning the repository on GitHub.
 
 #### Problem
-You wish to remove the existing `GitInPracticeRedux` local repository and recreate it by cloning from GitHub:
+You wish to remove the existing `GitInPracticeRedux` local repository and recreate it by cloning from GitHub.
 
+#### Solution
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
 2.  Run `rm -rf GitInPracticeRedux` to remove the existing `GitInPracticeRedux` repository.
 3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble:

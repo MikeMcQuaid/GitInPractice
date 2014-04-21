@@ -14,7 +14,25 @@ In this chapter you will learn about Git Shortcuts by learning the following top
 ### Set configuration for all repositories
 Recall in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>> we saw how to set some configuration options using `git config`. We set the user and email address for the initial Git configuration of Git and enabled `git rerere` to avoid having to resolve the same conflicts multiple times.
 
-When you ran `git config --global user.name "Mike McQuaid"` a file  named `.gitconfig` was created  (or modified if it existed) in your `$HOME` directory.
+#### Problem
+You wish to set your Git user name in your global Git configuration.
+
+#### Solution
+1.  You do not need to change to the directory of a particular or any Git repository.
+2.  Run `git config --global user.name "Mike McQuaid"`. There will be no output.
+
+This has set the value in the e.g. `/Users/mike/.gitconfig` file in the repository. You can read values from the configuration file by omitting the value argument. For example:
+```
+# git config --global user.name
+
+Mike McQuaid <1>
+```
+<1> name value
+
+You have set your Git user name in your global Git configuration.
+
+#### Discussion
+When you ran `git config --global user.name "Mike McQuaid"` a file named `.gitconfig` was created  (or modified if it existed) in your `$HOME` directory.
 
 .Where is the `$HOME` directory?
 NOTE: The `$HOME` directory is often signified with the tilde (`~`) character and will be in the rest of this chapter. If your username was `mike` the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on OSX and `/home/mike` on Linux/Unix.
@@ -36,14 +54,6 @@ You can see that the above commands created two sections (`user` and `rerere`) a
 
 This `~/.gitconfig` file is used to set your preferred configuration settings to be shared between all your repositories on your current machine. You could even share this file between machines to allow these settings to be used everywhere. This will be detailed later in this chapter in <<share-git-and-other-configuration-between-machines>>.
 
-You can also read values from the configuration file by omitting the value argument. For example:
-```
-# git config --global user.email
-
-mike@mikemcquaid.com <1>
-```
-<1> email value
-
 Options can also be unset by using the unset flag. For example, to unset the `git rerere` setting you would run:
 ```
 # git config --global --unset rerere.enabled
@@ -61,7 +71,14 @@ Recall that whenever we've used `git config` previously we've always used the `-
 * `--local` which uses the `.git/config` file in a Git repository. For example, if a Git repository is at `/Users/mike/GitInPracticeRedux/.git` then the local file would be at `/Users/mike/GitInPracticeRedux/.git/config`. `.git/config` is the default if no other configuration location flags are provided.
 * `--file` (or `-f`) which takes another argument to specify an file path to write to. For example, you could specify a file using `git config --file /Users/mike/Documents/git.cfg`.
 
-If we want to change the user email in a Git repository we would `cd` to the directory and run `git config user.email mike.mcquaid@github.com` (note the absence of `--global` which implies `--local`). This will produce no output. The email address did not need to be surrounded with quotes because it has no spaces, unlike e.g. `"Mike McQuaid"`
+#### Problem
+You wish to set your Git user email in your repository Git configuration.
+
+#### Solution
+1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git config user.email mike.mcquaid@github.com`. There will be no output.
+
+The email address did not need to be surrounded with quotes because it has no spaces, unlike e.g. `"Mike McQuaid"`
 
 This has set the value in the `.git/config` file in the repository. We can query it using:
 ```
@@ -71,6 +88,9 @@ mike.mcquaid@github.com <1>
 ```
 <1> user.email value
 
+You have set your Git user email in your repository Git configuration.
+
+#### Discussion
 If you used `--global` you'd instead see the value that was set in the global configuration file. If you'd omitted `--local` and `--global` then Git uses the same default priority as it does when reading configuration settings for its own use. The priority for deciding which configuration file to read from is:
 
 1.  the argument following `--file` (if it was provided)
@@ -225,23 +245,28 @@ If the wrong command is going to be run you can press Control-C to cancel it aft
 ### Aliasing commands
 One of the most powerful features available with `git config` is aliasing. Aliases allow you to create your own Git commands from combinations of other Git commands or by renaming them. This may be useful in making commands that are be more memorable or quicker to type. These are set as configuration values in the `alias` section.
 
-Let's say we want to have a shorter version of "the ultimate log output" from <<04-HistoryVisualization#the-ultimate-log-output>>. For this you could run `git config --global alias.ultimate-log "log --graph --oneline --decorate"`:
-```
-# git config --global alias.ultimate-log
-  "log --graph --oneline --decorate"
-```
+#### Problem
+You wish to create a shorter alias for the "the ultimate log output" from <<04-HistoryVisualization#the-ultimate-log-output>>.
 
-Now let's see the relevant section of the `~/.gitconfig` file using `grep`:
+#### Solution
+1.  You do not need to change to the directory of a particular or any Git repository.
+2.  Run `git config --global alias.ultimate-log "log --graph --oneline --decorate"`. There will be no output.
+
+You can verify this has worked by viewing the relevant section of the `~/.gitconfig` file using `grep`:
+
+.Ultimate log alias output
 ```
 # grep --before=1 ultimate ~/.gitconfig
 
-[alias]
-  ultimate-log = log --graph --oneline --decorate
+[alias] <1>
+  ultimate-log = log --graph --oneline --decorate <2>
 ```
+<1> alias section
+<2> alias value
 
-You can see a new alias has been created named `ultimate-log`. Now if you run `git ultimate-log` it will be the equivalent of running `git log --graph --oneline --decorate`. Any arguments you follow `git ultimate-log` will be treated the same as arguments following `git log --graph --oneline --decorate`.
+You have created an alias named `ultimate-log`. Now if you run `git ultimate-log` it will be the equivalent of running `git log --graph --oneline --decorate`. Any arguments you follow `git ultimate-log` will be treated the same as arguments following `git log --graph --oneline --decorate`.
 
-#### Shorten commands
+#### Discussion
 It's easier to remember `ultimate-log` than the various flags but it's still a bit long-winded to type. If you use `git ultimate-log` all the time you may want to use it more regularly than `git log` so want it to be fewer characters to type. Aliases can be of any length so you could create another alias to make a shorter value using `git config --global alias.l ultimate-log`:
 ```
 # git config --global alias.ultimate-log
@@ -270,7 +295,6 @@ As well as adding a longer version of the command you may wish to add comments i
 
 Using this format of comments, longer commands and shortened ones helps make your `.gitconfig` file easier to follow. When you or someone else looks back on the changes you made the comments and more verbose commands make it more obvious what your reasons were for adding each section.
 
-#### Chain commands with aliases
 As well as aliasing and shortening commands you can also use the alias functionality to chain multiple commands together.
 
 Any alias that starts with a `!` is run as a command in the root of the repository's working directory. Let's create a command that does a fetch and then interactive rebase.
@@ -291,6 +315,10 @@ GitHub also provides a dotfiles page with some notable dotfiles repositories and
 ### Show the current branch in your terminal prompt
 As you have noticed throughout this book it's common to create and change branches frequently when using Git. When using multiple repositories or not using one for a while it may be difficult to remember what branch is currently checked out. You could just run `git branch` but if you're switching regularly between multiple repositories it can be handy to have this information displayed in your terminal. Let's learn how to do this for Bash or ZSH: two popular shells.
 
+#### Problem
+You wish to add the current Git branch to your Bash or ZSH terminal prompt.
+
+#### Solution
 First, add the following function to your `~/.bashrc` file if you are using Bash or `~/.zshrc` file if you are using ZSH:
 ```bash
 git_branch() {
@@ -327,6 +355,9 @@ The final version should look something like this:
 .Shell branch output
 image::screenshots/07-ShellBranch.png[]
 
+You have successfully added the current Git branch to your Bash or ZSH terminal prompt.
+
+#### Discussion
 This prompt works by running the `git symbolic-ref --short HEAD` command every time a new prompt is displayed. In event of an error or no output (i.e. no checked out branch) it will not display any Git information in the prompt.
 
 ### Summary

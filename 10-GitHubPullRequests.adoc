@@ -24,18 +24,18 @@ In my experience most teams that work on private repositories tend to make use o
 
 We've been working mostly from the command-line in this book and PRs are sometimes a core part of Git workflows so it would be useful if we could also create PRs from the command-line. Thankfully there is a tool called `gh` which allows interacting with GitHub from the command-line (through the GitHub API).
 
-#### Interact with GitHub from the command line: gh
 The `gh` command-line tool allows various interactions with GitHub by providing a wrapper on top of Git's interface and adding new commands and improving the interaction of some Git commands with GitHub.
 
 For example, instead of running `git clone https://github.com/GitInPractice/GitInPracticeRedux` you could instead just run `gh clone GitInPractice/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
 
-#### Create a GitHub pull request from the command line: gh pull-request
 The `gh` tool can also be used to create PRs from the command-line. Although this accomplishes the same end result as the web interface and is slightly less flexible I generally prefer it as it fits in more nicely into the command-line-driven workflow of using the Git to interact with a project's repository.
 
 To create a PR we need to create a local branch of the changes we want to be merged into another branch (`master`, by default), push our local branch to a remote branch and use `gh` to create a pull-request.
 
-To create a pull request follow these steps:
+#### Problem
+You wish to create a GitHub pull request from the command-line.
 
+#### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Create a new branch from the `master branch` by running e.g. `git checkout -b pr-test master`.
 3.  Make some changes to a file e.g. `00-Preface.asciidoc` and commit them by running e.g. `git commit 00-Preface.asciidoc`. Ensure that there are multiple lines in the commit message i.e. a commit subject and commit body.
@@ -82,6 +82,9 @@ From the pull request creation output:
 * "remote branch (3)" shows the new remote branch that was created to be used for the new pull request.
 * "pull request (4)" shows the URL for the new pull request created by the `gh` tool using the GitHub API. It is requesting the merge of the `pr-test` branch into the remote repository's `master` branch.
 
+You have created a new pull request from the command-line using the `gh` tool.
+
+#### Discussion
 .How do you use branches with pull requests?
 NOTE: Each pull request you create should use a new, non-`master` branch. As each pull request tracks the status (and any new commits) for a particular remote branch you need to ensure each branch is used for a separate pull request to avoid e.g. adding a new commit to one pull request and having it show up in another. You should also avoid creating pull requests from the `master` branch as this is generally the branch you will wish to merge to. Additionally, GitHub will sometimes not update the `master` branch if you push new commits to it after creating the pull request so you would need to create a new pull request for every change than needs to be made. This is less than ideal as you lose all the existing context and comments.
 
@@ -100,8 +103,10 @@ The `gh` tool also accepts the `-b` and `-h` parameters which can be followed wi
 ### Making a pull request from a forked repository: gh fork
 If you are wishing to commit to an open-source software project that you do not have commit access to you will want to create a pull request so others can review your changes before they are merged (because open-source does not mean letting anyone commit to any repository at any time). To do this you will want to create your own repository that you can make commits and push branches to and request pull requests from. If you recall from <<what-are-pull-requests-and-forks>> you can fork any repository you have read access to (which includes all public, open-source repositories).
 
-Let's fork the `GitInPracticeRedux` repository using `gh` and create another pull request from that fork:
+#### Problem
+You wish to fork a repository and create a pull request from that fork from the command-line.
 
+#### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Create a new fork by running `gh fork`.
 3.  Create a new branch from the `master branch` by running e.g. `git checkout -b credits master`.
@@ -164,9 +169,15 @@ From the fork and pull request creation output:
 * "remote branch (4)" shows the new remote branch that was created.
 * "pull request (5)" shows the URL for the new pull request. It is requesting the merge of the `credits` branch from the  https://github.com/mikemcquaid/GitInPracticeRedux forked repository into the `master` branch of the https://github.com/GitInPractice/GitInPracticeRedux main repository.
 
-### Merging a pull request from the same repository
-Merging a pull request from a non-forked repository is easy. You can either click the "Merge pull request" button (as seen in <<new-pull-request>>) or just merge the branch as you would any other. Note that the "Merge pull request" button always performs a non-fast-forward merge (i.e. it always produces a merge commit) so let's do that here too:
+You have created a fork and pull request from it from the command-line.
 
+### Merging a pull request from the same repository
+Merging a pull request from a non-forked repository is easy. You can either click the "Merge pull request" button (as seen in <<new-pull-request>>) or just merge the branch as you would any other. Note that the "Merge pull request" button always performs a non-fast-forward merge (i.e. it always produces a merge commit) so let's do that here too.
+
+#### Problem
+You wish to merge a pull request from the command-line.
+
+#### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Checkout the `master` branch by running `git checkout master`.
 3.  Ensure all the remote branches are up to date by running `git fetch`.
@@ -215,6 +226,9 @@ From the merging a pull request output:
 * "branch push (3)" shows the new merged commits being pushed to the remote `master` branch.
 * "branch delete (4)" shows the deletion of the now merged (and therefore unneeded) `pr-test` branch.
 
+You have successfully merged a pull request from the command-line.
+
+#### Discussion
 If you visit the pull request URL you will notice that after the push the pull-request has been automatically closed as it has detected that you have merged the contents of the branch remotely.
 
 .How can you close a pull request without a merge?
@@ -225,8 +239,10 @@ To merge a pull request from a forked repository is a little more involved. You 
 
 To simulate the typical open-source maintainer approach where you wouldn't have new forks already added as remote repositories let's start by removing the fork's remote from the local Git repository by running `git remote rm mikemcquaid` (which won't produce any output). This leave the remote intact on GitHub but just means that it no longer will be on the local repository.
 
-Now that we have a local repository with a single remote again we can use `gh` to merge the commit from the forked repository:
+#### Problem
+You wish to merge a pull request from a forked repository from the command-line.
 
+#### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Checkout the `master` branch by running `git checkout master`.
 3.  Merge the remote pull request into the `master` branch by running `gh merge https://github.com/GitInPractice/GitInPracticeRedux/pull/2`.
@@ -268,6 +284,8 @@ From the merging a forked pull request output:
 * "branch checkout (1)" shows the checkout of the `master` branch.
 * "PR commit (2)" shows the new merge commit created by the pull request merge.
 * "branch push (3)" shows the new PR commits being pushed to the remote `master` branch.
+
+You have successfully merged a pull request from a forked repository from the command-line.
 
 ### Summary
 In this chapter you hopefully learned:
