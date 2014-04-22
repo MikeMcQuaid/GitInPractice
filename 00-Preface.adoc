@@ -4,7 +4,7 @@ Reader Prerequisites:
 
 * Command Line (medium): familiarity with the command-line as Git will only be used as a command-line tool in this book. For example, needs to be able to create, edit and remove directories and files from the command-line. This includes Windows users who will be need to install MSYSGit (which provides Git in a Unix shell on Windows).
 * Software Development (medium): this book will assume a basic understanding (and desire to learn more) about how version control is used in a team of software developers to build software projects.
-* Git (basic) or Version Control (medium): previous basic working experience with Git or advanced working experience with any other version control system.
+* Git (basic) or Version Control (medium): understanding of versions, branching and merging in Git (e.g. `git commit`) or another version control system (e.g. Subversion `commit`, `log`, `copy`, `switch`, `merge`).
 * GitHub (none): able to access to a free GitHub account.
 * Programming Languages (none): no particular programming language knowledge.
 
