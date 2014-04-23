@@ -1,9 +1,11 @@
 ## Vendoring Dependencies as Submodules
 ifdef::env-github[:outfilesuffix: .adoc]
 
-A Git repository can contain _submodules_. Submodules allow referencing other Git repositories at specific revisions another Git repository. This is most commonly used to reference external Git repositories that are dependencies for software projects e.g. external libraries or tools and ensure that all users of a Git repository have the same version of all these other software projects.
+A Git repository can contain _submodules_. Submodules allow you to reference other Git repositories at specific revisions. This is most commonly used to reference external Git repositories that are dependencies for software projects e.g. external libraries or tools and ensure that all users of a Git repository have the same version of all these other software projects.
 
-In this chapter you will learn about Git submodules by learning about the following topics:
+//[Dan] : So give an example or two of this working in the wild - a better gist of submodules. Perhaps use Homebrew as an example? Can you draw parallels to other package managers such as rpm, nuget or apt? Are submodules DLLs or teh source code that builds the DLLs? Definitely key here to get the reader drawing on real-world experience here because the brief description so far isn't helping. Perhaps give an example when the wrong external library is referenced an the project doesn't build. Also, if these are submodules, does the word 'module' mean anything in git?
+
+In this chapter you will learn:
 
 * When submodules are useful
 * How to add a submodule to a repository
@@ -15,11 +17,17 @@ In this chapter you will learn about Git submodules by learning about the follow
 Almost all software projects will make use of other software projects as libraries or tools. There are generally two approaches to handling other software projects (usually known as _dependencies_):
 
 1.  What other software projects are required, what versions they should be and where they should be installed is documented and developers have to ensure they follow this documentation to set up the project.
-2.  The other software projects that are required are included into the version control system of the main software project so they are always available whenever anyone accesses the main repository. This is known as _vendoring_ the dependencies.
+2.  The other software projects that are required are included in the version control system of the main software project so they are always available whenever anyone accesses the main repository. This is known as _vendoring_ the dependencies.
 
-There are pros and cons of both approaches. Adopting 1) means that the software source code repository can avoid including other software projects (and, worse, having to version them). Adopting 2) means that you always have the various dependencies available but can increase the space used by the version control system. As Git stores the complete history of a repository and downloads it all when cloned too many large dependencies can result in a bloated repository that takes a long time to clone. It is for this reason that submodules were created.
+There are pros and cons of both approaches. Adopting 1) means that the software source code repository can avoid including other software projects (and, worse, having to version them). Adopting 2) means that you always have the various dependencies available but can increase the space used by the version control system. 
+
+//[Dan]: "can" increase the space? Surely you mean "must" increase it?
+
+As Git stores the complete history of a repository and downloads it all when cloned, too many large dependencies can result in a bloated repository that takes a long time to clone. It is for this reason that submodules were created.
 
 Git's submodules store the reference to a specific SHA-1 reference in another remote Git repository and store these in subdirectories of the current repository. All that is actually committed in the current repository are some small pieces of metadata which the `git submodule` command uses to clone, update and interact with the various submodules inside a Git repository.
+
+//[Dan]: A diagram to illustrate the above paragraph would be a good thing.
 
 ### Add a git submodule: git submodule add
 Let's start by creating a new repository that can be used as a submodule in our existing `GitInPracticeRedux` repository.
