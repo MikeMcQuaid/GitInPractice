@@ -1,9 +1,7 @@
 ## Vendoring Dependencies as Submodules
 ifdef::env-github[:outfilesuffix: .adoc]
 
-A Git repository can contain _submodules_. Submodules allow referencing other Git repositories at specific revisions another Git repository. This is most commonly used to reference external Git repositories that are dependencies for software projects e.g. external libraries or tools and ensure that all users of a Git repository have the same version of all these other software projects.
-
-In this chapter you will learn about Git submodules by learning about the following topics:
+In this chapter you will learn how to maintain dependencies on other Git-based software projects within your own using Git submodules.
 
 * When submodules are useful
 * How to add a submodule to a repository
@@ -12,22 +10,30 @@ In this chapter you will learn about Git submodules by learning about the follow
 * How to run a command in every submodule in a repository
 
 ### When are submodules useful?
-Almost all software projects will make use of other software projects as libraries or tools. There are generally two approaches to handling other software projects (usually known as _dependencies_):
+Almost all software projects will make use of other software projects as libraries or tools. For example, say you are using Git and writing a C++ application and want to use the source code from the Git repository of an external JSON library in your project.
+
+There are generally two approaches to handling other software projects (usually known as _dependencies_) and which versions work with your own software:
 
 1.  What other software projects are required, what versions they should be and where they should be installed is documented and developers have to ensure they follow this documentation to set up the project.
-2.  The other software projects that are required are included into the version control system of the main software project so they are always available whenever anyone accesses the main repository. This is known as _vendoring_ the dependencies.
+2.  The other software projects that are required are included in the version control system of the main software project so they are always available whenever anyone accesses the main repository. This is known as _vendoring_ the dependencies.
 
-There are pros and cons of both approaches. Adopting 1) means that the software source code repository can avoid including other software projects (and, worse, having to version them). Adopting 2) means that you always have the various dependencies available but can increase the space used by the version control system. As Git stores the complete history of a repository and downloads it all when cloned too many large dependencies can result in a bloated repository that takes a long time to clone. It is for this reason that submodules were created.
+There are pros and cons of both approaches. Adopting 1) means that the software source code repository can avoid including other software projects. In the C++ application example it would mean documenting for other developers where and how they should download the external JSON library's Git repository from rather than storing anything related to it in the C++ application's Git repository.
+
+Adopting 2) means that you always have the various dependencies available but can increase the space used by the version control system. In the C++ application example (without submodules) you might copy the source code of the external JSON library into the application's Git repository. When you wanted to update the library version you would copy in the new code and commit it.
+
+As Git stores the complete history of a repository and downloads it all when cloned, too many large dependencies can result in a repository that takes a long time to clone and is unclear about any other repositories whose source code was used to populate some of this repository. This makes updating versions of e.g. external libraries a painful, manual process. It is for this reason that submodules were created.
+
+A Git repository can contain _submodules_. Submodules allow you to reference other Git repositories at specific revisions. This is most commonly used to reference external Git repositories that are dependencies for software projects. In the C++ application example instead of documenting the location or copying the source code of the external JSON library into the application's Git repository you could use submodules to reference the external JSON library's Git repository.
 
 Git's submodules store the reference to a specific SHA-1 reference in another remote Git repository and store these in subdirectories of the current repository. All that is actually committed in the current repository are some small pieces of metadata which the `git submodule` command uses to clone, update and interact with the various submodules inside a Git repository.
 
 ### Add a git submodule: git submodule add
 Let's start by creating a new repository that can be used as a submodule in our existing `GitInPracticeRedux` repository.
 
-Create a new submodule repository on GitHub by following these steps:
+Create a new repository on GitHub that we can use as a submodule by following these steps:
 
 1.  Create a new repository with `git init` and pass the path to a new directory e.g. `git init /Users/mike/GitInPracticeReduxSubmodule/`
-2.  Change to the directory containing your submodule repository e.g. `cd /Users/mike/GitInPracticeReduxSubmodule/`.
+2.  Change to the directory containing your new submodule repository e.g. `cd /Users/mike/GitInPracticeReduxSubmodule/`.
 3.  Create a file named `TODO.md` with the `echo` command by running `echo "# TODO\n1. Add something useful to this submodule." > TODO.md`.
 4.  Commit the new `TODO.md` as the initial commit by running `git commit --message "Initial commit of submodule."`.
 5.  Create a new repository on GitHub (or another Git hosting provider).
@@ -74,14 +80,14 @@ Branch master set up to track remote branch master from origin.
 From the new submodule repository creation output:
 
 * "new repository (1)" shows the creation of a new Git repository on disk to be used as a new submodule repository for the `GitInPracticeRedux` repository. It has been created outside the `GitInPracticeRedux` directory so it can be added later as if it was just another GitHub repository
-* "initial commit (2)" shows the first commit to the submodule repository of the `TODO.md` file.
+* "initial commit (2)" shows the first commit to the new submodule repository of the `TODO.md` file.
 * "push repository (3)" shows the push of the initial commit to the newly created GitHub repository.
 
-The submodule repository has been created and pushed to GitHub. Note that it is not a submodule of the `GitInPracticeRedux` repository yet; this was just to create a new repository that could be added as a submodule repository afterwards.
+The new submodule repository has been created and pushed to GitHub. Note that it is not yet a submodule of the `GitInPracticeRedux` repository; this was just to create a new repository that could be added as a submodule repository afterwards.
 
 Now that the submodule repository has been created and pushed to GitHub it can  be removed from your local machine with `rm -rf  GitInPracticeReduxSubmodule/`. Don't worry; remember a complete copy is stored on GitHub (which we will use next).
 
-Now that we've created a submodule repository let's add it as a submodule to the existing repository.
+Now that we've created a new submodule repository let's add it as a submodule to the existing repository.
 
 #### Problem
 You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of the `GitInPracticeRedux` repository.
@@ -89,7 +95,7 @@ You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git submodule add https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git submodule`.
-3.  Commit the submodule changes to the repository by running `git commit --message "Add submodule."`
+3.  Commit the new submodule changes to the repository by running `git commit --message "Add submodule."`
 
 The output of all these commands should resemble:
 
@@ -119,16 +125,20 @@ Checking connectivity... done.
 
 From the submodule addition output:
 
-* "submodule clone (1)" shows the clone of the `GitInPracticeReduxSubmodule` into the `submodule` directory of the local repository. After this was done it also created a `.gitmodules` file.
+* "submodule clone (1)" shows the clone of the `GitInPracticeReduxSubmodule` into the directory named `submodule` in the local repository. After this was done it also created a `.gitmodules` file in the root of the repository's working directory.
 * ".gitmodules file (2)" shows the file that contains the submodule metadata such as the directory path and the url.
-* "submodule directory (3)" shows the new directory that was created to store the contents of the submodule.
+* "submodule directory (3)" shows the new directory named `submodule` that was created to store the contents of the new submodule repository. Note that you would normally not call this `submodule` but we're just using this name for these examples.
 
 You have successfully added the `GitInPracticeReduxSubmodule` submodule to the `GitInPracticeRedux` repository.
 
 #### Discussion
-The new `submodule` directory behaves like any other Git repository. If you change into its directory you can run e.g. GitX, `git log` and even make changes and push them to the `GitInPracticeReduxSubmodule` repository (provided you have commit access).
+The new directory named `submodule` behaves like any other Git repository. If you change into its directory you can run e.g. GitX, `git log` and even make changes and push them to the `GitInPracticeReduxSubmodule` repository (provided you have commit access).
 
-Git makes use of the `.gitmodules` file and special metadata for the `submodule` directory to reference the submodule and the current submodule commit. This is used to ensure that anyone else cloning this repository can access the same submodules at the same version. Let's have a closer look at the last commit:
+Git makes use of the `.gitmodules` file and special metadata for the directory named `submodule` to reference the submodule and the current submodule commit. This is used to ensure that anyone else cloning this repository can access the same submodules at the same version after initializing the submodule(s).
+
+Initializing all submodules can be done by running `git submodule init` which copies all the submodule names and URLs from the `.gitmodules` file to the local repository Git configuration file (in `.git/config`). Note that this was done for you when you ran `git add`.
+
+Let's have a closer look at the last commit:
 
 .`git show` submodule output
 ```
@@ -166,13 +176,13 @@ From the `git show` submodule output:
 * "submodule name (1)" shows the name of the submodule that was created in the repository: `submodule`. This is used to reference this particular submodule with any additional submodule commands.
 * "submodule path (2)" shows the directory location where the submodule is cloned into. This is where the submodule files will be accessed.
 * "submodule URL (3)" shows the remote repository location for the submodule that was added.
-* "submodule file (5)" shows the commit SHA-1 for the submodule. Even if there are changes to the submodule this will always be the commit that is checked out by anyone using this submodule in this repository. This is to ensure that the submodule only uses a known, tested version and that changes to the submodule's Git repository (which may be something you don't have any control over) does not change anything in the current repository.
+* "submodule commit (4)" shows the commit SHA-1 for the submodule. Even if there are changes to the submodule this will always be the commit that is checked out by anyone using this submodule in this repository. This is to ensure that the submodule only uses a known, tested version and that changes to the submodule's Git repository (which may be something you don't have any control over) does not change anything in the current repository.
 
 `git submodule add` can also take some parameters to affect its behaviour:
 
 * the `--quiet` (or `-q`) flag can be passed to make `git submodule add` only print out error messages and no status information.
 * the `--force` (or `-f`) flag can be passed to allow adding a submodule path that would otherwise be ignored by `.gitignore` rules.
-* the `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk.
+* the `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk. This flag for `git clone` was mentioned previously in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>.
 
 ### Show the status of submodules: git submodule status
 Now that we've added a submodule to the repository it can be useful to query what submodules have been added and what their current status is. This can be done with the `git submodule status` command.
@@ -194,17 +204,19 @@ You wish to show the current states of all submodules of a repository.
 
 From the submodule status output:
 
-* "submodule status (1)" shows the SHA-1 of the pinned submodule, the name and the ref that it's pointing to (the `master` branch in this case).
+* "submodule status (1)" shows the SHA-1 of the pinned submodule, the name and the ref that it's pointing to (the `master` branch in this case). This matches the SHA-1 you saw earlier in the `submodule` directory metadata.
 
 #### Discussion
 `git submodule status` can take a `--recursive` flag which will run `git submodule status` inside each of the submodules directories too. This is useful as submodules can themselves contain submodules and you may wish to query the status of the submodules within the submodules.
 
 ### Update and initialize all submodules: git submodule update --init
-We have initialized a submodule in our repository but this will not be done automatically for anyone else with a clone of this repository. Let's simulate this situation by removing the current clone of the submodule in this repository:
+We have initialized a submodule (i.e. copied the submodule names and URLs  `.gitmodules` to `.git/config`) when we ran `git submodule add` earlier. However, initialization will not be done automatically for anyone else with a clone of this repository: they must run `git submodule init`.
+
+Let's simulate this situation by removing the current clone of the submodule in this repository:
 
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git submodule deinit .`.
-3.  Run `rm -rf .git/modules/`
+3.  Run `rm -rf .git/modules/` to remove the directory where Git caches submodules outside of the working directory.
 
 The output of all these commands should resemble:
 
@@ -225,11 +237,11 @@ Submodule 'submodule'
 
 From the remove submodule clone output:
 
-* "submodule deinit (1)" shows the clearing of the submodule directory. This means that the directory named `subbmodule` has all its contents deleted.
+* "submodule deinit (1)" shows the clearing of the submodule directory. This means that the directory named `submodule` has all its contents deleted.
 * "submodule unregister (2)" shows that the submodule has been unregistered i.e. it does not remove it from the repository but returns to an uninitialized state.
 * "submodule delete (3)" the deletion of the submodule storage directory. Although the submodule is cloned into the `submodule` directory it's initially cloned into `.git/modules` too and then cloned from there to the `submodule` directory. Deleting this ensures there is no copy of the submodule's repository in the current repository.
 
-Now that we've removed the submodule from our repository we can initialize the submodule and update it to any later revision.
+Sometimes at the same time as initializing a repository you may want to also update it to the latest revision to incorporate any changes that were made in the upstream, submodule repository. Now that we've removed the submodule from our repository we can initialize the submodule and update it to any later revision.
 
 #### Problem
 You wish to initialize all submodules in your repository and update them to the latest revision.
@@ -277,7 +289,7 @@ If there had been any changes to the `GitInPracticeReduxSubmodule` repository th
 `git clone` can also take a `--recurse-submodules` (or `--recursive`) flag to automatically run `git submodule update --init` on any submodules within the repository. Typically if you are cloning a repository you know contains submodules then you will use `git clone --recursive-submodules` to clone it and all the necessary submodules (and the submodules of the submodules, if they exist).
 
 ### Run a command in every submodule: git submodule foreach
-Sometimes you may wish to perform a command or query within ever submodule; perhaps in a script or just to quickly obtain some basic status information for each submodule. Git provides the `git submodule foreach` command for this case.
+Sometimes you may wish to perform a command or query within every submodule. For example you may wish to iterate through all the submodules in a repository (and their submodules) and run a Git command to ensure they have all checked out the `master` branch, have fetched the latest remote repository commits or print status information. Git provides the `git submodule foreach` command for this case: it takes a command (or commands) as an argument and then iterates through each Git submodule (and their submodules) and runs the same command.
 
 #### Problem
 You wish to output some status information for every submodule in the `GitInPracticeRedux` repository.
@@ -321,4 +333,4 @@ In this chapter you hopefully learned:
 * How to use `git submodule update --init` to initialize all submodules, fetch any changes and update them to the latest revision
 * How to use `git submodule foreach` and its variables to run commands and print metadata for every submodule in a repository
 
-Now let's learn how to create and merge "pull requests" on GitHub.
+Now let's learn how to make Git interact with Subversion repositories.

@@ -11,17 +11,21 @@ Two of these features are _pull requests_ and _forks_. In this chapter you will 
 * How to merge a pull request from a forked repository
 
 ### What are pull requests and forks?
-One of the core components of most software project collaboration is some sort of issue (or bug) tracker. Some examples of popular issue trackers are Jira, FogBugz, Pivotal Tracker and Trac. GitHub provides an issue tracker for every repository known as "Issues". In GitHub's Issues there is a subject and body field, open or closed state, labels and comments.
+One of the core components of most software project collaboration is some sort of issue (or bug) tracker e.g. Jira, FogBugz, Pivotal Tracker and Trac. GitHub provides an issue tracker for every repository known as "Issues". In GitHub's Issues there is a subject and body field, open or closed state, labels and comments.
 
 There is a special type of issue known as a _pull request_ (or _PR_). This is an issue on a project with an attached branch of code changes. Pull requests are used to request that someone with commit access to the repository merge the code changes from the pull request branch into their the main repository. Once a PR has been received you can view the changes that have been requested and anyone who can view the PR can make comments either inline on the commit or generally on the PR. If there are comments that require changes to be made then they can be committed and pushed to the pull request branch and the pull request will be updated with these changes. Once the PR's changes have reached an acceptable standard to be included in the repository then they can be merged with the "Merge" button from the GitHub website which will merge the requested branch into the repository.
 
+.How would use use pull requests as part of a code review process?
+NOTE: You may have a web application project using Git where the `master` branch will be regularly and automatically deployed to the web server. You may wish to ensure that any branches merged into the `master` branch are checked by another developer before they are merged too ensure no-one accidentally deploys bad code to the server. In this situation you could request that all merges to the `master` branch require a pull request to be created and another developer review the changes in the branch, make any comments and the branch creator developer fix them. Only when both the branch creator and the branch reviewer are both happy with the contents should the pull request be merged. Adopting this approach will result in higher-quality code being merged to `master` and less silly mistakes.
+
 Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that we use `git clone` to initially download an entire repository. A _fork_ is similar to a clone but rather than downloading the repository to your local machine it creates a clone of a repository on GitHub's servers. This allows you to make any changes you wish to your _fork_ even if you do not have commit access to the original repository. Anyone with read access to a repository can fork it.
 
-PRs and forks can be combined so you can find a repository you wish to make changes to, fork it and make changes in your local fork. You can then create a PR to request the changes on the branch in your fork be merged into the original repository. This allows people to be able to contribute to a repository without having commit access; PRs from forks can only be merged by someone with commit access to the original repository.
+PRs and forks can be combined so you can find a repository you wish to make changes to, fork it and make changes in your local fork. You can then create a PR to request the changes on the branch in your fork be merged into the original repository.
 
-### Making a pull request in the same repository
-In my experience most teams that work on private repositories tend to make use of a single repository rather than many different forks. Pull requests can still be used on a private repository; even although everyone with read access will also have commit access PRs are still useful for performing code review before changes are merged into a repository.
+.How would you use forks to contribute to a repository?
+NOTE: You may have an open-source project that you use and have found a bug in. However, you don't have commit access yet and they don't want to give you commit access to make the change. In this case you could fork the open-source repository, make the changes, commit and test them and then creating a pull request from your forked repository to the original repository. This would allow the maintainers of the open-source repository to review your proposed changes, make any comments and merge them when they are ready.
 
+### Interacting with GitHub from the command-line: gh
 We've been working mostly from the command-line in this book and PRs are sometimes a core part of Git workflows so it would be useful if we could also create PRs from the command-line. Thankfully there is a tool called `gh` which allows interacting with GitHub from the command-line (through the GitHub API).
 
 The `gh` command-line tool allows various interactions with GitHub by providing a wrapper on top of Git's interface and adding new commands and improving the interaction of some Git commands with GitHub.
@@ -29,6 +33,9 @@ The `gh` command-line tool allows various interactions with GitHub by providing 
 For example, instead of running `git clone https://github.com/GitInPractice/GitInPracticeRedux` you could instead just run `gh clone GitInPractice/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
 
 The `gh` tool can also be used to create PRs from the command-line. Although this accomplishes the same end result as the web interface and is slightly less flexible I generally prefer it as it fits in more nicely into the command-line-driven workflow of using the Git to interact with a project's repository.
+
+### Making a pull request in the same repository: gh pull-request
+In my experience most teams that work on private repositories tend to make use of a single repository rather than many different forks. Pull requests can still be used on a private repository; even although everyone with read access will also have commit access PRs are still useful for performing code review before changes are merged into a repository.
 
 To create a PR we need to create a local branch of the changes we want to be merged into another branch (`master`, by default), push our local branch to a remote branch and use `gh` to create a pull-request.
 
