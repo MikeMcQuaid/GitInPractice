@@ -1,5 +1,10 @@
 ## GitHub Pull Requests
 ifdef::env-github[:outfilesuffix: .adoc]
+//[Dan]:Same main criticism here as in C8 - it will be far easier to explain pull requests and forks within the context of a developer story. Equally, it should be really important to look at githubs own help pages on this and make sure that your words are better than theirs. "Chris wants to contribute to a repo - bugfixing several issues. He creates a fork which lets him work on those bugs in isolation... etc"
+
+//[Dan]: So the actual point of this chapter is how to control forks and pull requests using the command line rather than the Github UI?  So is this whole chapter worth havign a disclaimer at the top saying that if you aren't a github user, you should move laong to the next chapter?
+
+//[Dan]: When you're working through your develoepr story, don't forget to include graphics, show the issues page, show the ull request page etc. 
 
 GitHub provides more than just Git hosting that you can `git push` to and `git fetch` from; it also provides features that allow teams of individuals to collaborate on software projects in ways beyond those provided by Git itself.
 
@@ -10,8 +15,8 @@ Two of these features are _pull requests_ and _forks_. In this chapter you will 
 * How to interact with forks and pull requests from the command-line
 * How to merge a pull request from a forked repository
 
-### What are pull requests and forks?
-One of the core components of most software project collaboration is some sort of issue (or bug) tracker. Some examples of popular issue trackers are Jira, FogBugz, Pivotal Tracker and Trac. GitHub provides an issue tracker for every repository known as "Issues". In GitHub's Issues there is a subject and body field, open or closed state, labels and comments.
+### What are pull requests and forks? + how do they work?
+One of the core components of most software project collaboration is some sort of issue (or bug) tracker. For example,  Jira, FogBugz, Pivotal Tracker and Trac. GitHub provides an issue tracker for every repository known as "Issues". In GitHub's Issues there is a subject and body field, open or closed state, labels and comments.
 
 There is a special type of issue known as a _pull request_ (or _PR_). This is an issue on a project with an attached branch of code changes. Pull requests are used to request that someone with commit access to the repository merge the code changes from the pull request branch into their the main repository. Once a PR has been received you can view the changes that have been requested and anyone who can view the PR can make comments either inline on the commit or generally on the PR. If there are comments that require changes to be made then they can be committed and pushed to the pull request branch and the pull request will be updated with these changes. Once the PR's changes have reached an acceptable standard to be included in the repository then they can be merged with the "Merge" button from the GitHub website which will merge the requested branch into the repository.
 
@@ -20,6 +25,7 @@ Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-ma
 PRs and forks can be combined so you can find a repository you wish to make changes to, fork it and make changes in your local fork. You can then create a PR to request the changes on the branch in your fork be merged into the original repository. This allows people to be able to contribute to a repository without having commit access; PRs from forks can only be merged by someone with commit access to the original repository.
 
 ### Making a pull request in the same repository
+//[Dan] So this heading title is wrong. Perhaps more appropritate would be to have a small section here called "Introducing gh". Then talk through it and then into the first problem \ solution.
 In my experience most teams that work on private repositories tend to make use of a single repository rather than many different forks. Pull requests can still be used on a private repository; even although everyone with read access will also have commit access PRs are still useful for performing code review before changes are merged into a repository.
 
 We've been working mostly from the command-line in this book and PRs are sometimes a core part of Git workflows so it would be useful if we could also create PRs from the command-line. Thankfully there is a tool called `gh` which allows interacting with GitHub from the command-line (through the GitHub API).
