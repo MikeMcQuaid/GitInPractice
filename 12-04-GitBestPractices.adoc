@@ -1,3 +1,12 @@
 # Git Best Practices
+ifdef::env-github[:outfilesuffix: .adoc]
 
-Part 4 description goes here.
+Part 4 (Chapters 12-14) will discuss different workflows and best practices for using Git as part of a team of software developers. You will be able to compare and contrast differing approaches and decide which is best for your team.
+
+This part will cover the following topics:
+
+* How to write a good commit message and avoid whitespace problems
+* How to build a commit using only certain changes in a file
+* How CMake and Homebrew open-source projects use differing merge/rebase strategies to manage contributions
+* How to decide what merge/rebase strategy to use for your project
+//TODO: Chapter 14

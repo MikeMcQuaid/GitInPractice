@@ -5,18 +5,16 @@ Thanks for purchasing the MEAP of Git In Practice. I hope that what you’ll get
 Git is a powerful distributed version control system but it can sometimes be difficult to understand what is going on behind the scenes or how you’ve found yourself in a particular state. In Git In Practice by the end of the book you should understand:
 
 - The internals and confusing jargon Git will sometimes expose
-- A wide array of commands for interacting with Git repositories
+- A wide array of the most important commands for interacting with Git repositories
 - Workflows for configuring, using Git and GitHub effectively for teams, products and open-source project
-
-What you’ll be getting immediately is Part 1 of the book with a chapter each from Parts 2 and 3.
 
 Part 1 (Chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
 
-Chapter 3 (from Part 2) will show you various ways of interacting with the filesystem using Git in a problem/solution format.
+Part 2 (Chapters 3-6) will cover the most essential commands to learn when using Git either alone or with a team. It's here that you'll start to see some of the more powerful differences between Git and other version control systems with advanced branching capabilities and history rewriting.
 
-Chapter 9 (from Part 3) discusses two approaches for team branch workflows using Git; rebasing and merging. These are compared by contrasting the approaches taken by two successful open-source projects: the CMake build system and the Homebrew OS X package manager.
+Part 3 (Chapters 7-11) will provide you with some bonus Git skills that will help you be more efficient. These chapters will provide you with a collection of techniques that won't be used with every Git project but may be important for new ones.
 
-Part 2 will continue to introduce more Git commands in a problem/solution format and Part 3 will introduce more high-level workflows for managing projects and teams when using Git.
+Part 4 (Chapters 12-14) will discuss different workflows and best practices for using Git as part of a team of software developers. You will be able to compare and contrast differing approaches and decide which is best for your team.
 
 Please let me know your thoughts on what’s been written so far and what you’d like to see in the rest of the book. Your feedback will be invaluable in improving Git In Practice.
 

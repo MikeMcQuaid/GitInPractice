@@ -1,6 +1,12 @@
 # Introduction to Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
-The first part of this book will give you an outline of the essential concepts required to understand how version control systems work and how to make Git perform the basic tasks expected of a version control system.
+Part 1 (Chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
 
-I will start by explaining generic version control system concepts, how distributed version control differs from centralized version control, creating new versions in a version control system and finally how to share these changes with others.
+This part will cover the following topics:
+
+* Why Git was created
+* How to create and commit files in a new local Git repository
+* How to view the history of a Git repository in command-line or graphical tools
+* How to download and upload changes to a remote Git repository
+* How to create and merge branches
