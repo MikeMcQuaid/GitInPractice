@@ -1,3 +1,16 @@
+// ## Front Matter
+// ifdef::env-github[:outfilesuffix: .adoc]
+//
+// ### Foreword
+// // TODO
+//
+// ### Preface
+// // TODO
+//
+// ### Acknowledgements
+// // TODO
+//
+// ### About this Book
 The goal of this book is similar to that of "JavaScript: The Good Parts"; rather than provide a complete technical manual of everything Git can do instead provide a detailed understanding to software developers in how to use the best parts of Git to provide and inform the best software engineering workflow.
 
 Reader Prerequisites:
