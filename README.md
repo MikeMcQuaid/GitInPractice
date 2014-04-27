@@ -9,25 +9,26 @@ Chapters currently ready for review are linked from the Table of Contents.
 I rewrite the history of this repository often. Sorry about that.
 
 ## Table of Contents
-1. Introduction to Git
+1. Preface
+2. [Introduction to Git](01-01-IntroductionToGit.adoc)
        1. [Local Git](01-LocalGit.adoc)
        2. [Remote Git](02-RemoteGit.adoc)
-2. Git Essentials
+3. [Git Essentials](03-02-GitEssentials.adoc)
        1. [Filesystem Interactions](03-FilesystemInteractions.adoc)
        2. [History Visualization](04-HistoryVisualization.adoc)
        3. [Advanced Branching](05-AdvancedBranching.adoc)
        4. [Rewriting History and Disaster Recovery](06-RewritingHistoryAndDisasterRecovery.adoc)
-3. Advanced Git
+4. [Advanced Git](07-03-AdvancedGit.adoc)
        1. [Personalizing Git](07-PersonalizingGit.adoc)
        2. [Vendoring Dependencies as Submodules](08-VendoringDependenciesAsSubmodules.adoc)
        3. [Working with Subversion](09-WorkingWithSubversion.adoc)
        4. [GitHub Pull Requests](10-GitHubPullRequests.adoc)
        5. Hosting a Repository
-4. Git Best Practices
+5. [Git Best Practices](12-04-GitBestPractices.adoc)
        1. [Creating a Clean History](12-CreatingACleanHistory.adoc)
        2. [Merging vs. Rebasing](13-MergingVsRebasing.adoc)
        3. Recommended Team Workflows
-5. Appendices
+6. Appendices
        1. [Why Use Version Control?](A-WhyUseVersionControl.adoc)
        2. [Git Installation](B-GitInstallation.adoc)
        3. [Creating a GitHub Account and Repository](C-CreatingAGitHubAccountAndRepository.adoc)
