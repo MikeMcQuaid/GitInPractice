@@ -27,6 +27,9 @@ A Git repository can contain _submodules_. Submodules allow you to reference oth
 
 Git's submodules store the reference to a specific SHA-1 reference in another remote Git repository and store these in subdirectories of the current repository. All that is actually committed in the current repository are some small pieces of metadata which the `git submodule` command uses to clone, update and interact with the various submodules inside a Git repository.
 
+.What is `git subtree`?
+NOTE: You may have heard about `git subtree` which is an alternate method of managing Git subprojects inside a Git repository. Instead of just referncing other Git repositories `git subtree` will store the contents of the remote Git repository. It's a contributed command to Git which means it's not documented or supported to the same extent as `git submodule` so I won't be covering it in this book. If you want to read more you can view the `git subtree` documentation on GitHub: https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt
+
 ### Add a git submodule: git submodule add
 Let's start by creating a new repository that can be used as a submodule in our existing `GitInPracticeRedux` repository.
 
@@ -35,7 +38,7 @@ Create a new repository on GitHub that we can use as a submodule by following th
 1.  Create a new repository with `git init` and pass the path to a new directory e.g. `git init /Users/mike/GitInPracticeReduxSubmodule/`
 2.  Change to the directory containing your new submodule repository e.g. `cd /Users/mike/GitInPracticeReduxSubmodule/`.
 3.  Create a file named `TODO.md` with the `echo` command by running `echo "# TODO\n1. Add something useful to this submodule." > TODO.md`.
-4.  Commit the new `TODO.md` as the initial commit by running `git commit --message "Initial commit of submodule."`.
+4.  Commit the new `TODO.md` as the initial commit by running `git commit --message "Initial commit of submodule." TODO.md`.
 5.  Create a new repository on GitHub (or another Git hosting provider).
 6.  Add the new remote reference to the GitHub repository by running e.g. `git remote add origin https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git`.\
 7.  Push the repository to GitHub by running e.g. `git push --set-upstream origin master`.

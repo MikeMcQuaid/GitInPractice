@@ -25,8 +25,11 @@ PRs and forks can be combined so you can find a repository you wish to make chan
 .How would you use forks to contribute to a repository?
 NOTE: You may have an open-source project that you use and have found a bug in. However, you don't have commit access yet and they don't want to give you commit access to make the change. In this case you could fork the open-source repository, make the changes, commit and test them and then creating a pull request from your forked repository to the original repository. This would allow the maintainers of the open-source repository to review your proposed changes, make any comments and merge them when they are ready.
 
+.Where can I read more about using forks and pull requests?
+NOTE: You can read more about using pull requests and forking repositories in GitHub's official help pages at https://help.github.com/articles/using-pull-requests and https://help.github.com/articles/fork-a-repo. I've not reproduced or rewritten them here as they and their images are kept up-to-date with any changes made to GitHub.
+
 ### Interacting with GitHub from the command-line: gh
-We've been working mostly from the command-line in this book and PRs are sometimes a core part of Git workflows so it would be useful if we could also create PRs from the command-line. Thankfully there is a tool called `gh` which allows interacting with GitHub from the command-line (through the GitHub API).
+We've been working mostly from the command-line in this book and PRs are sometimes a core part of Git workflows so it would be useful if we could also create PRs from the command-line. Thankfully there is a tool called `gh` which allows interacting with GitHub from the command-line (through the GitHub API). It is available to download and provides installation instructions https://github.com/jingweno/gh.
 
 The `gh` command-line tool allows various interactions with GitHub by providing a wrapper on top of Git's interface and adding new commands and improving the interaction of some Git commands with GitHub.
 
@@ -236,7 +239,13 @@ From the merging a pull request output:
 You have successfully merged a pull request from the command-line.
 
 #### Discussion
-If you visit the pull request URL you will notice that after the push the pull-request has been automatically closed as it has detected that you have merged the contents of the branch remotely.
+Let's look at the pull request on GitHub:
+
+.Merged pull request
+[[merged-pull-request]]
+image::screenshots/10-MergedPullRequest.png[]
+
+<<merged-pull-request>> shows the state of the merged pull request after these changes. You will notice that after the push the pull-request has been automatically closed as it has detected that you have merged the contents of the branch remotely.
 
 .How can you close a pull request without a merge?
 NOTE: If you prefer to perhaps cherry-pick or rewrite some of the commits then the SHA-1 may change. This case will may not be detected automatically by GitHub as a merge and therefore the issue may not be closed automatically. If you wish to ensure that any modified commit will automatically close the pull request you could use `git rebase --interactive` or `git commit --amend` to change the commit message for one of the commits to include text such as `Closes #1`. The first pull request that was created above was numbered #1. This magic string in a commit message is detected by GitHub and indicates that when this commit is merged to the `master` branch on the main repository it should close the pull request (or issue) numbered #1. You can read more about this in GitHub's help at https://help.github.com/articles/closing-issues-via-commit-messages.
