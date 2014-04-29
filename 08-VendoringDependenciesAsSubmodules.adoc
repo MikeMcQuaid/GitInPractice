@@ -46,6 +46,7 @@ Create a new repository on GitHub that we can use as a submodule by following th
 The output of all these commands should resemble:
 
 .New submodule repository creation output
+[.long-annotations]
 ```
 # git init /Users/mike/GitInPracticeReduxSubmodule/
 
@@ -144,6 +145,7 @@ Initializing all submodules can be done by running `git submodule init` which co
 Let's have a closer look at the last commit:
 
 .`git show` submodule output
+[.long-annotations]
 ```
 # git show
 commit cc206b5c9b30eef23578e48dadfa3b194a50cfe7
@@ -198,6 +200,7 @@ You wish to show the current states of all submodules of a repository.
 2.  Run `git submodule status`. The output should resemble:
 
 .Submodule status output
+[.long-annotations]
 ```
 # git submodule status
 
@@ -224,6 +227,7 @@ Let's simulate this situation by removing the current clone of the submodule in 
 The output of all these commands should resemble:
 
 .Remove submodule clone
+[.long-annotations]
 ```
 # git submodule deinit .
 
@@ -254,6 +258,7 @@ You wish to initialize all submodules in your repository and update them to the 
 2.  Run `git submodule update --init`. The output should resemble:
 
 .Submodule initialize and update output
+[.long-annotations]
 ```
 # git submodule update --init
 
@@ -302,6 +307,7 @@ You wish to output some status information for every submodule in the `GitInPrac
 2.  Run `git submodule foreach 'echo $name: $toplevel/$path [$sha1]'`. The output should resemble:
 
 .submodule loop output
+[.long-annotations]
 ```
 # git submodule foreach 'echo $name: $toplevel:$path [$sha1]'
 

@@ -308,6 +308,7 @@ You wish to fetch new commits to the local `GitInPracticeRedux` repository from 
 2.  Run `git fetch`. The output should resemble:
 
 .Fetching new changes
+[.long-annotations]
 ```
 # git fetch
 
@@ -490,6 +491,7 @@ You wish to push the changes from the local `chapter-two` branch to create the r
 3.  Run `git push --set-upstream origin chapter-two`. The output should resemble:
 
 .Push and set upstream branch
+[.long-annotations]
 ```
 git push --set-upstream origin chapter-two
 

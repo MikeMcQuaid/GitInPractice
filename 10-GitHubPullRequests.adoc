@@ -55,6 +55,7 @@ You wish to create a GitHub pull request from the command-line.
 The output for these commands should resemble:
 
 .Create pull request with `gh` output
+[.long-annotations]
 ```
 # git checkout -b pr-test master
 
@@ -127,6 +128,7 @@ You wish to fork a repository and create a pull request from that fork from the 
 The output for these commands should resemble:
 
 .Create fork and pull request with `gh` output
+[.long-annotations]
 ```
 # gh fork
 
