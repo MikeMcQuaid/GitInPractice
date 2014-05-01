@@ -14,7 +14,7 @@ Let's start by learning why Git is so widely used by programmers.
 
 ### Why do programmers use Git?
 Git was created by a programmer to be used by programmers. Linus Torvalds, the creator of the Linux kernel, started writing Git in 2005 with the goal of having a distributed, open-source, high-performance and hard to corrupt version control system for the Linux kernel project to use. Within a week Git's source code was hosted inside the Git version control system and within two and a half months version 2.6.12 of the Linux kernel was released using Git.
-
+//(TP)-I don't know if it is relevant, but Linus has changed his view on Git and is quite sceptical about Git - and especially GitHub -  these days 
 Since its initial creation for the Linux kernel Git is now used by many other open source projects, all sizes of companies and large "social coding" Git hosting sites such as GitHub.
 
 Git is my preferred method of software source code control. I also use it for versioning plain text files such as the text for this book. Git has many strengths over other methods of source control. Git stores all of the history, branches and commits locally. This means adding new versions or querying history doesn't require a network connection. Git's history-log viewing and branch creation is near-instant compared with e.g. Subversion's which is sluggish even on a fast network connection. As Git stores changes locally you are not constrained by the work of others when working in a team. For example, remote branch updates and merges can be done independently so you can continue your edit/commit workflow without interruptions while still downloading and examining any changes made by others. In Git you can modify the history of branches and even rewrite commit data across the entire repository. It's often useful to be able to make lots of small commits which are later turned into a single commit or make commit messages contain more information after the fact and Git's history rewriting enables this. Even with this flexibility in Git every commit has a unique reference that survives rewriting or changes and won't be purged until it's missing from all branches for at least 30 days. This means it's very hard to accidentally lose work if it has been committed.
@@ -29,7 +29,7 @@ Many of the above projects and many users of Git have also been introduced to an
 Once you've installed Git (as detailed in <<B-GitInstallation#git-installation>>) the first thing you need to do is to tell Git your name and email (particularly before creating any commits). Rather than usernames Git uses a name and email address to identify the author of a commit.
 
 My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would run:
-
+//(TP)-This may be covered later, but the difference between '--' and '-' in front of commands.
 .Set name and email address
 ```
 # git config --global user.name "Mike McQuaid" <1>
@@ -67,7 +67,7 @@ Typically you create a new repository by downloading another repository that alr
 
 #### Problem
 You wish to create a new local Git repository in a new subdirectory named `GitInPracticeRedux.
-
+//(TP)-The foreslash in the below cd-command suggest you are working on a non-Windows box. I expect users will now this, but is it worth mentioning? I don't know what level of knowledge the reader is supposed to have, but "kids these days seems lost without a wizard ...". Just a thought.
 #### Solution
 1.  Change to the directory you wish to contain your new repository directory e.g. `cd /Users/mike/`.
 2.  Run `git init GitInPracticeRedux`.
@@ -89,6 +89,7 @@ You have initialized a new local Git repository named `GitInPracticeRedux` acces
 We're calling the repository `GitInPracticeRedux` rather than `GitInPractice` to differentiate it from the book itself.
 
 .Where can I see the full syntax references for Git commands?
+//(TP)-As above, there is a difference between 'git init --help' and 'git init -help'. Might be worth mentioning at some point.
 NOTE: All `git` commands referenced in this book have complete references to all their possible syntax and arguments in Git's help. This can be accessed for a given command by running the command suffixed with `--help` e.g. `git init --help`. This book will cover only the most common and useful commands and arguments.
 
 `git init` can be run without any arguments to create the local Git repository in the current directory.
