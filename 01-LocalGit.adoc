@@ -274,6 +274,7 @@ From the second commit output:
 You have made modifications to `GitInPractice.asciidoc` and committed them.
 
 ##### Discussion
+//(TP)-Does all abbreviations use single '-'?
 The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag is omitted then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
 
 `git commit` can be called with `--author` and `--date` flags to override the auto-set metadata in the new commit.
@@ -409,6 +410,7 @@ A _diff_ (also known as a _change_ or _delta_) is the difference between two com
 You wish to view the differences between the previous commit and the latest.
 
 #### Solution
+//(TP)-In the diff and --word-diff examples you have to press 'q' to "exit" to the command prompt again. That is at least the case with the version of Git I'm using.
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git diff master~1 master`. The output should resemble:
 
