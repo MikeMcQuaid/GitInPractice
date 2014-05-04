@@ -9,4 +9,3 @@ Mike McQuaid <mike@mikemcquaid.com>
 :source-highlighter: pygments
 :sectlink:
 :sectanchors:
-:data-uri:
