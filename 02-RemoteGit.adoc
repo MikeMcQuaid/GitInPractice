@@ -199,7 +199,7 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 
 #### Discussion
 `git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in Chapter 13.
-
+//(TP)-Can you write 'git clone --depth 0'? And what happens if the integer is negative?
 `git clone` can take a `--depth` flag followed by an integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
 
 `git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. Submodules will be covered in Chapter 12.
