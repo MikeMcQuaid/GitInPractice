@@ -87,7 +87,7 @@ Let's push the changes you made in our repository in <<01-LocalGit#introduction-
 You wish to push the changes from the local `GitInPracticeRedux` repository to the `origin` remote on GitHub.
 
 #### Solution
-//(TP)-The following example is quite "complex" if you have never used Git and especially if you have never worked with remote branches before. The description is excellent, and I will have a hard time trying to explain what could be done differently, but it is difficult to follow the details in the output. You explain the output of command 2. but not the actual command, e.g. --set-upstream, before bullet 6. Maybe this should be done up front?
+//(TP)-The following example is quite "complex" if you have never used Git and especially if you have never worked with remote branches before. The description is excellent, and I will have a hard time trying to explain what could be done differently, but it is difficult to follow the details in the output. You explain the output of command 2. but not the actual command, e.g. --set-upstream, before bullet 6. Maybe this should be done up front? Note to initial comment: I must retract my suggestion as it will amend the flow of this example to differ from the other examples. Sorry for the confusion.
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git push --set-upstream origin master` and enter your GitHub username and password when requested. The output should resemble:
 
