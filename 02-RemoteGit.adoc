@@ -2,7 +2,7 @@
 ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn how to retrieve and share changes with other users' Git repositories by learning the following topics:
-
+//(TP)-Is this chapter going to contain anything on forks? When to use them and the difference between forks and branches?
 * How to download a remote repository
 * How to send/receive changes from a remote repository
 * How to create and receive branches
