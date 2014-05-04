@@ -489,6 +489,7 @@ Now that you've created a new branch and checked it out it would be useful to pu
 You wish to push the changes from the local `chapter-two` branch to create the remote branch `chapter-two` on GitHub.
 
 #### Solution
+//(TP)-Will anything happen if you run 'git checkout <name>' if you are already on the <name> branch?
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
 3.  Run `git push --set-upstream origin chapter-two`. The output should resemble:
