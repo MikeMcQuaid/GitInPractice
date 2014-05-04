@@ -131,7 +131,7 @@ The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `or
 `git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
 
 `git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
-
+//(TP)-and rereading and rereading and ... :) Excellent!
 A _tracking branch_ is the default push or fetch location for a branch. This means in future you could run `git push` with no arguments on this branch and it will do the same thing as running `git push origin master` i.e. push the current branch to the `origin` remote's `master` branch.
 
 .Local repository after `git push`
