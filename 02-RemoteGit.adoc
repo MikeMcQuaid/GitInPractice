@@ -125,6 +125,7 @@ From the push output you can see:
 You have pushed your `master` branch's changes to the `origin` remote's `master` branch.
 
 #### Discussion
+//(TP)-Maybe a comment of what will happen if you try to run 'git push' the first time?
 The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch. After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
 
 `git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
