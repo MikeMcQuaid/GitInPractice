@@ -175,15 +175,15 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been succe
 # git add GitInPractice.asciidoc
 # git status
 
-# On branch master <1>
-#
-# Initial commit <2>
-#
-# Changes to be committed:
-#   (use "git rm --cached <file>..." to unstage)
-#
-#	new file:   GitInPractice.asciidoc <3>
-#
+On branch master <1>
+
+Initial commit <2>
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   GitInPractice.asciidoc <3>
+
 ```
 <1> default branch output
 <2> first commit
@@ -191,7 +191,7 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been succe
 
 In the status output:
 
-* "default branch output (1)" is the first line of `git status` output (which unfortunately, like the run commands, is also always prefixed with a `#`). It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the index (the staging area for the next commit).
 
