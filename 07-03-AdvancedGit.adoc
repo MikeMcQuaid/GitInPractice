@@ -11,4 +11,4 @@ This part will cover the following topics:
 * How to send and receive changes to a Subversion repository from Git
 * How to access a GitHub repository using a Subversion client
 * How to create and merge GitHub pull requests and forks from the command-line
-// TODO: Chapter 11
+* How to share a repository as a server or through a web interface
