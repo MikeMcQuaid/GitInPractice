@@ -7,3 +7,6 @@ Mike McQuaid <mike@mikemcquaid.com>
 :idprefix:
 :idseparator: -
 :source-highlighter: pygments
+:sectlink:
+:sectanchors:
+:data-uri:
