@@ -535,7 +535,7 @@ image::diagrams/02-Merging.png[]
 When a merge is requested all the commits from another branch are pulled into the current branch. Those commits then become part of the history of the branch. Please note from <<merging>> the commit in which the merge is made has two parents commits rather than one; it is joining together two separate paths through the history back into a single one. After a merge you may decide to keep the existing branch around to add more commits to it and perhaps merge again at a later point (only the new commits will need to be merged next time). Alternatively, you may delete the branch and make future commits on the Git's default `master` branch and create another branch when needed in the future.
 
 #### Problem
-You wish to make a commit on the local branch named `chapter-two` and merge this into into the `master` branch.
+You wish to make a commit on the local branch named `chapter-two` and merge this into the `master` branch.
 
 #### Solution
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
