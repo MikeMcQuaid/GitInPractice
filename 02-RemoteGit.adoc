@@ -537,7 +537,7 @@ When a merge is requested all the commits from another branch are pulled into th
 
 #### Problem
 You wish to make a commit on the local branch named `chapter-two` and merge this into the `master` branch.
-
+//(TP)-I think step 5 should be stressed more, that is you "stand" on the branch you wish to merge into (you kind of pull the changes instead of the other way around, where you stand on the branch you wish to merge from and push the changes)
 #### Solution
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
