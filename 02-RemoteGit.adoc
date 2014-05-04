@@ -419,7 +419,7 @@ From the branch output:
 
 * "new branch (1)" was created with the expected name.
 * "current branch <2>" is indicated by the `*` prefix which shows you are still on the master branch as before. `git branch` creates a new branch but does not change to it.
-
+//(TP)-Can you have spaces in your branch names?
 You have created a new local branch named `chapter-two` which currently points to the same commit as `master`.
 
 #### Discussion
