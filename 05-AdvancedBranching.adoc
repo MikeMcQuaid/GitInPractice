@@ -346,6 +346,9 @@ image::screenshots/05-OpenDiff.png[]
 
 You can also customize the tool that is used to specify your own merge tools. In <<opendiff>> you can see the `opendiff` tool provided with OSX used to resolve the previous merge conflict.
 
+.Who should resolve merge conflicts?
+NOTE: In Git the person who makes a merge i.e. runs the `git merge` command should always be the person who resolves a merge conflict. This may differ from other version control systems. Additionally, this may sometimes mean if a conflict resolution requires a particular member of a team to be able to pick the correct resolution that the `git merge` should be done by this person.
+
 ### Only resolve each merge conflict once: git rerere
 You may find yourself in a situation where you have a long-running branch where you have to keep merging in another branch and get the same merge conflicts every time.
 
