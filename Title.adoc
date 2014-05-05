@@ -2,8 +2,10 @@
 Mike McQuaid <mike@mikemcquaid.com>
 :doctype: book
 :toc: left
-:toclevels: 1
+:toclevels: 2
 :numbered:
 :idprefix:
 :idseparator: -
 :source-highlighter: pygments
+:sectlink:
+:sectanchors:

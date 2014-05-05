@@ -61,6 +61,8 @@ Now Git is set up, to use Git you need to initialize a Git _repository_ on your 
 ### Creating a repository: git init
 A Git _repository_ is the local collection of all the files related to a particular Git version control system and contains a `.git` subdirectory in its root. Git keeps track of the state of the files within the repository's directory on disk.
 
+(((repository)))
+
 Git repositories store all their data on your local machine. Making commits, viewing history and requesting differences between commits are all local operations that do not require a network connection. This makes all these operations much faster in Git than with centralized version control systems such as Subversion.
 
 Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
@@ -174,15 +176,15 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been succe
 # git add GitInPractice.asciidoc
 # git status
 
-# On branch master <1>
-#
-# Initial commit <2>
-#
-# Changes to be committed:
-#   (use "git rm --cached <file>..." to unstage)
-#
-#	new file:   GitInPractice.asciidoc <3>
-#
+On branch master <1>
+
+Initial commit <2>
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   GitInPractice.asciidoc <3>
+
 ```
 <1> default branch output
 <2> first commit
@@ -190,7 +192,7 @@ You have added the `GitInPractice.asciidoc` to the index. If this has been succe
 
 In the status output:
 
-* "default branch output (1)" is the first line of `git status` output (which unfortunately, like the run commands, is also always prefixed with a `#`). It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the index (the staging area for the next commit).
 

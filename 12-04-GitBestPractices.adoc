@@ -9,4 +9,4 @@ This part will cover the following topics:
 * How to build a commit using only certain changes in a file
 * How CMake and Homebrew open-source projects use differing merge/rebase strategies to manage contributions
 * How to decide what merge/rebase strategy to use for your project
-//TODO: Chapter 14
+* How to decide what branching workflow to use for your project

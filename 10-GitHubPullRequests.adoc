@@ -111,6 +111,9 @@ Essentially the pull request has just created a remote branch named `pr-test` wh
 
 The `gh` tool also accepts the `-b` and `-h` parameters which can be followed with a branch name to change the base and head branches respectively. These can either be passed a branch name e.g. `pr-test`, a branch name and GitHub user/organization name e.g. `GitInPractice:pr-test` or a GitHub user/organization name, repository name and branch name e.g. `GitInPractice/GitInPracticeRedux:pr-test`.
 
+.How can you view a pull request without whitespace changes?
+NOTE: The "Files changed" pane on a pull request will show a diff of the changes in that pull request. Some lines may have changes to whitespace that you don't care about. In this case you can avoid them by appending `?w=1` to the "Files changed" URL e.g. https://github.com/GitInPractice/GitInPracticeRedux/pull/1/files?w=1
+
 ### Making a pull request from a forked repository: gh fork
 If you are wishing to commit to an open-source software project that you do not have commit access to you will want to create a pull request so others can review your changes before they are merged (because open-source does not mean letting anyone commit to any repository at any time). To do this you will want to create your own repository that you can make commits and push branches to and request pull requests from. If you recall from <<what-are-pull-requests-and-forks>> you can fork any repository you have read access to (which includes all public, open-source repositories).
 

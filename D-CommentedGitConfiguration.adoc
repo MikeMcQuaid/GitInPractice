@@ -1,0 +1,13 @@
+[appendix]
+## Commented Git Configuration
+
+```
+[include]
+	path = ~/.gitconfig-user
+[color]
+	# Colour terminal command output when possible.
+	ui = auto
+...
+[gh]
+	protocol = https
+```

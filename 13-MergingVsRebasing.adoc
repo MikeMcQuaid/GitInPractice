@@ -106,7 +106,7 @@ To make a new branch and submit it for review:
 3.  Branch from `master` with `git checkout -b branchname origin/master`
 4.  Make changes and commit them with `git add` and `git commit`
 5.  Push the branch to the fork with `git push --set-upstream username branchname`
-6.  Create a _pull request_ on GitHub requesting review and merge of the branch. Pull requests will be covered in more detail in Chapter 11.
+6.  Create a _pull request_ on GitHub requesting review and merge of the branch.
 
 To make changes based on feedback:
 
