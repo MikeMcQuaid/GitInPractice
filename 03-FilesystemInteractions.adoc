@@ -43,7 +43,7 @@ You wish to rename a previously committed file in your Git working directory nam
 <1> commit message
 <2> no insertions/deletions
 <3> old => new filename
-
+//(TP)-Again the lines below does not correspond with the Solution statements above
 You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and committed it.
 
 #### Discussion
