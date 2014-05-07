@@ -212,7 +212,7 @@ Each line of a `.gitignore` file matches files with a pattern. For example, you 
 A good and widely-held principle for version control systems is to avoid committing _output files_ to a version control repository. Output files are those that are created from input files that are stored within the version control repository.
 
 For example, I may have a `hello.c` file which is compiled into `hello.o` object file. The `hello.c` _input file_ should be committed to the version control system but the `hello.o` _output file_ should not.
-
+//(TP)-Over time the .gitignore file will grow, but it may take some time. If you have a pointer or link to where the reader can download a good one, it would be very usefull.
 Committing `.gitignore` to the Git repository makes it easy to build up lists of expected output files so that they can be shared between all the users of a repository and not accidentally committed.
 
 Let's try and add an ignored file.
