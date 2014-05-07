@@ -50,7 +50,7 @@ You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and committed
 Moving and renaming files in version control systems rather than deleting and recreating them is done to preserve their history. For example, when a file has been moved into a new directory you will still be interested in the previous versions of the file before it was moved. In Git's case it will try and auto-detect renames or moves on `git add` or `git commit`; if a file is deleted and new file is created which has a majority of lines in common then Git will automatically detect the file was moved and `git mv` is not necessary. Despite this handy feature it's good practice to use `git mv` so you don't need to wait for a `git add` or `git commit` for Git to be aware of the move and to have consistent behavior across different versions of Git (which may have differing move auto-detection behavior).
 
 After running `git mv` the move or rename will be added to Git's index staging area which, if you remember from <<01-LocalGit#building-a-new-commit-in-the-index-staging-area-git-add>>, means that the change has been staged for inclusion in the next commit.
-
+//(TP)-I think it could be made more clear that you can perform file or directory operations within the same Git repository, but not between different Git repositories. 
 It's also possible to rename files or directories and move files or directories into other directories inside the Git repository using the `git mv` command and the same syntax as above. If you wish to move files into or out of a repository you must use a different, non-Git command (such as a Unix `mv` command).
 
 .What if the new filename already exists?
