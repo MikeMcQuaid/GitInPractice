@@ -8,7 +8,7 @@ In this chapter you will learn about interacting with files and directories in y
 * How to delete all untracked or ignored files or directories
 * How to reset all files to their previously committed state
 * How to temporarily stash and reapply changes to files
-
+//(TP)-Why should I care about the file system command via Git? Why not just copy or move the files via Explorer? It would be nice with some context.
 When working with a project in Git you will sometimes wish to move, delete, change and/or ignore certain files in your working directory. You could mentally keep track of the state of which files and changes are important but this is not a sustainable approach. Instead, Git provides commands for performing filesystem operations for you.
 
 Understanding the filesystem commands around Git will allow you to quickly perform these operations rather than being slowed down by Git's interactions.
