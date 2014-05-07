@@ -101,7 +101,7 @@ You have removed `GitInPracticeReviews.tmp` and committed it.
 Git will only interact with the Git repository when you explicitly give it commands which is why when you remove a file Git does not automatically run `git rm` command. The `git rm` command is not just indicating to Git that you wish for a file to be removed but also (like `git mv`) that this removal should be part of the next commit.
 
 If you wish to see a simulated run of `git rm` without actually removing the requested file then you can use `git rm -n` (or `--dry-run`). This will print the output of the command as if it were running normally and indicate success or failure but without actually removing the file.
-
+//(TP)-I create a new directory called 'Output' and placed some files in it. I also created a subfolder called 'bin' and places some additional files (it was actually the output of publishing a WebApi from within Visual Studio). When I ran the 'git rm -r' command all files _except_ the .DLL files in \bin were removed. Don't know if this is of importance, but thought I would mention it.
 To remove a directory and all the files and subdirectories within it you will need to use `git rm -r` (where the `-r` stands for 'recursive'). When run this will delete the directory and all files under it. This is combined well with `--dry-run` if you want to see what would be removed before removing it.
 
 .What if a file has uncommitted changes?
