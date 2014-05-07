@@ -456,7 +456,7 @@ You wish for Git to stop assuming there have been no changes made to `01-Introdu
 2.  Run `git update-index --no-assume-unchanged 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 
 Git will notice any current or future changes made to `01-IntroducingGitInPractice.asciidoc`.
-
+//(TP)-It might be worthwhile to have the reader re-run the 'git ls-files -v' command to verify that the above file is again being watched (as indicated by the capital H).
 #### Discussion
 Once you tell Git to stop ignoring changes made to a particular file then all commands such as `git add` and `git diff` will start behaving normally on this file again.
 
