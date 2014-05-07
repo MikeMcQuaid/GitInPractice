@@ -74,6 +74,7 @@ Note that if the `git add` fails you may have `*.tmp` in a `.gitignore` file som
 You wish to remove a previously committed file named `GitInPracticeReviews.tmp` in your Git working directory and commit the removed file.
 
 #### Solution
+//(TP)-There is a discrepency between the command in solution item 3 and the commands further down explaining the output. If this should not be so, please correct.
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `git rm GitInPracticeReviews.tmp`.
 3.  Run `git commit --message 'Remove unfavourable review file.'`. The output should resemble:
