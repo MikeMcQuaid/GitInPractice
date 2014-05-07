@@ -69,7 +69,7 @@ For testing purposes let's create and commit a temporary file to be removed:
 4.  Run `git commit --message 'Add review temporary file.'`
 
 Note that if the `git add` fails you may have `*.tmp` in a `.gitignore` file somewhere (introduced in <<ignore-files-gitignore>>). In this case add it using `git add --force GitInPracticeReviews.tmp`.
-
+//(TP)-Will the content of the '.gitignore' have any influence on the 'git rm -r' command? E.g. if you have a directory with some files, update your .gitignore to exclude them, and then try to remove the directory/files? I don't know if you are getting into more details about .gitignore later. If not and the above order of the modification to .gitignore does have an influence, it might be worth mentioning.
 #### Problem
 You wish to remove a previously committed file named `GitInPracticeReviews.tmp` in your Git working directory and commit the removed file.
 
