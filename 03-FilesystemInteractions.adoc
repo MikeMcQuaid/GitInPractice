@@ -26,6 +26,7 @@ Sometimes you will still need to manually rename or move files in your Git repos
 You wish to rename a previously committed file in your Git working directory named `GitInPractice.asciidoc` to `01-IntroducingGitInPractice.asciidoc` and commit the newly renamed file.
 
 #### Solution
+//(TP)-There is a difference between the commit message in bullet 3 and the command executed further down. 'Rename book file to first part file.' vs. 'Rename Chapter 1 file.'
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git mv GitInPractice.asciidoc 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 3.  Run `git commit --message 'Rename book file to first part file.'`. The output should resemble:
