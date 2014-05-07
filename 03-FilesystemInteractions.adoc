@@ -382,6 +382,7 @@ Sometimes you may wish to make changes to files but have Git ignore the specific
 I've found myself in a situation in the past where I'm wanting to test a Rails configuration file change for a week or two while continuing to do my normal work. I don't want to commit it because I don't want it to apply to servers or my coworkers but I do want to continue testing it while I make other commits rather than changing to a particular branch each time.
 
 #### Problem
+//(TP)-If you wish to make changed to multiple files in a given directory, can you tell git to 'assume-unchanged' on a whole directory?
 You wish for Git to assume there have been no changes made to `01-IntroducingGitInPractice.asciidoc`.
 
 #### Solution
