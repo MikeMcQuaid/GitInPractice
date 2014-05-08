@@ -142,7 +142,7 @@ image::screenshots/02-GitXPush.png[]
 <<gitx-push>> shows the state of the repository after the `git push`. There is one addition since we last looked at it in <<01-LocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
 
 .GitHub repository after `git push`
-<<github-push>>
+[[github-push]]
 image::screenshots/02-GitHubPush.png[]
 
 <<github-push>> shows the remote repository on GitHub after the `git push`. The latest commit SHA-1 there matches your current latest commit on the `master` branch seen in <<gitx-push>> (although they are different lengths; remember SHA-1s can always be shortened as long as they remain unique). To update this in future you would run `git push` again to push any local changes to GitHub.
