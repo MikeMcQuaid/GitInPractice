@@ -1,6 +1,7 @@
 ## Local Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
+//BEN: standard Manning format is just "This chapter covers" and then the intro bullets
 In this chapter you will learn how and why to use Git as a local version control system by covering the following topics:
 
 * Why Git was created
@@ -13,17 +14,17 @@ In this chapter you will learn how and why to use Git as a local version control
 Let's start by learning why Git is so widely used by programmers.
 
 ### Why do programmers use Git?
-Git was created by a programmer to be used by programmers. Linus Torvalds, the creator of the Linux kernel, started writing Git in 2005 with the goal of having a distributed, open-source, high-performance and hard to corrupt version control system for the Linux kernel project to use. Within a week Git's source code was hosted inside the Git version control system and within two and a half months version 2.6.12 of the Linux kernel was released using Git.
+Git was created by a programmer to be used by programmers. Linus Torvalds, the creator of the Linux kernel, started writing Git in 2005 with the goal of having a distributed, open-source, high-performance, and hard-to-corrupt version control system for the Linux kernel project to use. Within a week, Git's source code was hosted inside the Git version control system, and within two and a half months, version 2.6.12 of the Linux kernel was released using Git.
 //(TP)-I don't know if it is relevant, but Linus has changed his view on Git and is quite sceptical about Git - and especially GitHub -  these days 
-Since its initial creation for the Linux kernel Git is now used by many other open source projects, all sizes of companies and large "social coding" Git hosting sites such as GitHub.
+Since its initial creation for the Linux kernel, Git is now used by many other open source projects, all sizes of companies, and large "social coding" Git hosting sites such as GitHub.
 
-Git is my preferred method of software source code control. I also use it for versioning plain text files such as the text for this book. Git has many strengths over other methods of source control. Git stores all of the history, branches and commits locally. This means adding new versions or querying history doesn't require a network connection. Git's history-log viewing and branch creation is near-instant compared with e.g. Subversion's which is sluggish even on a fast network connection. As Git stores changes locally you are not constrained by the work of others when working in a team. For example, remote branch updates and merges can be done independently so you can continue your edit/commit workflow without interruptions while still downloading and examining any changes made by others. In Git you can modify the history of branches and even rewrite commit data across the entire repository. It's often useful to be able to make lots of small commits which are later turned into a single commit or make commit messages contain more information after the fact and Git's history rewriting enables this. Even with this flexibility in Git every commit has a unique reference that survives rewriting or changes and won't be purged until it's missing from all branches for at least 30 days. This means it's very hard to accidentally lose work if it has been committed.
+Git is my preferred method of software source code control. I also use it for versioning plain text files such as the manuscript for this book. Git has many strengths over other methods of source control. Git stores all of the history, branches, and commits locally. This means adding new versions or querying history doesn't require a network connection. Git's history-log viewing and branch creation is near-instant compared with for example Subversion's, which is sluggish even on a fast network connection. As Git stores changes locally, you're not constrained by the work of others when working in a team. For example, remote branch updates and merges can be done independently so you can continue your edit/commit workflow without interruptions while still downloading and examining any changes made by others. In Git you can modify the history of branches and even rewrite commit data across the entire repository. It's often useful to be able to make lots of small commits, which are later turned into a single commit or make commit messages contain more information after the fact, and Git's history rewriting enables this. Even with this flexibility in Git, every commit has a unique reference that survives rewriting or changes and won't be purged until it's missing from all branches for at least 30 days. This means it's hard to accidentally lose work if it has been committed.
 
-Git's main downsides are that the command-line application's interface is often counterintuitive: it makes frequent use of jargon that can only be adequately explained by understanding Git's internals. Additionally Git's official documentation can be hard to follow; it also uses jargon and has to detail the large number of options for Git's commands. To the credit of the Git community both the UI and documentation around Git have improved hugely over the years. This book will help you understand Git's jargon and the Git's internal operations; these should help you to understand why Git does what it does when you run the various Git commands.
+Git's main downsides are that the command-line application's interface is often counterintuitive: it makes frequent use of jargon that can only be adequately explained by understanding Git's internals. Additionally Git's official documentation can be hard to follow; it also uses jargon and has to detail the large number of options for Git's commands. To the credit of the Git community, both the UI and documentation around Git have improved hugely over the years. This book will help you understand Git's jargon and the Git's internal operations; these should help you to understand why Git does what it does when you run the various Git commands.
 
-Despite these downsides the strengths of Git have proved too strong for many software projects to resist. Google, Microsoft, Twitter, LinkedIn and Netflix all use Git as well as open-source projects such as the Linux kernel (the first Git user), Perl, PostgreSQL, Android, Ruby on Rails, Qt, GNOME, KDE, Eclipse and X.org.
+Despite these downsides, the strengths of Git have proved too strong for many software projects to resist. Google, Microsoft, Twitter, LinkedIn, and Netflix all use Git, as well as open-source projects such as the Linux kernel (the first Git user), Perl, PostgreSQL, Android, Ruby on Rails, Qt, GNOME, KDE, Eclipse, and X.org.
 
-Many of the above projects and many users of Git have also been introduced to and use Git through a Git hosting provider. My favorite is GitHub but there are various other paid and free alternatives available.
+Many of these projects and many users of Git have also been introduced to and use Git through a Git hosting provider. My favorite is GitHub, but various other paid and free alternatives are available.
 
 ### Initial setup
 Once you've installed Git (as detailed in <<B-GitInstallation#git-installation>>) the first thing you need to do is to tell Git your name and email (particularly before creating any commits). Rather than usernames Git uses a name and email address to identify the author of a commit.
@@ -47,23 +48,23 @@ mike@mikemcquaid.com <3>
 All command output listings in this book show:
 
 * "run command (1)" prefixed with a `#`.
-* "no output (2)" following the run command. In this case there was no output so this line has been left intentionally blank.
-* "command output (3)" following the run command. In this case the output was the previously set value of `user.email` (my email address).
+* "no output (2)" following the run command. In this case there was no output, so this line has been left intentionally blank.
+* "command output (3)" following the run command. In this case, the output was the previously set value of `user.email` (my email address).
 
 .How can I follow the listings?
-NOTE: You can follow listings as you work through the book by running the listed commands (in a Terminal on Unix or Git Bash on Windows) and comparing the output to the listing. A POSIX incompatible shell (which includes the Windows Command Prompt without Git Bash) may work for some listings but will fail for others that rely on POSIX syntax (e.g. the use of single quotes).
+NOTE: You can follow listings as you work through the book by running the listed commands (in a Terminal on Unix or Git Bash on Windows) and comparing the output to the listing. A POSIX-incompatible shell (which includes the Windows Command Prompt without Git Bash) may work for some listings but will fail for others that rely on POSIX syntax (such as the use of single quotes).
 
 .Is there an example repository?
-NOTE: The steps followed in the examples in this book were used to create the demo repository `GitInPracticeRedux` on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
+NOTE: The steps followed in the examples in this book were used to create the demo repository `GitInPracticeRedux` on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
 
-Now Git is set up, to use Git you need to initialize a Git _repository_ on your local machine.
+Now Git is set up; to use Git you need to initialize a Git _repository_ on your local machine.
 
 ### Creating a repository: git init
 A Git _repository_ is the local collection of all the files related to a particular Git version control system and contains a `.git` subdirectory in its root. Git keeps track of the state of the files within the repository's directory on disk.
 
 (((repository)))
 
-Git repositories store all their data on your local machine. Making commits, viewing history and requesting differences between commits are all local operations that do not require a network connection. This makes all these operations much faster in Git than with centralized version control systems such as Subversion.
+Git repositories store all their data on your local machine. Making commits, viewing history, and requesting differences between commits are all local operations that don't require a network connection. This makes all these operations much faster in Git than with centralized version control systems such as Subversion.
 
 Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
 
@@ -71,7 +72,7 @@ Typically you create a new repository by downloading another repository that alr
 You wish to create a new local Git repository in a new subdirectory named `GitInPracticeRedux.
 //(TP)-The foreslash in the below cd-command suggest you are working on a non-Windows box. I expect users will now this, but is it worth mentioning? I don't know what level of knowledge the reader is supposed to have, but "kids these days seems lost without a wizard ...". Just a thought.
 #### Solution
-1.  Change to the directory you wish to contain your new repository directory e.g. `cd /Users/mike/`.
+1.  Change to the directory you wish to contain your new repository directory, for example `cd /Users/mike/`.
 2.  Run `git init GitInPracticeRedux`.
 
 .Initializing a Git repository
@@ -85,22 +86,22 @@ Initialized empty Git repository in
 <1> requested name
 <2> repository path
 
-You have initialized a new local Git repository named `GitInPracticeRedux` accessible at e.g. `/Users/mike/GitInPracticeRedux`.
+You've initialized a new local Git repository named `GitInPracticeRedux` accessible (on my machine) at `/Users/mike/GitInPracticeRedux`.
 
 #### Discussion
 We're calling the repository `GitInPracticeRedux` rather than `GitInPractice` to differentiate it from the book itself.
 
 .Where can I see the full syntax references for Git commands?
 //(TP)-As above, there is a difference between 'git init --help' and 'git init -help'. Might be worth mentioning at some point.
-NOTE: All `git` commands referenced in this book have complete references to all their possible syntax and arguments in Git's help. This can be accessed for a given command by running the command suffixed with `--help` e.g. `git init --help`. This book will cover only the most common and useful commands and arguments.
+NOTE: All `git` commands referenced in this book have complete references to all their possible syntax and arguments in Git's help. This can be accessed for a given command by running the command suffixed with `--help`: for example, `git init --help`. This book will cover only the most common and useful commands and arguments.
 
 `git init` can be run without any arguments to create the local Git repository in the current directory.
 
 ##### .git subdirectory
-Under the new Git repository directory a `.git` subdirectory at e.g `/Users/mike/GitInPracticeRedux/.git/` is created with various files and directories under it.
+Under the new Git repository directory, a `.git` subdirectory at `/Users/mike/GitInPracticeRedux/.git/` (for example) is created with various files and directories under it.
 
 .Why is the `.git` directory not visible?
-NOTE: On some operating systems directories starting with a `.` such as `.git` will be hidden by default. They can still be accessed in the console using their full path (e.g. `/Users/mike/GitInPracticeRedux/.git/`) but will not show up in file listings in file browsers or by running e.g. `ls /Users/mike/GitInPracticeRedux/`.
+NOTE: On some operating systems, directories starting with a `.` such as `.git` will be hidden by default. They can still be accessed in the console using their full path (such as `/Users/mike/GitInPracticeRedux/.git/`) but won't show up in file listings in file browsers or by running a command like `ls /Users/mike/GitInPracticeRedux/`.
 
 Let's view the contents of the new Git repository by changing to the directory containing the Git repository and running the `find` command.
 
@@ -140,36 +141,36 @@ Git has created files for:
 
 * "local configuration (1)" of the local repository.
 * "description file (2)" to describe the repository for those created for use on a server.
-* "HEAD pointer (3)", "branch pointers (8)" and "tag pointers (9)" which point to commits.
-* "_event hooks_ (4)" samples; scripts that run on defined events e.g. pre-commit is run before every new commit is made.
-* "excluded files (5)" which manages files which should be excluded from the repository.
-* "object information (6)" and "pack files (7)" which are used for object storage and reference.
+* "HEAD pointer (3)", "branch pointers (8)", and "tag pointers (9)" that point to commits.
+* "_event hooks_ (4)" samples; scripts that run on defined events. For example, pre-commit is run before every new commit is made.
+* "excluded files (5)" manages files which should be excluded from the repository.
+* "object information (6)" and "pack files (7)" that are used for object storage and reference.
 
-You shouldn't edit any of these files directly until you have a more advanced understanding of Git (or never at all). You will instead modify these files and directories by interacting with the Git repository through Git's filesystem commands first introduced in <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
+You shouldn't edit any of these files directly until you have a more advanced understanding of Git (or never at all). You'll instead modify these files and directories by interacting with the Git repository through Git's filesystem commands, first introduced in <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
 
 ### Creating a new commit: git add, git commit
 To do anything useful in Git we first need one or more commits in our repository.
 
-A _commit_ is created from the changes to one or more files on disk. The typical workflow is that you will change the contents of files inside a repository, review the _diffs_, add them to the _index_, create a new commit from the contents of the index and repeat this cycle.
+A _commit_ is created from the changes to one or more files on disk. The typical workflow is that you'll change the contents of files inside a repository, review the _diffs_, add them to the _index_, create a new commit from the contents of the index, and repeat this cycle.
 
-Git's index is a staging area used to build up new commits. Rather than requiring all changes in the working tree make up the next commit Git allows files to be added incrementally to the index. The add/commit/checkout workflow can be seen in <<commit-workflow>>:
+Git's index is a staging area used to build up new commits. Rather than requiring all changes in the working tree to make up the next commit, Git allows files to be added incrementally to the index. The add/commit/checkout workflow can be seen in <<commit-workflow>>:
 
 .Git add/commit/checkout workflow
 [[commit-workflow]]
 image::diagrams/01-Workflow.png[]
 
 #### Building a new commit in the index staging area: git add
-Git does not add anything to the index without your instruction. As a result, the first thing you have to do with a file you want to include in a Git repository is request Git add it to the index.
+Git doesn't add anything to the index without your instruction. As a result, the first thing you have to do with a file you want to include in a Git repository is request that Git add it to the index.
 
 ##### Problem
 You wish to add an existing file `GitInPractice.asciidoc` to the index staging area for inclusion in the next commit.
 
 ##### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory.
 3.  Run `git add GitInPractice.asciidoc`. There will be no output.
 
-You have added the `GitInPractice.asciidoc` to the index. If this has been successful then the output of running `git status` should resemble:
+You've added the `GitInPractice.asciidoc` to the index. If this has been successful then the output of running `git status` should resemble the following:
 
 .Adding a file to the index
 ```
@@ -192,40 +193,41 @@ Changes to be committed:
 
 In the status output:
 
-* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Do not worry about creating branches for now, this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Don't worry about creating branches for now; this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the index (the staging area for the next commit).
 
 ##### Discussion
 `git add` can also be passed directories as arguments instead of files. You can add everything in the current directory and its subdirectories by running `git add .`.
 
-When a file is added to the index a file named `.git/index` is created (if it does not already exist). The added file contents and metadata are then added to the index file. You have requested two things of Git here:
+When a file is added to the index, a file named `.git/index` is created (if it doesn't already exist). The added file contents and metadata are then added to the index file. You've requested two things of Git here:
 
-1.  for Git to track the contents of the file as it changes (this is not done without an explicit `git add`).
-2.  the contents of the file when `git add` was run should be added to the index, ready to create the next commit.
+1.  For Git to track the contents of the file as it changes (this isn't done without an explicit `git add`).
+2.  The contents of the file when `git add` was run should be added to the index, ready to create the next commit.
 
 .Does `git add` need to be run more than once?
-NOTE: After you have added changes for `GitInPractice.asciidoc` to the index staging area with `git add` they will be used in the next commit. After these changes to `GitInPractice.asciidoc` have been committed with `git commit` (introduced in <<committing-changes-to-files-git-commit>>) if you wish to add more changes to `GitInPractice.asciidoc` you will need to run `git add GitInPractice.asciidoc` again. This is because, unlike some version control systems, `git add` is used both to initially add a file to the Git repository but also to request the changes to the file be used in the next commit.
+NOTE: After you've added changes for `GitInPractice.asciidoc` to the index staging area with `git add`, they will be used in the next commit. After these changes to `GitInPractice.asciidoc` have been committed with `git commit` (introduced in <<committing-changes-to-files-git-commit>>), if you wish to add more changes to `GitInPractice.asciidoc` you'll need to run `git add GitInPractice.asciidoc` again. This is because, unlike some version control systems, `git add` is used both to initially add a file to the Git repository but also to request the changes to the file be used in the next commit.
 
 Now that the contents of the file have been added to the index you're ready to commit it.
 
 #### Committing changes to files: git commit
-Making _commit_ stores the changes to one or more files. Each commit contains a message entered by the author, details of the author of the commit, a unique commit reference (in Git these are _SHA-1 hashes_ e.g. `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit (known as the _parent commit_), the date the commit was created and a pointer to the contents of files when the commit was made. The file contents are typically displayed as the _diff_ (the differences between the files before and the files after the commit).
+//BEN: "making commit" sounds odd. making a commit? creating a commit? running the commit command? 
+Making _commit_ stores the changes to one or more files. Each commit contains a message entered by the author, details of the author of the commit, a unique commit reference (in Git these are _SHA-1 hashes_ such as `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit (known as the _parent commit_), the date the commit was created, and a pointer to the contents of files when the commit was made. The file contents are typically displayed as the _diff_ (the differences between the files before and the files after the commit).
 
 .A typical commit broken down into its parts
 [[typical-commit]]
 image::diagrams/01-Commit.png[]
 
 .Why do the arrows point backwards?
-NOTE: As you may have noticed <<typical-commit>> uses arrows pointing from commits to their previous commit. The reason for this is that commits contain a pointer to the _parent commit_ and not the other way round; when a commit is made it has no idea what the next commit will be yet.
+NOTE: As you may have noticed, <<typical-commit>> uses arrows pointing from commits to their previous commit. The reason for this is because commits contain a pointer to the _parent commit_ and not the other way around; when a commit is made, it has no idea what the next commit will be yet.
 
 ##### Problem
 You wish to commit the contents of an existing file `GitInPractice.asciidoc` which has already been added to the index staging area. After this, you wish to make modifications to the file and commit them.
 
 ##### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
 2.  Ensure the file `GitInPractice.asciidoc` is in the current directory and that its changes were staged in the index with `git add`.
-3.  Run `git commit --message 'Initial commit of book.'`. The output should resemble:
+3.  Run `git commit --message 'Initial commit of book.'`. The output should resemble the following:
 
 .Committing changes staged in the index
 [.long-annotations]
@@ -242,14 +244,14 @@ You wish to commit the contents of an existing file `GitInPractice.asciidoc` whi
 
 From the commit output:
 
-* "branch, SHA-1, message (1)" shows the name of the branch that the commit was made (the default, `master`), the shortened SHA-1 (`6576b68`) and the commit message. The `(root-commit)` means the same as the `Initial commit` you saw earlier. It is only shown for the first commit in a repository and means it has no parent commit.
+* "branch, SHA-1, message (1)" shows the name of the branch that the commit was made (the default, `master`), the shortened SHA-1 (`6576b68`), and the commit message. The `(root-commit)` means the same as the `Initial commit` you saw earlier. It's only shown for the first commit in a repository, and means this commit has no parent.
 * "changed files, lines (2)" shows the number of files changed and the number of lines inserted or deleted across all the files in this commit.
-* "new file created (3)" shows that a new file was created and the Unix file mode (`100644`). The file mode is related to Unix file permissions and the `chmod` command but are not important in understanding how Git works so can be safely ignored.
+* "new file created (3)" shows that a new file was created, along with the Unix file mode (`100644`). The file mode is related to Unix file permissions and the `chmod` command, but not important in understanding how Git works so can be safely ignored.
 
 You have made a new commit containing `GitInPractice.asciidoc`.
 
 .What is a SHA-1 hash?
-NOTE: A "SHA-1 hash" is a secure hash digest function that is used extensively inside of Git. It outputs a 160-bit (20-byte) hash value which is usually displayed as a 40 character hexadecimal string. The hash is used to uniquely identify commits by Git by their contents and metadata. They is used instead of incremental revision numbers (like in Subversion) due to the distributed nature of Git. When you commit locally Git cannot know whether your commit occurred before or after another commit on another machine so it cannot use ordered revision numbers. As the full 40 characters are rather unwieldy Git will often show shortened SHA-1s (as long as they are unique in the repository). Anywhere that Git accepts a SHA-1 unique commit reference it will also accept the shortened version (as long as the shortened version is still unique within the repository).
+NOTE: A "SHA-1 hash" is a secure hash digest function that is used extensively inside of Git. It outputs a 160-bit (20-byte) hash value which is usually displayed as a 40-character hexadecimal string. The hash is used to uniquely identify commits by Git by their contents and metadata. They're used instead of incremental revision numbers (like in Subversion) due to the distributed nature of Git. When you commit locally, Git can't know whether your commit occurred before or after another commit on another machine, so it can't use ordered revision numbers. As the full 40 characters are rather unwieldy, Git will often show shortened SHA-1s (as long as they're unique in the repository). Anywhere that Git accepts a SHA-1 unique commit reference, it will also accept the shortened version (as long as the shortened version is still unique within the repository).
 
 Let's create another commit.
 
@@ -270,18 +272,18 @@ Let's create another commit.
 
 From the second commit output:
 
-* "branch, SHA-1, message (1)" has a different shortened SHA-1 as this is a new commit with different contents and metadata. No `(root-commit)` is shown as this second commit has the first as its parent.
+* "branch, SHA-1, message (1)" has a different shortened SHA-1, as this is a new commit with different contents and metadata. No `(root-commit)` is shown, as this second commit has the first as its parent.
 * "changed files, lines (2)" shows three insertions and one deletion because Git treats the modification of a line as the deletion of an old line and insertion of a new one.
 
-You have made modifications to `GitInPractice.asciidoc` and committed them.
+You've made modifications to `GitInPractice.asciidoc` and committed them.
 
 ##### Discussion
 //(TP)-Does all abbreviations use single '-'?
-The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag is omitted then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
+The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag is omitted, then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
 
 `git commit` can be called with `--author` and `--date` flags to override the auto-set metadata in the new commit.
 
-`git commit` can be called with a path (like `git add`) to do the equivalent of an add followed immediately by a commit. It can also take the `--all` (or `-a`) flags to add all changes to files tracked in the repository into a new commit. Although these methods all save time they tend to result in larger (and therefore worse) commits so I recommend avoiding their use until you've got used to using them separately. Several reasons small commits are better than large ones are covered in <<viewing-history-git-log-gitk-gitx>>.
+`git commit` can be called with a path (like `git add`) to do the equivalent of an add followed immediately by a commit. It can also take the `--all` (or `-a`) flags to add all changes to files tracked in the repository into a new commit. Although these methods all save time, they tend to result in larger (and therefore worse) commits, so I recommend avoiding their use until you've gotten used to using them separately. Several reasons small commits are better than large ones are covered in <<viewing-history-git-log-gitk-gitx>>.
 
 ###### Object store
 Git is a version control system built on top of an _object store_. Git creates and stores a collection of objects when you commit. The object store is stored inside the Git _repository_.
