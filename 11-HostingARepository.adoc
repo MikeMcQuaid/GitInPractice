@@ -1,20 +1,31 @@
 ## Hosting a Repository
 ifdef::env-github[:outfilesuffix: .adoc]
 
-We saw in <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> how to push to remote repositories provided by various organizations on the internet as a way of sharing your Git repositories with others. Sometimes though you may wish to host your Git repositories on a machine you control. This may range from a temporary basis where you wish to share a Git repository on your local machine with someone on your network to hosting your own Git server with access control and a web interface.
+//[Dan]: IIRC from our talk on Tuesday, the big thing missing here was the need to establish that this is for creating a very barebones server using git itself. There are lots of better tools out there to set it up.  
+//[Dan]: Also missing is the story component of the intro, for example explaining how Chris got into work one day to have his manager pull him into hsi office with an attack of the paranoia sayign that he wanted the IT department to host and maintain their git server rather than having a third party host it out of house. Chris then had to review his options. He decided that as a quck fix while evaluating other tools to maintain a git server, he would use git's own tooling to create a git server and host some repos."
 
-This chapter will walk through the facilities provided by Git to share your hosted repository with others without using a service like e.g. GitHub by learning about the following topics:
+We saw in <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> how to push to remote repositories provided by various organizations on the internet as a way of sharing your Git repositories with others. Sometimes though you may wish to host your Git repositories on a machine you control. 
+//[Dan]: Here's where to establish when and why you might want to do this at all. Start with, for example, "Scenarios to do this include" followed by a bullet list of those scenarios. 
+
+This may range from a temporary basis where you wish to share a Git repository on your local machine with someone on your network to hosting your own Git server with access control and a web interface.
+
+This chapter will walk through the facilities provided by Git to share your self-hosted repository with others without using a service like e.g. GitHub by learning about the following topics:
 
 * How to initialize a local repository to be used only as a server
+//[Dan]: This phrase above is the key to this chapter. if the reader isn't completely comfortable with what it means and what therefore the chapter will be teaching, they will get quickly frustrated and skip the whole thing.
 * How to mirror an existing repository for hosting as a server
 * How to share the contents of a repository with users on the same network
 * How to display the contents of a repository in a web browser
 * How to provide more advanced Git hosting with other software
 
+//[Dan]: Add a note here about where to find admin info for making git servers visible etc.
+
 ### Initialize a local repository as a server: git init --bare
 The Git repositories we've seen throughout this book have all had a similar structure: the working directory contains a checkout of the files in the current branch and a `.git` subdirectory which contains the repository data.
-
-Git stores data in a highly space-efficient format. The contents of the files on disk within a repository's working directory may sometimes take up more space than the compressed version of all files stored inside the repository! On a server the working directory should never be used directly so it is better to not create it at all. As you will just be sending/receiving Git objects to/from various Git clients with `git push`, `git fetch` or `git pull` you do not need to have the actual files checked out on disk. A Git repository without a working directory is known as a _bare repository_.
+//[Dan]: here would be a good place for a screenshot of finder \ WinExplorer etc showing the tree structure inside a standard repo as described above. (This is for comparison with a bare repo)
+Git stores data in a highly space-efficient format. The contents of the files on disk within a repository's working directory may sometimes take up more space than the compressed version of all files stored inside the repository! 
+//[Dan]: Could you have another go at writing the sentence above please? Isn't the repos working directoyr inside the repo as well? Bring forward some text from C1/2 if needed.
+On a server the working directory should never be used directly so it is better to not create it at all. As you will just be sending/receiving Git objects to/from various Git clients with `git push`, `git fetch` or `git pull` you do not need to have the actual files checked out on disk. A Git repository without a working directory is known as a _bare repository_. The major difference compared to the first repository we created in <<01-LocalGit#creating-a-repository-git-init>> is that this repository is not in a `.git` directory.
 
 Let's create a bare repository and have a look at its contents.
 
@@ -28,7 +39,7 @@ You wish to create a bare Git repository.
 .bare repository initialization output
 ```
 # git init --bare GitInPracticeReduxBare.git
-
+\\[Dan]: This cmd doesn't match the one given in step 2.
 Initialized empty Git repository in /Users/mike/GitInPracticeBare.git/ <1>
 ```
 <1> bare repository
@@ -41,7 +52,9 @@ You have successfully created a new bare Git repository.
 
 #### Discussion
 Bare repositories do not allow new commits to be created locally; they must be pushed from another repository. When creating bare repositories it is good practice to name them with the extension '.git' to make it clear that they are bare.
+//[Dan]: This second sentence on convention would do better as a call out NOTE I think.
 
+//[dan]: Instead another command line copy, here's where to have the second finder \ winexplorer screenshot showing the structure and files in a bare repo for comparison with figure 1.
 Let's view the contents of a bare repository by changing to the directory containing the bare Git repository and running the `find` command.
 
 ```
@@ -77,11 +90,15 @@ done
 ```
 
 The new repository has been created but it is empty i.e. contains no commits. If you add a file, commit and push it then it will be pushed to the bare repository and both repositories will now be non-empty.
-
+\\[Dan]: are you ever likely to create a bare repo and then clone it on the same machine? That seems like really bad practice.
+\\[Dan]: consider adding some more notes here about your experience with using bare repos
 ### Mirror a repository: git clone --mirror
 There are times when you wish to host a new Git repository that is a mirror of another i.e. a functionally identical copy. Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that `git clone` will create a clone of the repository locally with all commits, branches and tags that are in the repository you have cloned from.
 
 Additionally, `git clone` provides a `--mirror` flag which goes one step further and matches all refs locally. What this means is that if you cloned a repository with a branch named `testing` with `git clone` then it would contain only a remote branch named `origin/testing`. If you cloned this with `git clone --mirror` it would have a remote branch named `origin/testing` but also a local branch named `testing`. In practice this means that if anyone cloned your mirrored repository they will receive all branches if they cloned with `git clone --mirror` but not if they just used `git clone`.
+\\[dan]: Why would I want all the branches as well. It seems to make sense if you are going to host the repo
+\\[dan]: Perhaps some gitx screenshots here for comparing the effects of git clone with and wthout --mirror would be wise.
+\\[dan]: You might also want to get this paragraph a litte more succinct. it lost me very easily.
 
 Let's use `git clone --mirror` to set up a local mirror of the `GitInPracticeRedux` repository.
 
@@ -91,7 +108,7 @@ You wish mirror an existing remote repository.
 #### Solution
 1.  Change to the directory you wish to contain your new repository directory e.g. `cd /Users/mike/`.
 2.  Run `https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble:
-
+\\[Dan]: Please check code in step 2 with the listing below. \The code must match.
 .clone mirror output
 ```
 # git clone --mirror
@@ -114,9 +131,10 @@ You have mirrored the existing `GitInPracticeRedux` repository.
 
 #### Discussion
 Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that `git clone` can also take a `--bare` argument which behaves similarly to `--mirror`. Where `--mirror` will setup all remote refs as local ones e.g. turn remote branches into local ones `--bare` will just perform an ordinary clone but into a new bare repository rather than one with a working directory.
-
+\\[Dan]: Here would seem to be a good place for a table comparing the effects of git clone, git clone --mirror, git clone --bare, and git init --bare.
 Let's examine the contents of `GitInPracticeRedux.git/packed-refs` file:
 ```
+\\[dan]: There was some confusion about whether packed-refs, pack-refs was right.
 # pack-refs with: peeled fully-peeled
 ca74d2b7c4dd15a260e68c6ff3552c64041aacdc refs/heads/inspiration <1>
 a9e150fb17301eed6c31aa984411effdab8f3fec refs/heads/master <1>
@@ -132,13 +150,15 @@ e6e9208372f3784686499430fec547c20dad6139 refs/pull/2/merge <2>
 <3> tag
 
 The `pack-refs` file contains all the _packed_ (i.e. in Git's format for data internal and external transfer) refs that were fetched from the `GitInPracticeRedux` repository. It contains all the created branches (1), pull requests (2) and the tag that were created in this repository. These will now be shared with any other repositories that clone this one.
-
+\\[dan}]:GitInPractice Redux or just gip?
 ### Share repository with other users on the same network: git daemon
 Now that we've seen how to create bare repositories suitable for a server to share with other Git repositories let's learn how to actually serve these to other Git clients.
 
 We saw in <<initialize-a-local-repository-as-a-server-git-init-bare>> a repository being cloned from another path on the disk. While this would be one way of sharing a repository over the network with Git (give someone access to your disk with e.g. a network share) it's not very efficient as it will use multiple protocols: the protocol used to share the files over the network and Git's interaction with the packed repository. Instead a Git server will allow Git to interact natively in its own format.
-
-Git provides a simple server for basic repository hosting named `git daemon`. It provides no user authentication or encryption and only supports the `git://` protocol (rather than the `https://` we've used throughout this book or `ssh://` with uses SSH access). As a result it may be too limited for some cases but is great for the example in the section title: sharing a repository with other users on the same network.
+//[dan]: Why not identify the protocols you're talking about. SMB for one i'd guess, but what about a callout or a footnote for more info on the git protocol.
+Git provides a simple server for basic repository hosting named `git daemon`. It provides no user authentication or encryption and only supports the `git://` protocol (rather than the `https://` we've used throughout this book or `ssh://` with uses SSH access). 
+\\[Dan]: "with uses SSH access?"
+As a result it may be too limited for some cases but is great for the example in the section title: sharing a repository with other users on the same network.
 
 #### Problem
 You wish to share a repository with other users on the same network.
@@ -164,6 +184,8 @@ From the daemon output:
 Now that we have `git daemon` running open another terminal windows and clone this repository from a client with `git clone git://localhost/`:
 ```
 # git clone git://localhost/ GitInPracticeReduxDaemon <1>
+//[Dan]: must you share an address on the root of the server?
+//[dan]: Also, gitinpracticeREDUX?daemon
 
 Cloning into 'GitInPracticeReduxDaemon'...
 remote: Counting objects: 78, done.
@@ -195,19 +217,19 @@ You have successfully shared a repository over the network.
 
 #### Discussion
 `git daemon` can take some parameters to customize it's behavior:
-
+\\[dan]: here would be a good place for a hedgehog diagram showing the structure of the command.
 * the `--verbose` flag will output more verbose log details to the terminal about incoming Git client connections and access successes and failures. It's useful when hosting a server to enable this for debugging.
 * the `--base-path=.` indicates what path should be used as the server root. In this case we only hosted a single repository so we set the root to the base directory of the repository. If you wanted to host a directory that contained multiple repositories (e.g. `fish.git` and `cat.git`) you could specify the directory and then they could be accessed by name (e.g. `git clone git://localhost/fish.git` or `git clone git://localhost/cat.git`).
 * the `--export-all` flag is used to tell Git to allow access to all Git repositories under the base path. Without this argument by default `git daemon` will only allow access to repositories that have a `git-daemon-export-ok` file in the repository root (the root for bare repositories and `.git` for non-bare repositories).
 * the `--enable=receive-pack` flag is needed to allow write access to the repository. By default `git daemon` will only allow read access (provided by `upload-pack`) to repositories unless this flag is provided. It's not recommended to provide write access to non-bare repositories as it would be undesirable to have remote users be able to change the contents of your local branches.
 * the directory argument is needed if you wish to host a non-bare repository. In this case you would `cd` into the directory as normal but add a `./.git` argument specifying to share the `.git` directory. For example you might run `cd /Users/mike/GitInPracticeRedux && git daemon --verbose --base-path=. --export-all ./.git`.
-
+\\[Dan] As with 10.1, you've not shown any experience of your own using these commands. Perhaps some more discussion on using git:// vs anything else? How robust is it?
 ### Display repository in a browser: git instaweb
 Now that we've shared our repository on disk with other users it would be useful if we could provide a basic web interface to go along with our `git daemon`. Git provides a basic web interface named `gitweb` that can be hosted by a local web server.
-
+\\[dan]: Bring figure 10.1 back to here. 
 .How can I install `gitweb`?
 NOTE: `gitweb` is usually installed as part of the default Git installation (and is in all of the official Git installers). If it has not been you will need to install `gitweb` separately. This can be done by installing `gitweb` (or similar) with your package manager e.g. on Debian/Ubuntu run `apt-get install gitweb`.
-
+\\[Dan]: Why webrick? Is there a list of servers tha tinstaweb supports?
 Git provides the `git instaweb` command to host your local repository using the `gitweb` interface. To run this you will have to have a web server installed on your machine. If you are using OSX you can use `webrick` which is a simple web server provided with Ruby (which is provided with OSX). If you are on Linux you can install Ruby with your package manager e.g. on Debian/Ubuntu run `apt-get install ruby`. Windows Git installation sadly does not provide the `git instaweb` command but you can read how to set up `gitweb` using a separate web server such as Apache or IIS here: https://git.wiki.kernel.org/index.php/MSysGit:GitWeb.
 
 Now that we have `git instaweb` setup let's use it to display the repository in a browser.
@@ -239,7 +261,7 @@ Detailing all the features of the `gitweb` interface is beyond the scope of this
 You have successfully displayed the contents of the repository in a browser..
 
 #### Discussion
-`git instaweb` can take some parameters to customize it's behavior:
+`git instaweb` can take some parameters to customize its behavior:
 
 * the `--local` flag will ensure the web server can only be accessed from the local machine and not from other machines on the same network.
 * the `--port` flag can be followed with a port number to specify which port should be used to access `gitweb`. For example `--port 8080` would mean that `gitweb` is hosted on port 8080.
