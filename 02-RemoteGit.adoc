@@ -567,6 +567,9 @@ You have merged the `chapter-two` branch into the `master` branch.
 #### Discussion
 This brings the commit that was made in the `chapter-two` branch into the `master` branch.
 
+.What if you try and merge the same commit into a branch multiple times?
+NOTE: `git merge` will not merge the same commit into a branch multiple times; it will simple exit and output `Already up-to-date.` rather than performing the merge.
+
 .Local repository after `git merge chapter-two`
 [[gitx-merge]]
 image::screenshots/02-GitXMerge.png[]
