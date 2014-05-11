@@ -124,7 +124,7 @@ From the push output you can see:
 You have pushed your `master` branch's changes to the `origin` remote's `master` branch.
 
 #### Discussion
-The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch. After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
+The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch (without it it will output `fatal: The current branch master has no upstream branch.`). After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
 
 `git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
 
@@ -139,7 +139,7 @@ image::screenshots/02-GitXPush.png[]
 <<gitx-push>> shows the state of the repository after the `git push`. There is one addition since we last looked at it in <<01-LocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
 
 .GitHub repository after `git push`
-<<github-push>>
+[[github-push]]
 image::screenshots/02-GitHubPush.png[]
 
 <<github-push>> shows the remote repository on GitHub after the `git push`. The latest commit SHA-1 there matches your current latest commit on the `master` branch seen in <<gitx-push>> (although they are different lengths; remember SHA-1s can always be shortened as long as they remain unique). To update this in future you would run `git push` again to push any local changes to GitHub.
@@ -195,9 +195,9 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 <2> push URL
 
 #### Discussion
-`git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in <<11-HostingARepository#mirror-a-repository-git-clone-mirror>>.
+`git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in Chapter 13.
 
-`git clone` can take a `--depth` flag followed by an integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
+`git clone` can take a `--depth` flag followed by a positive integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
 
 `git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. This will be covered more in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
 
@@ -445,7 +445,7 @@ image::diagrams/02-BranchPointers.png[]
 You've seen `git branch` creates a local branch it does not change to it. To do that requires using `git checkout`.
 
 .Can branches be named anything?
-NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. This particular case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
+NOTE: Branches cannot have spaces or two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. The dots case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
 
 .What names should I use for branches?
 NOTE: Name branches according to their contents. For example, the `chapter-two` branch we've created here describes that the commits in this branch will be referencing the second chapter. I recommend a format of describing the branch's purpose in multiple words separated by hyphens. For example, a branch that is performing cleanup on the test suite should be named `test-suite-cleanup`.
@@ -532,14 +532,14 @@ image::diagrams/02-Merging.png[]
 When a merge is requested all the commits from another branch are pulled into the current branch. Those commits then become part of the history of the branch. Please note from <<merging>> the commit in which the merge is made has two parents commits rather than one; it is joining together two separate paths through the history back into a single one. After a merge you may decide to keep the existing branch around to add more commits to it and perhaps merge again at a later point (only the new commits will need to be merged next time). Alternatively, you may delete the branch and make future commits on the Git's default `master` branch and create another branch when needed in the future.
 
 #### Problem
-You wish to make a commit on the local branch named `chapter-two` and merge this into into the `master` branch.
+You wish to make a commit on the local branch named `chapter-two` and merge this into the `master` branch.
 
 #### Solution
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
 3.  Modify the contents of `GitInPractice.asciidoc` and run `git add GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Start Chapter 2.'`.
-5.  Run `git checkout master`.
+5.  Run `git checkout master` to checkout the branch you wish to merge `chapter-two` into.
 6.  Run `git merge chapter-two`. The output should resemble:
 
 .Merge branch

@@ -32,7 +32,7 @@ You wish to rename a previously committed file in your Git working directory nam
 
 .Renamed commit output
 ```
-# git commit --message 'Rename Chapter 1 file.'
+# git commit --message 'Rename book file to first part file.'
 
 [master c6eed66] Rename book file to first part file. <1>
  1 file changed, 0 insertions(+), 0 deletions(-) <2>
@@ -43,14 +43,14 @@ You wish to rename a previously committed file in your Git working directory nam
 <2> no insertions/deletions
 <3> old => new filename
 
-You have renamed `Chapter1.asciidoc` to `01-FirstChapter.asciidoc` and committed it.
+You have renamed `GitInPractice.asciidoc` to `01-IntroducingGitInPractice.asciidoc` and committed it.
 
 #### Discussion
 Moving and renaming files in version control systems rather than deleting and recreating them is done to preserve their history. For example, when a file has been moved into a new directory you will still be interested in the previous versions of the file before it was moved. In Git's case it will try and auto-detect renames or moves on `git add` or `git commit`; if a file is deleted and new file is created which has a majority of lines in common then Git will automatically detect the file was moved and `git mv` is not necessary. Despite this handy feature it's good practice to use `git mv` so you don't need to wait for a `git add` or `git commit` for Git to be aware of the move and to have consistent behavior across different versions of Git (which may have differing move auto-detection behavior).
 
 After running `git mv` the move or rename will be added to Git's index staging area which, if you remember from <<01-LocalGit#building-a-new-commit-in-the-index-staging-area-git-add>>, means that the change has been staged for inclusion in the next commit.
 
-It's also possible to rename files or directories and move files or directories into other directories inside the Git repository using the `git mv` command and the same syntax as above. If you wish to move files into or out of a repository you must use a different, non-Git command (such as a Unix `mv` command).
+It's also possible to rename files or directories and move files or directories into other directories inside the same Git repository using the `git mv` command and the same syntax as above. If you wish to move files into or out of a repository you must use a different, non-Git command (such as a Unix `mv` command) as Git does not handle moving files between different repositories with `git mv`.
 
 .What if the new filename already exists?
 NOTE: If the filename that you move to already exists you will need to use the `git mv -f` (or `--force`) option to request Git to overwrite whatever file is at the destination. If the destination file has not already been added or committed to Git then it will not be possible to retrieve the contents if you erroneously asked Git to overwrite it.
@@ -83,7 +83,7 @@ You wish to remove a previously committed file named `GitInPracticeReviews.tmp` 
 
 rm 'GitInPracticeReviews.tmp'
 
-# git commit --message 'Remove Chapter 2 temporary file.'
+# git commit --message 'Remove unfavourable review file.'
 
 [master 06b5eb5] Remove unfavourable review file. <1>
  1 file changed, 1 deletion(-) <2>
@@ -100,7 +100,7 @@ Git will only interact with the Git repository when you explicitly give it comma
 
 If you wish to see a simulated run of `git rm` without actually removing the requested file then you can use `git rm -n` (or `--dry-run`). This will print the output of the command as if it were running normally and indicate success or failure but without actually removing the file.
 
-To remove a directory and all the files and subdirectories within it you will need to use `git rm -r` (where the `-r` stands for 'recursive'). When run this will delete the directory and all files under it. This is combined well with `--dry-run` if you want to see what would be removed before removing it.
+To remove a directory and all the unignored files and subdirectories within it you will need to use `git rm -r` (where the `-r` stands for 'recursive'). When run this will delete the directory and all unignored files under it. This is combined well with `--dry-run` if you want to see what would be removed before removing it.
 
 .What if a file has uncommitted changes?
 NOTE: If a file has uncommitted changes but you still wish to remove it you will need to use the `git rm -f` (or `--force`) option to indicate to Git you wish to remove it before committing the changes.
@@ -212,6 +212,8 @@ A good and widely-held principle for version control systems is to avoid committ
 For example, I may have a `hello.c` file which is compiled into `hello.o` object file. The `hello.c` _input file_ should be committed to the version control system but the `hello.o` _output file_ should not.
 
 Committing `.gitignore` to the Git repository makes it easy to build up lists of expected output files so that they can be shared between all the users of a repository and not accidentally committed.
+
+GitHub also provides a useful collection of `gitignore` files at https://github.com/github/gitignore.
 
 Let's try and add an ignored file.
 
@@ -391,6 +393,8 @@ Git will ignore any changes made to `01-IntroducingGitInPractice.asciidoc`.
 #### Discussion
 When you run `git update-index --assume-unchanged` Git sets a special flag on the file to indicate that it should not be checked for any changes that have been made. This can be useful to temporarily ignore changes made to a particular file when looking at `git status` or `git diff` but also to tell Git to avoid checking a file that is particular huge and/or slow to read. This is not normally a problem on normal filesystems on which Git can quickly query if a file is modified by checking the "file modified" timestamp (rather than having to read the entire file and compare it).
 
+`git update-index --assume-unchanged` will only take files as arguments rather than directories. If you assume multiple files are unchanged you need to specify them as multiple arguments e.g. `git update-index --assume-unchanged 00-Preface.asciidoc 01-IntroducingGitInPractice.asciidoc`.
+
 The `git update-index` command has other complex options but we will only cover those around the "assume" logic. The rest of the behavior is better accessed through the `git add` command; a higher-level and more user-friendly way of modifying the state of the index.
 
 ### List assumed unchanged files
@@ -452,8 +456,16 @@ You wish for Git to stop assuming there have been no changes made to `01-Introdu
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `git update-index --no-assume-unchanged 01-IntroducingGitInPractice.asciidoc`. There will be no output.
 
-Git will notice any current or future changes made to `01-IntroducingGitInPractice.asciidoc`.
+You can verify that Git has stopped assuming there were no changes made to `01-IntroducingGitInPractice.asciidoc` by running `git ls-files -v | grep 01-IntroducingGitInPractice.asciidoc`. The output should resemble:
 
+.No assume unchanged file output
+```
+# git ls-files -v | grep 01-IntroducingGitInPractice.asciidoc
+
+H 01-IntroducingGitInPractice.asciidoc
+```
+
+Git will notice any current or future changes made to `01-IntroducingGitInPractice.asciidoc`.
 #### Discussion
 Once you tell Git to stop ignoring changes made to a particular file then all commands such as `git add` and `git diff` will start behaving normally on this file again.
 
