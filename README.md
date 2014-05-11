@@ -27,10 +27,9 @@ I rewrite the history of this repository often. Sorry about that.
        2. [Merging vs. Rebasing](13-MergingVsRebasing.adoc)
        3. [Recommended Team Workflows](14-RecommendedTeamWorkflows.adoc)
 6. Appendices
-       1. [Why Use Version Control?](A-WhyUseVersionControl.adoc)
-       2. [Git Installation](B-GitInstallation.adoc)
-       3. [Creating a GitHub Account and Repository](C-CreatingAGitHubAccountAndRepository.adoc)
-       4. [Commented Git Configuration](D-CommentedGitConfiguration.adoc)
+       1. [Git Installation](A-GitInstallation.adoc)
+       2. [Creating a GitHub Account and Repository](B-CreatingAGitHubAccountAndRepository.adoc)
+       3. [Commented Git Configuration](C-CommentedGitConfiguration.adoc)
 
 ## Usage
 You can read all the AsciiDoc source files inline on GitHub.
