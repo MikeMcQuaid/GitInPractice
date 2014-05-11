@@ -13,35 +13,35 @@ As seen in <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git
 Why are there two strategies for accomplishing essentially the same task? Let's find out by comparing the Git history of two popular open-source projects and their different branching strategies.
 
 ### CMake's workflow
-CMake is a cross-platform build-system created by Kitware. It has many contributors both inside and outside Kitware but relatively few contributions from those without direct push access to the Kitware Git repository.
+CMake is a cross-platform build-system created by Kitware. It has many contributors both inside and outside Kitware with most contributions coming from those with direct push access to the Kitware Git repository.
 
-CMake's Git repository is available to access at `git://cmake.org/cmake.git`. It's also mirrored on GitHub at https://github.com/Kitware/CMake if you would rather browse or clone it from there. Please clone it and examine it while reading this chapter.
+CMake's Git repository is available to access at `http://cmake.org/cmake.git`. It's also mirrored on GitHub at https://github.com/Kitware/CMake if you would rather browse or clone it from there. Please clone it and examine it while reading this chapter.
 
 CMake makes heavy use of branching and merges. Several of the branches visible or implied in <<cmake-gitx>> are:
 
-* `next`: Shown in the figure as `origin/next`. Used for integration of _topic branches_ when developing a new version of CMake. `master` is merged in here regularly to fix merge conflicts.
-* `nightly`: Shown in the figure as `origin/nightly`. Follows the `next` branch and is updated to the latest commit on `next` automatically at 01:00 UTC every day.
-* `master`: Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. Used for preparing a new release; development is merged into here. New topic branches are branched off of `master`.
-* topic branches: Seen in figure merged `Merged topic '...' next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on topic branches. Always merged into `next` and deleted after merge.
+* `next`: Shown in the figure as `origin/next`. An _integration branch_ used for integration of _feature branches_ (also known as _topic branches_) when developing a new version of CMake. `master` is merged in here regularly to fix merge conflicts.
+* `nightly`: Shown in the figure as `origin/nightly`. Follows the `next` branch and is updated to the latest commit on `next` automatically at 01:00 UTC every day. Used by automated nightly tests to get a consistent version for each day.
+* `master`: Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. An _integration branch_ used for preparing a new release; development is merged into here. New feature branches are branched off of `master`.
+* feature branches: Seen in figure merged `Merged topic '...' into next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on feature branches. Merged into `next` and `master` for integration testing.
 
 .CMake repository history
 [[cmake-gitx]]
 image::diagrams/13-CMakeGitX.png[]
 
-The regular merging of `master` into `next` ensures that any merge conflicts between `master` and `next` are resolved quickly in the `next` branch. The regular merging of topic branches into `next` allows integration testing before a new release is prepared and provides context for individual commits; the branch name used in the merge commit helps indicate what feature or bug the commit was in relation to.
+The merging of `master` into `next` is done immediately after merging any feature branch to `master`. This ensures that any merge conflicts between `master` and `next` are resolved quickly in the `next` branch. The regular merging of feature branches into `next` allows integration testing before a new release is prepared and provides context for individual commits; the branch name used in the merge commit helps indicate what feature or bug the commit was in relation to.
 
 .CMake branch/merge workflow
 [[cmake-workflow]]
 image::diagrams/13-CMakeWorkflow.png[]
 
-<<cmake-workflow>> focuses on the interactions between branches in the CMake workflow (rather than the interactions between commits and branches in <<cmake-gitx>>). For a new commit to end up in `master` a new topic branch needs to be created, commits made on it, the topic branch merged to the `next` branch and the `next branch` merged to `master` for a release.
+<<cmake-workflow>> focuses on the interactions between branches in the CMake workflow (rather than the interactions between commits and branches in <<cmake-gitx>>). For a new commit to end up in `master` a new feature branch needs to be created, commits made on it, the feature branch merged to the `next` branch and later the feature branch merged to `master` for a release.
 
 #### Workflow commands
 The following commands are used by CMake developers to clone the repository, create new branches for review, merge them to `next` to be tested and CMake core maintainers to finally merge them into `master.`
 
 To setup the CMake repository on their local machine:
 
-1.  Clone the fetch-only CMake Git repository with `git clone git://cmake.org/cmake.git`
+1.  Clone the fetch-only CMake Git repository with `git clone http://cmake.org/cmake.git`
 2.  Add the pushable staging repository with `git remote add stage git@cmake.org:stage/cmake.git`. The staging repository is used for testing and reviewing branches before they are ready to be merged. CMake developers are given push access to it but only CMake core maintainers have push access to the main repository.
 
 To make a new branch and submit it for review:
@@ -123,13 +123,13 @@ For a Homebrew core contributor to merge a branch into `master`:
 4.  Push the `master` branch with `git push`
 
 ### CMake's workflow pros and cons
-CMake's approach makes it easy to keep track of what topic branches have been merged, when they were merged and by whom. Individual features and bug-fixes live in separate branches and are only integrated when and where it makes sense to do so. Individual commits and evidence of branches (but not the branches themselves) are always kept in history for future viewing. Topic branches are tested individually and then integration testing is done in the `next` branch. When the `next` branch is deemed to be in a sufficiently stable state then it is merged into the `master` branch. This ensures that the `master` branch is always stable and ready for a new release.
+CMake's approach makes it easy to keep track of what feature branches have been merged, when they were merged and by whom. Individual features and bug-fixes live in separate branches and are only integrated when and where it makes sense to do so. Individual commits and evidence of branches (but not the branches themselves) are always kept in history for future viewing. Feature branches are tested individually and then integration testing is done in the `next` branch. When the `next` branch is deemed to be in a sufficiently stable state then it is merged into the `master` branch. This ensures that the `master` branch is always stable and ready for a new release.
 
 When developing desktop software like CMake which ships binary releases having a very stable branch is important; releases are a formal, time-consuming process and updates cannot be trivially pushed after release. As a result it's important to ensure that testing is done frequently and sufficiently before releasing.
 
 CMake's approach produces a history that contains a lot of information but, as seen from the plethora of lines in <<cmake-gitx>>, can be hard to follow. Merge commits are frequent and commits with actual changes are harder to find as a result. This can make reverting individual commits tricky; using `git revert` on a merge commit is hard as Git does not know which side of the merge it should revert to. In addition, if you revert a merge commit then you cannot easily re-merge it.
 
-There are also potential trust issues with CMake's approach. Everyone who wants to create a topic branch needs commit access to the CMake repository. As Git (and Git hosting services) do not provide fine-grained access control (e.g. restricting access to particular branches) and as CMake's Git workflow does not rewrite history anyone with commit access could e.g. make commits directly to the `master` branch and circumvent the process. Everyone who commits to CMake needs to be made aware of the process and trusted not to break or circumvent it.
+There are also potential trust issues with CMake's approach. Everyone who wants to create a feature branch needs commit access to the CMake repository. As Git (and Git hosting services) do not provide fine-grained access control (e.g. restricting access to particular branches) and as CMake's Git workflow does not rewrite history anyone with commit access could e.g. make commits directly to the `master` branch and circumvent the process. Everyone who commits to CMake needs to be made aware of the process and trusted not to break or circumvent it. Although rewriting, Kitware's control of the servers and server-side checks can protect against most of this the potential risks remain.
 
 ### Homebrew's workflow pros and cons
 A major benefit of Homebrew's approach should be evident from <<homebrew-gitx>>; the history is very simple. The `master` branch contains no direct merges so ordering is easy to follow. Commits contain concise descriptions of exactly what they do and there are no commits that are fixing previous ones. Every commit communicates important information.

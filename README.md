@@ -4,12 +4,10 @@ Git In Practice is an intermediate-level Git book due to be published by Manning
 ## Status
 Git In Practice is a work in progress.
 
-Chapters currently ready for review are linked from the Table of Contents.
-
 I rewrite the history of this repository often. Sorry about that.
 
 ## Table of Contents
-1. Preface
+1. [Preface](00-Preface.adoc)
 2. [Introduction to Git](01-01-IntroductionToGit.adoc)
        1. [Local Git](01-LocalGit.adoc)
        2. [Remote Git](02-RemoteGit.adoc)
@@ -23,15 +21,16 @@ I rewrite the history of this repository often. Sorry about that.
        2. [Vendoring Dependencies as Submodules](08-VendoringDependenciesAsSubmodules.adoc)
        3. [Working with Subversion](09-WorkingWithSubversion.adoc)
        4. [GitHub Pull Requests](10-GitHubPullRequests.adoc)
-       5. Hosting a Repository
+       5. [Hosting a Repository](11-HostingARepository.adoc)
 5. [Git Best Practices](12-04-GitBestPractices.adoc)
        1. [Creating a Clean History](12-CreatingACleanHistory.adoc)
        2. [Merging vs. Rebasing](13-MergingVsRebasing.adoc)
-       3. Recommended Team Workflows
+       3. [Recommended Team Workflows](14-RecommendedTeamWorkflows.adoc)
 6. Appendices
        1. [Why Use Version Control?](A-WhyUseVersionControl.adoc)
        2. [Git Installation](B-GitInstallation.adoc)
        3. [Creating a GitHub Account and Repository](C-CreatingAGitHubAccountAndRepository.adoc)
+       4. [Commented Git Configuration](D-CommentedGitConfiguration.adoc)
 
 ## Usage
 You can read all the AsciiDoc source files inline on GitHub.
