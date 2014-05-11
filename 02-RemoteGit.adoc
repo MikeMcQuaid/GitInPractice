@@ -29,7 +29,7 @@ image::diagrams/02-RemoteWorkflow.png[]
 
 If your local repository needs to send or receive data to a repository on another machine it will need to add a _remote repository_. A remote repository is one that is typically stored on another computer. `git push` sends your new commits to it and `git fetch` retrieves any new commits made by others from it.
 
-In <<01-LocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<C-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider but this book will assume the use of GitHub (as it is the most widely used).
+In <<01-LocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<B-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider but this book will assume the use of GitHub (as it is the most widely used).
 
 The first action you're concerned with is adding a reference for your newly-created remote repository (also known as a _remote_) on GitHub to your previous local repository so you can push and fetch commits.
 
