@@ -10,12 +10,12 @@ In this chapter you will learn how to maintain dependencies on other Git-based s
 * How to run a command in every submodule in a repository
 
 ### When are submodules useful?
-Almost all software projects will make use of other software projects as libraries or tools. For example, say you are using Git and writing a C++ application and want to use the source code from the Git repository of an external JSON library in your project.
+Almost all software projects will make use of other software projects as libraries or tools. For example, say you are using Git and writing a desktop application in C++ and want to use communicate with a server that provides a JSON API. Rather than writing the JSON handling yourself you find an open-source project on GitHub which provides a library for accessing JSON APIs with C++. You want to include this open-source library into your project and update it when they've released new versions with new bug fixes you need.
 
 There are generally two approaches to handling other software projects (usually known as _dependencies_) and which versions work with your own software:
 
-1.  What other software projects are required, what versions they should be and where they should be installed is documented and developers have to ensure they follow this documentation to set up the project.
-2.  The other software projects that are required are included in the version control system of the main software project so they are always available whenever anyone accesses the main repository. This is known as _vendoring_ the dependencies.
+1.  Write documentation for what other software projects are required, what versions they should be and where they should be installed so other developers building the project know how to set it up correctly.
+2.  Include the dependencies in the project's repository so they are always available to anyone when cloning the repository. This is known as _vendoring_ the dependencies.
 
 There are pros and cons of both approaches. Adopting 1) means that the software source code repository can avoid including other software projects. In the C\++ application example it would mean documenting for other developers where and how they should download the external JSON library's Git repository from rather than storing anything related to it in the C++ application's Git repository.
 
