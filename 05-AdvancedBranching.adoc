@@ -115,9 +115,9 @@ Some useful merge strategy options for a recursive merge (currently the only str
 Neither of these lists are exhaustive but these are the strategies and options I've found are most commonly used. All the merge strategies and options can be examined by running `git help merge`.
 
 ### Resolve a merge conflict
-As mentioned previously sometimes when you merge one branch into another there will have been changes to the same part of the same file in both branches and Git cannot detect automatically which one is the desired change to include. In this situation you have what is known as a _merge conflict_ which you will need to resolve manually.
+As mentioned previously sometimes when you merge one branch into another there will have been changes to the same part of the same file in both branches and Git cannot detect automatically which of these changes is the desired one to include. In this situation you have what is known as a _merge conflict_ which you will need to resolve manually.
 
-These situations tend to occur more often in software projects where you have multiple users working on the same project at the same time. One user might make a bug fix to a file while another refactors it and when the branches are merged then a merge conflict will be created.
+These situations tend to occur more often in software projects where you have multiple users working on the same project at the same time. One user might make a bug fix to a file while another refactors it and when the branches are merged then a merge conflict will result.
 
 Let's create a new branch and change the same files in both branches to produce a merge conflict.
 
@@ -350,9 +350,11 @@ You can also customize the tool that is used to specify your own merge tools. In
 NOTE: In Git the person who makes a merge i.e. runs the `git merge` command should always be the person who resolves a merge conflict. This may differ from other version control systems. Additionally, this may sometimes mean if a conflict resolution requires a particular member of a team to be able to pick the correct resolution that the `git merge` should be done by this person.
 
 ### Only resolve each merge conflict once: git rerere
-You may find yourself in a situation where you have a long-running branch where you have to keep merging in another branch and get the same merge conflicts every time.
+You may find yourself in a situation where you have a long-running branch where you have to keep merging in another branch and get the same merge conflicts every time. It can be frustrating to have to manually resolve the same merge conflict multiple times; after all isn't repeatedly performing boring tasks what computers are good for?
 
-Git has a command named `git rerere` (which stands for Reuse Recorded Resolution) which integrates with the normal `git merge` workflow to record the resolution of merge conflicts for later replay. In short, you only need to solve a particular merge conflict once. I always tend to enable this when I use Git as it runs automatically to ensure that I don't need to solve the same merge conflicts multiple times if e.g. repeatedly merging the same branch which produces the same conflict.
+Git has a command named `git rerere` (which stands for "Reuse Recorded Resolution") which integrates with the normal `git merge` workflow to record the resolution of merge conflicts for later replay. In short, you only need to solve a particular merge conflict once. I always tend to enable this when I use Git as it runs automatically to ensure that I don't need to solve the same merge conflicts multiple times if e.g. repeatedly merging the same branch which produces the same conflict.
+
+When `git rerere` is enabled it will store the changes before a merge conflict and compare them to after it was resolved. This is used to fingerprint a particular merge conflict based on the entire contents of the conflict (i.e. the changes from both branches). This fingerprint is then used whenever there is another merge conflict to compare against all the previously resolved merge conflicts. If a merge conflict is detected to be the same then `git rerere` will reuse the previously recorded merge conflict resolution and edit the files as if you had resolved it manually. You still need to use `git add` to mark the merge conflict as resolved however; this is in case you've actually decided to resolve this merge conflict in a slightly different way so it gives you a chance to edit it.
 
 Let's learn how to setup `git rerere`.
 
@@ -365,7 +367,7 @@ You wish to setup `git rerere` to integrate with the merge workflow so you don't
 You have enabled `git rerere` to automatically save and retrieve merge conflict resolutions in all repositories.
 
 #### Discussion
-You do not need to run `git rerere manually` for it to store and retrieve merge conflicts. After enabling `git rerere` you will see some slightly different output the next time you run `git commit` after resolving a merge conflict:
+You do not need to run `git rerere` manually for it to store and retrieve merge conflicts. After enabling `git rerere` you will see some slightly different output the next time you run `git commit` after resolving a merge conflict:
 
 .rerere merge conflict storage
 ```
@@ -400,6 +402,8 @@ NOTE: Sometimes you may wish to make `git rerere` forget a resolution for a part
 
 ### Create a tag: git tag
 Remember refs from <<01-LocalGit#refs>>. A tag is another _ref_ (or pointer) for a single commit. Tags differ from branches in that they are (usually) permanent. Rather than pointing to the work-in-progress on a feature they are generally used to describe a version of a software project.
+
+For example if you were releasing version `1.3` of your software project you would tag the commit that you release to customers as `v1.3` to store that version for later use. This means if a customer later complained about something being broken in `v1.3` you could check out that tagged commit and test against it; confident that you're using the same version of the software that the customer is. You can hopefully see that this is one of the reasons you wouldn't modify tags; once you've released a version to customers if you want to update it you would likely release a new version e.g. `1.4` rather than changing the definition of `1.3`.
 
 .Local repository before `git tag`
 [[GitXBeforeTag]]
@@ -460,7 +464,7 @@ You've seen that `git tag` can be used to identify certain commits as released v
 
 I'm a passionate advocate of continuous integration systems and I've worked on desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
 
-However, in some software there is an "About" screen which displays the software's version. In this case I'd like to have a version number generated that makes sense but does not rely on auto-generating a tag for each version of the software.
+However, in some software there is an "About" screen which displays the software's version. In this case I'd like to have a version number generated that makes sense but does not rely on auto-generating a tag for each version of the software and is sortable with some information about the current version of the software. Something like `v0.1-1-g0a5e328` would be preferential to just a short revision e.g. `g0a5e328`.
 
 As the expected version number would be `v0.1` given that has just been tagged let's make another modification to the `GitInPracticeRedux` repository and generate a version number for the new, untagged commit.
 
