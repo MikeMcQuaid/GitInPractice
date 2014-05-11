@@ -331,9 +331,11 @@ If the `-L` flag is specified and followed with a line range e.g. `-L 40,60` the
 ### Find which commit caused a particular bug: git bisect
 The only thing worse than finding a bug in software and having to fix it is having to fix the same bug multiple times. A bug that was found, fixed and has appeared again is typically known as a _regression_.
 
-The usual workflow for finding regressions is fairly painful. You typically will keep going back in the version control history until you find a commit in which the bug isn't present, go forward until you find where it happens again and repeat the process to narrow it down. It's typically a rather tedious exercise which is made worse by your having to fix the same problem again.
+The traditional workflow for finding regressions is fairly painful. You typically will keep checkout out older and older revisions in the version control history until you find a commit in which the bug wasn't present, check out newer and newer revisions until you find where it happens again and repeat the process to narrow it down. It's typically a rather tedious exercise which is made worse by your having to fix the same problem again.
 
-Thankfully Git has a useful tool that makes this process much easier for you: `git bisect`. This uses a binary search algorithm to identify the problematic commit as quickly as possible.
+Thankfully Git has a useful tool that makes this process much easier for you: `git bisect`. This uses a binary search algorithm to identify the problematic commit as quickly as possible; effectively automated the search backwards and forwards through history that I explained earlier.
+
+The `git bisect` command takes `good` and `bad` arguments that you use to tell it that a particular commit did not have the bug (`good`) or did have the bug (`bad`). As it assumes that the bug does disappear and reappear multiple times but occurred once it can make the assumption that the commit that caused a particular bug is first one chronologically that contains that bug. It uses this assumption, records the `good` and `bad` commits and uses this to narrow down the commits each time. For example, if it was bisecting between commits from Monday (`good`) to Friday (`bad`) if a commit on Wednesday was known to be `good` then it can narrow the search down to Monday, Tuesday or Wednesday. This halving of the search space each time is what is known as a _binary search_ because it makes a binary decision each time: was the `bad` commit before or after this one.
 
 For a simple example let's try and find a commit which renamed a particular file (without manually looking through the history).
 
@@ -410,7 +412,7 @@ From <<gitx-bisect>> you can see that `git bisect` creates new, temporary (they 
 You have located the commit that renamed `GitInPractice.asciidoc`.
 
 #### Discussion
-Each time `git bisect good`, `git bisect bad` or `git bisect reset` is run Git may checkout the relevant next commit for examination. As a result it's important to ensure that all outstanding changes have been committed (or stashed) before you use `git bisect`.
+Each time `git bisect good`, `git bisect bad` or `git bisect reset` is run Git will checkout the relevant next commit for examination. As a result it's important to ensure that all outstanding changes have been committed (or stashed) before you use `git bisect`.
 
 .bisect binary search performance
 |===
