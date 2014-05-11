@@ -2,7 +2,7 @@
 ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn how to retrieve and share changes with other users' Git repositories by learning the following topics:
-//(TP)-Is this chapter going to contain anything on forks? When to use them and the difference between forks and branches?
+
 * How to download a remote repository
 * How to send/receive changes from a remote repository
 * How to create and receive branches
@@ -87,7 +87,6 @@ Let's push the changes you made in our repository in <<01-LocalGit#introduction-
 You wish to push the changes from the local `GitInPracticeRedux` repository to the `origin` remote on GitHub.
 
 #### Solution
-//(TP)-The following example is quite "complex" if you have never used Git and especially if you have never worked with remote branches before. The description is excellent, and I will have a hard time trying to explain what could be done differently, but it is difficult to follow the details in the output. You explain the output of command 2. but not the actual command, e.g. --set-upstream, before bullet 6. Maybe this should be done up front? Note to initial comment: I must retract my suggestion as it will amend the flow of this example to differ from the other examples. Sorry for the confusion.
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git push --set-upstream origin master` and enter your GitHub username and password when requested. The output should resemble:
 
@@ -125,14 +124,12 @@ From the push output you can see:
 You have pushed your `master` branch's changes to the `origin` remote's `master` branch.
 
 #### Discussion
-//(TP)-Maybe a comment of what will happen if you try to run 'git push' the first time?
-The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch. After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
+The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch (without it it will output `fatal: The current branch master has no upstream branch.`). After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
 
 `git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
 
 `git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
-//(TP)-and rereading and rereading and ... :) Excellent!
-//(TP)-Is the line below not a repeat of the lines above?
+
 A _tracking branch_ is the default push or fetch location for a branch. This means in future you could run `git push` with no arguments on this branch and it will do the same thing as running `git push origin master` i.e. push the current branch to the `origin` remote's `master` branch.
 
 .Local repository after `git push`
@@ -199,8 +196,8 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 
 #### Discussion
 `git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in Chapter 13.
-//(TP)-Can you write 'git clone --depth 0'? And what happens if the integer is negative?
-`git clone` can take a `--depth` flag followed by an integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
+
+`git clone` can take a `--depth` flag followed by a positive integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
 
 `git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. This will be covered more in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
 
@@ -419,7 +416,7 @@ From the branch output:
 
 * "new branch (1)" was created with the expected name.
 * "current branch <2>" is indicated by the `*` prefix which shows you are still on the master branch as before. `git branch` creates a new branch but does not change to it.
-//(TP)-Can you have spaces in your branch names?
+
 You have created a new local branch named `chapter-two` which currently points to the same commit as `master`.
 
 #### Discussion
@@ -448,7 +445,7 @@ image::diagrams/02-BranchPointers.png[]
 You've seen `git branch` creates a local branch it does not change to it. To do that requires using `git checkout`.
 
 .Can branches be named anything?
-NOTE: Branches cannot have two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. This particular case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
+NOTE: Branches cannot have spaces or two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. The dots case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
 
 .What names should I use for branches?
 NOTE: Name branches according to their contents. For example, the `chapter-two` branch we've created here describes that the commits in this branch will be referencing the second chapter. I recommend a format of describing the branch's purpose in multiple words separated by hyphens. For example, a branch that is performing cleanup on the test suite should be named `test-suite-cleanup`.
@@ -489,7 +486,6 @@ Now that you've created a new branch and checked it out it would be useful to pu
 You wish to push the changes from the local `chapter-two` branch to create the remote branch `chapter-two` on GitHub.
 
 #### Solution
-//(TP)-Will anything happen if you run 'git checkout <name>' if you are already on the <name> branch?
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
 3.  Run `git push --set-upstream origin chapter-two`. The output should resemble:
@@ -537,13 +533,13 @@ When a merge is requested all the commits from another branch are pulled into th
 
 #### Problem
 You wish to make a commit on the local branch named `chapter-two` and merge this into the `master` branch.
-//(TP)-I think step 5 should be stressed more, that is you "stand" on the branch you wish to merge into (you kind of pull the changes instead of the other way around, where you stand on the branch you wish to merge from and push the changes)
+
 #### Solution
 1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
 3.  Modify the contents of `GitInPractice.asciidoc` and run `git add GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Start Chapter 2.'`.
-5.  Run `git checkout master`.
+5.  Run `git checkout master` to checkout the branch you wish to merge `chapter-two` into.
 6.  Run `git merge chapter-two`. The output should resemble:
 
 .Merge branch

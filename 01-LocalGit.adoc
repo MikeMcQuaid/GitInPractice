@@ -1,7 +1,6 @@
 ## Local Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
-//BEN: standard Manning format is just "This chapter covers" and then the intro bullets
 In this chapter you will learn how and why to use Git as a local version control system by covering the following topics:
 
 * Why Git was created
@@ -15,7 +14,7 @@ Let's start by learning why Git is so widely used by programmers.
 
 ### Why do programmers use Git?
 Git was created by a programmer to be used by programmers. Linus Torvalds, the creator of the Linux kernel, started writing Git in 2005 with the goal of having a distributed, open-source, high-performance, and hard-to-corrupt version control system for the Linux kernel project to use. Within a week, Git's source code was hosted inside the Git version control system, and within two and a half months, version 2.6.12 of the Linux kernel was released using Git.
-//(TP)-I don't know if it is relevant, but Linus has changed his view on Git and is quite sceptical about Git - and especially GitHub -  these days 
+
 Since its initial creation for the Linux kernel, Git is now used by many other open source projects, all sizes of companies, and large "social coding" Git hosting sites such as GitHub.
 
 Git is my preferred method of software source code control. I also use it for versioning plain text files such as the manuscript for this book. Git has many strengths over other methods of source control. Git stores all of the history, branches, and commits locally. This means adding new versions or querying history doesn't require a network connection. Git's history-log viewing and branch creation is near-instant compared with for example Subversion's, which is sluggish even on a fast network connection. As Git stores changes locally, you're not constrained by the work of others when working in a team. For example, remote branch updates and merges can be done independently so you can continue your edit/commit workflow without interruptions while still downloading and examining any changes made by others. In Git you can modify the history of branches and even rewrite commit data across the entire repository. It's often useful to be able to make lots of small commits, which are later turned into a single commit or make commit messages contain more information after the fact, and Git's history rewriting enables this. Even with this flexibility in Git, every commit has a unique reference that survives rewriting or changes and won't be purged until it's missing from all branches for at least 30 days. This means it's hard to accidentally lose work if it has been committed.
@@ -30,7 +29,7 @@ Many of these projects and many users of Git have also been introduced to and us
 Once you've installed Git (as detailed in <<B-GitInstallation#git-installation>>) the first thing you need to do is to tell Git your name and email (particularly before creating any commits). Rather than usernames Git uses a name and email address to identify the author of a commit.
 
 My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would run:
-//(TP)-This may be covered later, but the difference between '--' and '-' in front of commands.
+
 .Set name and email address
 ```
 # git config --global user.name "Mike McQuaid" <1>
@@ -70,7 +69,7 @@ Typically you create a new repository by downloading another repository that alr
 
 #### Problem
 You wish to create a new local Git repository in a new subdirectory named `GitInPracticeRedux.
-//(TP)-The foreslash in the below cd-command suggest you are working on a non-Windows box. I expect users will now this, but is it worth mentioning? I don't know what level of knowledge the reader is supposed to have, but "kids these days seems lost without a wizard ...". Just a thought.
+
 #### Solution
 1.  Change to the directory you wish to contain your new repository directory, for example `cd /Users/mike/`.
 2.  Run `git init GitInPracticeRedux`.
@@ -92,7 +91,6 @@ You've initialized a new local Git repository named `GitInPracticeRedux` accessi
 We're calling the repository `GitInPracticeRedux` rather than `GitInPractice` to differentiate it from the book itself.
 
 .Where can I see the full syntax references for Git commands?
-//(TP)-As above, there is a difference between 'git init --help' and 'git init -help'. Might be worth mentioning at some point.
 NOTE: All `git` commands referenced in this book have complete references to all their possible syntax and arguments in Git's help. This can be accessed for a given command by running the command suffixed with `--help`: for example, `git init --help`. This book will cover only the most common and useful commands and arguments.
 
 `git init` can be run without any arguments to create the local Git repository in the current directory.
@@ -211,8 +209,7 @@ NOTE: After you've added changes for `GitInPractice.asciidoc` to the index stagi
 Now that the contents of the file have been added to the index you're ready to commit it.
 
 #### Committing changes to files: git commit
-//BEN: "making commit" sounds odd. making a commit? creating a commit? running the commit command? 
-Making _commit_ stores the changes to one or more files. Each commit contains a message entered by the author, details of the author of the commit, a unique commit reference (in Git these are _SHA-1 hashes_ such as `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit (known as the _parent commit_), the date the commit was created, and a pointer to the contents of files when the commit was made. The file contents are typically displayed as the _diff_ (the differences between the files before and the files after the commit).
+Creating a _commit_ stores the changes to one or more files. Each commit contains a message entered by the author, details of the author of the commit, a unique commit reference (in Git these are _SHA-1 hashes_ such as `86bb0d659a39c98808439fadb8dbd594bec0004d`), a pointer to the preceding commit (known as the _parent commit_), the date the commit was created, and a pointer to the contents of files when the commit was made. The file contents are typically displayed as the _diff_ (the differences between the files before and the files after the commit).
 
 .A typical commit broken down into its parts
 [[typical-commit]]
@@ -278,8 +275,7 @@ From the second commit output:
 You've made modifications to `GitInPractice.asciidoc` and committed them.
 
 ##### Discussion
-//(TP)-Does all abbreviations use single '-'?
-The `--message` flag for `git commit` can be abbreviated to `-m`. If this flag is omitted, then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
+The `--message` flag for `git commit` can be abbreviated to `-m` (all abbreviations use a single `-`). If this flag is omitted, then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
 
 `git commit` can be called with `--author` and `--date` flags to override the auto-set metadata in the new commit.
 
@@ -414,9 +410,8 @@ A _diff_ (also known as a _change_ or _delta_) is the difference between two com
 You wish to view the differences between the previous commit and the latest.
 
 #### Solution
-//(TP)-In the diff and --word-diff examples, you have to press 'q' to "exit" to the command prompt again. That is at least the case with the version of Git I'm using.
 1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git diff master~1 master`. The output should resemble the following:
+2.  Run `git diff master~1 master` (you may need to press `q` to exit afterwards). The output should resemble the following:
 
 .The differences between the previous commit and latest
 [.long-annotations]
@@ -447,8 +442,7 @@ index 48f7a8a..b14909f 100644 <3>
 The diff output contains:
 
 * "git diff command (1)" requests that Git show the diff between the commit before the top of `master` (`master~1`) and the commit on top of `master`. Both `master~1` and `master` are _refs_ and will be explained later in <<refs>>.
-//BEN: missing a word below: "diffing the contents OF two directories"? between two directories?
-* "virtual diff command (2)" is the invocation of the Unix `diff` command that Git is simulating. Git pretends that it's actually diffing the contents two directories the "old virtual path (4)" and the "new virtual path (5)", and the "virtual diff command (2)" represents that. The `--git` flag can be ignored, as it just shows this is the Git simulation and the Unix `diff` command is never run.
+* "virtual diff command (2)" is the invocation of the Unix `diff` command that Git is simulating. Git pretends that it's actually diffing the contents of two directories the "old virtual path (4)" and the "new virtual path (5)", and the "virtual diff command (2)" represents that. The `--git` flag can be ignored, as it just shows this is the Git simulation and the Unix `diff` command is never run.
 * "index SHA-1 changes (3)" show the difference in the contents of the working tree between these commits. This can be safely ignored, other than noticing that these SHA-1s don't refer to the commits themselves.
 * "old virtual path (4)" shows the simulated directory for the `master~1` commit.
 * "new virtual path (5)" shows the simulated directory for the `master` commit.
@@ -458,8 +452,7 @@ The diff output contains:
 * "inserted line (9)" is a new line that was added in the latter commit.
 
 #### Discussion
-//BEN: missing word below: "will ____ the differences" == limit the differences?
-`git diff` can take path arguments after a `--` to request only the differences between particular paths. For example, `git diff master~1 master -- GitInPractice.asciidoc` will the differences to only the `GitInPractice.asciidoc` file between the previous and latest commits.
+`git diff` can take path arguments after a `--` to request only the differences between particular paths. For example, `git diff master~1 master -- GitInPractice.asciidoc` will show the differences to only the `GitInPractice.asciidoc` file between the previous and latest commits.
 
 `git diff` without an argument displays the differences between the current working directory and the index staging area. `git diff master` displays the differences between the current working directory and the last commit on the default `master` branch.
 
