@@ -1,6 +1,7 @@
 ## Remote Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
+//BEN: usual Manning style is just "This chapter covers" and then the bullets
 In this chapter you will learn how to retrieve and share changes with other users' Git repositories by learning the following topics:
 
 * How to download a remote repository
@@ -8,28 +9,28 @@ In this chapter you will learn how to retrieve and share changes with other user
 * How to create and receive branches
 * How to merge commits from one branch to another
 
-As you learned in <<01-LocalGit#creating-a-repository-git-init>> it's possible to work entirely with Git as a local version control system and never share changes with others. Usually, however, if you are using a version control system you will want to share changes with others; from simply sending files to a remote server for backup to collaborating as part of a large development team. Team collaboration will also require knowledge of how to create and interact with branches for working on different features in parallel. Let's start by adding a remote repository.
+As you learned in <<01-LocalGit#creating-a-repository-git-init>>, it's possible to work entirely with Git as a local version control system and never share changes with others. Usually, however, if you're using a version control system, you'll want to share changes with others: from simply sending files to a remote server for backup to collaborating as part of a large development team. Team collaboration will also require knowledge of how to create and interact with branches for working on different features in parallel. Let's start by adding a remote repository.
 
 ### Adding a remote repository: git remote add
-Typically when using version control you will want to share your commits with other people using other computers. With a traditional, _centralized version control system_ (such as Subversion or CVS) the repository is usually stored on another machine. As you make a commit it is sent over the network, checked that it can apply (there may be other changes since you last checked) and then committed to the version control system where others can see it.
+Typically when using version control, you'll want to share your commits with other people using other computers. With a traditional, _centralized version control system_ (such as Subversion or CVS), the repository is usually stored on another machine. As you make a commit, it's sent over the network, checked whether it can apply (there may be other changes since you last checked), and then committed to the version control system where others can see it.
 
-With a _distributed version control system_ like Git every user has a complete repository on their own computer. While there may be a centralized repository that people send their commits to it will not be accessed unless specifically requested. All commits, branches and history are stored offline unless users choose to send or receive commits from another repository.
+With a _distributed version control system_ like Git, every user has a complete repository on their own computer. Though there may be a centralized repository that people send their commits to, it won't be accessed unless specifically requested. All commits, branches, and history are stored offline unless users choose to send or receive commits from another repository.
 
 .Git add/commit/checkout cycle
 [[commit-workflow-again]]
 image::diagrams/01-Workflow.png[]
 
-<<commit-workflow-again>> shows the local Git cycle we used in <<01-LocalGit#creating-a-new-commit-git-add-git-commit>>. Files in the local working directory are modified and added with `git add` to the index staging area. The contents of the index staging area is committed with `git commit` to form a new commit which is stored in the local repository directory. Later, this repository can be queried to view the differences between versions of files using `git diff`. In <<checking-out-a-local-branch-git-checkout>> you will also see how to use `git checkout` to change to different local branches' versions of files.
+<<commit-workflow-again>> shows the local Git cycle we used in <<01-LocalGit#creating-a-new-commit-git-add-git-commit>>. Files in the local working directory are modified and added with `git add` to the index staging area. The contents of the index staging area are committed with `git commit` to form a new commit, which is stored in the local repository directory. Later, this repository can be queried to view the differences between versions of files using `git diff`. In <<checking-out-a-local-branch-git-checkout>> you'll also see how to use `git checkout` to change to different local branches' versions of files.
 
 .Git add/commit/push/pull/checkout cycle
 [[push-workflow]]
 image::diagrams/02-RemoteWorkflow.png[]
 
-<<push-workflow>> shows the remote Git cycle we will look at in this chapter. As in the local workflow files are modified, added, committed and can be checked out. However there are now two repositories: a local repository and _remote repository_.
+<<push-workflow>> shows the remote Git cycle we'll look at in this chapter. As in the local workflow, files are modified, added, committed, and can be checked out. But there are now two repositories: a local repository and _remote repository_.
 
-If your local repository needs to send or receive data to a repository on another machine it will need to add a _remote repository_. A remote repository is one that is typically stored on another computer. `git push` sends your new commits to it and `git fetch` retrieves any new commits made by others from it.
+If your local repository needs to send or receive data to a repository on another machine, it'll need to add a _remote repository_. A remote repository is one that's typically stored on another computer. `git push` sends your new commits to it and `git fetch` retrieves any new commits made by others from it.
 
-In <<01-LocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<B-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider but this book will assume the use of GitHub (as it is the most widely used).
+In <<01-LocalGit#creating-a-repository-git-init>> you created a local repository on your machine. Please sign up for a GitHub account and create a _remote repository_ on GitHub (detailed in <<B-CreatingAGitHubAccountAndRepository#creating-a-github-account-and-repository>>). You can use another Git hosting provider, but this book will assume the use of GitHub (as it's the most widely used).
 
 The first action you're concerned with is adding a reference for your newly-created remote repository (also known as a _remote_) on GitHub to your previous local repository so you can push and fetch commits.
 
@@ -37,10 +38,10 @@ The first action you're concerned with is adding a reference for your newly-crea
 You wish to add the new GitInPractice remote repository to your current repository.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git remote add origin` with your repository URL appended. e.g. if your username is `GitInPractice` and repository is named `GitInPracticeRedux` run `git remote add origin https://github.com/GitInPractice/GitInPracticeRedux.git`. There will be no output.
+1.  Change directory to the Git repository, in my case `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git remote add origin` with your repository URL appended. So if your username is `GitInPractice` and repository is named `GitInPracticeRedux`, run `git remote add origin https://github.com/GitInPractice/GitInPracticeRedux.git`. There will be no output.
 
-You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble:
+You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble the following:
 
 .Remote repositories
 [.long-annotations]
@@ -59,9 +60,9 @@ In the remote listing:
 * "push URL (2)" specifies the URL that `git push` uses to send new local commits.
 
 .When the fetch and push URLs differ?
-NOTE: These will not differ unless they have been set to do so by the `git remote` command or by Git configuration. It's almost never necessary to do this so I will not cover it in this book.
+NOTE: These won't differ unless they've been set to do so by the `git remote` command or by Git configuration. It's almost never necessary to do this, so I won't cover it in this book.
 
-You have added a remote named `origin` that points to the remote `GitInPracticeRedux` repository belonging to the `GitInPractice` user on GitHub. You can now send and receive changes from this remote. Nothing has been sent or received yet; the new remote is effectively just a named URL pointing to the remote repository location.
+You've added a remote named `origin` that points to the remote `GitInPracticeRedux` repository belonging to the `GitInPractice` user on GitHub. You can now send and receive changes from this remote. Nothing has been sent or received yet; the new remote is effectively just a named URL pointing to the remote repository location.
 
 #### Discussion
 `git remote` can also be called with the `rename` and `remove` (or `rm`) subcommands to alter remotes accordingly.
@@ -71,15 +72,15 @@ You have added a remote named `origin` that points to the remote `GitInPracticeR
 `git remote prune` will delete any remote references to branches that have been deleted from the remote repository by other users. Don't worry about this for now; remote branches will be covered in <<pushing-a-local-branch-remotely>>.
 
 .What is the default name for a remote?
-NOTE: You can have multiple remote repositories connected to your local repository so the remote repositories are named. Typically if you have a single remote repository it will be named `origin`.
+NOTE: You can have multiple remote repositories connected to your local repository so the remote repositories are named. Typically if you have a single remote repository, it will be named `origin`.
 
 ##### Authoritative version storage
-With centralized version control systems the central server always stores the authoritative version of the code. Clients to this repository will typically only store a small proportion of the history and require access to the server to perform most tasks. With a distributed version control system like Git every local repository has a complete copy of the data. Which repository stores the authoritative version in this case? It turns out that this is merely a matter of convention; Git itself does not deem any particular repository to have any higher priority than another. Typically in organizations there will be a central location (like with a centralized version control) which is treated as the authoritative version and people are encouraging to push their commits and branches to.
+With centralized version control systems, the central server always stores the authoritative version of the code. Clients to this repository will typically only store a small proportion of the history and require access to the server to perform most tasks. With a distributed version control system like Git, every local repository has a complete copy of the data. Which repository stores the authoritative version in this case? It turns out that this is merely a matter of convention; Git itself doesn't deem any particular repository to have any higher priority than another. Typically in organizations there will be a central location (like with a centralized version control) that is treated as the authoritative version and people are encouraged to push their commits and branches to.
 
-The lack of authority for a particular repository with distributed version control systems is sometimes seen as a liability but can actually be a strength. The Linux kernel project (for which Git was original created) makes use of this to provide a network of trust and a more manageable way of merging changes. When Linus Torvalds, the self-named "benevolent dictator" of the project, tags a new release this is generally considered a new release of Linux. What is in his repository (well, his publicly accessible one; he will have multiple repositories between various personal machines that he does not make publicly accessible) is generally considered to be what is in Linux. Linus has trusted lieutenants from who he can pull and merge commits and branches. Rather than every single merge to Linux needing to be done by Linus he can leave some of it to his lieutenants (who leave some to their sub-lieutenants and so on) so everyone can needs only worry about verifying and including the work of a small number of others. This particular workflow may not make sense in many organizations but it demonstrates how distributed version control systems can allow different ways of managing merges to centralized version control.
+The lack of authority for a particular repository with distributed version control systems is sometimes seen as a liability but can actually be a strength. The Linux kernel project (for which Git was original created) makes use of this to provide a network of trust and a more manageable way of merging changes. When Linus Torvalds, the self-named "benevolent dictator" of the project, tags a new release, this is generally considered a new release of Linux. What's in his repository (well, his publicly accessible one; he will have multiple repositories between various personal machines that he doesn't make publicly accessible) is generally considered to be what's in Linux. Linus has trusted lieutenants from whom he can pull and merge commits and branches. Rather than every single merge to Linux needing to be done by Linus, he can leave some of it to his lieutenants (who leave some to their sub-lieutenants and so on), so everyone can needs only worry about verifying and including the work of a small number of others. This particular workflow may not make sense in many organizations, but it demonstrates how distributed version control systems can allow different ways of managing merges to centralized version control.
 
 ### Pushing changes to a remote repository: git push
-You will eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git (which can operate over HTTP, SSH or it's own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
+You'll eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git (which can operate over HTTP, SSH, or its own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result, you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
 
 Let's push the changes you made in our repository in <<01-LocalGit#introduction-to-local-git>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
@@ -87,8 +88,8 @@ Let's push the changes you made in our repository in <<01-LocalGit#introduction-
 You wish to push the changes from the local `GitInPracticeRedux` repository to the `origin` remote on GitHub.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git push --set-upstream origin master` and enter your GitHub username and password when requested. The output should resemble:
+1.  Change directory to the Git repository, in my case `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git push --set-upstream origin master` and enter your GitHub username and password when requested. The output should resemble the following:
 
 .Push and set upstream branch
 [.long-annotations]
@@ -115,34 +116,34 @@ Branch master set up to track remote branch master from origin. <6>
 
 From the push output you can see:
 
-* "username entry (1)" and "password entry (2)" are those for your GitHub account. They may only be asked for the first time you push to a repository depending on your operating system of choice (which may decide to save the password for you). They are always required to `push` to repositories but are only required for `fetch` when fetching from private repositories.
-* "object preparation/transmission (3)" can be safely ignored in this or future figures; it is simply Git communicating details on how the files are being sent to the remote repository and isn't worth understanding beyond basic progress feedback.
+* "username entry (1)" and "password entry (2)" are those for your GitHub account. They may only be asked for the first time you push to a repository depending on your operating system of choice (which may decide to save the password for you). They're always required to `push` to repositories but are only required for `fetch` when fetching from private repositories.
+* "object preparation/transmission (3)" can be safely ignored in this or future figures; it's simply Git communicating details on how the files are being sent to the remote repository and isn't worth understanding beyond basic progress feedback.
 * "remote URL (4)" matches the push URL from the `git remote --verbose` output earlier. It is where Git has sent the local commits to.
-* "local/remote branch (5)" indicates that this was a new branch on the remote. This is because the remote repository on GitHub was empty until we pushed this; it had no commits and thus no `master` branch yet. This was created by the `git push`. The `master -> master` indicates the local master branch (the first of the two) has been pushed to the remote `master` branch (the second of the two). This may seem redundant but it is shown as it is possible (but ill-advised due to the obvious confusion it causes) to have local and remote branches with different names. Don't worry about local or remote branches for now as these will be covered in <<creating-a-new-local-branch-from-the-current-branch-git-branch>>.
-* "set tracking branch (6)" is shown because the `--set-upstream` option was passed to `git push`. By passing this option you have is told Git that you want the local `master` branch you have just pushed to _track_ the `origin` remote's branch `master`. The `master` branch on the `origin` remote (which is often abbreviated as `origin/master`) is now known as the _tracking branch_ (or _upstream_) for your local `master` branch.
+* "local/remote branch (5)" indicates that this was a new branch on the remote. This is because the remote repository on GitHub was empty until we pushed this; it had no commits and thus no `master` branch yet. This was created by the `git push`. The `master -> master` indicates the local master branch (the first of the two) has been pushed to the remote `master` branch (the second of the two). This may seem redundant, but it's shown here because it's possible (but ill-advised due to the obvious confusion it causes) to have local and remote branches with different names. Don't worry about local or remote branches for now, as these will be covered in <<creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "set tracking branch (6)" is shown because the `--set-upstream` option was passed to `git push`. By passing this option, you've told Git that you want the local `master` branch you've just pushed to _track_ the `origin` remote's branch `master`. The `master` branch on the `origin` remote (which is often abbreviated as `origin/master`) is now known as the _tracking branch_ (or _upstream_) for your local `master` branch.
 
 You have pushed your `master` branch's changes to the `origin` remote's `master` branch.
 
 #### Discussion
-The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch (without it it will output `fatal: The current branch master has no upstream branch.`). After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
+The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch (without this, it'll output `fatal: The current branch master has no upstream branch.`). After that, a `git push` with no arguments will default to running the equivalent of `git push origin master`.
 
-`git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
+`git push` can take an `--all` flag, which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this: you may push some branches with work in-progress.
 
-`git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
+`git push` can take a `--force` flag, which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Don't use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
 
-A _tracking branch_ is the default push or fetch location for a branch. This means in future you could run `git push` with no arguments on this branch and it will do the same thing as running `git push origin master` i.e. push the current branch to the `origin` remote's `master` branch.
+A _tracking branch_ is the default push or fetch location for a branch. This means in future you could run `git push` with no arguments on this branch and it'll do the same thing as running `git push origin master`--push the current branch to the `origin` remote's `master` branch.
 
 .Local repository after `git push`
 [[gitx-push]]
 image::screenshots/02-GitXPush.png[]
 
-<<gitx-push>> shows the state of the repository after the `git push`. There is one addition since we last looked at it in <<01-LocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
+<<gitx-push>> shows the state of the repository after the `git push`. There's one addition since we last looked at it in <<01-LocalGit#refs>>: the `origin/master` label. This is attached to the commit which matches the currently known state of the `origin` remote's `master` branch.
 
 .GitHub repository after `git push`
 [[github-push]]
 image::screenshots/02-GitHubPush.png[]
 
-<<github-push>> shows the remote repository on GitHub after the `git push`. The latest commit SHA-1 there matches your current latest commit on the `master` branch seen in <<gitx-push>> (although they are different lengths; remember SHA-1s can always be shortened as long as they remain unique). To update this in future you would run `git push` again to push any local changes to GitHub.
+<<github-push>> shows the remote repository on GitHub after the `git push`. The latest commit SHA-1 there matches your current latest commit on the `master` branch seen in <<gitx-push>> (although they're different lengths; remember SHA-1s can always be shortened as long as they remain unique). To update this in the future, you'd run `git push` again to push any local changes to GitHub.
 
 ### Cloning a remote/GitHub repository onto your local machine: git clone
 It is useful to learn how to create a new Git repository locally and push it to GitHub. However, you will usually be downloading an existing repository to use as your local repository. This process of creating a new local repository from an existing remote repository is known as _cloning_ a repository.
