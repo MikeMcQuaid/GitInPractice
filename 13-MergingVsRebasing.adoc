@@ -54,7 +54,12 @@ To make a new branch and submit it for review:
 
 To merge a branch for nightly testing:
 
-1.  Tell the staging server to merge the branch to `next` with `ssh git@cmake.org stage cmake merge -b next branchname`
+1.  Fetch the remote branches with `git fetch stage`
+2.  Checkout the `next` branch with `git checkout next`
+3.  Merge the remote branch with `git merge stage/branchname`
+4.  Push the `next` branch with `git push`
+
+CMake developers actually perform these steps with the `stage` command over SSH by running `ssh git@cmake.org stage cmake merge -b next branchname`.
 
 To make changes based on feedback from other CMake developers:
 
@@ -63,16 +68,17 @@ To make changes based on feedback from other CMake developers:
 3.  Push the new commits to the staging repository with `git push`
 4.  Post another email to the CMake mailing list (http://www.cmake.org/mailman/listinfo/cmake-developers)
 
-For a CMake core maintainer to merge a branch into `master` after successful
-review:
+For a CMake core maintainer to merge a branch into `master` after successful review:
 
-1.  Fetch the remote branches with `git fetch origin`
+1.  Fetch the remote branches with `git fetch stage`
 2.  Checkout the `master` branch with `git checkout master`
-3.  Merge the remote branch with `git merge origin/branchname`
+3.  Merge the remote branch with `git merge stage/branchname`
 4.  Push the `master` branch with `git push`
 
+CMake core maintainers actually perform these steps with the `stage` command over SSH by running `ssh git@cmake.org stage cmake merge -b master branchname`.
+
 ### Homebrew's workflow
-Homebrew is a package manager for OSX. It has thousands of contributors but a very small number of people with commit access to the main repository (five at the time of writing).
+Homebrew is a package manager for OSX. It has thousands of contributors but a very small number of maintainers with commit access to the main repository (five at the time of writing).
 
 Homebrew's main Git repository is available to access at https://github.com/Homebrew/homebrew. Please clone it and examine it while reading this chapter.
 
@@ -88,15 +94,15 @@ image::diagrams/13-HomebrewWorkflow.png[]
 
 <<homebrew-workflow>> focuses on the branches and repositories in the Homebrew workflow. New commits can end up on `master` either by being directly committed by those with main repository access, a feature branch being squashed and picked from a forked repository or, very rarely, through a major refactor branch being merged.
 
-On the very infrequent occasions that a major refactor branch is needed on the core-repository (e.g. for heavy testing of the major refactor) then it will be kept as a branch in the main repository and then merged. This branch will not be used by users but may be committed to and tested by multiple core contributors.
+On the very infrequent occasions that a major refactor branch is needed on the core-repository (e.g. for heavy testing of the major refactor) then it will be kept as a branch in the main repository and then merged. This branch will not be used by users but may be committed to and tested by multiple maintainers.
 
 #### Workflow commands
-The following commands are used by Homebrew contributors to clone the repository, create new branches and pull requests and Homebrew core contributors to finally merge them into `master.`
+The following commands are used by Homebrew contributors to clone the repository, create new branches and pull requests and Homebrew maintainers to finally merge them into `master.`
 
 To setup the Homebrew repository on their local machine:
 
 1.  Clone the fetch-only Homebrew Git repository with `git clone https://github.com/Homebrew/homebrew.git`
-2.  _Fork_ the Homebrew repository on GitHub. This creates a pushable, personal remote repository. This is needed as only Homebrew core contributors have push access to the main repository.
+2.  _Fork_ the Homebrew repository on GitHub. This creates a pushable, personal remote repository. This is needed as only Homebrew maintainers have push access to the main repository.
 3.  Add the pushable forked repository with `git remote add username https://github.com/username/homebrew.git`
 
 To make a new branch and submit it for review:
@@ -115,11 +121,11 @@ To make changes based on feedback:
 3.  Squash the new commits with `git rebase --interactive origin/master`
 4.  Update the remote branch and the pull request with `git push --force`
 
-For a Homebrew core contributor to merge a branch into `master`:
+For a Homebrew maintainer to merge a branch into `master`:
 
 1.  Checkout the `master` branch with `git checkout master`
-2.  Add the forked repository and cherry-pick the commit with `git add remote username https://github.com/username/homebrew.git`, `git fetch username` and `git merge username/branchname`. Alternatively, some core contributors (including me) use Homebrew's `brew pull` command which pulls the contents of a pull request onto a local branch by using patch files rather than fetching from the forked repository. Approaches like this will be covered more in Chapter 11.
-3.  Rebase, reword and cleanup the commits on `master` with `git rebase --interactive origin/master`. It's common for Homebrew core contributors to edit or squash commits and rewrite commit messages but preserve the "author" metadata so the author retains credit. Often a commit will be edited to contain a string like "Closes #123" which automatically closes the pull request numbered 123 when the commit is merged to master. This will also be covered more in Chapter 11.
+2.  Add the forked repository and cherry-pick the commit with `git add remote username https://github.com/username/homebrew.git`, `git fetch username` and `git merge username/branchname`. Alternatively, some maintainers (including me) use Homebrew's `brew pull` command which pulls the contents of a pull request onto a local branch by using patch files rather than fetching from the forked repository.
+3.  Rebase, reword and cleanup the commits on `master` with `git rebase --interactive origin/master`. It's common for Homebrew maintainers to edit or squash commits and rewrite commit messages but preserve the "author" metadata so the author retains credit. Often a commit will be edited to contain a string like "Closes #123" which automatically closes the pull request numbered 123 when the commit is merged to master. This will also be covered more in Chapter 11.
 4.  Push the `master` branch with `git push`
 
 ### CMake's workflow pros and cons
