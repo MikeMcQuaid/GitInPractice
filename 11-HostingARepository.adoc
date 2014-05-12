@@ -200,7 +200,7 @@ These lines show that our Git client connected to the server (1), the repository
 You have successfully shared a repository over the network.
 
 #### Discussion
-`git daemon` can take some parameters to customize it's behavior:
+`git daemon` can take some parameters to customize its behavior:
 * the `--verbose` flag will output more verbose log details to the terminal about incoming Git client connections and access successes and failures. It's useful when hosting a server to enable this for debugging.
 * the `--base-path=.` indicates what path should be used as the server root. In this case we only hosted a single repository so we set the root to the base directory of the repository. If you wanted to host a directory that contained multiple repositories (e.g. `fish.git` and `cat.git`) you could specify the directory and then they could be accessed by name (e.g. `git clone git://localhost/fish.git` or `git clone git://localhost/cat.git`). As I tend to only use `git daemon` to share a single repository I always tend to just use `--base-path=.`.
 * the `--export-all` flag is used to tell Git to allow access to all Git repositories under the base path. Without this argument by default `git daemon` will only allow access to repositories that have a `git-daemon-export-ok` file in the repository root (the root for bare repositories and `.git` for non-bare repositories). I always tend to use this as I use `git daemon` so infrequently and only on repositories I explicitly, currently want to share.
