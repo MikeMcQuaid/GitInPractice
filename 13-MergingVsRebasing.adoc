@@ -21,8 +21,8 @@ CMake makes heavy use of branching and merges. Several of the branches visible o
 
 * `next`: Shown in the figure as `origin/next`. An _integration branch_ used for integration of _feature branches_ (also known as _topic branches_) when developing a new version of CMake. `master` is merged in here regularly to fix merge conflicts.
 * `nightly`: Shown in the figure as `origin/nightly`. Follows the `next` branch and is updated to the latest commit on `next` automatically at 01:00 UTC every day. Used by automated nightly tests to get a consistent version for each day.
-* `master`: Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. An _integration branch_ used for preparing a new release; development is merged into here. New feature branches are branched off of `master`.
-* feature branches: Seen in figure merged `Merged topic '...' into next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on feature branches. Merged into `next` and `master` for integration testing.
+* `master`: Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. An _integration branch_ which is always kept ready for a new release; release branches are merged into here and then deleted. New feature branches are branched off of `master`.
+* feature branches: Seen in figure merged `Merge topic '...' into next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on feature branches. Merged into `next` for integration testing and `master` for permanent inclusion and then can be deleted.
 
 .CMake repository history
 [[cmake-gitx]]
@@ -34,7 +34,7 @@ The merging of `master` into `next` is done immediately after merging any featur
 [[cmake-workflow]]
 image::diagrams/13-CMakeWorkflow.png[]
 
-<<cmake-workflow>> focuses on the interactions between branches in the CMake workflow (rather than the interactions between commits and branches in <<cmake-gitx>>). For a new commit to end up in `master` a new feature branch needs to be created, commits made on it, the feature branch merged to the `next` branch and later the feature branch merged to `master` for a release.
+<<cmake-workflow>> focuses on the interactions between branches in the CMake workflow (rather than the interactions between commits and branches in <<cmake-gitx>>). For a new commit to end up in `master` a new feature branch needs to be created, commits made on it, the feature branch merged to the `next` branch for integration testing and finally the feature branch merged to `master` and deleted.
 
 #### Workflow commands
 The following commands are used by CMake developers to clone the repository, create new branches for review, merge them to `next` to be tested and CMake core maintainers to finally merge them into `master.`
@@ -86,7 +86,7 @@ Homebrew has very few merge commits within the repository (remember that _fast f
 [[homebrew-workflow]]
 image::diagrams/13-HomebrewWorkflow.png[]
 
-<<homebrew-workflow>> focuses on the branches and repositories in the Homebrew workflow. New commits can end up on master either by being directly committed by those with main repository access, a feature branch being squashed and picked from a forked repository or, very rarely, through a major refactor branch being merged.
+<<homebrew-workflow>> focuses on the branches and repositories in the Homebrew workflow. New commits can end up on `master` either by being directly committed by those with main repository access, a feature branch being squashed and picked from a forked repository or, very rarely, through a major refactor branch being merged.
 
 On the very infrequent occasions that a major refactor branch is needed on the core-repository (e.g. for heavy testing of the major refactor) then it will be kept as a branch in the main repository and then merged. This branch will not be used by users but may be committed to and tested by multiple core contributors.
 
@@ -123,18 +123,18 @@ For a Homebrew core contributor to merge a branch into `master`:
 4.  Push the `master` branch with `git push`
 
 ### CMake's workflow pros and cons
-CMake's approach makes it easy to keep track of what feature branches have been merged, when they were merged and by whom. Individual features and bug-fixes live in separate branches and are only integrated when and where it makes sense to do so. Individual commits and evidence of branches (but not the branches themselves) are always kept in history for future viewing. Feature branches are tested individually and then integration testing is done in the `next` branch. When the `next` branch is deemed to be in a sufficiently stable state then it is merged into the `master` branch. This ensures that the `master` branch is always stable and ready for a new release.
+CMake's approach makes it easy to keep track of what feature branches have been merged, when they were merged and by whom. Individual features and bug-fixes live in separate branches and are only integrated when and where it makes sense to do so. Individual commits and evidence of branches (but not the branches themselves) are always kept in history for future viewing. Feature branches are tested individually and then integration testing is done in the `next` branch. When a feature branch is deemed to be in a sufficiently stable state then it is merged into the `master` branch and deleted. This ensures that the `master` branch is always stable and kept ready for a release.
 
 When developing desktop software like CMake which ships binary releases having a very stable branch is important; releases are a formal, time-consuming process and updates cannot be trivially pushed after release. As a result it's important to ensure that testing is done frequently and sufficiently before releasing.
 
 CMake's approach produces a history that contains a lot of information but, as seen from the plethora of lines in <<cmake-gitx>>, can be hard to follow. Merge commits are frequent and commits with actual changes are harder to find as a result. This can make reverting individual commits tricky; using `git revert` on a merge commit is hard as Git does not know which side of the merge it should revert to. In addition, if you revert a merge commit then you cannot easily re-merge it.
 
-There are also potential trust issues with CMake's approach. Everyone who wants to create a feature branch needs commit access to the CMake repository. As Git (and Git hosting services) do not provide fine-grained access control (e.g. restricting access to particular branches) and as CMake's Git workflow does not rewrite history anyone with commit access could e.g. make commits directly to the `master` branch and circumvent the process. Everyone who commits to CMake needs to be made aware of the process and trusted not to break or circumvent it. Although rewriting, Kitware's control of the servers and server-side checks can protect against most of this the potential risks remain.
+There are also potential trust issues with CMake's approach. Everyone who wants to create a feature branch needs commit access to the CMake repository. As Git (and Git hosting services) do not provide fine-grained access control (e.g. restricting access to particular branches) and as CMake's Git workflow does not rewrite history anyone with commit access could e.g. make commits directly to the `master` branch and circumvent the process. Everyone who commits to CMake needs to be made aware of the process and trusted not to break or circumvent it. Kitware protects against process violations with rewriting and server-side checks. However, this requires complex setup and server configuration and a willingness to rewrite pushed branches to fix mistakes.
 
 ### Homebrew's workflow pros and cons
 A major benefit of Homebrew's approach should be evident from <<homebrew-gitx>>; the history is very simple. The `master` branch contains no direct merges so ordering is easy to follow. Commits contain concise descriptions of exactly what they do and there are no commits that are fixing previous ones. Every commit communicates important information.
 
-As a result of commits being squashed it also makes it very easy to revert individual commits and, if necessary, reapply them at a later point. As Homebrew does not have a release process (the top of the master branch is always assumed to be stable and delivered to users) it is important that changes and fixes can be pushed quickly rather than having a stabilization or testing process.
+As a result of commits being squashed it also makes it very easy to revert individual commits and, if necessary, reapply them at a later point. As Homebrew does not have a release process (the top of the `master` branch is always assumed to be stable and delivered to users) it is important that changes and fixes can be pushed quickly rather than having a stabilization or testing process.
 
 .Why is a readable history important for Homebrew?
 NOTE: For Homebrew readable history is a very important feature of their workflow. Homebrew uses Git not just as a version control system for developers but also as an update delivery mechanism for users. Presenting these users with a more readable history allows them to better grasp updates to Homebrew with basic Git commands and without understanding merges.
