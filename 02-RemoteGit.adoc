@@ -146,19 +146,19 @@ image::screenshots/02-GitHubPush.png[]
 <<github-push>> shows the remote repository on GitHub after the `git push`. The latest commit SHA-1 there matches your current latest commit on the `master` branch seen in <<gitx-push>> (although they're different lengths; remember SHA-1s can always be shortened as long as they remain unique). To update this in the future, you'd run `git push` again to push any local changes to GitHub.
 
 ### Cloning a remote/GitHub repository onto your local machine: git clone
-It is useful to learn how to create a new Git repository locally and push it to GitHub. However, you will usually be downloading an existing repository to use as your local repository. This process of creating a new local repository from an existing remote repository is known as _cloning_ a repository.
+It's useful to learn how to create a new Git repository locally and push it to GitHub. But you'll usually be downloading an existing repository to use as your local repository. This process of creating a new local repository from an existing remote repository is known as _cloning_ a repository.
 
-Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is that Subversion is a centralized version control system so when you download a repository locally you are only actually downloading the latest revision from the repository. With Git it is known as _cloning_ because you are making a complete copy of that repository by downloading all commits, branches, tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>); the complete history of the repository onto your local machine.
+Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is because Subversion is a centralized version control system, so when you download a repository locally, you're only actually downloading the latest revision from the repository. With Git, it's known as _cloning_ because you're making a complete copy of that repository by downloading all commits, branches, and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>); the complete history of the repository onto your local machine.
 
-As you just pushed the entire contents of the local repository to GitHub let's remove the local repository and recreate it by cloning the repository on GitHub.
+As you just pushed the entire contents of the local repository to GitHub, let's remove the local repository and recreate it by cloning the repository on GitHub.
 
 #### Problem
 You wish to remove the existing `GitInPracticeRedux` local repository and recreate it by cloning from GitHub.
 
 #### Solution
-1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
+1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created--say, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
 2.  Run `rm -rf GitInPracticeRedux` to remove the existing `GitInPracticeRedux` repository.
-3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble:
+3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble the following:
 
 .Cloning a remote repository
 [.long-annotations]
@@ -178,11 +178,11 @@ Checking connectivity... done
 From the clone output you can see:
 
 * "destination directory (1)" is the directory in which the new `GitInPracticeRedux` local repository was created.
-* "object preparation/transmission (2)" can be safely ignored again (although if you're wondering why there were 6 objects remember the different objects in the object store in <<01-LocalGit#object-store>>).
+* "object preparation/transmission (2)" can be safely ignored again (although if you're wondering why there were six objects, remember the different objects in the object store in <<01-LocalGit#object-store>>).
 
-You have cloned the `GitInPracticeRedux` remote repository and created a new local repository containing all its commits in `/Users/mike/GitInPracticeRedux`.
+You've cloned the `GitInPracticeRedux` remote repository and created a new local repository containing all its commits in `/Users/mike/GitInPracticeRedux`.
 
-You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble:
+You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble the following:
 
 .Remote repositories
 [.long-annotations]
@@ -196,17 +196,17 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 <2> push URL
 
 #### Discussion
-`git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in Chapter 13.
+`git clone` can take `--bare` or `--mirror` flags, which will create a repository suitable for hosting on a server. This will be covered more in chapter 13.
 
-`git clone` can take a `--depth` flag followed by a positive integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
+`git clone` can take a `--depth` flag followed by a positive integer, which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository, but it's limited, as it can't be cloned/fetched/pushed from or pushed to.
 
-`git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. This will be covered more in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
+`git clone` can take a `--recurse-submodules` (or `--recursive`) flag, which will initialize all the Git submodules in the repository. This will be covered more in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
 
 .Local repository after `git clone`
 [[git-clone]]
 image::screenshots/02-GitXPush.png[]
 
-<<git-clone>> shows the state of the repository after the `git clone`. It is identical to the state after the `git push` in <<gitx-push>>. This shows that the clone was successful and the newly created local repository has the same contents as the deleted old local repository.
+<<git-clone>> shows the state of the repository after the `git clone`. It's identical to the state after the `git push` in <<gitx-push>>. This shows that the clone was successful and the newly created local repository has the same contents as the deleted old local repository.
 
 Cloning a repository has also created a new remote called `origin`. `origin` is the default remote and references the repository that the clone originated from (which is https://github.com/GitInPractice/GitInPracticeRedux.git in this case).
 
@@ -215,28 +215,28 @@ Now let's learn how to pull new commits from the remote repository.
 ### Pulling changes from another repository: git pull
 `git pull` downloads the new commits from another repository and merges the remote branch into the current branch.
 
-If you run `git pull` on the local repository you just see a message stating `Already up-to-date.`. `git pull` in this case contacted the remote repository, saw that there were no changes to be downloaded and let us know that it was up to date. This is expected as this repository has been pushed to but not updated since.
+If you run `git pull` on the local repository, you just see a message stating `Already up-to-date.` `git pull` in this case contacted the remote repository, saw that there were no changes to be downloaded, and let us know that it was up to date. This is expected, as this repository has been pushed to but not updated since.
 
-To test `git pull` let's create another clone of the same repository, make a new commit and `git push` it. This will allow downloading new changes with `git pull` on the original remote repository.
+To test `git pull` let's create another clone of the same repository, make a new commit, and `git push` it. This will allow downloading new changes with `git pull` on the original remote repository.
 
 To create another cloned, local repository and push a commit from it:
 
-1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPushTest`.
+1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created--for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPushTest`.
 2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxPushTest` to clone into the `GitInPracticeReduxPushTest` directory.
-3.  Change directory to the new Git repository e.g. `cd /Users/mike/GitInPracticeReduxPushTest/`.
+3.  Change directory to the new Git repository: in our example, `cd /Users/mike/GitInPracticeReduxPushTest/`.
 4.  Modify the `GitInPractice.asciidoc` file.
 5.  Run `git add GitInPractice.asciidoc`.
 6.  Run `git commit --message 'Improve joke comic timing.'`.
 7.  Run `git push`.
 
-Now that you've pushed a commit to the `GitInPracticeRedux` remote on GitHub you can change back to your original repository and `git pull` from it. Keep the `GitInPracticeReduxPushTest` directory around as we'll use it later.
+Now that you've pushed a commit to the `GitInPracticeRedux` remote on GitHub, you can change back to your original repository and `git pull` from it. Keep the `GitInPracticeReduxPushTest` directory around as we'll use it later.
 
 #### Problem
 You wish to pull new commits into the current branch on the local `GitInPracticeRedux` repository from the remote repository on GitHub.
 
 #### Solution
-1.  Change directory to the original Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git pull`. The output should resemble:
+1.  Change directory to the original Git repository: `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git pull`. The output should resemble the following:
 
 .Pulling new changes
 [.long-annotations]
@@ -266,17 +266,17 @@ You can see from the pull output:
 
 * "object preparation/transmission (1)" can be safely ignored again.
 * "remote URL (2)" matches the remote repository URL we saw used for `git push`.
-* "remote branch update (3)" shows how the state of the `origin` remote's `master` branch was updated and that this can be seen in `origin/master`. `origin/master` is a valid ref that can be used with tools such as `git diff` so `git diff origin/master` will show the differences between the current working tree state and the `origin` remote's `master` branch.
-* "local branch update (4)" shows that after `git pull` downloaded the changes from the other repository it merged the changes from the tracking branch into the current branch. In this case your `master` branch had the changes from the `master` branch on the remote `origin` merged in. You can see in this case the SHA-1s match those in the "remote branch update (3)". It has been updated to include the new commit (`85a5db1`).
+* "remote branch update (3)" shows how the state of the `origin` remote's `master` branch was updated, and that this can be seen in `origin/master`. `origin/master` is a valid ref that can be used with tools such as `git diff`, so `git diff origin/master` will show the differences between the current working tree state and the `origin` remote's `master` branch.
+* "local branch update (4)" shows that after `git pull` downloaded the changes from the other repository, it merged the changes from the tracking branch into the current branch. In this case your `master` branch had the changes from the `master` branch on the remote `origin` merged in. You can see in this case that the SHA-1s match those in the "remote branch update (3)". It has been updated to include the new commit (`85a5db1`).
 * "merge type (5)" was a _fast-forward merge_ which means that no merge commit was made. Fast-forward merges will be explained in <<merging-an-existing-branch-into-the-current-branch-git-merge>>.
-* "lines changed in file <6>" is the same as the lines changed from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>>. It is showing a summary of the changes that have been pulled into your `master` branch.
+* "lines changed in file <6>" is the same as the lines changed from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>>. It's showing a summary of the changes that have been pulled into your `master` branch.
 * "diff summary <7>" is the same as the diff summary from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>> .
 
 #### Discussion
 `git pull` can take a `--rebase` flag which will perform a rebase rather than a merge. This will be covered in <<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
 
 .Why did a merge happen?
-NOTE: It may be confusing that a merge has happened here. Didn't you just ask for the updates from that branch? You haven't created any other branches so why did a merge happen? In Git all remote branches (which includes the default `master` branch) are only linked to your local branches if the local branch is tracking the remote branch. As a result when you are pulling in changes from a remote branch into your current branch you may sometimes result in a situation where you have made local changes and the remote branch has also received changes. In this case a merge must be made to reconcile the differing local and remote branch.
+NOTE: It may be confusing that a merge has happened here. Didn't you just ask for the updates from that branch? You haven't created any other branches, so why did a merge happen? In Git, all remote branches (which includes the default `master` branch) are only linked to your local branches if the local branch is tracking the remote branch. As a result, when you're pulling in changes from a remote branch into your current branch, you may sometimes result in a situation where you've made local changes and the remote branch has also received changes. In this case, a merge must be made to reconcile the differing local and remote branch.
 
 .Local repository after `git pull`
 [[gitx-pull]]
@@ -284,29 +284,29 @@ image::screenshots/02-GitXPull.png[]
 
 You can see from <<gitx-pull>> that a new commit has been added to the repository and that both `master` and `origin/master` have been updated.
 
-You have pulled the new commits from the `GitInPracticeRedux` remote repository into your local repository and Git has merged them into your `master` branch. Now let's learn how to download changes without applying them onto your master branch.
+You've pulled the new commits from the `GitInPracticeRedux` remote repository into your local repository, and Git has merged them into your `master` branch. Now let's learn how to download changes without applying them onto your master branch.
 
 ### Fetching changes from a remote without modifying local branches: git fetch
-Remember that `git pull` performs two actions: fetching the changes from a remote repository and merging them into the current branch. Sometimes you may wish to download the new commits from the remote repository without merging them into your current branch (or without merging them yet). To do this you can use the `git fetch` command. `git fetch` performs the fetching action of downloading the new commits but skips the merge step (which you can manually perform later).
+Remember that `git pull` performs two actions: fetching the changes from a remote repository and merging them into the current branch. Sometimes you may wish to download the new commits from the remote repository without merging them into your current branch (or without merging them yet). To do this, you can use the `git fetch` command. `git fetch` performs the fetching action of downloading the new commits but skips the merge step (which you can manually perform later).
 
-To test `git fetch` let's use the `GitInPracticeReduxPushTest` local repository again to make another new commit and `git push` it. This will allow downloading new changes with `git fetch` on the original remote repository.
+To test `git fetch`, let's use the `GitInPracticeReduxPushTest` local repository again to make another new commit and `git push` it. This will allow downloading new changes with `git fetch` on the original remote repository.
 
 To push another commit from the `GitInPracticeReduxPushTest` repository:
 
-1.  Change directory to the `GitInPracticeReduxPushTest repository e.g. `cd /Users/mike/GitInPracticeReduxPushTest/`.
+1.  Change directory to the `GitInPracticeReduxPushTest repository; for example `cd /Users/mike/GitInPracticeReduxPushTest/`.
 2.  Modify the `GitInPractice.asciidoc` file.
 3.  Run `git add GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Joke rejected by editor!'`.
 5.  Run `git push`.
 
-Now that you've pushed another commit to the `GitInPracticeRedux` remote on GitHub you can change back to your original repository and `git fetch` from it. If you wish you can now delete the `GitInPracticeReduxPushTest` repository by running e.g. `rm -rf /Users/mike/GitInPracticeReduxPushTest/`
+Now that you've pushed another commit to the `GitInPracticeRedux` remote on GitHub, you can change back to your original repository and `git fetch` from it. If you wish, you can now delete the `GitInPracticeReduxPushTest` repository by running a command like `rm -rf /Users/mike/GitInPracticeReduxPushTest/`.
 
 #### Problem
 You wish to fetch new commits to the local `GitInPracticeRedux` repository from the `GitInPracticeRedux` remote repository on GitHub without merging into your `master` branch.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git fetch`. The output should resemble:
+1.  Change directory to the Git repository: `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git fetch`. The output should resemble the following:
 
 .Fetching new changes
 [.long-annotations]
@@ -324,23 +324,23 @@ From https://github.com/GitInPractice/GitInPracticeRedux <2>
 <2> remote URL
 <3> remote branch update
 
-The `git fetch` output is the same as the first part of the `git pull` output. However the SHA-1s are different again as a new commit was downloaded. This is because `git fetch` is effectively half of what `git pull` is doing. If your `master` branch is tracking the `master` branch on the remote `origin` then `git pull` is directly equivalent to running `git fetch && git merge origin/master`.
+The `git fetch` output is the same as the first part of the `git pull` output. But the SHA-1s are different again, as a new commit was downloaded. This is because `git fetch` is effectively half of what `git pull` is doing. If your `master` branch is tracking the `master` branch on the remote `origin`, then `git pull` is directly equivalent to running `git fetch && git merge origin/master`.
 
-You've fetched the new commits from the remote repository into your local repository without not merging them into your `master` branch.
+You've fetched the new commits from the remote repository into your local repository without merging them into your `master` branch.
 
 #### Discussion
 .Remote repository after `git fetch`
 [[gitx-fetch]]
 image::screenshots/02-GitXFetch.png[]
 
-You can see from <<gitx-fetch>> that another new commit has been added to the repository but this time only `origin/master` has been updated but `master` has not. To see this you may need to select the `origin` remote and `master` remote branch in the GitX sidebar. Selecting commits by remote branches is a feature sadly not available in `gitk`
+You can see from <<gitx-fetch>> that another new commit has been added to the repository, but this time only `origin/master` has been updated but `master` has not. To see this, you may need to select the `origin` remote and `master` remote branch in the GitX sidebar. Selecting commits by remote branches is a feature sadly not available in `gitk`
 
-To clean up our local repository let's do another quick `git pull` to update the state of the `master` branch based on the (already fetched) `origin/master`.
+To clean up our local repository, let's do another quick `git pull` to update the state of the `master` branch based on the (already fetched) `origin/master`.
 
 To pull new commits into the current branch on the local `GitInPracticeRedux` repository from the remote repository on GitHub:
 
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git pull`. The output should resemble:
+1.  Change directory to the Git repository; for example `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git pull`. The output should resemble the following:
 
 .Pull after fetch
 [.long-annotations]
@@ -357,7 +357,7 @@ Fast-forward <2>
 <3> lines changed in file
 <4> diff summary
 
-This shows the latter part of the first `git pull` output we saw. There were no more changes fetched from the `origin` remote and the local `master` branch had not been updated. As a result this `git pull` behaved the same as running `git merge origin/master`.
+This shows the latter part of the first `git pull` output we saw. No more changes were fetched from the `origin` remote and the local `master` branch hadn't been updated. As a result, this `git pull` behaved the same as running `git merge origin/master`.
 
 .Local repository after `git fetch` then `git pull`
 [[git-fetch-pull]]
@@ -366,42 +366,41 @@ image::screenshots/02-GitXFetchPull.png[]
 <<git-fetch-pull>> shows that the `master` branch has now been updated to match the `origin/master` latest commit once more.
 
 .Should I use pull or fetch?
-NOTE: I prefer to use `git fetch` over `git pull`. It means I can continue to fetch regularly in the background and only include these changes in my local branches when it is convenient and in the method I find most appropriate which may be merging or rebasing (or resetting which you will see in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of e.g. a merge conflict.
+NOTE: I prefer to use `git fetch` over `git pull`. This means I can continue to fetch regularly in the background, and only include these changes in my local branches when it's convenient and in the method I find most appropriate, which may be merging or rebasing (or resetting, which you'll see in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of a merge conflict, for example.
 
 We've talked about local branches and remote branches but haven't actually created any ourselves yet. Let's learn about how branches work and how to create them.
 
 ### Creating a new local branch from the current branch: git branch
-When committing in Git the history continues linearly; what was the most recent commit becomes the parent commit for the new commit. This parenting continues back to the initial commit in the repository. You can see an example of this in <<without-branches>>:
+When committing in Git, the history continues linearly; what was the most recent commit becomes the parent commit for the new commit. This parenting continues back to the initial commit in the repository. You can see an example of this in <<without-branches>>:
 
 .Committing without using branches
 [[without-branches]]
 image::diagrams/02-WithoutBranches.png[]
 
-Sometimes this linear approach is not enough for software projects. Sometimes you may need to make new commits which are not yet ready for public consumption. This requires _branches_.
+Sometimes this linear approach isn't enough for software projects. Sometimes you may need to make new commits that are not yet ready for public consumption. This requires _branches_.
 
-Branching allows two independent tracks through history to be created and committed to without either modifying the other. Programmers can happily commit to their independent branch without the fear of disrupting the work of another branch. This means that they can, for example, commit broken or incomplete features rather than having to wait for others to be ready for their commits. It also means they can be isolated from changes made by others until they are ready to integrate them into their branch. <<branches>> shows the same commits as <<without-branches>> if they were split between two branches instead for isolation.
+Branching allows two independent tracks through history to be created and committed to without either modifying the other. Programmers can happily commit to their independent branch without the fear of disrupting the work of another branch. This means that they can, for example, commit broken or incomplete features rather than having to wait for others to be ready for their commits. It also means they can be isolated from changes made by others until they're ready to integrate them into their branch. <<branches>> shows the same commits as <<without-branches>> if they were split between two branches instead for isolation.
 
 .Committing to multiple branches
 [[branches]]
 image::diagrams/02-Branches.png[]
 
-When a branch is created and new commits are made that branch advances forward to include the new commits. In Git a branch is actually no more than a pointer to a particular commit. This is unlike other version control systems such as Subversion in which branches are just a subdirectory of the repository.
+When a branch is created and new commits are made, that branch advances forward to include the new commits. In Git, a branch is no more than a pointer to a particular commit. This is unlike other version control systems such as Subversion, in which branches are just a subdirectory of the repository.
 
-The branch is pointed to a new commit when a new commit is made on that branch. A _tag_ is quite similar to a branch but points to a single commit and remains pointing to the same commit even when new commits are made. Typically tags are used for annotating commits; for example, when you release version 1.0 of your software you may tag the commit used to built the 1.0 release with a "1.0" tag. This means you can come back to it in future, rebuild that release or check how certain things worked without fear that it will be somehow changed automatically.
+The branch is pointed to a new commit when a new commit is made on that branch. A _tag_ is similar to a branch, but points to a single commit and remains pointing to the same commit even when new commits are made. Typically tags are used for annotating commits; for example, when you release version 1.0 of your software, you may tag the commit used to build the 1.0 release with a "1.0" tag. This means you can come back to it in future, rebuild that release, or check how certain things worked without fear that it will be somehow changed automatically.
 
-Branching allows two independent tracks of development to occur at once. In <<branches>>, the `separate-files branch` was used to separate the content from a single file and split it into two new files. This allowed refactoring of the book structure to be done in the `separate-files` branch while the default branch (known as `master` in Git) could be used to create more content. In version control systems like Git where creating a branch is a quick, local operation branches may be used for every independent change.
+Branching allows two independent tracks of development to occur at once. In <<branches>>, the `separate-files branch` was used to separate the content from a single file and split it into two new files. This allowed refactoring of the book structure to be done in the `separate-files` branch while the default branch (known as `master` in Git) could be used to create more content. In version control systems like Git where creating a branch is a quick, local operation, branches may be used for every independent change.
 
-Some programmers will create new branches whenever they work on a new bug fix or feature and then integrate these branches at a later point; perhaps after requesting review of their changes from others. This means even for programmers working without a team it can be useful to have multiple branches in use at any one point. For example, you may be working on a new feature but realize that a critical error in your application needs fixed immediately. You could quickly create a new branch based off the version used by customers, fix the error and switch branch back to the branch you had been committing the new feature to.
+Some programmers will create new branches whenever they work on a new bug fix or feature and then integrate these branches at a later point; perhaps after requesting review of their changes from others. This means even for programmers working without a team, it can be useful to have multiple branches in use at any one point. For example, you may be working on a new feature but realize that a critical error in your application needs fixed immediately. You could quickly create a new branch based off the version used by customers, fix the error, and switch branch back to the branch you'd been committing the new feature to.
 
 #### Problem
-You wish to create a new local branch named `chapter-two` from the current
-(`master`) branch.
+You wish to create a new local branch named `chapter-two` from the current (`master`) branch.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository: `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git branch chapter-two`. There will be no output.
 
-You can verify the branch was created by running `git branch` which should have the following output:
+You can verify the branch was created by running `git branch`, which should have the following output:
 
 .List branches
 ```
@@ -416,12 +415,12 @@ You can verify the branch was created by running `git branch` which should have 
 From the branch output:
 
 * "new branch (1)" was created with the expected name.
-* "current branch <2>" is indicated by the `*` prefix which shows you are still on the master branch as before. `git branch` creates a new branch but does not change to it.
+* "current branch <2>" is indicated by the `*` prefix, which shows you're still on the master branch as before. `git branch` creates a new branch but doesn't change to it.
 
-You have created a new local branch named `chapter-two` which currently points to the same commit as `master`.
+You've created a new local branch named `chapter-two` that currently points to the same commit as `master`.
 
 #### Discussion
-`git branch` can take a second argument with the _start point_ for the branch. This defaults to the current branch you are on e.g. `git branch chapter-two` is the equivalent of `git branch chapter-two master` if you're already on the master branch. This can be used to create branches from previous commits which is sometimes useful if e.g. the current `master` branch state has broken unit tests that you need to be working.
+`git branch` can take a second argument with the _start point_ for the branch. This defaults to the current branch you're on; for example, `git branch chapter-two` is the equivalent of `git branch chapter-two master` if you're already on the master branch. This can be used to create branches from previous commits, which is sometimes useful if, say, the current `master` branch state has broken unit tests that you need to be working.
 
 `git branch` can take a `--track` flag which, combined with a start point, will set the upstream for the branch (similarly to `git push --set-upstream` but without pushing anything remotely yet).
 
@@ -429,13 +428,13 @@ You have created a new local branch named `chapter-two` which currently points t
 [[git-branch]]
 image::screenshots/02-GitBranch.png[]
 
-You can see from <<git-branch>> that there is a new branch label for the `chapter-two` branch. In the GitX GUI the label colors indicate:
+You can see from <<git-branch>> that there's a new branch label for the `chapter-two` branch. In the GitX GUI the label colors indicate:
 
-* orange: the currently checked-out local branch
-* green: a non-checked-out local branch
-* blue: a remote branch
+* Orange--the currently checked-out local branch
+* Green--a non-checked-out local branch
+* Blue--a remote branch
 
-Note that some editions of the book are in printed in grayscale so these colors may not be visible. Instead please compare them to GitX on your computer.
+Note that print editions of the book are in printed in grayscale, so these colors may not be visible. Instead please compare them to GitX on your computer.
 
 .Branch pointers
 [[branch-pointers]]
@@ -443,22 +442,22 @@ image::diagrams/02-BranchPointers.png[]
 
 <<branch-pointers>> shows how these two branch pointers point to the same commit.
 
-You've seen `git branch` creates a local branch it does not change to it. To do that requires using `git checkout`.
+You've seen how `git branch` creates a local branch but doesn't change to it. To do that requires using `git checkout`.
 
 .Can branches be named anything?
-NOTE: Branches cannot have spaces or two consecutive dots (`..`) anywhere in their name so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. The dots case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
+NOTE: Branches can't have spaces or two consecutive dots (`..`) anywhere in their name, so `chapter..two` would be an invalid branch name and `git branch` will refuse to create it. The dots case is due to the special meaning of `..` for a commit range for the `git diff` command (which we saw used in <<01-LocalGit#refs>>).
 
 .What names should I use for branches?
 NOTE: Name branches according to their contents. For example, the `chapter-two` branch we've created here describes that the commits in this branch will be referencing the second chapter. I recommend a format of describing the branch's purpose in multiple words separated by hyphens. For example, a branch that is performing cleanup on the test suite should be named `test-suite-cleanup`.
 
 ### Checking out a local branch: git checkout
-Once you've created a local branch you will want to check out the contents of another branch into Git's working directory. The state of all the current files in the working directory will be replaced with the new state based on the revision that the new branch is currently pointing to.
+Once you've created a local branch, you'll want to check out the contents of another branch into Git's working directory. The state of all the current files in the working directory will be replaced with the new state based on the revision that the new branch is currently pointing to.
 
 #### Problem
 You wish to change to a local branch named `chapter-two` from the current (`master`) branch.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout chapter-two`. The output should be `Switched to branch 'chapter-two'`.
 
 You've checked out the local branch named `chapter-two` and moved from the `master` branch.
@@ -469,26 +468,26 @@ You've checked out the local branch named `chapter-two` and moved from the `mast
 image::diagrams/01-Workflow.png[]
 
 .Why do Subversion and Git use `checkout` to mean different things?
-NOTE: As mentioned earlier some other version control systems (e.g. Subversion) use `checkout` to refer to the initial download from a remote repository but `git checkout` is used here to change branches. This may be slightly confusing until we look at Git's full remote workflow. <<git-subversion-workflow>> shows Git's local workflow again. Under closer examination `git checkout` and `svn checkout` behave similarly; both check out the contents of a version control repository into the working directory but Subversion's repository is remote and Git's repository is local. In this case `git checkout` is requesting the checkout of a particular branch so the current state of that branch is checked out into the working directory.
+NOTE: As mentioned earlier, some other version control systems (such as Subversion) use `checkout` to refer to the initial download from a remote repository, but `git checkout` is used here to change branches. This may be slightly confusing until we look at Git's full remote workflow. <<git-subversion-workflow>> shows Git's local workflow again. Under closer examination, `git checkout` and `svn checkout` behave similarly; both check out the contents of a version control repository into the working directory, but Subversion's repository is remote and Git's repository is local. In this case, `git checkout` is requesting the checkout of a particular branch so the current state of that branch is checked out into the working directory.
 
 .HEAD pointer with multiple branches
 [[head-branches]]
 image::diagrams/02-HEAD-Branches.png[]
 
-Afterwards the HEAD pointer (seen in <<head-branches>>) is updated to point to the current, `chapter-two` branch pointer which in turn points to the top commit of that branch. The HEAD pointer moved from the `master` to the `chapter-two` branch when you ran `git checkout chapter-two`; setting `chapter-two` to be the current branch.
+Afterward, the HEAD pointer (seen in <<head-branches>>) is updated to point to the current, `chapter-two` branch pointer, which in turn points to the top commit of that branch. The HEAD pointer moved from the `master` to the `chapter-two` branch when you ran `git checkout chapter-two`; setting `chapter-two` to be the current branch.
 
 .Will `git checkout` overwrite any uncommitted changes?
-NOTE: Make sure you've committed any changes on the current branch before checking out a new branch. If you do not do this `git checkout` will refuse to check out the new branch if there are changes in that branch to a file with uncommitted changes. If you wish to overwrite these uncommitted changes anyway you can force this with `git checkout --force`. Another solution is `git stash` which allows temporary storage of changes and will be covered in <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
+NOTE: Make sure you've committed any changes on the current branch before checking out a new branch. If you don't do this, `git checkout` will refuse to check out the new branch if there are changes in that branch to a file with uncommitted changes. If you wish to overwrite these uncommitted changes anyway, you can force this with `git checkout --force`. Another solution is `git stash`, which allows temporary storage of changes and will be covered in <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
 
 ### Pushing a local branch remotely
-Now that you've created a new branch and checked it out it would be useful to push any new commits made to the remote repository. To do this requires using `git push` again.
+Now that you've created a new branch and checked it out, it would be useful to push any new commits made to the remote repository. To do this requires using `git push` again.
 
 #### Problem
 You wish to push the changes from the local `chapter-two` branch to create the remote branch `chapter-two` on GitHub.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
+1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git checkout chapter-two` to ensure you're on the `chapter-two` branch.
 3.  Run `git push --set-upstream origin chapter-two`. The output should resemble:
 
 .Push and set upstream branch
@@ -508,11 +507,11 @@ chapter-two from origin. <3>
 
 The push output is much the same as the previous `git push` run:
 
-* "object preparation/transmission (1)" (although still ignorable) shows that no new objects were sent. The reason for this is that the `chapter-two` branch still points to the same commit as the `master` branch; it's effectively a different name (or, more accurately, ref) pointing to the same commit. As a result there have been no more commit objects created and therefore no more were sent.
+* "object preparation/transmission (1)" (although still ignorable) shows that no new objects were sent. The reason for this is because the `chapter-two` branch still points to the same commit as the `master` branch; it's effectively a different name (or, more accurately, ref) pointing to the same commit. As a result no more commit objects have been created and therefore no more were sent.
 * "local/remote branch (2)" has `chapter-two` as the branch name.
 * "set tracking branch (3)" has `chapter-two` as the branch name.
 
-You have pushed your local `chapter-two` branch and created a new remote branch named `chapter-two` on the remote repository.
+You've pushed your local `chapter-two` branch and created a new remote branch named `chapter-two` on the remote repository.
 
 #### Discussion
 Remember that now the local `chapter-two` branch is tracking the remote `chapter-two` branch so any future `git pull` or `git push` on the `chapter-two` branch will use the `origin` remote's `chapter-two` branch.
@@ -521,7 +520,7 @@ Remember that now the local `chapter-two` branch is tracking the remote `chapter
 [[gitx-push-branch]]
 image::screenshots/02-GitXPushBranch.png[]
 
-As you'll hopefully have anticipated <<gitx-push-branch>> shows the addition of another remote branch named `origin/chapter-two`.
+As you'll hopefully have anticipated, <<gitx-push-branch>> shows the addition of another remote branch named `origin/chapter-two`.
 
 ### Merging an existing branch into the current branch: git merge
 At some point we have a branch that we're done with and we want to bring all the commits made on it into another branch. This process is known as a `merge`.
@@ -530,18 +529,18 @@ At some point we have a branch that we're done with and we want to bring all the
 [[merging]]
 image::diagrams/02-Merging.png[]
 
-When a merge is requested all the commits from another branch are pulled into the current branch. Those commits then become part of the history of the branch. Please note from <<merging>> the commit in which the merge is made has two parents commits rather than one; it is joining together two separate paths through the history back into a single one. After a merge you may decide to keep the existing branch around to add more commits to it and perhaps merge again at a later point (only the new commits will need to be merged next time). Alternatively, you may delete the branch and make future commits on the Git's default `master` branch and create another branch when needed in the future.
+When a merge is requested, all the commits from another branch are pulled into the current branch. Those commits then become part of the history of the branch. Please note from <<merging>> that the commit in which the merge is made has two parents commits rather than one; it's joining together two separate paths through the history back into a single one. After a merge, you may decide to keep the existing branch around to add more commits to it and perhaps merge again at a later point (only the new commits will need to be merged next time). Alternatively, you may delete the branch and make future commits on the Git's default `master` branch and create another branch when needed in the future.
 
 #### Problem
 You wish to make a commit on the local branch named `chapter-two` and merge this into the `master` branch.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git checkout chapter-two` to ensure you are on the `chapter-two` branch.
+1.  Change directory to the Git repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git checkout chapter-two` to ensure you're on the `chapter-two` branch.
 3.  Modify the contents of `GitInPractice.asciidoc` and run `git add GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Start Chapter 2.'`.
-5.  Run `git checkout master` to checkout the branch you wish to merge `chapter-two` into.
-6.  Run `git merge chapter-two`. The output should resemble:
+5.  Run `git checkout master` to check out the branch you wish to merge `chapter-two` into.
+6.  Run `git merge chapter-two`. The output should resemble the following:
 
 .Merge branch
 [.long-annotations]
@@ -560,16 +559,16 @@ Fast-forward <2>
 The output may seem familiar from the `git pull` output. Remember this is because `git pull` actually does a `git fetch && git merge`.
 
 * "local branch update (1)" shows the changes that have been merged into the local `master` branch. Note that the SHA-1 has been updated from the previous `master` SHA-1 (`07fc4c3`) to the current `chapter-two` SHA-1 (`ac14a50`).
-* "merge type (2)" was a _fast-forward merge_. This means that no merge commit (a commit with multiple parents) was needed so none was made. The `chapter-two` commits were made on top of the `master` branch but no more commits had been added to the `master` branch before the merge was made. In Git's typical language: the merged commit (tip of the `chapter-two` branch) is a descendent of the current commit (tip of the `master` branch). If there had been another commit on the `master` branch before merging then this merge would have created a merge commit. If there had been conflicts between the changes made in both branches that could not automatically be resolved then a merge conflict would be created and need to be resolved.
+* "merge type (2)" was a _fast-forward merge_. This means that no merge commit (a commit with multiple parents) was needed, so none was made. The `chapter-two` commits were made on top of the `master` branch but no more commits had been added to the `master` branch before the merge was made. In Git's typical language: the merged commit (tip of the `chapter-two` branch) is a descendent of the current commit (tip of the `master` branch). If there had been another commit on the `master` branch before merging then this merge would've created a merge commit. If there had been conflicts between the changes made in both branches that couldn't automatically be resolved then a merge conflict would be created and need to be resolved.
 * "diff summary <3>" shows a summary of the changes that have been merged into your `master` branch from the `chapter-two` branch.
 
-You have merged the `chapter-two` branch into the `master` branch.
+You've merged the `chapter-two` branch into the `master` branch.
 
 #### Discussion
 This brings the commit that was made in the `chapter-two` branch into the `master` branch.
 
 .What if you try and merge the same commit into a branch multiple times?
-NOTE: `git merge` will not merge the same commit into a branch multiple times; it will simple exit and output `Already up-to-date.` rather than performing the merge.
+NOTE: `git merge` won't merge the same commit into a branch multiple times; it will simple exit and output `Already up-to-date.` rather than performing the merge.
 
 .Local repository after `git merge chapter-two`
 [[gitx-merge]]
@@ -578,9 +577,9 @@ image::screenshots/02-GitXMerge.png[]
 You can see from <<gitx-merge>> that now the `chapter-two` and `master` branches point to the same commit once more.
 
 ##### Merge conflicts
-So far merges may have sounded too good to be true; you can work on multiple things in parallel and combine them at any later point in any order. Not so fast my merge-happy friend; I haven't told you about merge conflicts yet.
+So far merges may have sounded too good to be true; you can work on multiple things in parallel and combine them at any later point in any order. Not so fast, my merge-happy friend; I haven't told you about merge conflicts yet.
 
-A _merge conflict_ occurs when both branches involved in the merge have changed the same part of the same file. Git will try and automatically resolve these conflicts but sometimes is unable to do so without human intervention. This case produces a merge conflict.
+A _merge conflict_ occurs when both branches involved in the merge have changed the same part of the same file. Git will try to automatically resolve these conflicts but sometimes is unable to do so without human intervention. This case produces a merge conflict.
 
 .Merge conflict resolution with Git
 ```
@@ -603,9 +602,9 @@ system.
 <5> current version
 <6> current marker
 
-When a merge conflict occurs the version control system will go through any files that have conflicts and insert something similar to the above markers. These markers indicate the versions of the file on each branch.
+When a merge conflict occurs, the version control system will go through any files that have conflicts and insert something similar to the preceding markers. These markers indicate the versions of the file on each branch.
 
-* "unchanged line (1)" is provided only for context in this example
+* "unchanged line (1)" is provided only for context in this example.
 * "incoming marker (2)" starts the section containing the lines from the current branch (referenced by `HEAD` here).
 * "incoming line (3)" shows a line from the incoming branch's commit(s).
 * "branch separator (4)" starts the section containing the lines from the incoming branch.
@@ -613,11 +612,11 @@ When a merge conflict occurs the version control system will go through any file
 * "current marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
 
 .How can conflict markers be found quickly?
-NOTE: When searching a large file for the merge conflict markers you should enter `<<<<` into your text editor's find tool to quickly locate them.
+NOTE: When searching a large file for the merge conflict markers, you should enter `<<<<` into your text editor's find tool to quickly locate them.
 
-The person performing the merge will need to manually edit the file to produce the correctly merged output, save it and mark the merge as resolved. Sometimes resolving the conflict will involve picking all the lines of a single version; either the previous version's lines or the new branch's lines. Other times resolving the conflict will involve combining some lines from the previous version and some lines from the new branch.In cases where other files have been edited (like this example) it may also involve putting some of these lines into other files.
+The person performing the merge will need to manually edit the file to produce the correctly merged output, save it, and mark the merge as resolved. Sometimes resolving the conflict will involve picking all the lines of a single version: either the previous version's lines or the new branch's lines. Other times, resolving the conflict will involve combining some lines from the previous version and some lines from the new branch. In cases where other files have been edited (like this example), it may also involve putting some of these lines into other files.
 
-When conflicts have been resolved a _merge commit_ can be made. This will store the two parent commits and the conflicts that were resolved so they can be inspected in the future. Unfortunately sometimes people will pick the wrong option or merge incorrectly so it's good to be able to later see what conflicts they had to resolve.
+When conflicts have been resolved, a _merge commit_ can be made. This will store the two parent commits and the conflicts that were resolved so they can be inspected in the future. Unfortunately sometimes people will pick the wrong option or merge incorrectly, so it's good to be able to later see what conflicts they had to resolve.
 
 ##### Rebasing
 A _rebase_ is a method of history rewriting in Git that is similar to a merge. A rebase involves changing the parent of a commit to point to another.
@@ -626,24 +625,24 @@ A _rebase_ is a method of history rewriting in Git that is similar to a merge. A
 [[rebasing-branch]]
 image::diagrams/02-Rebasing.png[]
 
-<<rebasing-branch>> shows a rebase of the `separate-files` branch onto the `master` branch. The rebase operation has changed the parent of the first commit in the `separate-files` branch to be the last commit in the `master` branch. This means all the content changes from the `master` branch are now included in the `separate-files branch` and any conflicts were manually resolved but were not stored (as they would be in a merge conflict).
+<<rebasing-branch>> shows a rebase of the `separate-files` branch onto the `master` branch. The rebase operation has changed the parent of the first commit in the `separate-files` branch to be the last commit in the `master` branch. This means all the content changes from the `master` branch are now included in the `separate-files branch` and any conflicts were manually resolved but weren't stored (as they would be in a merge conflict).
 
 We'll cover rebasing in more detail later in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>. All that's necessary to remember for now is that it's a different approach to a merge that can be used for a similar outcome (pulling changes from one branch into another).
 
 ### Deleting a remote branch
-Now that the `chapter-two` branch has been merged into the `master` branch the new commit that made in the `chapter-two` branch is now in the `master` branch. This means that we can push the `master` branch to push all the `chapter-two` changes to `origin/master`. Once this is done (and assuming we don't want to make any more commits to the `chapter-two` branch) then `origin/chapter-two` can be safely deleted.
+Now that the `chapter-two` branch has been merged into the `master` branch, the new commit that made in the `chapter-two` branch is now in the `master` branch. This means that we can push the `master` branch to push all the `chapter-two` changes to `origin/master`. Once this is done (and assuming we don't want to make any more commits to the `chapter-two` branch) then `origin/chapter-two` can be safely deleted.
 
 .Why delete the branches?
-NOTE: Sometimes branches in version control systems are kept around for a long time and sometimes they are very temporary. A long-running branch may be one that represents the version deployed to a particular server. A short-running branch may be a single bug fix or feature which has been completed. In Git once a branch has been merged the history of the branch is still visible in the history and the branch can be safely deleted as a merged branch is, at that point, just a ref to an existing commit in the history of the branch it was merged into.
+NOTE: Sometimes branches in version control systems are kept around for a long time and sometimes they're very temporary. A long-running branch may be one that represents the version deployed to a particular server. A short-running branch may be a single bug fix or feature that has been completed. In Git, once a branch has been merged, the history of the branch is still visible in the history and the branch can be safely deleted as a merged branch is, at that point, just a ref to an existing commit in the history of the branch it was merged into.
 
 #### Problem
 You wish to push the current `master` branch and delete the branch named `chapter-two` on the remote `origin`.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master` to ensure you are on the `master` branch.
 3.  Run `git push`.
-4.  Run `git push --delete origin chapter-two`. The output should resemble:
+4.  Run `git push --delete origin chapter-two`. The output should resemble the following:
 
 .Delete remote branch
 ```
@@ -676,8 +675,8 @@ The `chapter-two` branch has all its commits merged into the `master` branch and
 You wish to delete the local branch named `chapter-two`.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git checkout master` to ensure you are on the `master` branch.
+1.  Change directory to the Git repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git checkout master` to ensure you're on the `master` branch.
 3.  Run `git branch --delete chapter-two`. The output should be `Deleted branch chapter-two (was ac14a50).`
 
 You've deleted the `chapter-two` branch from the local repository.
@@ -690,7 +689,7 @@ image::screenshots/02-GitXBranchDelete.png[]
 <<gitx-branch-delete>> shows the final state with all evidence of the `chapter-two` branch now removed (other than the commit message).
 
 .Why delete the remote branch before the local branch?
-NOTE: We had merged all the `chapter-two` changes into the `master` branch and pushed this to `origin/master`. As a result the `chapter-two` and `origin/chapter-two` branches are no longer needed. However, Git will refuse to delete a local branch with `git branch --delete` if it has not been merged into the current branch or its changes have not been pushed to its tracking branch (`origin/chapter-two` in this case). Deleting `origin/chapter-two` first means that the local `chapter-two` branch can be deleted by `git branch --delete` without Git complaining that `chapter-two` has changes that need pushed to `origin/chapter-two`.
+NOTE: We had merged all the `chapter-two` changes into the `master` branch and pushed this to `origin/master`. As a result, the `chapter-two` and `origin/chapter-two` branches are no longer needed. But Git will refuse to delete a local branch with `git branch --delete` if it hasn't been merged into the current branch or its changes haven't been pushed to its tracking branch (`origin/chapter-two` in this case). Deleting `origin/chapter-two` first means that the local `chapter-two` branch can be deleted by `git branch --delete` without Git complaining that `chapter-two` has changes that need pushed to `origin/chapter-two`.
 
 ### Summary
 In this chapter you hopefully learned:
@@ -698,9 +697,9 @@ In this chapter you hopefully learned:
 * How to push your local repository to a remote repository
 * How to clone an existing remote repository
 * How to push and pull changes to/from a remote repository
-* That fetching allows obtaining changes without modifying local branches
+* That fetching allows you to obtain changes without modifying local branches
 * That pulling is the equivalent to fetching then merging
-* How to checkout local and remote branches
+* How to check out local and remote branches
 * How to merge branches and then delete from the local and remote repository
 
 Now let's learn how to perform some more advanced interactions with files inside the Git working directory.
