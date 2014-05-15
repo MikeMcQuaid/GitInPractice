@@ -198,7 +198,7 @@ As well as `--hard` and `--mixed` `git reset` can also take a `--soft` argument.
 You can also perform a combined reset and commit operation to modify the previous commit using `git commit --amend`. `git commit --amend` resets to the previous commit and then creates a new commit with the same commit message as the commit that was just reset. It uses `git reset --soft HEAD^` and then runs `git commit --reedit-message` with the previous (now reset) commit as an argument. This means that it'll add anything you have currently added to the index staging area to the changes from the previous commit and prompt for a new commit message. I most commonly use this to adjust the previous commit message if I realize I've made a typo or omitted useful information.
 
 ### Rebase commits on top of another branch: git rebase
-Recall from <<02-RemoteGit#rebasing>> that rebasing is similar to merging but requires rewriting history.
+Recall from <<02-RemoteGit#pushing-a-local-branch-remotely>> that rebasing is similar to merging but requires rewriting history.
 
 Let's create a branch that we can rebase:
 

@@ -81,7 +81,7 @@ The lack of authority for a particular repository with distributed version contr
 ### Pushing changes to a remote repository: git push
 You will eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git (which can operate over HTTP, SSH or it's own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
 
-Let's push the changes you made in our repository in <<01-LocalGit#introduction-to-local-git>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
+Let's push the changes you made in our repository in <<01-LocalGit#committing-changes-to-files-git-commit>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
 #### Problem
 You wish to push the changes from the local `GitInPracticeRedux` repository to the `origin` remote on GitHub.
