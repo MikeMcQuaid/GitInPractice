@@ -1,7 +1,7 @@
 ## Rewriting History and Disaster Recovery
 ifdef::env-github[:outfilesuffix: .adoc]
 
-In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing##homebrew-s-workflow>> and Chapter 14.
+In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing#homebrew-s-workflow>> and Chapter 14.
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
