@@ -566,7 +566,7 @@ NOTE: Cherry-picking is best used for individual commits that may be out of sequ
 * if the `--edit` flag is passed to `git cherry-pick` it will prompt you for a commit message before committing
 * if you are cherry-picking from a public branch (i.e. one you will push remotely) to another public branch then you can use the `-x` flag to append a line to the cherry-picked commit's message saying which commit this change was picked from. For example if this flag was used in the last example the commit message would have `(cherry picked from commit dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d)` appended to it.
 * when you want to indicate in the commit message which person cherry-picked a particular change more explicitly than the "Committer" metadata that will be set by default then you can use the `--signoff` (or `-s`) flag. This will append a Signed-off-by line to the end of the commit message. For example if this flag was used in the last example the commit message would have `Signed-off-by: Mike McQuaid <mike@mikemcquaid.com>` appended to it.
-* if there is a merge conflict on a `cherry-pick` you will need to resolve it a similar fashion as a `git merge` (or the same fashion as `git rebase` which you will see in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>). This involves resolving the conflict, running `git add` but then `git cherry-pick --continue` instead of `git commit` to commit the changes. If you wish to abort the current cherry-pick as perhaps you've realized the merge-conflict is too complex you can do this using `git cherry-pick --abort`.
+* if there is a merge conflict on a `cherry-pick` you will need to resolve it a similar fashion as a `git merge` (or the same fashion as `git rebase` which you will see later in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>). This involves resolving the conflict, running `git add` but then `git cherry-pick --continue` instead of `git commit` to commit the changes. If you wish to abort the current cherry-pick as perhaps you've realized the merge-conflict is too complex you can do this using `git cherry-pick --abort`.
 
 .When would you sign off a commit?
 NOTE: Signing-off a commit is generally used in projects to indicate that a commit was checked by someone else before being included. I'm a maintainer of the Homebrew open-source project and use sign-off to indicate to other maintainers that it was me who merged this commit. This information is also included as the "Author" metadata in the commit but the sign-off makes it more readily accessible. The same process could be used in companies when a developer reviews the work of another and wants to signify this in a commit message.
@@ -574,7 +574,7 @@ NOTE: Signing-off a commit is generally used in projects to indicate that a comm
 ### Revert a previous commit: git revert
 You may occasionally make a commit that you regret. You would then wish to undo the commit until you can fix it so it works as intended.
 
-In Git you can rewrite history to hide such mistakes (as we first will learn in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>) but this is generally considered bad practice if you have already pushed a commit publicly. In these cases you are better to instead use `git revert`.
+In Git you can rewrite history to hide such mistakes (as we will learn later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>) but this is generally considered bad practice if you have already pushed a commit publicly. In these cases you are better to instead use `git revert`.
 
 #### Problem
 You wish to revert a commit to reverse its changes.
@@ -677,7 +677,7 @@ You have seen which commits remain un-merged from the `master` branch.
 #### Discussion
 If you omit the `--verbose` (or `-v`) flag from `git cherry` it will show just the `-`/`+` and the full SHA-1 but not the commit subject e.g. `- dfe2377f00bb58b0f4ba5200b8f4299d0bfeeb5d`.
 
-When you learn about rebasing in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>> `git cherry` can be useful at showing what commits will be kept or dropped after a rebase operation.
+When you learn about rebasing later in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>> `git cherry` can be useful at showing what commits will be kept or dropped after a rebase operation.
 
 ### Summary
 In this chapter you hopefully learned:
@@ -690,5 +690,3 @@ In this chapter you hopefully learned:
 * How to use `git cherry-pick` to bring individual commits from one branch to another
 * How to use `git revert` to reverse individual commits
 * How to use `git cherry` to list what commits remain un-merged on a branch
-
-Now let's learn how to rewrite history.

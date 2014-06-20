@@ -187,7 +187,7 @@ From the `git show` submodule output:
 
 * the `--quiet` (or `-q`) flag can be passed to make `git submodule add` only print out error messages and no status information.
 * the `--force` (or `-f`) flag can be passed to allow adding a submodule path that would otherwise be ignored by `.gitignore` rules.
-* the `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk. This flag for `git clone` was mentioned previously in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>.
+* the `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk. This flag for `git clone` was mentioned previously in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> and can be useful for reducing the clone time for very large repositories.
 
 ### Show the status of submodules: git submodule status
 Now that we've added a submodule to the repository it can be useful to query what submodules have been added and what their current status is. This can be done with the `git submodule status` command.
@@ -341,5 +341,3 @@ In this chapter you hopefully learned:
 * How to use `git submodule status` to view all submodules and their current revision
 * How to use `git submodule update --init` to initialize all submodules, fetch any changes and update them to the latest revision
 * How to use `git submodule foreach` and its variables to run commands and print metadata for every submodule in a repository
-
-Now let's learn how to make Git interact with Subversion repositories.

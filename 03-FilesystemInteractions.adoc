@@ -131,7 +131,7 @@ You have reset the Git working directory to the last committed state.
 #### Discussion
 The `--hard` argument signals to `git reset` that you wish it to reset both the index staging area and the working directory to the state of the previous commit on this branch. If run without an argument it defaults to `git reset --mixed` which will reset the index staging area but not the contents of the working directory. In short, `git reset --mixed` only undoes `git add` but `git reset --hard` undoes `git add` and all file modifications.
 
-`git reset` will be used to perform more operations (including those that alter history) in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>.
+`git reset` will be used to perform more operations (including those that alter history) later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>.
 
 .Dangers of using `git reset --hard`
 WARNING: Care should be used with `git reset --hard`; it will immediately and without prompting remove all your uncommitted changes to any file in your working directory. This is probably the command which has caused me more regret than any other; I've typed it accidentally and removed work I hadn't intended to. Remember in <<01-LocalGit#why-do-programmers-use-git>> we learnt that it's very hard to lose work with Git? If you have uncommitted work this is one of the easiest ways to lose it! A safer option may be to use Git's stash functionality instead.
@@ -374,7 +374,7 @@ You have cleared all the previously stashed changes.
 
 #### Discussion
 .No prompt for `git stash clear`
-WARNING: Clearing the stash will be done without a prompt and will remove every previous item from the stash so be careful when doing so. Cleared stashes cannot be recovered.
+WARNING: Clearing the stash will be done without a prompt and will remove every previous item from the stash so be careful when doing so. Cleared stashes cannot be easily recovered. For this reason once you learn about history rewriting in later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>> I'd recommend making commits and rewriting them later rather than relying too much on `git stash`.
 
 ### Assume files are unchanged
 Sometimes you may wish to make changes to files but have Git ignore the specific changes you have made so that operations such as `git stash` and `git diff` ignore these changes. In these cases you could just ignore them yourself or stash them elsewhere but it would be ideal to be able to tell Git to ignore these particular changes.
@@ -479,5 +479,3 @@ In this chapter you hopefully learned:
 * How to (carefully) use `git reset --hard` to reset the working directory to the previously committed state
 * How to use `git stash` to temporarily store and retrieve changes
 * How to use `git update-index` to tell Git to assume files are unchanged
-
-Now let's learn how to visualize history in a Git repository in different formats.

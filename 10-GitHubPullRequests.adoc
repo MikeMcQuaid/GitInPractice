@@ -249,8 +249,8 @@ image::screenshots/10-MergedPullRequest.png[]
 
 <<merged-pull-request>> shows the state of the merged pull request after these changes. You will notice that after the push the pull-request has been automatically closed as it has detected that you have merged the contents of the branch remotely.
 
-.How can you close a pull request without a merge?
-NOTE: If you prefer to perhaps cherry-pick or rewrite some of the commits then the SHA-1 may change. This case will may not be detected automatically by GitHub as a merge and therefore the issue may not be closed automatically. If you wish to ensure that any modified commit will automatically close the pull request you could use `git rebase --interactive` or `git commit --amend` to change the commit message for one of the commits to include text such as `Closes #1`. The first pull request that was created above was numbered #1. This magic string in a commit message is detected by GitHub and indicates that when this commit is merged to the `master` branch on the main repository it should close the pull request (or issue) numbered #1. You can read more about this in GitHub's help at https://help.github.com/articles/closing-issues-via-commit-messages.
+.How can you close a pull request without a merge or issue from a commit?
+NOTE: If you prefer to perhaps cherry-pick or rewrite some of the commits then the SHA-1 may change. This case will may not be detected automatically by GitHub as a merge and therefore the issue may not be closed automatically. If you wish to ensure that any modified commit will automatically close the pull request you could use `git rebase --interactive` or `git commit --amend` to change the commit message for one of the commits to include text such as `Closes #1`. The first pull request that was created above was numbered #1. This magic string in a commit message is detected by GitHub and indicates that when this commit is merged to the `master` branch on the main repository it should close the pull request or issue numbered #1. You can read more about this in GitHub's help at https://help.github.com/articles/closing-issues-via-commit-messages.
 
 ### Merging a pull request from a forked repository: gh merge
 To merge a pull request from a forked repository is a little more involved. You can click the "Merge pull request" button but what if you want to merge the branch from the command-line? You could manually add the forked repository as a remote repository and merge it like before. Instead, though, let's use the handy `gh` tool again to make things a bit easier.
@@ -312,5 +312,3 @@ In this chapter you hopefully learned:
 * How forks are used to request pull requests on repositories without commit access
 * How to create a new pull request using `gh pull-request`
 * How to merge a a pull request using `git merge` or `gh merge`
-
-Now let's learn how to vendor other projects in your Git repositories using submodules.

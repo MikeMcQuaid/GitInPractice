@@ -434,5 +434,3 @@ In this chapter you hopefully learned:
 * How to use `git svn clone` to import an existing Subversion repository
 * How to use `git svn rebase` to fetch from and `git svn dcommit` to push to an existing Subversion repository
 * How to use `svn checkout` to checkout GitHub repositories using Subversion
-
-Now let's learn how to interact with pull requests: GitHub's way of requesting another project include your changes.

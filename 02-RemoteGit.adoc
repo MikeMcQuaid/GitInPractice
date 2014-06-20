@@ -124,11 +124,11 @@ From the push output you can see:
 You have pushed your `master` branch's changes to the `origin` remote's `master` branch.
 
 #### Discussion
-The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time you push a branch (without it it will output `fatal: The current branch master has no upstream branch.`). After that a `git push` with no arguments will default to running the equivalent of `git push origin master`.
+The `git push` `--set-upstream` (or `-u`) flag and explicit specification of `origin` and `master` are only required the first time to create a remote branch (without it some versions of Git may output `fatal: The current branch master has no upstream branch.`). After that a `git push` with no arguments will default to running the equivalent of `git push origin master`. This is set up by default by `git clone` when you clone a repository.
 
-`git push` can take an `--all` flag which will push all branches and tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
+`git push` can take an `--all` flag which will push all branches and tags (introduced later in <<05-AdvancedBranching#create-a-tag-git-tag>>) at once. Be careful when doing this; you may push some branches with work in-progress.
 
-`git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
+`git push` can take a `--force` flag which will disable some checks on the remote repository to allow rewriting of history. *This is very dangerous. Do not use this flag until after later reading (and rereading) <<06-RewritingHistoryAndDisasterRecovery#rewriting-history-on-a-remote-branch-git-push-force>>.*
 
 A _tracking branch_ is the default push or fetch location for a branch. This means in future you could run `git push` with no arguments on this branch and it will do the same thing as running `git push origin master` i.e. push the current branch to the `origin` remote's `master` branch.
 
@@ -147,7 +147,7 @@ image::screenshots/02-GitHubPush.png[]
 ### Cloning a remote/GitHub repository onto your local machine: git clone
 It is useful to learn how to create a new Git repository locally and push it to GitHub. However, you will usually be downloading an existing repository to use as your local repository. This process of creating a new local repository from an existing remote repository is known as _cloning_ a repository.
 
-Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is that Subversion is a centralized version control system so when you download a repository locally you are only actually downloading the latest revision from the repository. With Git it is known as _cloning_ because you are making a complete copy of that repository by downloading all commits, branches, tags (introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>); the complete history of the repository onto your local machine.
+Some other version control systems (such as Subversion) will use the terminology of _checking out_ a repository. The reasoning for this is that Subversion is a centralized version control system so when you download a repository locally you are only actually downloading the latest revision from the repository. With Git it is known as _cloning_ because you are making a complete copy of that repository by downloading all commits, branches, tags (introduced later in <<05-AdvancedBranching#create-a-tag-git-tag>>); the complete history of the repository onto your local machine.
 
 As you just pushed the entire contents of the local repository to GitHub let's remove the local repository and recreate it by cloning the repository on GitHub.
 
@@ -157,7 +157,7 @@ You wish to remove the existing `GitInPracticeRedux` local repository and recrea
 #### Solution
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
 2.  Run `rm -rf GitInPracticeRedux` to remove the existing `GitInPracticeRedux` repository.
-3.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble:
+3.  Run `git clone` with your repository URL appended. e.g. if your username is `GitInPractice` and repository is named `GitInPracticeRedux` run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble:
 
 .Cloning a remote repository
 [.long-annotations]
@@ -197,9 +197,9 @@ origin  https://github.com/GitInPractice/GitInPracticeRedux.git (push) <2>
 #### Discussion
 `git clone` can take `--bare` or `--mirror` flags which will create a repository suitable for hosting on a server. This will be covered more in Chapter 13.
 
-`git clone` can take a `--depth` flag followed by a positive integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to.
+`git clone` can take a `--depth` flag followed by a positive integer which will create a _shallow clone_. A shallow clone is one where only the specified number of revisions are downloaded from the remote repository but it is limited as it cannot be cloned/fetched/pushed from or pushed to. This can be useful for reducing the clone time for very large repositories.
 
-`git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. This will be covered more in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
+`git clone` can take a `--recurse-submodules` (or `--recursive`) flag which will initialize all the Git submodules in the repository. This will be covered more later in <<12-CreatingACleanHistory#update-and-initialize-all-submodules-git-submodule-update-init>>.
 
 .Local repository after `git clone`
 [[git-clone]]
@@ -221,7 +221,7 @@ To test `git pull` let's create another clone of the same repository, make a new
 To create another cloned, local repository and push a commit from it:
 
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPushTest`.
-2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxPushTest` to clone into the `GitInPracticeReduxPushTest` directory.
+2.  Run `git clone` with your repository URL and destination directory appended. e.g. if your username is `GitInPractice`, repository is named `GitInPracticeRedux` and destination directory is named `GitInPracticeReduxPushTest` run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxPushTest` to clone into the `GitInPracticeReduxPushTest` directory.
 3.  Change directory to the new Git repository e.g. `cd /Users/mike/GitInPracticeReduxPushTest/`.
 4.  Modify the `GitInPractice.asciidoc` file.
 5.  Run `git add GitInPractice.asciidoc`.
@@ -272,7 +272,7 @@ You can see from the pull output:
 * "diff summary <7>" is the same as the diff summary from `git commit` in <<01-LocalGit#committing-changes-to-files-git-commit>> or `git diff` in <<01-LocalGit#viewing-the-differences-between-commits-git-diff>> .
 
 #### Discussion
-`git pull` can take a `--rebase` flag which will perform a rebase rather than a merge. This will be covered in <<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
+`git pull` can take a `--rebase` flag which will perform a rebase rather than a merge. This will be covered later in <<06-RewritingHistoryAndDisasterRecovery#pull-a-branch-and-rebase-commits-git-pull-rebase>>.
 
 .Why did a merge happen?
 NOTE: It may be confusing that a merge has happened here. Didn't you just ask for the updates from that branch? You haven't created any other branches so why did a merge happen? In Git all remote branches (which includes the default `master` branch) are only linked to your local branches if the local branch is tracking the remote branch. As a result when you are pulling in changes from a remote branch into your current branch you may sometimes result in a situation where you have made local changes and the remote branch has also received changes. In this case a merge must be made to reconcile the differing local and remote branch.
@@ -365,7 +365,7 @@ image::screenshots/02-GitXFetchPull.png[]
 <<git-fetch-pull>> shows that the `master` branch has now been updated to match the `origin/master` latest commit once more.
 
 .Should I use pull or fetch?
-NOTE: I prefer to use `git fetch` over `git pull`. It means I can continue to fetch regularly in the background and only include these changes in my local branches when it is convenient and in the method I find most appropriate which may be merging or rebasing (or resetting which you will see in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of e.g. a merge conflict.
+NOTE: I prefer to use `git fetch` over `git pull`. It means I can continue to fetch regularly in the background and only include these changes in my local branches when it is convenient and in the method I find most appropriate which may be merging or rebasing (or resetting which you will see later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of e.g. a merge conflict.
 
 We've talked about local branches and remote branches but haven't actually created any ourselves yet. Let's learn about how branches work and how to create them.
 
@@ -477,7 +477,7 @@ image::diagrams/02-HEAD-Branches.png[]
 Afterwards the HEAD pointer (seen in <<head-branches>>) is updated to point to the current, `chapter-two` branch pointer which in turn points to the top commit of that branch. The HEAD pointer moved from the `master` to the `chapter-two` branch when you ran `git checkout chapter-two`; setting `chapter-two` to be the current branch.
 
 .Will `git checkout` overwrite any uncommitted changes?
-NOTE: Make sure you've committed any changes on the current branch before checking out a new branch. If you do not do this `git checkout` will refuse to check out the new branch if there are changes in that branch to a file with uncommitted changes. If you wish to overwrite these uncommitted changes anyway you can force this with `git checkout --force`. Another solution is `git stash` which allows temporary storage of changes and will be covered in <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
+NOTE: Make sure you've committed any changes on the current branch before checking out a new branch. If you do not do this `git checkout` will refuse to check out the new branch if there are changes in that branch to a file with uncommitted changes. If you wish to overwrite these uncommitted changes anyway you can force this with `git checkout --force`. Another solution is `git stash` which allows temporary storage of changes and will be covered later in <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>.
 
 ### Pushing a local branch remotely
 Now that you've created a new branch and checked it out it would be useful to push any new commits made to the remote repository. To do this requires using `git push` again.
@@ -581,7 +581,7 @@ So far merges may have sounded too good to be true; you can work on multiple thi
 
 A _merge conflict_ occurs when both branches involved in the merge have changed the same part of the same file. Git will try and automatically resolve these conflicts but sometimes is unable to do so without human intervention. This case produces a merge conflict.
 
-.Merge conflict resolution with Git
+.Merge conflict in Git
 ```
 ## Chapter 1  <1>
 <<<<<<< HEAD <2>
@@ -617,6 +617,8 @@ NOTE: When searching a large file for the merge conflict markers you should ente
 The person performing the merge will need to manually edit the file to produce the correctly merged output, save it and mark the merge as resolved. Sometimes resolving the conflict will involve picking all the lines of a single version; either the previous version's lines or the new branch's lines. Other times resolving the conflict will involve combining some lines from the previous version and some lines from the new branch.In cases where other files have been edited (like this example) it may also involve putting some of these lines into other files.
 
 When conflicts have been resolved a _merge commit_ can be made. This will store the two parent commits and the conflicts that were resolved so they can be inspected in the future. Unfortunately sometimes people will pick the wrong option or merge incorrectly so it's good to be able to later see what conflicts they had to resolve.
+
+We'll cover resolving merge conflicts in more detail later in <<05-AdvancedBranching#resolve-a-merge-conflict>>.
 
 ##### Rebasing
 A _rebase_ is a method of history rewriting in Git that is similar to a merge. A rebase involves changing the parent of a commit to point to another.
@@ -701,5 +703,3 @@ In this chapter you hopefully learned:
 * That pulling is the equivalent to fetching then merging
 * How to checkout local and remote branches
 * How to merge branches and then delete from the local and remote repository
-
-Now let's learn how to perform some more advanced interactions with files inside the Git working directory.
