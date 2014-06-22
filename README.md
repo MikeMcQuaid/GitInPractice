@@ -30,6 +30,7 @@ I rewrite the history of this repository often. Sorry about that.
        1. [Git Installation](A-GitInstallation.adoc)
        2. [Creating a GitHub Account and Repository](B-CreatingAGitHubAccountAndRepository.adoc)
        3. [Commented Git Configuration](C-CommentedGitConfiguration.adoc)
+       4. [Why Use Version Control?](D-WhyUseVersionControl.adoc)
 
 ## Usage
 You can read all the AsciiDoc source files inline on GitHub.

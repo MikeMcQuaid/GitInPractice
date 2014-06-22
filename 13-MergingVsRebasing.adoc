@@ -174,5 +174,3 @@ In this chapter you hopefully learned:
 * How merging allows you to keep track of who added commits, when and why
 * How rebasing and squashing allows you to maintain a cleaner history and
   eliminate commits that may be irrelevant
-
-Now let's learn how to work with Subversion repositories directly from Git.

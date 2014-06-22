@@ -144,21 +144,15 @@ This will mean that Git will, if supported by your terminal and not writing to a
 
 Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings (which are specific to the terminal software you are using).
 
-#### Using the new push defaults
-Git 2.0 (which should be released around May 2014) defaults to the new push strategy (i.e. the `simple` push strategy). As a result, if your installed version of Git is 2.0 or above you can can skip this section.
+#### Git 2.0's push defaults
+Git 2.0 (which was released 28 May 2014) defaulted to a new push strategy (the `simple` push strategy). This means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`). Also, with the `simple` strategy Git refuses to push if the remote branch name is different to the local branch name unless you specify it e.g. with `git push origin remotebranchname`. As this is the new behavior it's a good idea to enable it in older versions of Git. If your installed version of Git is 2.0 or above you can can skip this section.
 
-Git's default push behavior uses the `matching` strategy on versions below 2.0. This means that when you run `git push` without arguments Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches then when you run `git push` any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch I would expect `git push` to only affect the branch that I am on.
-
-In Git 2.0 the new default will be the `simple` strategy; this means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`).
-
-Also, with the `simple` strategy Git refuses to push if the remote branch name is different to the local branch name unless you specify it e.g. with `git push origin remotebranchname`.
-
-You can opt-in to this behavior before Git 2.0 is released by running:
+Git versions below 2.0 uses the `matching` strategy for their default push behavior. This means that when you run `git push` without arguments Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches then when you run `git push` any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch I would expect `git push` to only affect the branch that I am on. Let's switch to the `simple` strategy instead which does this by running:
 ```
 # git config --global push.default simple
 ```
 
-I have done it and I'd highly recommend you do too; it means you are less likely to accidentally push changes made on other branches that are not ready to be pushed yet.
+I always enable this if I have to use older Git versions and I'd highly recommend you do too; it means you are less likely to accidentally push changes made on other branches that are not ready to be pushed yet.
 
 #### Pruning branches automatically
 In Git if multiple people are using the same repository then if someone else deletes a remote branch the remote branch reference (e.g. `origin/remote-branch-name`) will not be deleted from your repository without running the `git remote prune` command. This is the same behavior as there is with tags; Git tries to avoid removing refs that may be useful to you unless you specifically request it. To prune the `origin` remote branches you would run `git remote prune origin`.
@@ -369,5 +363,3 @@ In this chapter you hopefully learned:
 * How to create a `git fetch-and-rebase` command that runs `git fetch` then `git rebase --interactive`
 * How to use a dotfiles repository to share configuration files between machines
 * How to make a Bash or ZSH terminal prompt use the `hostname (branch) #` format
-
-Now let's learn how to create clean commit history by committing only specific changes than have been made to a file (rather than all of the changes).

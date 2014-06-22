@@ -1,7 +1,7 @@
 ## Rewriting History and Disaster Recovery
 ifdef::env-github[:outfilesuffix: .adoc]
 
-In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing##homebrew-s-workflow>> and Chapter 14.
+In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing#homebrew-s-workflow>> and Chapter 14.
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
@@ -65,6 +65,8 @@ You can from <<gitx-reflog>> that the SHA-1s match those in the `git reflog` out
 * the latest commit on the `master` branch (`3e3c417`, `HEAD@{0}`, `HEAD@{3}`),
 
 Recall from <<01-LocalGit#refs>> you learned some different types of refs. The `HEAD@{0}` is another type of ref and can be used with commands such as `git log` or `git cherry-pick` to view the state based on that commit. Typically I always prefer to use the SHA-1 as SHA-1s for particular commits never change (even with the history rewriting we will learn later this chapter) but e.g. `HEAD@{0}` will change with any action that affects the `HEAD` pointer.
+
+Remember `git stash` from <<03-FilesystemInteractions#temporarily-stash-some-changes-git-stash>>. When you use the `git stash` commands they do not show in the `git reflog` output. Again, for this reason once you learn about history rewriting in this chapter I'd recommend making commits and rewriting them later rather than relying too much on `git stash`.
 
 You have viewed the changing state of the `HEAD` pointer by viewing the reflog.
 
@@ -593,7 +595,7 @@ From the forced push output:
 You have rewritten the history on a remote branch.
 
 #### Discussion
-You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change in <<07-PersonalizingGit#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
+You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change later in <<07-PersonalizingGit#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
 
 Remember the reflog isn't pushed remotely so if you unintentionally rewrite history on the remote branch there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason you should be very careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that no-one else is using. Avoid doing it on shared branches and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to try and ensure you aren't rewriting commits that are on the remote branch that you don't have locally. Of course, it's still possible that someone pushes a commit just after you do a `git pull` which you overwrite (which is why `git push --force` is a dangerous operation).
 
@@ -706,5 +708,3 @@ In this chapter you hopefully learned:
 * How to use `git push origin +branchname` to force-push commits and rewrite history on remote branches
 * How to use `git filter-branch` to rewrite the entire history of one or more branches
 * How to use avoid disaster by committing regularly
-
-Now let's learn how to configure Git's settings so you can use it more efficiently.

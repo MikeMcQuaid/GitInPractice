@@ -65,7 +65,7 @@ A Git _repository_ is the local collection of all the files related to a particu
 
 Git repositories store all their data on your local machine. Making commits, viewing history, and requesting differences between commits are all local operations that don't require a network connection. This makes all these operations much faster in Git than with centralized version control systems such as Subversion.
 
-Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
+Typically you create a new repository by downloading another repository that already exists (known as _cloning_ by Git and introduced later in <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>>) but let's start by initializing an empty, new local repository.
 
 #### Problem
 You wish to create a new local Git repository in a new subdirectory named `GitInPracticeRedux.
@@ -144,7 +144,7 @@ Git has created files for:
 * "excluded files (5)" manages files which should be excluded from the repository.
 * "object information (6)" and "pack files (7)" that are used for object storage and reference.
 
-You shouldn't edit any of these files directly until you have a more advanced understanding of Git (or never at all). You'll instead modify these files and directories by interacting with the Git repository through Git's filesystem commands, first introduced in <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
+You shouldn't edit any of these files directly until you have a more advanced understanding of Git (or never at all). You'll instead modify these files and directories by interacting with the Git repository through Git's filesystem commands, introduced later in <<03-FilesystemInteractions#rename-or-move-a-file-git-mv>>.
 
 ### Creating a new commit: git add, git commit
 To do anything useful in Git we first need one or more commits in our repository.
@@ -191,7 +191,7 @@ Changes to be committed:
 
 In the status output:
 
-* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Don't worry about creating branches for now; this will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
+* "default branch output (1)" is the first line of `git status` output. It shows the current _branch_ which, by default, is always `master`. Don't worry about creating branches for now; this will be covered later in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>.
 * "first commit (2)". The "Initial commit" is shown to indicate that no commits have yet been made and the `git add` is being used to build the first commit.
 * "new file in index (3)" shows the new file that you've just added to the index (the staging area for the next commit).
 
@@ -275,7 +275,7 @@ From the second commit output:
 You've made modifications to `GitInPractice.asciidoc` and committed them.
 
 ##### Discussion
-The `--message` flag for `git commit` can be abbreviated to `-m` (all abbreviations use a single `-`). If this flag is omitted, then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
+The `--message` flag for `git commit` can be abbreviated to `-m` (all abbreviations use a single `-`). If this flag is omitted, then Git will open a text editor (specified by the `EDITOR` or `GIT_EDITOR` environment variables) to prompt you for the commit message. These variables will also be used by other commands later in the book (such as interactive rebase introduced later in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>) when requesting text input.
 
 `git commit` can be called with `--author` and `--date` flags to override the auto-set metadata in the new commit.
 
@@ -288,7 +288,7 @@ Git is a version control system built on top of an _object store_. Git creates a
 [[git-objects]]
 image::diagrams/01-Objects.png[]
 
-In <<git-objects>> you can see the main Git objects we're concerned with: _commits_, _blobs_, and _trees_. There's also a _tag_ object, but don't worry about tags until they're introduced in <<05-AdvancedBranching#create-a-tag-git-tag>>. <<typical-commit>> showed an example of a commit object, and how they store metadata and referenced file contents. The file contents reference is actually a reference to a _tree object_. A tree object stores a reference to all the _blob objects_ at a particular point in time and other tree objects if there are any subdirectories. A blob object stores the contents of a particular version of a particular single file in the Git repository.
+In <<git-objects>> you can see the main Git objects we're concerned with: _commits_, _blobs_, and _trees_. There's also a _tag_ object, but don't worry about tags until they're introduced later in  <<05-AdvancedBranching#create-a-tag-git-tag>>. <<typical-commit>> showed an example of a commit object, and how they store metadata and referenced file contents. The file contents reference is actually a reference to a _tree object_. A tree object stores a reference to all the _blob objects_ at a particular point in time and other tree objects if there are any subdirectories. A blob object stores the contents of a particular version of a particular single file in the Git repository.
 
 .Should objects being interacted with directly?
 NOTE: When using Git, you should never need to interact with objects or object files directly. The terminology of _blobs_ and _trees_ aren't used regularly in Git or in this book, but it's useful to remember what these are so you can build a conceptual understanding of what Git is doing internally. When things go well, this should be unnecessary, but when we start to delve into more advanced Git functionality or Git spits out a baffling error message, then remembering _blobs_ and _trees_ may help you work out what has happened.
@@ -303,7 +303,7 @@ image::diagrams/01-ParentCommit.png[]
 Now that we have two commits and have learned how they're stored, we can start looking at Git's history.
 
 ### Viewing history: git log, gitk, gitx
-The _history_ in Git is the complete list of all commits made since the repository was created. The history also contains the references to any _branches_, _merges_, and _tags_ made within the repository. These three will be covered in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>, <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>, and <<05-AdvancedBranching#create-a-tag-git-tag>>.
+The _history_ in Git is the complete list of all commits made since the repository was created. The history also contains the references to any _branches_, _merges_, and _tags_ made within the repository. These three will be covered later in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>, <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-git-merge>>, and later in <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 When you're using Git you'll find yourself regularly checking the history: sometimes to remind yourself of your own work, sometimes to see why other changes were made in the past, and sometimes reading new changes than have been made by others. In different situations, different pieces of data will be interesting, but all pieces of data will always be available for every commit.
 
@@ -321,7 +321,7 @@ Let's learn how to view the history of a repository.
 You wish to view the commit history (also known as log) of a repository.
 
 #### Solution
-1.  Change directory to the Git repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git log`. The output should resemble the following:
 
 .History output
@@ -397,7 +397,7 @@ Git is unusual compared to many other version control systems in that it allows 
 [[squashing]]
 image::diagrams/01-Squashing.png[]
 
-In <<squashing>> you see a fairly common use case for rewriting history with Git. If you were working on some window code all morning and wanted your coworkers to see it later (or just include it in the project), there's no need for everyone to see the mistakes you made along the way. In <<squashing>> the commits are _squashed_ together so instead of three commits and the latter two fixing mistakes from the first commit, we've squashed these together to create a single commit for the window feature. We'd only rewrite history like this if working on a separate branch that didn't have other work from other people relying on it yet, as it has changed some parent commits (so, without intervention, other people's commits may point to commits that no longer exist). Don't worry too much about squashing work for now; just remember this as a situation where you may want to rewrite history. In <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>> we'll first learn how to rewrite history and the cases where it's useful and safe to do so.
+In <<squashing>> you see a fairly common use case for rewriting history with Git. If you were working on some window code all morning and wanted your coworkers to see it later (or just include it in the project), there's no need for everyone to see the mistakes you made along the way. In <<squashing>> the commits are _squashed_ together so instead of three commits and the latter two fixing mistakes from the first commit, we've squashed these together to create a single commit for the window feature. We'd only rewrite history like this if working on a separate branch that didn't have other work from other people relying on it yet, as it has changed some parent commits (so, without intervention, other people's commits may point to commits that no longer exist). Don't worry too much about squashing work for now; just remember this as a situation where you may want to rewrite history. Much later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>> we'll first learn how to rewrite history and the cases where it's useful and safe to do so.
 
 What we're generally interested in when reading the history (and why we clean it up) is ensuring the changes between commits are relevant (for example, don't make changes only to revert then immediately in the next commit five minutes later), minimal, and readable. These changes are known as _diffs_.
 
@@ -539,7 +539,7 @@ You can also use the tool `git rev-parse` if you want to see what SHA-1 a given 
 6b437c7739d24e29c8ded318e683eca8f03a5260
 ```
 
-There are more types of refs, such as remote branches and tags, but you don't need to worry about them just now; they'll be introduced in <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
+There are more types of refs, such as remote branches and tags, but you don't need to worry about them just now; they'll be introduced in later <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> and <<05-AdvancedBranching#create-a-tag-git-tag>>.
 
 ### Summary
 In this chapter you hopefully learned:
@@ -551,5 +551,3 @@ In this chapter you hopefully learned:
 * How to view history using `git log` and `gitk`/`gitx`
 * How to see the differences between commits using `git diff`
 * How to use refs to reference commits
-
-Now let's learn how to use these concepts to interact with repositories that are not stored on your local machine.

@@ -80,7 +80,7 @@ The new repository has been created but it is empty i.e. contains no commits. If
 I've only personally used bare repositories in the past to create mirrors of existing repositories on a server I control. I didn't care about having the files checked-out into the working directory but just wanted a copy of all the repository data. Let's learn how to use Git to create an exact mirror of another repository.
 
 ### Mirror a repository: git clone --mirror
-There are times when you wish to host a new Git repository that is a mirror of another i.e. a functionally identical copy. Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that `git clone` will create a clone of the repository locally with all commits, branches and tags that are in the repository you have cloned from.
+There are times when you wish to host a new Git repository that is a mirror of another i.e. a functionally identical copy. This could be for backup, providing a local cache for increased speed or moving a repository to another location. Recall from <<02-RemoteGit#cloning-a-remote-github-repository-onto-your-local-machine-git-clone>> that `git clone` will create a clone of the repository locally with all commits, branches and tags that are in the repository you have cloned from.
 
 If you `git clone` a repository with a branch named `testing` then your new, local clone will contain a remote branch named `origin/testing`. However, what if you wanted this to not only create the `origin/testing` remote branch but also a local branch named `testing`? In this case you would use the `--mirror` flag for `git clone` which creates local branches for all remote branches it finds (or, in Git terminology, it matches all refs locally). This is useful in cases where you want to create an exact copy of another repository (i.e. a mirror) so others could clone from it and get the same results as cloning from the original repository or to keep as a backup. Recall _forks_ on GitHub from <<10-GitHubPullRequests#what-are-pull-requests-and-forks>>; `git clone --mirror` is effectively GitHub does when you _fork_ a repository: it makes a complete copy that can be modified without changing the original repository and creates all the same branches.
 
@@ -269,5 +269,3 @@ In this chapter you hopefully learned:
 * How to share a repository across the network with `git daemon`
 * How to display a web interface for a repository with `git instaweb`
 * How to provide more advanced Git hosting with GitHub, cgit and/or gitolite
-
-Now let's learn how to create a clean, easy to understand Git history.
