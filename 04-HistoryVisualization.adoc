@@ -323,7 +323,7 @@ You have shown who changed each line of a file, in which commit and when the com
 `git blame` has a `--show-email` (or `-e`) flag which can show the email address of the author instead of the name.
 
 You can use the `-w` flag to ignore whitespace changes when finding where the line changes came from. Sometimes people will fix e.g. indentation or whitespace on a line which makes no functional difference to the code in most programming languages. In these cases you want to ignore whitespace changes so you can look at the changes that actually affect program behavior.
-
+//(TP)-Is it worth mentioning that '-s' takes precedens over '-e', e.g. no email/name is shown.
 The `-s` flag hide the author name and date from in the output. This can be useful for displaying a more concise output format and instead looking up this information by passing the SHA-1 to `git show` at a later point.
 
 If the `-L` flag is specified and followed with a line range e.g. `-L 40,60` then only the lines in that range will be shown. This can be useful if you know already what subset of the file you care about and don't want to have to search through it again in the `git blame` output.
