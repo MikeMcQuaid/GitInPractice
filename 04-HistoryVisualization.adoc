@@ -69,7 +69,7 @@ You have shown a subset of commits filtered by author, date and commit message.
 * a `--reverse` argument to show the commits in ascending chronological order (i.e. the oldest commit first)
 * a `--before` (or `--until`) argument which will only show commits before the given date. This is the reverse of `--after`.
 * a `--merges` flag (or `--min-parents=2`) which will only show merge commits i.e. commits that have at least 2 parents. If you adopt a branch-heavy workflow with Git then this will be very useful in identifying what branches were merged and when.
-
+//(TP)-I don't know if it is my version of Git, but I need to press 'q' to return to the prompt after running 'git show'. Might be worth mentioning to avoid confusion and frustration.
 ##### `git show`
 `git show` is a command similar to `git log` but shows a single commit. It also defaults to showing what was changed in that commit. Remember from <<01-LocalGit#viewing-history-git-log-gitk-gitx>> that `git log` has a `--patch` (or -p) argument to show what was changed by each commit in its output.
 
