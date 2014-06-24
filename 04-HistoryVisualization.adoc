@@ -64,7 +64,7 @@ You have shown a subset of commits filtered by author, date and commit message.
 
 #### Discussion
 `git log` can take:
-
+//(TP)-A lot of the arguments can take 'aliases'. Maybe a note of why this is so.
 * a `--max-count` (or `-n`) argument to limit the number of commits that are shown in the log output. I tend to use this often when I know that I only care about something in the e.g. last 10 commits and don't want to scroll through more output than that.
 * a `--reverse` argument to show the commits in ascending chronological order (i.e. the oldest commit first)
 * a `--before` (or `--until`) argument which will only show commits before the given date. This is the reverse of `--after`.
