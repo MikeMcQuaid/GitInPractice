@@ -203,7 +203,7 @@ Let's try and create a more prose-like format for `git log`:
 ```
 
 Here we've specified the format string with `%ar %an did: %s`. In this format string:
-
+//(TP)-Should either be 'did:' below or change to 'did :' above.
 * `%ar` is the relative format date on which the commit was authored.
 * `%an` is the name of the author of the commit.
 * `did :` is text that's displayed the same in every commit and isn't a placeholder.
