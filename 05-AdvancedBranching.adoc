@@ -465,7 +465,7 @@ If you realize you've tagged the wrong commit and wish to update it after pushin
 You've seen that `git tag` can be used to identify certain commits as released versions of a project.
 
 I'm a passionate advocate of continuous integration systems and I've worked on desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
-
+//(TP)-Might be slightly off topic, but it would be very interesting to learn how Git could help you with the semantic versioning. If there is time and room it would add great value to know how to 'tag' minor vs. major releases.
 However, in some software there is an "About" screen which displays the software's version. In this case I'd like to have a version number generated that makes sense but does not rely on auto-generating a tag for each version of the software and is sortable with some information about the current version of the software. Something like `v0.1-1-g0a5e328` would be preferential to just a short revision e.g. `g0a5e328`.
 
 As the expected version number would be `v0.1` given that has just been tagged let's make another modification to the `GitInPracticeRedux` repository and generate a version number for the new, untagged commit.
