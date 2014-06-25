@@ -455,7 +455,7 @@ git tag can take various flags:
 * the `--delete` (or `-d`) flag can delete a tag. This is useful if you've created a tag with the wrong name rather than just pointing to the wrong commit.
 
 Run `git push` to push the `master` branch to `origin/master`. You may have noticed that it did not push any of the tags. After you've tagged a version and verified it is pointing to the correct commit and has the correct name then you can push it using `git push --tags`. This will push all the tags you've created in the local repository to the remote repository. These tags will then be fetched by anyone using `git fetch` on the same repository in future.
-
+//(TP)-Maybe a few word on the rational behind tags not being pushed 'automatically' by 'git push'. 
 .How can you update remote tags?
 NOTE: You've seen that by using `git tag --delete` or `git tag --force` it is possible to delete or modify tags locally. It's also possible to push these changes to the remote repository with `git push --tags --force` but this is not advised. For other users of the repository to have their tags updated they will need to delete them locally and refetch. This is intentionally cumbersome as Git intends tags to be static so does not change them locally without users explicit intervention.
 
