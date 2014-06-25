@@ -22,6 +22,7 @@ You learnt in <<02-RemoteGit#merging-an-existing-branch-into-the-current-branch-
 Recall that a merge commit is one that has multiple parents and is displayed in GitX by the converging of two or more branch "tracks". `git merge` provides various options for merging branches without creating merge commits, using various strategies or resolving conflicts with a graphical merge tool.
 
 .Why would you want to force creation of a merge commit?
+//(TP)-Can 'fast-forward merges' be explained in more detail? I do not think it is obvious what 'part' of the below signifies a 'fast-forward' merge. Is it all forced creations?
 NOTE: While fast-forward merges can sometimes be useful in some Git workflows you will want to explicitly signify the merging of a branch, even if it was not necessary to do so. This explicit indication of a merge through the creation of a merge commit can show all the metadata present in any other commit e.g. who performed the merge, when and why. In software projects merging a new feature will usually be done by merging a branch and it is useful for regression testing and history visualization for this feature merge to be more explicit.
 
 Let's start by setting up how to perform a merge that could be made without creating a merge commit: a fast-forward merge. Recall a fast-forward merge means that the incoming branch has the current branch as an ancestor. This means commits have been made on the incoming branch but none have been made on the on the current branch since the incoming branch from it.
