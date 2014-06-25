@@ -255,7 +255,7 @@ It is a truth universally acknowledged, that a single person in
 possession of good source code, must be in want of a version control
 system.
 ```
-
+//(TP)-Maybe a comment about not having to re-run the actual merge-command? One might think something is missing otherwise.
 Now the merge conflict has been resolved the merge conflict can be marked as resolved with `git add` and then the merge commit committed.
 
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
