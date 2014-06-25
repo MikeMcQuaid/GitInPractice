@@ -473,7 +473,7 @@ As the expected version number would be `v0.1` given that has just been tagged l
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Add some content to the `00-Preface.asciidoc` file.
 3.  Run `git commit --message 'Add preface text.' 00-Preface.asciidoc`. The output should resemble:
-
+//(TP)-If people have begun to use the short '-m' for message, the version number will not contain the hash. Maybe a comment about this?
 .Preface commit output
 ```
 # git commit --message 'Add preface text.
