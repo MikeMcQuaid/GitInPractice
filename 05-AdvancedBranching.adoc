@@ -516,7 +516,7 @@ If you wish to use a longer or shorter SHA-1 ref you can configure this using th
 Sometimes you may wish to include only a single commit from a branch onto the current branch rather than merging the entire branch. For example you may want to back-port a single bug fix commit from a development branch into a stable release branch. You could do this by manually creating the same change on that branch but a better way would be using the tool that Git provides: `git cherry-pick`.
 
 Let's create a new branch based off the `v0.1` tag that we'll call `v0.1-release` so we have something we can cherry-pick.
-
+//(TP)-Don't you have to do a 'git add 02-AdvancedGitInPractice.asciidoc' before the commit?
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout -b v0.1-release v0.1`
 3.  Add some content to the `02-AdvancedGitInPractice.asciidoc` file.
