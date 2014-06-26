@@ -267,7 +267,7 @@ It's easier to remember `ultimate-log` than the various flags but it's still a b
   "log --graph --oneline --decorate"
 
 # grep --before=1 ultimate ~/.gitconfig
-
+//(TP)-I must be doing something wrong, because I get 'Expansion of alias 'l' failed; 'ultimate-log' is not a git command' when I try to run 'git l' after git config --global alias.l ultimate-log'. 'git ultimate-log' works fine.
 [alias]
   ultimate-log = log --graph --oneline --decorate
   l = ultimate-log
