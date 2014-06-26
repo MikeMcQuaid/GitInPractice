@@ -311,7 +311,7 @@ As you have noticed throughout this book it's common to create and change branch
 
 #### Problem
 You wish to add the current Git branch to your Bash or ZSH terminal prompt.
-
+//(TP)-If you don't know what terminal you are using, maybe a few words on how to find out.
 #### Solution
 First, add the following function to your `~/.bashrc` file if you are using Bash or `~/.zshrc` file if you are using ZSH:
 ```bash
