@@ -92,7 +92,7 @@ You have set your Git user email in your repository Git configuration.
 
 #### Discussion
 If you used `--global` you'd instead see the value that was set in the global configuration file. If you'd omitted `--local` and `--global` then Git uses the same default priority as it does when reading configuration settings for its own use. The priority for deciding which configuration file to read from is:
-
+//(TP)-It possible, please consider to add something about how to find the "active" configuration value. Let's say you try to do something and get an unexpected result because the configuration value had been "overwritten". How do you determine where to look for the "incorrect" value? Sure, you could always set is locally, but maybe you don't want to do this.
 1.  the argument following `--file` (if it was provided)
 2.  the local configuration file (`.git/config`)
 3.  the global configuration file (`~/.gitconfig`)
