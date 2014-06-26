@@ -322,7 +322,7 @@ You wish to view the commit history (also known as log) of a repository.
 
 #### Solution
 1.  Change directory to the Git repository, such as `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git log`. The output should resemble the following:
+2.  Run `git log` and, if necessary, `q` to exit. The output should resemble the following:
 
 .History output
 ```

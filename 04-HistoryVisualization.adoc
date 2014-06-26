@@ -22,7 +22,7 @@ You wish to list the commits authored by Mike McQuaid, after 10th November 2013 
 
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'`. The output should resemble:
+2.  Run `git log --author "Mike McQuaid" --after "Nov 10 2013" --grep 'file\.'` and, if necessary, `q` to exit. The output should resemble:
 
 .Filtered log output
 ```
@@ -64,12 +64,12 @@ You have shown a subset of commits filtered by author, date and commit message.
 
 #### Discussion
 `git log` can take:
-//(TP)-A lot of the arguments can take 'aliases'. Maybe a note of why this is so.
+
 * a `--max-count` (or `-n`) argument to limit the number of commits that are shown in the log output. I tend to use this often when I know that I only care about something in the e.g. last 10 commits and don't want to scroll through more output than that.
 * a `--reverse` argument to show the commits in ascending chronological order (i.e. the oldest commit first)
 * a `--before` (or `--until`) argument which will only show commits before the given date. This is the reverse of `--after`.
 * a `--merges` flag (or `--min-parents=2`) which will only show merge commits i.e. commits that have at least 2 parents. If you adopt a branch-heavy workflow with Git then this will be very useful in identifying what branches were merged and when.
-//(TP)-I don't know if it is my version of Git, but I need to press 'q' to return to the prompt after running 'git show'. Might be worth mentioning to avoid confusion and frustration.
+
 ##### `git show`
 `git show` is a command similar to `git log` but shows a single commit. It also defaults to showing what was changed in that commit. Remember from <<01-LocalGit#viewing-history-git-log-gitk-gitx>> that `git log` has a `--patch` (or -p) argument to show what was changed by each commit in its output.
 
@@ -99,7 +99,7 @@ From the show commit output:
 
 * "commit information (1)" shows all the same information expected in `git log output` but only ever shows a single commit.
 * "commit diff (2)" shows the changes that were made in that commit. It's the equivalent of typing `git diff HEAD^^..HEAD^` i.e. the difference between the previous commit and the one before it.
-//(TP)-Same comment as for 'git show'
+
 The `git show HEAD^` output is equivalent to `git log --max-count=1 --patch HEAD^`.
 
 ### List commits with different formatting
@@ -117,7 +117,7 @@ You wish to list the last two commits in an email format with the eldest display
 
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git log --format=email --reverse --max-count 2'`. The output should resemble:
+2.  Run `git log --format=email --reverse --max-count 2'` and, if necessary, `q` to exit. The output should resemble:
 
 .Email formatted log output
 [.long-annotations]
@@ -203,10 +203,10 @@ Let's try and create a more prose-like format for `git log`:
 ```
 
 Here we've specified the format string with `%ar %an did: %s`. In this format string:
-//(TP)-Should either be 'did:' below or change to 'did :' above.
+
 * `%ar` is the relative format date on which the commit was authored.
 * `%an` is the name of the author of the commit.
-* `did :` is text that's displayed the same in every commit and isn't a placeholder.
+* `did:` is text that's displayed the same in every commit and isn't a placeholder.
 * `%s` is the commit message subject i.e. first line.
 
 You can see the complete list of these placeholders in `git log --help`. There are too many for me to detail them all in this book. The large number of placeholders should mean it you can customize `git log` output into almost any format.
@@ -323,8 +323,8 @@ You have shown who changed each line of a file, in which commit and when the com
 `git blame` has a `--show-email` (or `-e`) flag which can show the email address of the author instead of the name.
 
 You can use the `-w` flag to ignore whitespace changes when finding where the line changes came from. Sometimes people will fix e.g. indentation or whitespace on a line which makes no functional difference to the code in most programming languages. In these cases you want to ignore whitespace changes so you can look at the changes that actually affect program behavior.
-//(TP)-Is it worth mentioning that '-s' takes precedens over '-e', e.g. no email/name is shown.
-The `-s` flag hide the author name and date from in the output. This can be useful for displaying a more concise output format and instead looking up this information by passing the SHA-1 to `git show` at a later point.
+
+The `-s` flag hide the author name and date from in the output (and takes precedence over `--show-email`/`-e`). This can be useful for displaying a more concise output format and instead looking up this information by passing the SHA-1 to `git show` at a later point.
 
 If the `-L` flag is specified and followed with a line range e.g. `-L 40,60` then only the lines in that range will be shown. This can be useful if you know already what subset of the file you care about and don't want to have to search through it again in the `git blame` output.
 

@@ -102,8 +102,7 @@ Certain strategies (such as recursive) can also take options by passing the `--s
 Some useful merge strategies are:
 
 * `recursive`: this strategy can merge one branch into another and automatically detect renames. This strategy is the default if you try and merge a single branch into another.
-//(TP)-It seems like you are repeating yourself concerning not being able to do manual resolution of merge conflicts.
-* `octopus`: this strategy can merge multiple branches at once but will refuse to allow manual resolution of merge conflicts. This strategy is the default if you try and merge two or more branches into another by running e.g. `git merge branch1 branch2 branch3`. You will never set it explicitly but it's worth remembering that you cannot manually resolve merge conflicts if you merge multiple branches at once. In my experience this means that it's worth always merging branches one at a time.
+* `octopus`: this strategy can merge multiple branches at once but fails on a merge conflict. This strategy is the default if you try and merge two or more branches into another by running e.g. `git merge branch1 branch2 branch3`. You will never set it explicitly but it's worth remembering that you cannot manually resolve merge conflicts if you merge multiple branches at once. In my experience this means that it's worth always merging branches one at a time.
 * `ours`: this strategy performs a normal merge but ignores all the changes from the incoming branch. This means the resulting tree is the same as it was before the merge. This can be useful when you wish to merge a branch and indicate this in the history without wanting to actually including any of its changes. For example, you could use this to merge the results of a failed experiment and then delete the experimental branch afterwards. In this case the experiment would remain in the history without being in the current code.
 * `subtree`: this strategy is a modified version of the recursive strategy that will detect if the tree structures are at different levels and adjust them if needed. For example, if one branch had all the files in the directory `A/B/C` and the other had all the same files in the directory `A/B` then the subtree strategy would handle this case; `A/B/C/README.md` and `A/B/README.md` could be merged despite their different tree locations.
 
@@ -255,8 +254,7 @@ It is a truth universally acknowledged, that a single person in
 possession of good source code, must be in want of a version control
 system.
 ```
-//(TP)-Maybe a comment about not having to re-run the actual merge-command? One might think something is missing otherwise.
-Now the merge conflict has been resolved the merge conflict can be marked as resolved with `git add` and then the merge commit committed.
+Now the merge conflict has been resolved the merge conflict can be marked as resolved with `git add` and then the merge commit committed. You do not need to run `git merge` again; you're still in the middle of a merge operation which concludes when you `git commit`.
 
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git add 01-IntroducingGitInPractice.asciidoc`.
@@ -455,17 +453,17 @@ git tag can take various flags:
 * the `--delete` (or `-d`) flag can delete a tag. This is useful if you've created a tag with the wrong name rather than just pointing to the wrong commit.
 
 Run `git push` to push the `master` branch to `origin/master`. You may have noticed that it did not push any of the tags. After you've tagged a version and verified it is pointing to the correct commit and has the correct name then you can push it using `git push --tags`. This will push all the tags you've created in the local repository to the remote repository. These tags will then be fetched by anyone using `git fetch` on the same repository in future.
-//(TP)-Maybe a few word on the rational behind tags not being pushed 'automatically' by 'git push'. 
+
 .How can you update remote tags?
 NOTE: You've seen that by using `git tag --delete` or `git tag --force` it is possible to delete or modify tags locally. It's also possible to push these changes to the remote repository with `git push --tags --force` but this is not advised. For other users of the repository to have their tags updated they will need to delete them locally and refetch. This is intentionally cumbersome as Git intends tags to be static so does not change them locally without users explicit intervention.
 
-If you realize you've tagged the wrong commit and wish to update it after pushing it's generally a better idea to just tag a new version and push that instead.
+If you realize you've tagged the wrong commit and wish to update it after pushing it's generally a better idea to just tag a new version and push that instead. This complexity is why `git push` requires the `--tags` argument to push tags.
 
 ### Generate a version number based on previous tags: git describe
 You've seen that `git tag` can be used to identify certain commits as released versions of a project.
 
 I'm a passionate advocate of continuous integration systems and I've worked on desktop software projects with semantic versioning (e.g. `1.0.0`). On these projects I've setup continuous integration systems to create installers of the software on every commit to the `master` branch.
-//(TP)-Might be slightly off topic, but it would be very interesting to learn how Git could help you with the semantic versioning. If there is time and room it would add great value to know how to 'tag' minor vs. major releases.
+
 However, in some software there is an "About" screen which displays the software's version. In this case I'd like to have a version number generated that makes sense but does not rely on auto-generating a tag for each version of the software and is sortable with some information about the current version of the software. Something like `v0.1-1-g0a5e328` would be preferential to just a short revision e.g. `g0a5e328`.
 
 As the expected version number would be `v0.1` given that has just been tagged let's make another modification to the `GitInPracticeRedux` repository and generate a version number for the new, untagged commit.
@@ -473,7 +471,7 @@ As the expected version number would be `v0.1` given that has just been tagged l
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Add some content to the `00-Preface.asciidoc` file.
 3.  Run `git commit --message 'Add preface text.' 00-Preface.asciidoc`. The output should resemble:
-//(TP)-If people have begun to use the short '-m' for message, the version number will not contain the hash. Maybe a comment about this?
+
 .Preface commit output
 ```
 # git commit --message 'Add preface text.
@@ -503,10 +501,12 @@ v0.1-1-g0a5e328 <1>
 * `1` indicates that there has been one commit made since the most recent tag (`v0.1`) on the current branch.
 * `g0a5e328` is the current commit SHA-1 prepended with a `g` (which stands for `git`).
 
+If you had run `git describe --tags` when on the previous commit (which was the `v0.1` tag) it would have outputted just `v0.1`.
+
 You have generated a version number based on the existing tags in the repository.
 
 #### Discussion
-If `git describe` is passed a ref then it will generate the version number for that particular commit. For example, `git describe --tags v0.1` will output `v0.1`.
+If `git describe` is passed a ref then it will generate the version number for that particular commit. For example, `git describe --tags v0.1` will output `v0.1` and `git describe --tags 0a5e328` will output `v0.1-1-g0a5e328.`
 
 If you wish to generate the long-form versions for tagged commits you can pass the `--long` flag. For example, `git describe --tags --long v0.1` will output `v0.1-0-g725c33a`.
 
@@ -516,7 +516,7 @@ If you wish to use a longer or shorter SHA-1 ref you can configure this using th
 Sometimes you may wish to include only a single commit from a branch onto the current branch rather than merging the entire branch. For example you may want to back-port a single bug fix commit from a development branch into a stable release branch. You could do this by manually creating the same change on that branch but a better way would be using the tool that Git provides: `git cherry-pick`.
 
 Let's create a new branch based off the `v0.1` tag that we'll call `v0.1-release` so we have something we can cherry-pick.
-//(TP)-Don't you have to do a 'git add 02-AdvancedGitInPractice.asciidoc' before the commit?
+
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout -b v0.1-release v0.1`
 3.  Add some content to the `02-AdvancedGitInPractice.asciidoc` file.

@@ -340,8 +340,8 @@ From the rebase conflict output:
 ### Rebase commits interactively: git rebase --interactive
 You may have thought to yourself given the various reset, cherry-pick and commit skip options that we've seen in this chapter and the last that it would be nice if you could somehow combine them to alter the history of a branch into the form you would like before pushing it elsewhere. Git provides a useful tool for this use-case: the `--interactive` (or `-i`) flag for rebase.
 
-For this example we want to see how empty commits are handled. Normally you'd never want to do this; it's just to demonstrate how rebase handles them. This can happen after resolving conflicts so that a commit no longer has any changes. To create an empty commit on the inspiration branch:
-//(TP)-Would you ever create an empty commit manutally? (except to explain something, of course). Maybe an example or explanation?
+For this example we want to see how empty commits are handled. Normally you'd rarely ever to do this; it's just to demonstrate how rebase handles them. This can happen after resolving conflicts so that a commit no longer has any changes. You might do this manually if you wanted to trigger an event in a system that monitors your Git repository and triggers events on each new commit but without having to change any files. To create an empty commit on the inspiration branch:
+
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
 3.  Run `git commit --allow-empty --message "Empty commit"` to create an empty commit. The output should resemble:
@@ -523,10 +523,10 @@ From the rebase pull output:
 [[gitx-pull-rebase-after]]
 image::screenshots/06-GitXPullRebaseAfter.png[]
 
-<<gitx-pull-rebase-after>> shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`).
+<<gitx-pull-rebase-after>> shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`). This works identically if there are multiple commits that need rebased.
 
 You have pulled with a rebase. Now `git push` to send these commits upstream.
-//(TP)-Does it make any difference if you have multiple 'local' commits before running 'git pull --rebase'? If so an explanation might be in order.
+
 #### Discussion
 `git pull --rebase` is sometimes recommended as a sensible default to use instead of `git pull`. You rarely will want to create a merge commit on a `git pull` operation so using `git pull --rebase` guarantees that this will not happen. This means when you do push this branch it will have a simpler, cleaner history. Once you understand how to rebase and solve conflicts I would recommend using `git pull --rebase` by default.
 

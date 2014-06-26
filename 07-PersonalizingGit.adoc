@@ -92,7 +92,7 @@ You have set your Git user email in your repository Git configuration.
 
 #### Discussion
 If you used `--global` you'd instead see the value that was set in the global configuration file. If you'd omitted `--local` and `--global` then Git uses the same default priority as it does when reading configuration settings for its own use. The priority for deciding which configuration file to read from is:
-//(TP)-It possible, please consider to add something about how to find the "active" configuration value. Let's say you try to do something and get an unexpected result because the configuration value had been "overwritten". How do you determine where to look for the "incorrect" value? Sure, you could always set is locally, but maybe you don't want to do this.
+
 1.  the argument following `--file` (if it was provided)
 2.  the local configuration file (`.git/config`)
 3.  the global configuration file (`~/.gitconfig`)
@@ -132,20 +132,20 @@ You can see various default options have been set based on the current system (e
 In this section I will show you how to set some of the most useful configuration settings for making Git easier to use. However, Git has a huge number of configuration settings; it would be a significant proportion of this book to try and detail them all. I would recommend reading through `git config --help` at some point and considering which other settings you may wish to change. Additionally, in <<mike-gitconfig>> you can see my personal, commented Git configuration if you are interested in what I use.
 
 #### Colored output in Git
-Colored output was enabled by default in Git 1.8.4. As a result, if your installed version of Git is 1.8.4 or above you can can skip this section.
+Colored output was enabled by default in Git 1.8.4. As a result, if your installed version of Git is 1.8.4 or above (check by running `git --version`) you can can skip this section.
 
 Git's output does not use colors by default on versions below 1.8.4. To enable colored Git output you can run:
 
 ```
 # git config --global color.ui auto
 ```
-//(TP)-May have been explained in a previous chapter, but worth repeating: 'git version' to determine the version of your Git installation.
+
 This will mean that Git will, if supported by your terminal and not writing to a file Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
 
 Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings (which are specific to the terminal software you are using).
 
 #### Git 2.0's push defaults
-Git 2.0 (which was released 28 May 2014) defaulted to a new push strategy (the `simple` push strategy). This means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`). Also, with the `simple` strategy Git refuses to push if the remote branch name is different to the local branch name unless you specify it e.g. with `git push origin remotebranchname`. As this is the new behavior it's a good idea to enable it in older versions of Git. If your installed version of Git is 2.0 or above you can can skip this section.
+Git 2.0 (which was released 28 May 2014) defaulted to a new push strategy (the `simple` push strategy). This means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`). Also, with the `simple` strategy Git refuses to push if the remote branch name is different to the local branch name unless you specify it e.g. with `git push origin remotebranchname`. As this is the new behavior it's a good idea to enable it in older versions of Git. If your installed version of Git is 2.0 or above (check by running `git --version`) you can can skip this section.
 
 Git versions below 2.0 uses the `matching` strategy for their default push behavior. This means that when you run `git push` without arguments Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches then when you run `git push` any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch I would expect `git push` to only affect the branch that I am on. Let's switch to the `simple` strategy instead which does this by running:
 ```
@@ -261,17 +261,19 @@ You can verify this has worked by viewing the relevant section of the `~/.gitcon
 You have created an alias named `ultimate-log`. Now if you run `git ultimate-log` it will be the equivalent of running `git log --graph --oneline --decorate`. Any arguments you follow `git ultimate-log` will be treated the same as arguments following `git log --graph --oneline --decorate`.
 
 #### Discussion
-It's easier to remember `ultimate-log` than the various flags but it's still a bit long-winded to type. If you use `git ultimate-log` all the time you may want to use it more regularly than `git log` so want it to be fewer characters to type. Aliases can be of any length so you could create another alias to make a shorter value using `git config --global alias.l ultimate-log`:
+It's easier to remember `ultimate-log` than the various flags but it's still a bit long-winded to type. If you use `git ultimate-log` all the time you may want to use it more regularly than `git log` so want it to be fewer characters to type. Aliases can be of any length so you could create another alias to make a shorter value using `git config --global alias.l '!git ultimate-log'`:
 ```
-# git config --global alias.ultimate-log
+# git config --global alias.l '!git ultimate-log'
   "log --graph --oneline --decorate"
 
 # grep --before=1 ultimate ~/.gitconfig
-//(TP)-I must be doing something wrong, because I get 'Expansion of alias 'l' failed; 'ultimate-log' is not a git command' when I try to run 'git l' after git config --global alias.l ultimate-log'. 'git ultimate-log' works fine.
+
 [alias]
   ultimate-log = log --graph --oneline --decorate
-  l = ultimate-log
+  l = !git ultimate-log
 ```
+
+Note the use of single quotes when setting the alias. These are required in this case as otherwise the Unix shell may not write the `!` and you will see an error like: `Expansion of alias 'l' failed; 'ultimate-log' is not a git command`.
 
 Now you can use `git l` do run `git ultimate-log` which will in turn run `git log --graph --oneline --decorate`. You may wonder why we didn't just set `git l` to be the ultimate log directly rather than passing through another command? I always prefer to do this as a way of providing making the `.gitconfig` file easier to read and follow.
 
@@ -284,7 +286,7 @@ As well as adding a longer version of the command you may wish to add comments i
   pretty-one-line-log = log --graph --oneline --decorate
 
   ## Shortened 'New' Commands
-  l = pretty-one-line-log
+  l = !git pretty-one-line-log
 ```
 
 Using this format of comments, longer commands and shortened ones helps make your `.gitconfig` file easier to follow. When you or someone else looks back on the changes you made the comments and more verbose commands make it more obvious what your reasons were for adding each section.
@@ -301,7 +303,7 @@ This can be useful in doing something similar to `git pull --rebase` but doing a
 Some people will use Git on multiple machines. You may use it on both a desktop and laptop computer. It's annoying to have your ideal configuration be different on each machine so you may wish to keep your `~/.gitconfig` settings in sync so they are the same on every machine.
 
 A common solution for this is to create a _dotfiles_ repository on GitHub. This involves creating a Git repository, adding all your Git global configuration files such as `~/.gitconfig` and `~/.gitignore`, committing, pushing and share these files between machines as you would any other Git repository. This can be good practice for learning how to use Git. You used dotfiles repositories for sharing many other application configuration files (e.g. such as a `.bashrc` file to configure the Bash shell).
-//(TP)-The link to the dotfiles does not work. 404 error.
+
 You may be interested in my dotfiles repository on GitHub (https://github.com/mikemcquaid/dotfiles). It contains various configuration files including my `.gitconfig` and `.gitignore` which are well documented (and included in this book in <<mike-gitconfig>>). I've also created a simple script named `install-dotfiles.sh`. After cloning my dotfiles repository to somewhere in my `$HOME` I can run `install-dotfiles.sh` to symlink or copy all the dotfiles files into their correct locations. This means that I can easily get and install all my dotfiles on any machine that has Git installed. This is useful for me as I use the same dotfiles across my multiple computers, virtual machines and servers.
 
 GitHub also provides a dotfiles page with some notable dotfiles repositories and discussion of why they are useful at http://dotfiles.github.io.
@@ -311,9 +313,11 @@ As you have noticed throughout this book it's common to create and change branch
 
 #### Problem
 You wish to add the current Git branch to your Bash or ZSH terminal prompt.
-//(TP)-If you don't know what terminal you are using, maybe a few words on how to find out.
+
 #### Solution
-First, add the following function to your `~/.bashrc` file if you are using Bash or `~/.zshrc` file if you are using ZSH:
+First, work out what shell you are using by running `basename $SHELL`. This should output either `bash` or `zsh`. If it outputs something else then you may need to modify the instructions (which, I'm afraid, is beyond the scope of this book).
+
+Add the following function to your `~/.bashrc` file if you are using Bash or `~/.zshrc` file if you are using ZSH:
 ```bash
 git_branch() {
   GIT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null) || return
