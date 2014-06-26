@@ -341,7 +341,7 @@ From the rebase conflict output:
 You may have thought to yourself given the various reset, cherry-pick and commit skip options that we've seen in this chapter and the last that it would be nice if you could somehow combine them to alter the history of a branch into the form you would like before pushing it elsewhere. Git provides a useful tool for this use-case: the `--interactive` (or `-i`) flag for rebase.
 
 For this example we want to see how empty commits are handled. Normally you'd never want to do this; it's just to demonstrate how rebase handles them. This can happen after resolving conflicts so that a commit no longer has any changes. To create an empty commit on the inspiration branch:
-
+//(TP)-Would you ever create an empty commit manutally? (except to explain something, of course). Maybe an example or explanation?
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
 3.  Run `git commit --allow-empty --message "Empty commit"` to create an empty commit. The output should resemble:
