@@ -139,7 +139,7 @@ Git's output does not use colors by default on versions below 1.8.4. To enable c
 ```
 # git config --global color.ui auto
 ```
-
+//(TP)-May have been explained in a previous chapter, but worth repeating: how do you determine the version of your Git installation?
 This will mean that Git will, if supported by your terminal and not writing to a file Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
 
 Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings (which are specific to the terminal software you are using).
