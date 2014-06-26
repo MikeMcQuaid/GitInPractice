@@ -301,7 +301,7 @@ This can be useful in doing something similar to `git pull --rebase` but doing a
 Some people will use Git on multiple machines. You may use it on both a desktop and laptop computer. It's annoying to have your ideal configuration be different on each machine so you may wish to keep your `~/.gitconfig` settings in sync so they are the same on every machine.
 
 A common solution for this is to create a _dotfiles_ repository on GitHub. This involves creating a Git repository, adding all your Git global configuration files such as `~/.gitconfig` and `~/.gitignore`, committing, pushing and share these files between machines as you would any other Git repository. This can be good practice for learning how to use Git. You used dotfiles repositories for sharing many other application configuration files (e.g. such as a `.bashrc` file to configure the Bash shell).
-
+//(TP)-The link to the dotfiles does not work. 404 error.
 You may be interested in my dotfiles repository on GitHub (https://github.com/mikemcquaid/dotfiles). It contains various configuration files including my `.gitconfig` and `.gitignore` which are well documented (and included in this book in <<mike-gitconfig>>). I've also created a simple script named `install-dotfiles.sh`. After cloning my dotfiles repository to somewhere in my `$HOME` I can run `install-dotfiles.sh` to symlink or copy all the dotfiles files into their correct locations. This means that I can easily get and install all my dotfiles on any machine that has Git installed. This is useful for me as I use the same dotfiles across my multiple computers, virtual machines and servers.
 
 GitHub also provides a dotfiles page with some notable dotfiles repositories and discussion of why they are useful at http://dotfiles.github.io.
