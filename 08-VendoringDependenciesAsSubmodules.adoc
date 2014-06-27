@@ -95,7 +95,7 @@ Now that we've created a new submodule repository let's add it as a submodule to
 
 #### Problem
 You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of the `GitInPracticeRedux` repository.
-
+//(TP)-Is the submodul added to all branches or only the current one?
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git submodule add https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git submodule`.
