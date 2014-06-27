@@ -24,7 +24,7 @@ Adopting 2) means that you always have the various dependencies available but ca
 As Git stores the complete history of a repository and downloads it all when cloned, too many large dependencies can result in a repository that takes a long time to clone and is unclear about any other repositories whose source code was used to populate some of this repository. This makes updating versions of e.g. external libraries a painful, manual process. It is for this reason that submodules were created.
 
 A Git repository can contain _submodules_. Submodules allow you to reference other Git repositories at specific revisions. This is most commonly used to reference external Git repositories that are dependencies for software projects. In the C++ application example instead of documenting the location or copying the source code of the external JSON library into the application's Git repository you could use submodules to reference the external JSON library's Git repository.
-
+//(TP)-Submodules seems very similar in functionality to nuget-packages for Visual Studio. Would it make sense to compare the two or is that to specific to Windows/VS?
 Git's submodules store the reference to a specific SHA-1 reference in another remote Git repository and store these in subdirectories of the current repository. All that is actually committed in the current repository are some small pieces of metadata which the `git submodule` command uses to clone, update and interact with the various submodules inside a Git repository.
 
 .What is `git subtree`?
