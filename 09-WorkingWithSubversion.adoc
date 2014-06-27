@@ -217,7 +217,7 @@ In some cases you may not want people to know you are using `git svn` or not wan
 
 ##### Updating a Subversion repository
 To update a Subversion repository you need to use the `git svn` command; you cannot use `git fetch` or `git pull` as `git svn` has not set up any remote Git repository references for you as it does not use the same transport mechanism.
-
+//(TP)-Would you use (traditional)'git' commands on the local svn repository and only 'git svn' commands when pushing changes up remote or would you always uge 'git svn' on an "imported" svn repository?
 .Git SVN add/commit/dcommit/rebase/checkout cycle
 [[gitsvn-workflow]]
 image::diagrams/09-GitSvnWorkflow.png[]
