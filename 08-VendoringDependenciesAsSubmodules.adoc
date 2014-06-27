@@ -341,3 +341,4 @@ In this chapter you hopefully learned:
 * How to use `git submodule status` to view all submodules and their current revision
 * How to use `git submodule update --init` to initialize all submodules, fetch any changes and update them to the latest revision
 * How to use `git submodule foreach` and its variables to run commands and print metadata for every submodule in a repository
+//(TP)-Thinking of the previous chapter on Personalizing Git, especially the aliasing, it would be great with some examples here. If there are sequences relating to submodules you always do, consider showing the alias or linking of command.
