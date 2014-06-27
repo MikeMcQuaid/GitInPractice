@@ -24,7 +24,7 @@ Adopting 2) means that you always have the various dependencies available but ca
 As Git stores the complete history of a repository and downloads it all when cloned, too many large dependencies can result in a repository that takes a long time to clone and is unclear about any other repositories whose source code was used to populate some of this repository. This makes updating versions of e.g. external libraries a painful, manual process. It is for this reason that submodules were created.
 
 A Git repository can contain _submodules_. Submodules allow you to reference other Git repositories at specific revisions. This is most commonly used to reference external Git repositories that are dependencies for software projects. In the C++ application example instead of documenting the location or copying the source code of the external JSON library into the application's Git repository you could use submodules to reference the external JSON library's Git repository.
-//(TP)-Submodules seems very similar in functionality to nuget-packages for Visual Studio. Would it make sense to compare the two or is that to specific to Windows/VS?
+
 Git's submodules store the reference to a specific SHA-1 reference in another remote Git repository and store these in subdirectories of the current repository. All that is actually committed in the current repository are some small pieces of metadata which the `git submodule` command uses to clone, update and interact with the various submodules inside a Git repository.
 
 .What is `git subtree`?
@@ -94,12 +94,13 @@ Now that the submodule repository has been created and pushed to GitHub it can  
 Now that we've created a new submodule repository let's add it as a submodule to the existing repository.
 
 #### Problem
-You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of the `GitInPracticeRedux` repository.
-//(TP)-Is the submodul added to all branches or only the current one?
+You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of the `GitInPracticeRedux` repository in the `master` branch.
+
 #### Solution
 1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git submodule add https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git submodule`.
-3.  Commit the new submodule changes to the repository by running `git commit --message "Add submodule."`
+2.  Run `git checkout master`
+3.  Run `git submodule add https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git submodule`.
+4.  Commit the new submodule changes to the repository by running `git commit --message "Add submodule."`
 
 The output of all these commands should resemble:
 
@@ -341,4 +342,3 @@ In this chapter you hopefully learned:
 * How to use `git submodule status` to view all submodules and their current revision
 * How to use `git submodule update --init` to initialize all submodules, fetch any changes and update them to the latest revision
 * How to use `git submodule foreach` and its variables to run commands and print metadata for every submodule in a repository
-//(TP)-Thinking of the previous chapter on Personalizing Git, especially the aliasing, it would be great with some examples here. If there are sequences relating to submodules you always do, consider showing the alias or linking of command.
