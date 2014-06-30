@@ -46,7 +46,7 @@ _italics_, ~~strikethrough~~, `monospace` or lists bulleted with a `*`
 or numbered with e.g. `1.`. You shouldn't go overboard with this but it
 can add some useful, basic formatting.
 ```
-
+//(TP)-An example of the above would be nice here.
 ### Building a commit from parts of files: git add --patch
 We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
