@@ -1,7 +1,6 @@
 ## Advanced Branching
 ifdef::env-github[:outfilesuffix: .adoc]
 
-// BEN: usual Manning style is just "In this c
 You've already learned the basics of branching in <<02-RemoteGit#creating-a-new-local-branch-from-the-current-branch-git-branch>>. In this chapter you will learn about more advanced branching techniques by learning the following topics:
 
 * How to configure `git merge` to behave differently
@@ -26,8 +25,7 @@ Recall that a merge commit is one that has multiple parents and is displayed in 
 
 NOTE: Though fast-forward merges can sometimes be useful in some Git workflows, you'll want to explicitly signify the merging of a branch, even if it wasn't necessary to do so. This explicit indication of a merge through the creation of a merge commit can show all the metadata present in any other commit, such as who performed the merge, when, and why. In software projects, merging a new feature will usually be done by merging a branch, and it's useful for regression testing and history visualization for this feature merge to be more explicit.
 
-Let's start by setting up how to perform a merge that could be made without creating a merge commit: a fast-forward merge. Recall that a _fast-forward merge_ means that the incoming branch has the current branch as an ancestor. This means commits have been made on the incoming branch, but none have been made on the current branch since the incoming branch from it.
-// BEN: seems like you're missing a verb above: "since ___ the current branch"
+Let's start by setting up how to perform a merge that could be made without creating a merge commit: a fast-forward merge. Recall that a _fast-forward merge_ means that the incoming branch has the current branch as an ancestor. This means commits have been made on the incoming branch, but none have been made on the current branch since the incoming branch was branched from it.
 
 We're creating a branch that can have a fast-forward merge. This is so when we create a merge commit, we know that it was because it was specifically requested, and not because it was required.
 
@@ -321,12 +319,12 @@ From the merge commit output:
   manually. Sometimes these conflicts may be resolved incorrectly so this list
   is useful in spotting which files required resolution so they can be reviewed
   by other people later.
-* "incoming delete (3)" shows a line that was deleted in the incoming 
+* "incoming delete (3)" shows a line that was deleted in the incoming
   (`separate-files`) branch's commit(s). The `-` is in the first column as a
   result.
-* "current delete (4)" shows a line that was deleted in the current 
+* "current delete (4)" shows a line that was deleted in the current
   (`master`) branch's commit(s). The `-` is in the second column as a result.
-* "current insert (5)" shows a line that was inserted in the current 
+* "current insert (5)" shows a line that was inserted in the current
   (`master`) branch's commit(s). The `+` is in the second column as a result.
 
 In this diff there are two columns (rather than the usual one) allocated for `-` and `+` markers. This is because where a normal diff is just indicating insertions and deletions to a file, this _merge diff_ is showing insertions and deletions to a file and the branch they were inserted or removed in. For example, in the preceding listing, the first column indicates a line inserted or deleted from the incoming branch (`separate-files`) and the second column indicates a line inserted or deleted from the current branch (`master`). Don't worry about identifying which column is which; it's not very important but just provides more context for changes.

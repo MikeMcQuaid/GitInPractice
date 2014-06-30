@@ -173,8 +173,7 @@ CommitDate: Fri Jan 10 08:19:50 2014 +0000
 ...
 ```
 
-// BEN: second sentence below, "This was used as" -- do you mean "this was used because" OR "this was used in a similar way to"?
-This snippet shows a single commit from Homebrew, an open-source project accessible at https://github.com/Homebrew/homebrew. This was used as in the `GitInPracticeRedux` repository all the previous commits will have the same author and committer, author date, and commit date.
+This snippet shows a single commit from Homebrew, an open-source project accessible at https://github.com/Homebrew/homebrew. This was used because in the `GitInPracticeRedux` repository all the previous commits will have the same author and committer, author date, and commit date.
 
 .Why do commits have an author and committer?
 NOTE: This fuller commit output shows that for a commit, there are two recorded actions: the original author of the commit and the committer (the person who added this commit to the repository). These two attributes are both set at `git commit` time. If they're both set at once then why are they separate values? Remember that we've seen repeatedly that commits are like emails, and can be formatted as emails and sent to others. If I have a public repository on GitHub then other users can clone my repository but can't commit to it.

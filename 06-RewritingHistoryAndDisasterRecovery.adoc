@@ -3,7 +3,6 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that Git is capable of rewriting the history of a repository. As each repository contains the entire history, this ranges from undoing a single commit to rewriting data on every commit in the repository. I make use of rewriting history regularly to ensure branches that are merged have a clean, readable history made up of small commits before merging. You can read more about this in <<13-MergingVsRebasing#homebrew-s-workflow>> and chapter 14.
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets. (previous paragraph could go under the bullets)
 In this chapter you will learn about rewriting history by learning the following topics:
 
 * How to use view the history of all changes made to branches over time
@@ -337,8 +336,6 @@ From the rebase conflict output:
     This means that, rather than solving the merge conflicts in this particular commit, the commit is skipped and the next one is applied instead. This may make sense in certain situations where the functionality of this commit has already been made by another commit on the branch you're rebasing on top of making this commit redundant.
   `git rebase --abort`::
     This gives up on the `git rebase` process altogether and returns the branch to its state before the rebase was attempted.
-    
-    // BEN: Manning doesn't generally do definition lists like this; our usual format is a bulleted list like * TERM--This means...
 
 ### Rebase commits interactively: git rebase --interactive
 You may have thought to yourself given the various reset, cherry-pick and commit skip options that we've seen in this chapter and the last that it would be nice if you could somehow combine them to alter the history of a branch into the form you would like before pushing it elsewhere. Git provides a useful tool for this use-case: the `--interactive` (or `-i`) flag for rebase.
