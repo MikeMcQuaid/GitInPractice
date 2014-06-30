@@ -12,7 +12,7 @@ In this chapter you will learn how to create a clean history by learning the fol
 
 ### Writing a good commit message
 We saw already in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
-
+//(TP)-The link below is broken.
 Below is an example of a good commit message format. It's strongly influenced by
 a guide written by Tim Pope which is now at
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html.
