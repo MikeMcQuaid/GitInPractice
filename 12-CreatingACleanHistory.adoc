@@ -269,3 +269,4 @@ In this chapter you learned:
 * How to use `git add --patch` or `git commit --patch` to stage only chosen hunks for a new commit
 * How to use GitX or Git GUI to stage only selected lines or hunks for a new commit
 * How to use `git diff --check` to make sure you haven't added any bad whitespace changes
+//(TP)-May be out of scope, but how about Git Extensions? This is a great tool for all your needs and integrates very well with VS.
