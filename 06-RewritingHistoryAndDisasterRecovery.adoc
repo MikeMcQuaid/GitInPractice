@@ -338,13 +338,13 @@ From the rebase conflict output:
     This gives up on the `git rebase` process altogether and returns the branch to its state before the rebase was attempted.
 
 ### Rebase commits interactively: git rebase --interactive
-You may have thought to yourself given the various reset, cherry-pick and commit skip options that we've seen in this chapter and the last that it would be nice if you could somehow combine them to alter the history of a branch into the form you would like before pushing it elsewhere. Git provides a useful tool for this use-case: the `--interactive` (or `-i`) flag for rebase.
+You may have thought to yourself given the various reset, cherry-pick, and commit skip options that we've seen in this chapter and the last, that it would be nice if you could somehow combine them to alter the history of a branch into the form you'd like before pushing it elsewhere. Git provides a useful tool for this use case: the `--interactive` (or `-i`) flag for rebase.
 
-For this example we want to see how empty commits are handled. Normally you'd rarely ever to do this; it's just to demonstrate how rebase handles them. This can happen after resolving conflicts so that a commit no longer has any changes. You might do this manually if you wanted to trigger an event in a system that monitors your Git repository and triggers events on each new commit but without having to change any files. To create an empty commit on the inspiration branch:
+For this example, we want to see how empty commits are handled. Normally you'd rarely to do this; it's just to demonstrate how rebase handles them. This can happen after resolving conflicts so that a commit no longer has any changes. You might do this manually if you wanted to trigger an event in a system that monitors your Git repository and triggers events on each new commit, but without having to change any files. To create an empty commit on the inspiration branch:
 
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
-3.  Run `git commit --allow-empty --message "Empty commit"` to create an empty commit. The output should resemble:
+3.  Run `git commit --allow-empty --message "Empty commit"` to create an empty commit. The output should resemble the following:
 
 ```
 # git commit --allow-empty --message "Empty commit"
@@ -356,9 +356,9 @@ For this example we want to see how empty commits are handled. Normally you'd ra
 You wish to interactively rebase the history of a branch.
 
 #### Solution
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
-3.  Run `git rebase --interactive v0.1`. An editor will appear and the contents should resemble:
+3.  Run `git rebase --interactive v0.1`. An editor will appear and the contents should resemble the following:
 
 .interactive rebase git-rebase-todo file
 [.long-annotations]
@@ -386,10 +386,10 @@ pick 5d4ad83 Add Chapter 1 inspiration. <2>
 #
 # Note that empty commits are commented out
 ```
-<1> v0.1-release
-<2> inspiration commit
-<3> empty commit
-<4> rebase range
+<1> V0.1-release
+<2> Inspiration commit
+<3> Empty commit
+<4> Rebase range
 <5> pick command
 <6> reword command
 <7> edit command
@@ -399,16 +399,16 @@ pick 5d4ad83 Add Chapter 1 inspiration. <2>
 
 From the interactive rebase git-rebase-todo file:
 
-* "v0.1-release commit (1)" shows the last commit on the `v0.1-release` branch. This shows up here because we are rebasing back on top the `v0.1` tagged commit so the rebase operation will try to rebase any commit ancestors on the `inspiration` branch that are not ancestors of the `v0.1` tagged commit. It may be undesirable to have these commits on our new branch but, as mentioned in the file, if you remove this line from the file then the commit will be removed from the rebase. This is effectively the same as if there had been a conflict and you used `git rebase --skip` to skip this commit. Even more powerfully if you cut a line from here and perform another `git rebase --interactive` operation as long as the commit still exists (i.e. it hasn't been purged due to it being detached from any branch for 90 days) you can paste it back in and `rebase` will include it in this operation.
-* "inspiration commit (2)" shows the last commit that was made on the `inspiration` branch. This has the same commit contents (although a different SHA-1) to the original commit that we rebased on top of the `v0.1-release` branch.
-* "empty commit (3)" shows a commit with no changes. These are commented out with a `#` character. You should never want to keep empty commits so `rebase` is removing them for you automatically.
-* "rebase range (4)" shows the range of commits that are being rebased (`725c33a..5d4ad83`) and what commit they are being rebased onto. In this case the `725c33a` commit is the commit tagged `v0.1`.
-* "pick command (5)" (or `p`) is one of several _rebase commands_ that can be selected for each commit in an interactive rebase. The rebase will run through the list of commits from top to bottom and follow the command for each listed commit (skipping any that have been removed). The `pick` command means that the commit should be included in the rebase as-is. If this file is saved and closed without modification then every commit will be picked and the `git rebase --interactive` operation will be identical to what the `git rebase` operation would have been.
-* "reword command (6)" (or `r`) is a rebase command that, when it reaches that commit and is ready to apply it, opens a file in an editor allowing you to customize the commit message. This is particularly useful in cases where you later realize that a commit message was poor and you wish to change it before pushing.
-* "edit command (7)" (or `e`) behaves as if there was a merge conflict; before the commit is applied you will be dropped into a terminal with the `--continue`/`--skip`/`--abort` options and you can edit the contents of a commit before proceeding. This is useful when you want to slightly modify a commit perhaps so a later one can apply more cleanly or to change the way you solved a problem in a particular commit.
-* "squash command (8)" (or `s`) will merge two or more commits into one. If a commit is marked to be squashed then the preceding commit (or commits if the previous commit was also marked to be squashed) will not be applied until the last adjacent squashed commit is reached. This last commit will then prompt for a commit message (like `edit`) and the default commit message will be a combination of each of all the commit messages for the commits that have been squashed together. This is very useful in combining multiple commits; perhaps the first commit was missing a file which was then added in the second commit. The commits could be squashed which would mean when they are pushed to the remote repository no-one ever need know that there was a mistake made when creating the first commit.
-* "fixup command (9)" (or `f`) is very similar to the `squash` command but it does not prompt for a message and instead uses the commit message of the first commit. This is used in situations where you want to combine commits but don't need to change commit messages.
-* "exec command (10)" (or `x`) is different to the previous commands in that it does not operate on a commit. Instead the rest of the line after `exec` is run at that stage in the `rebase` process. This could be used to print debugging output while performing a rebase operation.
+* "V0.1-release commit (1)" shows the last commit on the `v0.1-release` branch. This shows up here because we're rebasing back on top the `v0.1` tagged commit, so the rebase operation will try to rebase any commit ancestors on the `inspiration` branch that aren't ancestors of the `v0.1` tagged commit. It may be undesirable to have these commits on our new branch but, as mentioned in the file, if you remove this line from the file then the commit will be removed from the rebase. This is effectively the same as if there had been a conflict and you used `git rebase --skip` to skip this commit. Even more powerfully, if you cut a line from here and perform another `git rebase --interactive` operation, as long as the commit still exists (it hasn't been purged due to it being detached from any branch for 90 days), you can paste it back in and `rebase` will include it in this operation.
+* "Inspiration commit (2)" shows the last commit that was made on the `inspiration` branch. This has the same commit contents (although a different SHA-1) as the original commit that we rebased on top of the `v0.1-release` branch.
+* "Empty commit (3)" shows a commit with no changes. These are commented out with a `#` character. You should never keep empty commits, so `rebase` is removing them for you automatically.
+* "Rebase range (4)" shows the range of commits that are being rebased (`725c33a..5d4ad83`) and what commit they're being rebased onto. In this case, the `725c33a` commit is the commit tagged `v0.1`.
+* "pick command (5)" (or `p`) is one of several _rebase commands_ that can be selected for each commit in an interactive rebase. The rebase will run through the list of commits from top to bottom and follow the command for each listed commit (skipping any that have been removed). The `pick` command means that the commit should be included in the rebase as-is. If this file is saved and closed without modification then every commit will be picked and the `git rebase --interactive` operation will be identical to what the `git rebase` operation would've been.
+* "reword command (6)" (or `r`) is a rebase command that, when it reaches that commit and is ready to apply it, opens a file in an editor, allowing you to customize the commit message. This is particularly useful when you later realize that a commit message was poor and you wish to change it before pushing.
+* "edit command (7)" (or `e`) behaves as if there were a merge conflict; before the commit is applied, you'll be dropped into a terminal with the `--continue`/`--skip`/`--abort` options, and you can edit the contents of a commit before proceeding. This is useful when you want to slightly modify a commit perhaps so a later one can apply more cleanly or to change the way you solved a problem in a particular commit.
+* "squash command (8)" (or `s`) will merge two or more commits into one. If a commit is marked to be squashed then the preceding commit (or commits if the previous commit was also marked to be squashed) won't be applied until the last adjacent squashed commit is reached. This last commit will then prompt for a commit message (like `edit`), and the default commit message will be a combination of all the commit messages for the commits that have been squashed together. This is useful for combining multiple commits; perhaps the first commit was missing a file which was then added in the second commit. The commits could be squashed, which would mean when they're pushed to the remote repository that no one ever need know that a mistake was made when creating the first commit.
+* "fixup command (9)" (or `f`) is very similar to the `squash` command, but it doesn't prompt for a message and instead uses the commit message of the first commit. This is used in situations where you want to combine commits but don't need to change commit messages.
+* "exec command (10)" (or `x`) is different than the previous commands in that it doesn't operate on a commit. Instead the rest of the line after `exec` is run at that stage in the `rebase` process. This could be used to print debugging output while performing a rebase operation.
 
 Edit and save the file so the only uncommented lines are the following:
 
@@ -420,7 +420,7 @@ f a8200e1 Add release preface.
 # ...
 ```
 
-The output should resemble:
+The output should resemble the following:
 
 .interactive rebase output
 ```
@@ -430,49 +430,49 @@ The output should resemble:
  2 files changed, 2 insertions(+), 1 deletion(-) <2>
 Successfully rebased and updated refs/heads/inspiration. <3>
 ```
-<1> fixup commit
-<2> fixup diff
-<3> rebase success
+<1> Fixup commit
+<2> Fixup diff
+<3> Rebase success
 
 From the interactive rebase output:
 
-* "fixup commit (1)" shows the new commit that was created by the `fixup` command. It has the commit message of the previous of the two commits but contains the changes from both commits.
-* "fixup diff (2)" shows the diffstat for the new commit created by the `fixup` command.
-* "rebase success (3)" shows the successful result of the rebase operation.
+* "Fixup commit (1)" shows the new commit that was created by the `fixup` command. It has the commit message of the first of the two commits, but contains the changes from both commits.
+* "Fixup diff (2)" shows the diffstat for the new commit created by the `fixup` command.
+* "Rebase success (3)" shows the successful result of the rebase operation.
 
 .Interactively rebased inspiration branch
 [[gitx-rebase-interactive-after]]
 image::screenshots/06-GitXRebaseInteractiveAfter.png[]
 
-<<gitx-rebase-interactive-after>> shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase` it now has two commits, the latter of which was previously previously the prior and contains the contents of two commits.
+<<gitx-rebase-interactive-after>> shows the state of the `inspiration` branch after the interactive rebase. Rather than being how it was before your first `git rebase`, it now has two commits, the latter of which was previously the prior, and contains the contents of two commits.
 
 You have successfully interactively rebased the `inspiration` branch on the `v0.1` tagged commit. Now push it using `git push --set-upstream origin inspiration`.
 
 #### Discussion
-Although complex, `git rebase --interactive` allows for very powerful workflows (some of which will be seen in later chapters in this book). I will typically always use an interactive rebase before I pushed a branch upstream; it allows me to take stock, consider what I want the history to look like. The factors I consider are if any commits are now redundant or simply cleaning up previous commits, can any commit messages be improved, do any commits need reordered to make more sense, do any commits need to be removed altogether or moved to other branches. `git rebase --interactive` allows me to do this for all my commits in an ordered process so works as a particularly effective review-and-modification tool.
+Although complex, `git rebase --interactive` allows for powerful workflows (some of which will be seen in later chapters in this book). I typically always use an interactive rebase before I push a branch upstream; it allows me to take stock, and consider what I want the history to look like. The factors I consider are if any commits are now redundant or simply cleaning up previous commits, can any commit messages be improved, do any commits need to be reordered to make more sense, and do any commits need to be removed altogether or moved to other branches? `git rebase --interactive` allows me to do this for all my commits in an ordered process, so it works as a particularly effective review-and-modification tool.
 
-Part 3 will cover some workflows in which `git rebase --interactive` is a key part.
+Part 3 will cover some workflows, in which `git rebase --interactive` is a key part.
 
 ### Pull a branch and rebase commits: git pull --rebase
-Rebasing is often useful when you are pulling commits into your current branch. You almost certainly do not wish to create a merge commit just because you have made commits on your current branch and want to fetch new commits from upstream. A merge commit will be created, however, if you've committed on this branch and pull in new commits. Instead of creating a merge conflict you can use `git pull --rebase`.
+Rebasing is often useful when you're pulling commits into your current branch. You almost certainly don't want to create a merge commit just because you've made commits on your current branch and want to fetch new commits from upstream. A merge commit will be created, however, if you've committed on this branch and pull in new commits. Instead of creating a merge conflict, you can use `git pull --rebase`.
 
-To test `git pull --rebase` let's create another clone of the same repository, make a new commit and `git push` it. This will allow downloading new changes with `git pull --rebase` on the original remote repository.
+To test `git pull --rebase`, let's create another clone of the same repository, make a new commit, and `git push` it. This will allow downloading new changes with `git pull --rebase` on the original remote repository.
 
 To create another cloned, local repository and push a commit from it:
 
-1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPullTest`.
+1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created; for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPullTest`.
 2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxPullTest` to clone into the `GitInPracticeReduxPullTest` directory.
-3.  Change directory to the new Git repository e.g. `cd /Users/mike/GitInPracticeReduxPullTest/`.
+3.  Change directory to the new Git repository; in my case, `cd /Users/mike/GitInPracticeReduxPullTest/`.
 4.  Modify the `00-Preface.asciidoc` file.
 5.  Run `git commit --message 'Preface: Sequel not prequel.' 00-Preface.asciidoc`.
 6.  Run `git push`.
 
 Now let's create a commit in our main, local repository:
 
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; in my case, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
 3.  Edit `02-AdvancedGitInPractice.asciidoc` and make a change to the file.
-4.  Run `git commit --message="Chapter 2: only one chapter." 02-AdvancedGitInPractice.asciidoc`. The output should resemble:
+4.  Run `git commit --message="Chapter 2: only one chapter." 02-AdvancedGitInPractice.asciidoc`. The output should resemble the following:
 
 .Commit to be reset output
 ```
@@ -493,8 +493,8 @@ image::screenshots/06-GitXPullRebaseBefore.png[]
 You want to pull commits from `origin/master` and rebase your current commits in `master` on top of the upstream changes.
 
 #### Solution
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git pull --rebase`. The output should resemble:
+1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
+2.  Run `git pull --rebase`. The output should resemble the following:
 
 .rebase pull output
 ```
@@ -509,37 +509,37 @@ From https://github.com/GitInPractice/GitInPracticeRedux
 First, rewinding head to replay your work on top of it...
 Applying: Chapter 2: only one chapter. <2>
 ```
-<1> fetch output
-<2> rebase output
+<1> Fetch output
+<2> Rebase output
 
-Recall that `git pull` is equivalent to running `git fetch && git merge` and `git pull --rebase` the equivalent to running `git fetch && git rebase`
+Recall that `git pull` is equivalent to running `git fetch && git merge`, and `git pull --rebase` is the equivalent to running `git fetch && git rebase`
 
 From the rebase pull output:
 
-* "fetch output (1)" shows the output of the fetch operation. This is the same as if you had run `git fetch`.
-* "rebase output (2)" shows the output of the successful rebase operation. The one commit that had already been made on your local `master` branch is rebased on top of the latest commit in the `origin/master` remote branch. This is the same as if you had run `git rebase origin/master` after `git fetch`.
+* "Fetch output (1)" shows the output of the fetch operation. This is the same as if you'd run `git fetch`.
+* "Rebase output (2)" shows the output of the successful rebase operation. The one commit that had already been made on your local `master` branch is rebased on top of the latest commit in the `origin/master` remote branch. This is the same as if you had run `git rebase origin/master` after `git fetch`.
 
 .Commit after pull rebase
 [[gitx-pull-rebase-after]]
 image::screenshots/06-GitXPullRebaseAfter.png[]
 
-<<gitx-pull-rebase-after>> shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there is a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`). This works identically if there are multiple commits that need rebased.
+<<gitx-pull-rebase-after>> shows the state of the `master` branch after the `git pull --rebase` operation. You can see that there's a new commit from `origin/master` (`ae54679`) and that the previous top commit on the local `master` branch has been rebased on top of this and has a new SHA-1 (`27f2d8b`). This works identically if there are multiple commits that need rebased.
 
 You have pulled with a rebase. Now `git push` to send these commits upstream.
 
 #### Discussion
-`git pull --rebase` is sometimes recommended as a sensible default to use instead of `git pull`. You rarely will want to create a merge commit on a `git pull` operation so using `git pull --rebase` guarantees that this will not happen. This means when you do push this branch it will have a simpler, cleaner history. Once you understand how to rebase and solve conflicts I would recommend using `git pull --rebase` by default.
+`git pull --rebase` is sometimes recommended as a sensible default to use instead of `git pull`. You rarely will want to create a merge commit on a `git pull` operation, so using `git pull --rebase` guarantees that this won't happen. This means when you do push this branch, it will have a simpler, cleaner history. Once you understand how to rebase and solve conflicts, I'd recommend using `git pull --rebase` by default.
 
 ### Rewriting history on a remote branch: git push --force
-If you modify history on a branch then trying to perform a `git push` operation on it will fail. This is to stop you accidentally writing remote history that other users are relying on. It is possible to do this but you need to be more explicit in your syntax to indicate that you are aware you are performing a dangerous operation.
+If you modify history on a branch then trying to perform a `git push` operation on it will fail. This is to stop you accidentally writing remote history that other users are relying on. It's possible to do this but you need to be more explicit in your syntax to indicate that you're aware that you're performing a dangerous operation.
 
 Let's try and rebase the `inspiration` branch again and push it:
 
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; on my system, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
 3.  Run `git push` to ensure all the changes are up-to-date.
 4.  Run `git rebase v0.1-release`.
-5.  Run `git push` again. The output should resemble:
+5.  Run `git push` again. The output should resemble the following:
 
 .Rewritten history push failure output
 [.long-annotations]
@@ -557,13 +557,13 @@ hint: 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help'
   for details. <2>
 ```
-<1> local/remote branches
-<2> push failure
+<1> Local/remote branches
+<2> Push failure
 
 From the rewritten history push failure output:
 
-* "local/remote branches (1)" shows the local `inspiration` branch that we attempted to push to the remote `inspiration` branch. Unfortunately this request was rejected as it was a `non-fast-forward` i.e. it would not be advancing the current history but instead rewriting it.
-* "push failure (2)" shows the error message from `git push`. It fails because the branch you are pushing lacks changes from the branches you are pushing to. This is because it is not easily possible for the remote repository to know whether you have commits on that branch you need to `fetch` before pushing or whether you have modified the existing history of a branch.
+* "Local/remote branches (1)" shows the local `inspiration` branch that we attempted to push to the remote `inspiration` branch. Unfortunately this request was rejected because it was a `non-fast-forward`--it wouldn't be advancing the current history but instead rewriting it.
+* "Push failure (2)" shows the error message from `git push`. It fails because the branch you're pushing lacks changes from the branches you're pushing to. This is because it's not easily possible for the remote repository to know whether you have commits on that branch you need to `fetch` before pushing or whether you've modified the existing history of a branch.
 
 Instead let's learn how to force this push operation to rewrite the history on this remote branch.
 
@@ -571,10 +571,10 @@ Instead let's learn how to force this push operation to rewrite the history on t
 You wish to rewrite the history on the remote `origin/inspiration` branch based on the contents of the local `inspiration branch`.
 
 #### Solution
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout inspiration`.
 3.  Run `git pull --rebase`.
-4.  Run `git push origin +inspiration` again. The output should resemble:
+4.  Run `git push origin +inspiration` again. The output should resemble the following:
 
 .Rewritten history push output
 ```
@@ -586,29 +586,29 @@ Total 1 (delta 0), reused 0 (delta 0)
 To https://github.com/GitInPractice/GitInPracticeRedux.git
  + 0109344...ca74d2b inspiration -> inspiration (forced update) <1>
 ```
-<1> forced update
+<1> Forced update
 
 From the forced push output:
 
-* "forced update (1)" shows the `git push` output as usual but with a `(forced update)` indicating that it was forced to allow non-fast-forwards on the remote.
+* "Forced update (1)" shows the `git push` output as usual but with a `(forced update)` indicating that it was forced to allow non-fast-forwards on the remote.
 
 You have rewritten the history on a remote branch.
 
 #### Discussion
-You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+` but this is not advised as it is less safe; depending on your Git configuration you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change later in <<07-PersonalizingGit#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names so these will all be force-pushed if `git push --force` is run without parameters.
+You can also use `git push --force` instead of specifying the remote branch name prefixed with a `+`, but this is not advised as it's less safe; depending on your Git configuration, you could accidentally force-push multiple branches at once. By default in some Git versions (which I tell you how to change later in <<07-PersonalizingGit#using-the-new-push-defaults>>), a push will push all branches with matching local and remote branch names, so these will all be force-pushed if `git push --force` is run without parameters.
 
-Remember the reflog isn't pushed remotely so if you unintentionally rewrite history on the remote branch there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason you should be very careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that no-one else is using. Avoid doing it on shared branches and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to try and ensure you aren't rewriting commits that are on the remote branch that you don't have locally. Of course, it's still possible that someone pushes a commit just after you do a `git pull` which you overwrite (which is why `git push --force` is a dangerous operation).
+Remember the reflog isn't pushed remotely, so if you unintentionally rewrite history on the remote branch, there's no way to recover commits you didn't have locally without direct access to the Git repository on the server. For this reason, you should be careful when rewriting remote branches. A good rule of thumb is to only ever do it on branches that nobody else is using. Avoid doing it on shared branches, and never do it on the `master` branch. Also, ensure you do a `git pull` immediately before any forced push to try to ensure you aren't rewriting commits that are on the remote branch that you don't have locally. Of course, it's still possible that someone pushes a commit just after you do a `git pull`, which you overwrite (which is why `git push --force` is a dangerous operation).
 
 ### Rewriting the entire history of a branch: git filter-branch
-There are times when rewriting a few commits is not enough; you want to rewrite the entire history of a branch. Perhaps there was confidential files that you committed accidentally early in the project that you want to remove or you want to split a large repository into multiple smaller ones.
+There are times when rewriting a few commits isn't enough; you want to rewrite the entire history of a branch. Perhaps you accidentally committed confidential files early in the project that you want to remove, or you want to split a large repository into multiple smaller ones.
 
 Git provides a tool called `git filter-branch` for these cases; it will iterate through the entire history of a branch and allow rewriting every commit as it does so. This can be used to rewrite all the commits in an entire repository.
 
 To avoiding messing up our current local repository lets create another cloned, local repository:
 
-1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created e.g. `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxFilterTest`.
+1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created; for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxFilterTest`.
 2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxFilterTest` to clone into the `GitInPracticeReduxFilterTest` directory.
-3.  Change directory to the new Git repository e.g. `cd /Users/mike/GitInPracticeReduxFilterTest/`.
+3.  Change directory to the new Git repository; on my machine, `cd /Users/mike/GitInPracticeReduxFilterTest/`.
 
 .GitX before filter-branch
 [[gitx-filter-branch-before]]
@@ -620,8 +620,8 @@ image::screenshots/06-GitXFilterBranchBefore.png[]
 You wish to remove all references to the file `00-Preface.asciidoc` on the `master` branch.
 
 #### Solution
-1.  Change to the directory containing your filter test repository e.g. `cd /Users/mike/GitInPracticeReduxFilterTest/`.
-2.  Run `git filter-branch --prune-empty --index-filter "git rm --cached --ignore-unmatch 00-Preface.asciidoc" master`. The output should resemble:
+1.  Change to the directory containing your filter test repository; for example, `cd /Users/mike/GitInPracticeReduxFilterTest/`.
+2.  Run `git filter-branch --prune-empty --index-filter "git rm --cached --ignore-unmatch 00-Preface.asciidoc" master`. The output should resemble the following:
 
 .filter-branch file removal output
 ```
@@ -649,62 +649,63 @@ Ref 'refs/heads/master' was rewritten <5>
 ```
 <1> filter command
 <2> remove command
-<3> rewritten commit
-<4> removed filename
-<5> branch rewritten
+<3> Rewritten commit
+<4> Removed filename
+<5> Branch rewritten
 
 From the filter-branch file removal output:
 
-* "filter command (1)" (`git filter-branch`) takes the:
+// BEN: same comment as earlier: Manning doesn't really do definition lists like this; we use bulleted lists like * TERM---This term...
+* "filter command (1)" (`git filter-branch`) takes the following flags:
   `--prune-empty` flag::
-    discards any now empty commits (i.e. those that only changed the `00-Preface.asciidoc`) as they are no longer needed.
+    This discards any now empty commits (those that only changed the `00-Preface.asciidoc`) as they're no longer needed.
   `--index-filter` flag::
-    rewrites the index of each commit given a command to run on each commit and
+    This rewrites the index of each commit given a command to run on each commit.
   `master` branch argument::
-    specifies which branch should be traversed and rewritten.
-* "remove command (2)" is passed as a string (i.e. surrounded by `"`) and is the command that is run by `git filter-branch` on each commit. Here the `git rm` takes the:
+    This specifies which branch should be traversed and rewritten.
+* "remove command (2)" is passed as a string (surrounded by `"`) and is the command that's run by `git filter-branch` on each commit. Here the `git rm` takes the following flags:
   `--cached` flag::
-    removes the file from the index. As this is an index filter that is all that is necessary to remove it from the commit; it does not have to be removed from disk (which would be slower).
+    This removes the file from the index. As this is an index filter, that is all that's necessary to remove it from the commit; it doesn't have to be removed from disk (which would be slower).
   `--ignore-unmatch` flag::
-    specifies that the command should be successful even if the specified file (`00-Preface.asciidoc`) does not exist on the current commit.
-* "rewritten commit (3)" shows a the first commit in which the index filter found the specified file (`00-Preface.asciidoc`). The newly created commit will have a different SHA-1 to that of the original commit listed here (`4320fad6a58b105b8a1001f4f0da0258aa622feb`).
-* "removed filename (4)" shows the filename that was specified to `git rm` and has been removed from this commit.
-* "branch rewritten (5)" shows that the `master` branch was changed by the `git filter-branch` operation. If it was not instead it would show `WARNING: Ref 'refs/heads/master' is unchanged`.
+    This specifies that the command should be successful even if the specified file (`00-Preface.asciidoc`) doesn't exist on the current commit.
+* "Rewritten commit (3)" shows a the first commit in which the index filter found the specified file (`00-Preface.asciidoc`). The newly created commit will have a different SHA-1 to that of the original commit listed here (`4320fad6a58b105b8a1001f4f0da0258aa622feb`).
+* "Removed filename (4)" shows the filename that was specified to `git rm` and has been removed from this commit.
+* "Branch rewritten (5)" shows that the `master` branch was changed by the `git filter-branch` operation. If it wasn't, instead it would show `WARNING: Ref 'refs/heads/master' is unchanged`.
 
 .GitX after filter-branch
 [[gitx-filter-branch-after]]
 image::screenshots/06-GitXFilterBranchAfter.png[]
 
-<<gitx-filter-branch-after>> shows the output from GitX after the `git filter-branch` command from the first point at which they diverge (which is the first commit containing the `00-Preface.asciidoc` file). All commits that referenced the file have been changed and all those that only changed this file have been pruned as they were empty. You can see the `origin/master` remote branch also has a identical ref named `refs/original/refs/heads/master`. This is used as a backup so the original `master` can be restored by `git branch --force master refs/original/refs/heads/master` if desired.
+<<gitx-filter-branch-after>> shows the output from GitX after the `git filter-branch` command from the first point, at which they diverge (which is the first commit containing the `00-Preface.asciidoc` file). All commits that referenced the file have been changed, and all those that only changed this file have been pruned, as they were empty. You can see that the `origin/master` remote branch also has a identical ref named `refs/original/refs/heads/master`. This is used as a backup so the original `master` can be restored by `git branch --force master refs/original/refs/heads/master` if desired.
 
 You have removed all references to `00-Preface.asciidoc` on the `master` branch.
 
 #### Discussion
-`filter-branch` is a relatively niche command that is used only in fairly dramatic circumstances such as killing a project but extracting parts of it into a library, filtering history before open-sourcing a repository or removing confidential information that was accidentally committed over a long period of time.
+`filter-branch` is a relatively niche command that is used only in fairly dramatic circumstances such as killing a project but extracting parts of it into a library, filtering history before open-sourcing a repository, or removing confidential information that was accidentally committed over a long period of time.
 
-`git filter-branch` can take a:
+`git filter-branch` can take the following arguments:
 
-* `--all` argument which runs it on every branch rather than just the named one. This can be used to rewrite entire repositories rather than just single branches.
-* `--force` (or `-f`) flag which is needed to perform a second `filter-branch` on the same branch in a repository (which would overwrite the backup). Otherwise the following message is output:
+* `--all`--Runs on every branch rather than just the named one. This can be used to rewrite entire repositories rather than just single branches.
+* `--force` (or `-f`)--Needed to perform a second `filter-branch` on the same branch in a repository (which would overwrite the backup). Otherwise the following message is output:
 ```
 Cannot create a new backup.
 A previous backup already exists in refs/original/
 Force overwriting the backup with -f
 ```
-* `--env-filter` flag which allows changing environment variables to change the metadata for each commit. For example, you could set the `GIT_AUTHOR_EMAIL` for each commit to change the email for every commit or change it conditionally to change it for a particular author.
-* `--tree-filter` flag which allows rewriting the contents of the working directory tree. It will check out every revision and then allow modification of it. The command in this example could have instead be done with a tree filter (`git filter-branch --tree-filter "rm 00-Preface.asciidoc" master`) but this would check out and delete the files from disk every time which would be slower than the `--index-filter` we used.
-* `--msg-filter` flag which allows rewriting commit messages. This can be useful in removing confidential information (or swearwords) from commit messages.
-* `--subdirectory-filter` flag which can be filter the history to those commits which touch a particular subdirectory. It also makes that subdirectory the new project root. This can be useful when splitting a large repository into multiple smaller repositories based on existing subdirectories.
-* `--parent-filter` flag which can change commit parents, `--commit-filter` flag which can vary commit commands and `--tag-name-filter` flag which modify tag names but these tend to be less widely used.
+* `--env-filter`--Allows changing environment variables to change the metadata for each commit. For example, you could set the `GIT_AUTHOR_EMAIL` for each commit to change the email for every commit or change it conditionally to change it for a particular author.
+* `--tree-filter`--Allows rewriting the contents of the working directory tree. It will check out every revision and then allow modification of it. The command in this example could've instead been done with a tree filter (`git filter-branch --tree-filter "rm 00-Preface.asciidoc" master`) but this would check out and delete the files from disk every time, which would be slower than the `--index-filter` we used.
+* `--msg-filter`--Allows rewriting commit messages. This can be useful in removing confidential information (or swearwords) from commit messages.
+* `--subdirectory-filter`--Can filter the history to those commits that touch a particular subdirectory. It also makes that subdirectory the new project root. This can be useful when splitting a large repository into multiple smaller repositories based on existing subdirectories.
+* `--parent-filter`--can change commit parents. `--commit-filter` can vary commit commands and `--tag-name-filter` modifies tag names, but these tend to be less widely used.
 
-This book does not seek to cover all these flags in the same detail as this example. The best approach to learn more about this functionality is to read `git filter-branch --help` and experiment on duplicated local repositories.
+This book doesn't seek to cover all these flags in the same detail as this example. The best approach to learn more about this functionality is to read `git filter-branch --help` and experiment on duplicated local repositories.
 
 ### Summary
 In this chapter you hopefully learned:
 
 * How to use `git reflog` to reference log and see how `HEAD` and branch pointers have changed over time
 * How to use `git reset` to reset a branch to point to any other commit
-* How to use `git rebase` to reparent commits, the `--interactive` flag to rearrange history on demand and `git pull --rebase` to avoid merge conflicts when pulling changes
+* How to use `git rebase` to reparent commits, the `--interactive` flag to rearrange history on demand, and `git pull --rebase` to avoid merge conflicts when pulling changes
 * How to use `git push origin +branchname` to force-push commits and rewrite history on remote branches
 * How to use `git filter-branch` to rewrite the entire history of one or more branches
 * How to use avoid disaster by committing regularly
