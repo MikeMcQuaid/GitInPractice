@@ -1,43 +1,45 @@
 ## Personalizing Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Git is a heavily configurable tool. As we've seen previously in this book there's often times where you have multiple behaviors or choices for commands that you can select with flags or by using different commands. You may always want to run a command with a lengthy set of commands or want to set your preferred `difftool` or `mergetool` as a default. These tweaks can be done per-repository or globally and will allow you to maximize productivity when adopting a particular Git workflow.
+Git is a heavily configurable tool. As we've seen previously in this book, there are often times where you have multiple behaviors or choices for commands that you can select with flags or by using different commands. You may always want to run a command with a lengthy set of commands, or want to set your preferred `difftool` or `mergetool` as a default. These tweaks can be done per-repository or globally, and will allow you to maximize productivity when adopting a particular Git workflow.
 
-In this chapter you will learn about Git Shortcuts by learning the following topics:
+// BEN: usual Manning style is just "In this chapter" and then the bullets (prev paragraph would go after the bullets)
 
-* How to set configuration for a single repository, all of a user's repositories or all a system's repositories
+In this chapter you'll learn about Git shortcuts by learning the following topics:
+
+* How to set configuration for a single repository, all of a user's repositories, or all of a system's repositories
 * How to enable various useful configuration settings
-* How to alias, shorten and chain Git commands
+* How to alias, shorten, and chain Git commands
 * How to use Git share configuration files between machines
 * How to show the current branch in a terminal prompt
 
 ### Set configuration for all repositories
-Recall in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>> we saw how to set some configuration options using `git config`. We set the user and email address for the initial Git configuration of Git and enabled `git rerere` to avoid having to resolve the same conflicts multiple times.
+Recall in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>>, we saw how to set some configuration options using `git config`. We set the user and email address for the initial Git configuration of Git and enabled `git rerere` to avoid having to resolve the same conflicts multiple times.
 
 #### Problem
 You wish to set your Git user name in your global Git configuration.
 
 #### Solution
-1.  You do not need to change to the directory of a particular or any Git repository.
+1.  You don't need to change to the directory of a particular or any Git repository.
 2.  Run `git config --global user.name "Mike McQuaid"`. There will be no output.
 
-This has set the value in the e.g. `/Users/mike/.gitconfig` file in the repository. You can read values from the configuration file by omitting the value argument. For example:
+This has set the value in my home directory, `/Users/mike/.gitconfig` (see the note, "Where is the `$HOME` directory?"). You can read values from the configuration file by omitting the value argument. For example:
 ```
 # git config --global user.name
 
 Mike McQuaid <1>
 ```
-<1> name value
+<1> Name value
 
 You have set your Git user name in your global Git configuration.
 
 #### Discussion
-When you ran `git config --global user.name "Mike McQuaid"` a file named `.gitconfig` was created  (or modified if it existed) in your `$HOME` directory.
+When you ran `git config --global user.name "Mike McQuaid"`, a file named `.gitconfig` was created  (or modified if it existed) in your `$HOME` directory.
 
 .Where is the `$HOME` directory?
-NOTE: The `$HOME` directory is often signified with the tilde (`~`) character and will be in the rest of this chapter. If your username was `mike` the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on OSX and `/home/mike` on Linux/Unix.
+NOTE: The `$HOME` directory is often signified with the tilde (`~`) character, and will be in the rest of this chapter. If your username is `mike`, the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on OSX and `/home/mike` on Linux/Unix.
 
-The filename is prefixed with a dot and this means on OSX and Linux it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal we can see the contents. Provided you ran `git config` as requested in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>> it should look something like this:
+The filename is prefixed with a dot, and this means on OSX and Linux that it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal, we can see the contents. Provided you ran `git config` as requested in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>>, it should look something like this:
 ```
 # cat ~/.gitconfig
 
@@ -47,38 +49,38 @@ The filename is prefixed with a dot and this means on OSX and Linux it may be hi
 [rerere]
   enabled = 1
 ```
-<1> user section
-<2> email key and value
+<1> User section
+<2> Email key and value
 
-You can see that the above commands created two sections (`user` and `rerere`) and three values (`name`, `email`, `enabled`). The `git config` command takes arguments in the format `git config --global section.key value`. If we ran this command again with the same `section.key` but a different value it would alter the current value rather than creating a new line.
+You can see that these commands created two sections (`user` and `rerere`) and three values (`name`, `email`, `enabled`). The `git config` command takes arguments in the format `git config --global section.key value`. If we ran this command again with the same `section.key` but a different value, it would alter the current value rather than creating a new line.
 
 This `~/.gitconfig` file is used to set your preferred configuration settings to be shared between all your repositories on your current machine. You could even share this file between machines to allow these settings to be used everywhere. This will be detailed later in this chapter in <<share-git-and-other-configuration-between-machines>>.
 
-Options can also be unset by using the unset flag. For example, to unset the `git rerere` setting you would run:
+Options can also be unset by using the `unset` flag. For example, to unset the `git rerere` setting you would run:
 ```
 # git config --global --unset rerere.enabled
 ```
 
-Now that we've seen how to set and read some configuration settings for all repositories let's see how to do it for a single one.
+Now that we've seen how to set and read some configuration settings for all repositories, let's see how to do it for a single one.
 
 ### Set configuration for a single repository
-There are times when you may want to use different configuration settings for different repositories on the same computer. For example, in the past I have used one email address when committing to open-source source repositories and another email address when committing to my employer's repositories. If you wanted to do both of these on the same computer case you could set a different `user.email` value in the single repository configuration file to be used in preference to the global `~/.gitconfig`.
+There are times when you may want to use different configuration settings for different repositories on the same computer. For example, in the past I've used one email address when committing to open source repositories and another email address when committing to my employer's repositories. If you wanted to do both of these on the same computer, you could set a different `user.email` value in the single repository configuration file to be used in preference to the global `~/.gitconfig`.
 
-Recall that whenever we've used `git config` previously we've always used the `--global` flag. There's actually four different flags that can be used to affect the location of the configuration file that's used. These are:
+Recall that whenever we've used `git config` previously, we've always used the `--global` flag. There are actually four different flags that can be used to affect the location of the configuration file that's used:
 
-* `--global` which uses the `~/.gitconfig` file in your `$HOME` directory. For example, if your `$HOME` was `/Users/mike` then the global file would be at `/Users/mike/.gitconfig`.
-* `--system` which uses the `etc/gitconfig` file under wherever Git was installed. For example, if Git was installed into `/usr/local/` the system file would be at `/usr/local/etc/gitconfig` or if installed into `/usr/` the system file would be at `/etc/gitconfig`.
-* `--local` which uses the `.git/config` file in a Git repository. For example, if a Git repository is at `/Users/mike/GitInPracticeRedux/.git` then the local file would be at `/Users/mike/GitInPracticeRedux/.git/config`. `.git/config` is the default if no other configuration location flags are provided.
-* `--file` (or `-f`) which takes another argument to specify an file path to write to. For example, you could specify a file using `git config --file /Users/mike/Documents/git.cfg`.
+* `--global`--Uses the `~/.gitconfig` file in your `$HOME` directory. For example, if your `$HOME` was `/Users/mike` then the global file would be at `/Users/mike/.gitconfig`.
+* `--system`--Uses the `etc/gitconfig` file under wherever Git was installed. For example, if Git was installed into `/usr/local/`, the system file would be at `/usr/local/etc/gitconfig`, or if installed into `/usr/`, the system file would be at `/etc/gitconfig`.
+* `--local`--Uses the `.git/config` file in a Git repository. For example, if a Git repository is at `/Users/mike/GitInPracticeRedux/.git` then the local file would be at `/Users/mike/GitInPracticeRedux/.git/config`. `.git/config` is the default if no other configuration location flags are provided.
+* `--file` (or `-f`)--Takes another argument to specify an file path to write to. For example, you could specify a file using `git config --file /Users/mike/Documents/git.cfg`.
 
 #### Problem
 You wish to set your Git user email in your repository Git configuration.
 
 #### Solution
-1.  Change to the directory containing your repository e.g. `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your repository; on my machine, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git config user.email mike.mcquaid@github.com`. There will be no output.
 
-The email address did not need to be surrounded with quotes because it has no spaces, unlike e.g. `"Mike McQuaid"`
+The email address didn't need to be surrounded with quotes because it has no spaces, unlike a name such as `"Mike McQuaid"`
 
 This has set the value in the `.git/config` file in the repository. We can query it using:
 ```
@@ -91,16 +93,16 @@ mike.mcquaid@github.com <1>
 You have set your Git user email in your repository Git configuration.
 
 #### Discussion
-If you used `--global` you'd instead see the value that was set in the global configuration file. If you'd omitted `--local` and `--global` then Git uses the same default priority as it does when reading configuration settings for its own use. The priority for deciding which configuration file to read from is:
+If you used `--global`, you'd instead see the value that was set in the global configuration file. If you omit `--local` and `--global` then Git uses the same default priority as it does when reading configuration settings for its own use. The priority for deciding which configuration file to read from is:
 
-1.  the argument following `--file` (if it was provided)
-2.  the local configuration file (`.git/config`)
-3.  the global configuration file (`~/.gitconfig`)
-4.  the system configuration file (`etc/gitconfig` under where Git was installed)
+1.  The argument following `--file` (if it was provided)
+2.  The local configuration file (`.git/config`)
+3.  The global configuration file (`~/.gitconfig`)
+4.  The system configuration file (`etc/gitconfig` under where Git was installed)
 
-If a value has been set for a key in a higher-priority file than that is used by Git's commands instead. This allows overriding the individual configuration between different repositories, users and systems.
+If a value has been set for a key in a higher-priority file then that is used by Git's commands instead. This allows overriding the individual configuration between different repositories, users, and systems.
 
-Although the global `~/.gitconfig` file was not created until we set some values, on creation every repository contains a `~/.git/config` file:
+Although the global `~/.gitconfig` file wasn't created until we set some values, on creation every repository contains a `~/.git/config` file:
 
 .A sample `.git/config` file
 ```
@@ -126,85 +128,86 @@ Although the global `~/.gitconfig` file was not created until we set some values
   email = mike.mcquaid@github.com
 ```
 
-You can see various default options have been set based on the current system (e.g. `ignorecase` as Git has detected that we're using the default OSX case-insensitive filesystem) and interactions with the Git repository. When we do a `git push --set-upstream` Git sets values in a `branch` section in the `.git/config` file. This section specifies where to push and pull from when on a certain branch.
+You can see various default options have been set based on the current system (such as `ignorecase`, as Git has detected that we're using the default OSX case-insensitive filesystem) and interactions with the Git repository. When we do a `git push --set-upstream`, Git sets values in a `branch` section in the `.git/config` file. This section specifies where to push and pull from when on a certain branch.
 
 ### Useful configuration settings
-In this section I will show you how to set some of the most useful configuration settings for making Git easier to use. However, Git has a huge number of configuration settings; it would be a significant proportion of this book to try and detail them all. I would recommend reading through `git config --help` at some point and considering which other settings you may wish to change. Additionally, in <<mike-gitconfig>> you can see my personal, commented Git configuration if you are interested in what I use.
+In this section I'll show you how to set some of the most useful configuration settings for making Git easier to use. But Git has a huge number of configuration settings; it would be a significant proportion of this book to try and detail them all. I recommend reading through `git config --help` at some point and considering which other settings you may wish to change. Additionally, in <<mike-gitconfig>> you can see my personal, commented Git configuration if you're interested in what I use.
 
 #### Colored output in Git
-Colored output was enabled by default in Git 1.8.4. As a result, if your installed version of Git is 1.8.4 or above (check by running `git --version`) you can can skip this section.
+Colored output was enabled by default in Git 1.8.4. As a result, if your installed version of Git is 1.8.4 or above (check by running `git --version`), you can skip this section.
 
-Git's output does not use colors by default on versions below 1.8.4. To enable colored Git output you can run:
+Git's output doesn't use colors by default on versions below 1.8.4. To enable colored Git output you can run the following:
 
 ```
 # git config --global color.ui auto
 ```
 
-This will mean that Git will, if supported by your terminal and not writing to a file Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
+// BEN: I don't understand the significance of "not writing to a file" below ... could be more clear 
+This will mean that, if supported by your terminal and not writing to a file, Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will use red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
 
-Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them you will need to change your terminal's settings (which are specific to the terminal software you are using).
+Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them, you'll need to change your terminal's settings (which are specific to the terminal software you're using).
 
 #### Git 2.0's push defaults
-Git 2.0 (which was released 28 May 2014) defaulted to a new push strategy (the `simple` push strategy). This means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`). Also, with the `simple` strategy Git refuses to push if the remote branch name is different to the local branch name unless you specify it e.g. with `git push origin remotebranchname`. As this is the new behavior it's a good idea to enable it in older versions of Git. If your installed version of Git is 2.0 or above (check by running `git --version`) you can can skip this section.
+Git 2.0 (which was released on May 28, 2014) defaulted to a new push strategy (the `simple` push strategy). This means that branches are pushed to their upstream branch (set the first time with `git push --set-upstream`). Also, with the `simple` strategy, Git refuses to push if the remote branch name is different than the local branch name unless you specify it with an option such as `git push origin remotebranchname`. As this is the new behavior, it's a good idea to enable it in older versions of Git. If your installed version of Git is 2.0 or above (check by running `git --version`), you can skip this section.
 
-Git versions below 2.0 uses the `matching` strategy for their default push behavior. This means that when you run `git push` without arguments Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches then when you run `git push` any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch I would expect `git push` to only affect the branch that I am on. Let's switch to the `simple` strategy instead which does this by running:
+Git versions below 2.0 use the `matching` strategy for their default push behavior. This means that when you run `git push` without arguments, Git will push all branches that have the same local and remote branch name. For example, if you have `master` and `inspiration` local branches and `origin/master` and `origin/inspiration` remote branches, then when you run `git push`, any changes made on both `master` and `inspiration` local branches will be pushed to their remote branches. I think this is confusing; when on a branch, I would expect `git push` to only affect the branch that I', on. Let's switch to the `simple` strategy instead by running the following:
 ```
 # git config --global push.default simple
 ```
 
-I always enable this if I have to use older Git versions and I'd highly recommend you do too; it means you are less likely to accidentally push changes made on other branches that are not ready to be pushed yet.
+I always enable this if I have to use older Git versions, and I'd highly recommend you do too; it means you're less likely to accidentally push changes made on other branches that aren't ready to be pushed yet.
 
 #### Pruning branches automatically
-In Git if multiple people are using the same repository then if someone else deletes a remote branch the remote branch reference (e.g. `origin/remote-branch-name`) will not be deleted from your repository without running the `git remote prune` command. This is the same behavior as there is with tags; Git tries to avoid removing refs that may be useful to you unless you specifically request it. To prune the `origin` remote branches you would run `git remote prune origin`.
+In Git, if multiple people are using the same repository then if someone else deletes a remote branch, the remote branch reference (such as `origin/remote-branch-name`) won't be deleted from your repository without running the `git remote prune` command. This is the same behavior as with tags; Git tries to avoid removing refs that may be useful to you unless you specifically request it. To prune the `origin` remote branches, you would run `git remote prune origin`.
 
 .Does pruning affect local or remote branches?
-NOTE: Pruning does not delete local branches, only references to remote branches. For example, you had a `inspiration` branch which you had pushed to `origin/inspiration`. Later someone  deleted `origin/inspiration`. The `origin/inspiration` remote branch reference would only be deleted from your local repository after you ran `git remote prune`. However, both before and after the prune your local `inspiration` branch would remain unchanged.
+NOTE: Pruning doesn't delete local branches, only references to remote branches. For example, suppose you had a `inspiration` branch which you had pushed to `origin/inspiration`. Later someone deleted `origin/inspiration`. The `origin/inspiration` remote branch reference would only be deleted from your local repository after you ran `git remote prune`. But both before and after the prune, your local `inspiration` branch would remain unchanged.
 
-I find it tedious to run this every time I want to remove a branch and would prefer it happened on every `git fetch` or `git pull` operation. To enable this behavior you can run:
+I find it tedious to run this every time I want to remove a branch, and would prefer it happened on every `git fetch` or `git pull` operation. To enable this behavior, you can run the following:
 
 ```
 # git config --global fetch.prune 1
 ```
 
-This means all remote branches will be pruned whenever you fetch or pull from a remote repository. This is particularly useful when you are working on a repository where remote branches are created and deleted very regularly. This can occur in some workflows where direct commits to the `master` branch are discouraged so branches are created for every change that needs to be made.
+This means all remote branches will be pruned whenever you fetch or pull from a remote repository. This is particularly useful when you're working on a repository where remote branches are created and deleted very regularly. This can occur in some workflows where direct commits to the `master` branch are discouraged, so branches are created for every change that needs to be made.
 
 #### Ignore files across all repositories: global ignore file
 We've already seen in <<ignore-files-gitignore>> how you can use a `.gitignore` file to ignore certain files within a repository.
 
-Sometimes you may have problems with this approach; some other users of the repository may disagree about what files should be ignored or you may be sick of ignoring the same temporary files your editor generates in every repository you use. For this reason Git allows you to set a global ignore file which you can put your personal ignore rules (useful if others don't want them in a repository). To tell Git you wish to use a `~/.gitignore` file you run:
+Sometimes you may have problems with this approach; some other users of the repository may disagree about what files should be ignored, or you may be sick of ignoring the same temporary files your editor generates in every repository you use. For this reason, Git allows you to set a global ignore file where you can put your personal ignore rules (useful if others don't want them in a repository). To tell Git you wish to use a `~/.gitignore` file, you run the following:
 
 ```
 # git config --global core.excludesfile ~/.gitignore
 ```
 
-This global file behaves as any other `.gitignore` file but you can put entries in it to be shared between all repositories. For example, in mine I put `.DS_Store` which are the thumbnail cache files that OSX puts in any directory you view with Finder.app that contains images (see it in <<mike-gitignore>>). I also put editor-specific files and build output directory names that I tend to personally prefer. This means I don't need to remember to do so for every new repository that I use or add an ignore rule to repositories whenever I change text editor.
+This global file behaves as any other `.gitignore` file, but you can put entries in it to be shared between all repositories. For example, in mine I put `.DS_Store`, which are the thumbnail cache files that OSX puts in any directory you view with Finder.app that contains images (see it in <<mike-gitignore>>). I also put editor-specific files and build output directory names that I tend to personally prefer. This means I don't need to remember to do so for every new repository that I use or add an ignore rule to repositories whenever I change text editors.
 
 #### Display help output in your web browser
-You may be someone who keeps their web browser open more than a terminal or just finds documentation easier to read in a browser than a terminal. You can request that `git --help` commands display their output in a web browser by appending the `--web` flag. For example, to get help for the `git help` command in the web browser you would run `git help --help --web`.
+You might be someone who keeps their web browser open more than a terminal, or just finds documentation easier to read in a browser than a terminal. You can request that `git --help` commands display their output in a web browser by appending the `--web` flag. For example, to get help for the `git help` command in the web browser, you'd run `git help --help --web`.
 
-This may fail with the message `fatal: HTML documentation is not provided by this distribution of git`. This is because some Git installations do not install HTML documentation. If this is the case you can find the Git HTML documentation at http://git-scm.com/docs/ and skip the rest of this section.
+This may fail with the message `fatal: HTML documentation is not provided by this distribution of git`. This is because some Git installations don't install HTML documentation. If this is the case, you can find the Git HTML documentation at http://git-scm.com/docs/ and skip the rest of this section.
 
-If your Git installation displayed the HTML documentation correctly then you can tell `git help` and `git --help` to always display documentation in HTML format by running:
+If your Git installation displayed the HTML documentation correctly then you can tell `git help` and `git --help` to always display documentation in HTML format by running the following:
 
 ```
 # git config --global help.format web
 ```
 
-After this when you run e.g. `git config --help` then instead of displaying in your terminal it will open the HTML documentation in your default browser instead. If you wish to configure the browser that is used you can run `git web--browse --help` to view the many different ways of configuring the browser that is used.
+After this, when you run a command like `git config --help`, instead of displaying in your terminal, it will open the HTML documentation in your default browser. If you wish to configure the browser that's used, you can run `git web--browse --help` to view the many different ways of configuring the browser that is used.
 
 #### Store passwords in the OSX keychain
-Apple's Mac OS X operating system provides a system-wide secure keychain for each user. This is what is used to store your passwords for various services e.g. network shares. You can also request that the keychain is where Git stores its various passwords e.g. for private `https://` GitHub repository clones. To do this you run:
+Apple's Mac OSX operating system provides a system-wide secure keychain for each user. This is whats used to store your passwords for various services such as network shares. You can also request that Git store its various passwords there, for example for private `https://` GitHub repository clones. To do this you run the following:
 
 ```
 # git config --global credential.helper osxkeychain
 ```
 
-After setting this, the next time you clone a private GitHub repository and asked for a password you will be prompted whether to allow `git-credential-osxkeychain` access to your keychain. You should allow this and then passwords will be stored and retrieved from here in future. This is useful on OSX as otherwise Git may prompt for the same passwords multiple times or write them unencrypted to disk.
+After setting this, the next time you clone a private GitHub repository and ask for a password, you'll be prompted whether to allow `git-credential-osxkeychain` access to your keychain. You should allow this and then passwords will be stored and retrieved from here in future. This is useful on OSX, as otherwise Git may prompt for the same passwords multiple times or write them unencrypted to disk.
 
-Alternatively on Windows there's a tool named `git-credential-winstore` (available at http://gitcredentialstore.codeplex.com) to store these credentials in the Windows Credential Store. On Linux/Unix there's a tool named `git-credential-gnome-keyring` (bundled with Git 1.8.0 and above) to store these credentials in the Gnome Keyring.
+Alternatively on Windows, there's a tool named `git-credential-winstore` (available at http://gitcredentialstore.codeplex.com) to store these credentials in the Windows Credential Store. On Linux/Unix there's a tool named `git-credential-gnome-keyring` (bundled with Git 1.8.0 and above) to store these credentials in the Gnome Keyring.
 
 #### Store arbitrary text in Git configuration
-As well as all the supported keys you can use any Git configuration file as an arbitrary key-value store. For example, if you ran `git config --global gitinpractice.status inprogress` these lines would be added to your `~/.gitconfig`:
+In addition to all the supported keys, you can use any Git configuration file as an arbitrary key-value store. For example, if you ran `git config --global gitinpractice.status inprogress`, these lines would be added to your `~/.gitconfig`:
 
 ```
 # git config --global book.gitinpractice.firstedition.status inprogress
@@ -213,16 +216,16 @@ As well as all the supported keys you can use any Git configuration file as an a
 	status = inprogress
 ```
 
-These could then be retrieved using `git config book.gitinpractice.firstedition.status`. Git will silently ignore any configuration values it does not recognize. This allows you to use the Git configuration file to store other useful data. I use it for storing some configuration data for some personal shell scripts. For example, I store my SourceForge username in `sourceforge.username` so scripts unrelated to Git can run `git config sourceforge.username` to get the username.
+These could then be retrieved using `git config book.gitinpractice.firstedition.status`. Git will silently ignore any configuration values it doesn't recognize. This allows you to use the Git configuration file to store other useful data. I use it for storing some configuration data for some personal shell scripts. For example, I store my SourceForge username in `sourceforge.username` so scripts unrelated to Git can run `git config sourceforge.username` to get the username.
 
 #### Autocorrecting misspelt commands
-If you often mistype commands such as e.g. `git pish` instead of `git push` you could set up an alias. However, it may be time-consuming and clutter up your configuration file to do this for every variant you mistype. Instead you can enable Git's autocorrection feature by running:
+If you often mistype commands--such as `git pish` instead of `git push`--you could set up an alias. But it may be time-consuming and clutter up your configuration file to do this for every variant you mistype. Instead you can enable Git's autocorrection feature by running the following:
 
 ```
 # git config --global help.autocorrect 1
 ```
 
-This will wait for the value-specified number of 0.1 seconds (e.g. a value of `2` would wait for `0.2 seconds`) before autocorrecting and running the correct version. You may wish to set this time to longer if you wish to verify the command before it runs.
+This will wait for the value-specified number of 0.1 seconds (so a value of `2` would wait for `0.2 seconds`) before autocorrecting and running the correct version. You may wish to set this time to longer if you wish to verify the command before it runs.
 
 For example, if I ran `git pish` after this configuration change:
 ```
@@ -234,19 +237,19 @@ in 0.1 seconds automatically...
 Everything up-to-date
 ```
 
-If the wrong command is going to be run you can press Control-C to cancel it after the `WARNING` text is displayed.
+If the wrong command is going to be run, you can press Control-C to cancel it after the `WARNING` text is displayed.
 
 ### Aliasing commands
-One of the most powerful features available with `git config` is aliasing. Aliases allow you to create your own Git commands from combinations of other Git commands or by renaming them. This may be useful in making commands that are be more memorable or quicker to type. These are set as configuration values in the `alias` section.
+One of the most powerful features available with `git config` is aliasing. Aliases allow you to create your own Git commands from combinations of other Git commands or by renaming them. This may be useful for making commands that are more memorable or easier to type. These are set as configuration values in the `alias` section.
 
 #### Problem
 You wish to create a shorter alias for the "the ultimate log output" from <<04-HistoryVisualization#the-ultimate-log-output>>.
 
 #### Solution
-1.  You do not need to change to the directory of a particular or any Git repository.
+1.  You don't need to change to the directory of a particular or any Git repository.
 2.  Run `git config --global alias.ultimate-log "log --graph --oneline --decorate"`. There will be no output.
 
-You can verify this has worked by viewing the relevant section of the `~/.gitconfig` file using `grep`:
+You can verify that this has worked by viewing the relevant section of the `~/.gitconfig` file using `grep`:
 
 .Ultimate log alias output
 ```
@@ -255,13 +258,13 @@ You can verify this has worked by viewing the relevant section of the `~/.gitcon
 [alias] <1>
   ultimate-log = log --graph --oneline --decorate <2>
 ```
-<1> alias section
-<2> alias value
+<1> Alias section
+<2> Alias value
 
-You have created an alias named `ultimate-log`. Now if you run `git ultimate-log` it will be the equivalent of running `git log --graph --oneline --decorate`. Any arguments you follow `git ultimate-log` will be treated the same as arguments following `git log --graph --oneline --decorate`.
+You have created an alias named `ultimate-log`. Now if you run `git ultimate-log`, it will be the equivalent of running `git log --graph --oneline --decorate`. Any arguments you follow `git ultimate-log` will be treated the same as arguments following `git log --graph --oneline --decorate`.
 
 #### Discussion
-It's easier to remember `ultimate-log` than the various flags but it's still a bit long-winded to type. If you use `git ultimate-log` all the time you may want to use it more regularly than `git log` so want it to be fewer characters to type. Aliases can be of any length so you could create another alias to make a shorter value using `git config --global alias.l '!git ultimate-log'`:
+It's easier to remember `ultimate-log` than the various flags, but it's still unwieldy to type. If you use `git ultimate-log` all the time, you may want to use it more regularly than `git log` so want it to be fewer characters to type. Aliases can be of any length so you could create another alias to make a shorter value using `git config --global alias.l '!git ultimate-log'`:
 ```
 # git config --global alias.l '!git ultimate-log'
   "log --graph --oneline --decorate"
@@ -273,11 +276,11 @@ It's easier to remember `ultimate-log` than the various flags but it's still a b
   l = !git ultimate-log
 ```
 
-Note the use of single quotes when setting the alias. These are required in this case as otherwise the Unix shell may not write the `!` and you will see an error like: `Expansion of alias 'l' failed; 'ultimate-log' is not a git command`.
+Note the use of single quotes when setting the alias. These are required in this case, as otherwise the Unix shell might not write the `!` and you'll see an error like: `Expansion of alias 'l' failed; 'ultimate-log' is not a git command`.
 
-Now you can use `git l` do run `git ultimate-log` which will in turn run `git log --graph --oneline --decorate`. You may wonder why we didn't just set `git l` to be the ultimate log directly rather than passing through another command? I always prefer to do this as a way of providing making the `.gitconfig` file easier to read and follow.
+Now you can use `git l` do run `git ultimate-log`, which will in turn run `git log --graph --oneline --decorate`. You may wonder why we didn't just set `git l` to be the ultimate log directly, rather than passing through another command? I always prefer to do this as a way of providing making the `.gitconfig` file easier to read and follow.
 
-As well as adding a longer version of the command you may wish to add comments into your Git configuration files. You can do this by manually prefixing any line with the `#` or `;` characters. For example, in my `~/.gitconfig` I have:
+As well as adding a longer version of the command, you may want to add comments into your Git configuration files. You can do this by manually prefixing any line with the `#` or `;` characters. For example, in my `~/.gitconfig` I have:
 
 ```
 [alias]
@@ -289,35 +292,35 @@ As well as adding a longer version of the command you may wish to add comments i
   l = !git pretty-one-line-log
 ```
 
-Using this format of comments, longer commands and shortened ones helps make your `.gitconfig` file easier to follow. When you or someone else looks back on the changes you made the comments and more verbose commands make it more obvious what your reasons were for adding each section.
+Using this format of comments, longer commands, and shortened ones helps make your `.gitconfig` file easier to follow. When you or someone else looks back on the changes you made, the comments and more verbose commands make it more obvious what your reasons were for adding each section.
 
-As well as aliasing and shortening commands you can also use the alias functionality to chain multiple commands together.
+As well as aliasing and shortening commands, you can also use the alias functionality to chain multiple commands together.
 
 Any alias that starts with a `!` is run as a command in the root of the repository's working directory. Let's create a command that does a fetch and then interactive rebase.
 
-Run `git config --global alias.fetch-and-rebase '!git fetch && git rebase -i origin/master'`. This is telling Git to go to the root of the working directory (i.e. the directory containing the `.git` directory), run `git fetch` and if it succeeds run `git rebase -i origin/master`.
+Run `git config --global alias.fetch-and-rebase '!git fetch && git rebase -i origin/master'`. This is telling Git to go to the root of the working directory (the directory containing the `.git` directory), run `git fetch`, and if it succeeds, run `git rebase -i origin/master`.
 
-This can be useful in doing something similar to `git pull --rebase` but doing an interactive rebase instead. I often use this when I know some changes have been made upstream and I want to squash and reorder my commits based on these changes. For example, if I know changes have been made to the `origin/master` remote branch this alias will fetch them and interactive rebase the current branch on top of the `origin/master` remote branch so I can do the various things described in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>
+This can be useful in doing something similar to `git pull --rebase` but doing an interactive rebase instead. I often use this when I know some changes have been made upstream and I want to squash and reorder my commits based on these changes. For example, if I know changes have been made to the `origin/master` remote branch, this alias will fetch them and interactive rebase the current branch on top of the `origin/master` remote branch so I can do the various things described in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-interactively-git-rebase-interactive>>
 
 ### Share Git (and other) configuration between machines
-Some people will use Git on multiple machines. You may use it on both a desktop and laptop computer. It's annoying to have your ideal configuration be different on each machine so you may wish to keep your `~/.gitconfig` settings in sync so they are the same on every machine.
+Some people will use Git on multiple machines. You may use it on both a desktop and laptop computer. It's annoying to have your configuration be different on each machine, so you may wish to keep your `~/.gitconfig` settings in sync so they're the same on every machine.
 
-A common solution for this is to create a _dotfiles_ repository on GitHub. This involves creating a Git repository, adding all your Git global configuration files such as `~/.gitconfig` and `~/.gitignore`, committing, pushing and share these files between machines as you would any other Git repository. This can be good practice for learning how to use Git. You used dotfiles repositories for sharing many other application configuration files (e.g. such as a `.bashrc` file to configure the Bash shell).
+A common solution for this is to create a _dotfiles_ repository on GitHub. This involves creating a Git repository, adding all your Git global configuration files such as `~/.gitconfig` and `~/.gitignore`, committing, pushing, and sharing these files between machines as you would any other Git repository. This can be good practice for learning how to use Git. You used dotfiles repositories for sharing many other application configuration files (such as a `.bashrc` file to configure the Bash shell).
 
-You may be interested in my dotfiles repository on GitHub (https://github.com/mikemcquaid/dotfiles). It contains various configuration files including my `.gitconfig` and `.gitignore` which are well documented (and included in this book in <<mike-gitconfig>>). I've also created a simple script named `install-dotfiles.sh`. After cloning my dotfiles repository to somewhere in my `$HOME` I can run `install-dotfiles.sh` to symlink or copy all the dotfiles files into their correct locations. This means that I can easily get and install all my dotfiles on any machine that has Git installed. This is useful for me as I use the same dotfiles across my multiple computers, virtual machines and servers.
+You may be interested in my dotfiles repository on GitHub (https://github.com/mikemcquaid/dotfiles). It contains various configuration files including my `.gitconfig` and `.gitignore`, which are well documented (and included in this book in <<mike-gitconfig>>). I've also created a simple script named `install-dotfiles.sh`. After cloning my dotfiles repository to somewhere in my `$HOME`, I can run `install-dotfiles.sh` to symlink or copy all the dotfiles files into their correct locations. This means that I can easily get and install all my dotfiles on any machine that has Git installed. This is useful for me, as I use the same dotfiles across my multiple computers, virtual machines, and servers.
 
-GitHub also provides a dotfiles page with some notable dotfiles repositories and discussion of why they are useful at http://dotfiles.github.io.
+GitHub also provides a dotfiles page with some notable dotfiles repositories and discussion of why they're useful at http://dotfiles.github.io.
 
 ### Show the current branch in your terminal prompt
-As you have noticed throughout this book it's common to create and change branches frequently when using Git. When using multiple repositories or not using one for a while it may be difficult to remember what branch is currently checked out. You could just run `git branch` but if you're switching regularly between multiple repositories it can be handy to have this information displayed in your terminal. Let's learn how to do this for Bash or ZSH: two popular shells.
+As you've noticed throughout this book, it's common to create and change branches frequently when using Git. When using multiple repositories or not using one for a while, it may be difficult to remember what branch is currently checked out. You could just run `git branch` but if you're switching regularly between multiple repositories, it can be handy to have this information displayed in your terminal. Let's learn how to do this for Bash or ZSH: two popular shells.
 
 #### Problem
 You wish to add the current Git branch to your Bash or ZSH terminal prompt.
 
 #### Solution
-First, work out what shell you are using by running `basename $SHELL`. This should output either `bash` or `zsh`. If it outputs something else then you may need to modify the instructions (which, I'm afraid, is beyond the scope of this book).
+First, work out what shell you're using by running `basename $SHELL`. This should output either `bash` or `zsh`. If it outputs something else then you may need to modify the instructions (which, I'm afraid, is beyond the scope of this book).
 
-Add the following function to your `~/.bashrc` file if you are using Bash or `~/.zshrc` file if you are using ZSH:
+Add the following function to your `~/.bashrc` file if you're using Bash or `~/.zshrc` file if you're using ZSH:
 ```bash
 git_branch() {
   GIT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null) || return
@@ -325,28 +328,28 @@ git_branch() {
 }
 ```
 
-This provides a `git_branch` function. Once you've added it, open a new shell, `cd` to a Git repository and run `git_branch`. If you are on the `master` branch the output should be `(master)`.
+This provides a `git_branch` function. Once you've added it, open a new shell, `cd` to a Git repository, and run `git_branch`. If you're on the `master` branch, the output should be `(master)`.
 
-This function is using the `git symbolic-ref` command which resolves a ref to a branch. In this case we're asking for the shortest branch ref for the `HEAD` pointer i.e. the currently checked-out branch. This is then output surrounded with brackets.
+This function is using the `git symbolic-ref` command, which resolves a ref to a branch. In this case we're asking for the shortest branch ref for the `HEAD` pointer--the currently checked-out branch. This is then output surrounded with brackets.
 
 Let's make a prompt of the format `hostname (branch) #`.
 
-If you're using Bash add the following to your `~/.bashrc`:
+If you're using Bash, add the following to your `~/.bashrc`:
 ```bash
 PS1='\[\033[01;32m\]\h \033[01;31m\]$(git_branch)\
 \[\033[01;34m\]#\[\033[00m\] '
 ```
 
-If you're using ZSH add the following to your `~/.zshrc`
+If you're using ZSH, add the following to your `~/.zshrc`
 ```bash
 autoload -U colors && colors
 PROMPT='%{$fg_bold[green]%}%m %{$fg_bold[red]%}$(git_branch)\
 %{$fg_bold[blue]%}# %b%f'
 ```
 
-The differences between the two reflect the different ways of setting colors in Bash and ZSH and the different variables that are used to output the hostname (`\h` vs `%m`) and the colors (`\[\033[01;32m\]` vs `%{$fg_bold[green]%}`).
+The differences between the two reflect the different ways of setting colors in Bash and ZSH and the different variables that are used to output the hostname (`\h` versus `%m`) and the colors (`\[\033[01;32m\]` vs `%{$fg_bold[green]%}`).
 
-Be careful to enter them exactly as-is or they may error. You may wish to enter them into your currently running terminal to test them before inserting into your `~/.bashrc` or `~/.zshrc`.
+Be careful to enter them exactly as-is or they may cause errors. You may wish to enter them into your currently running terminal to test them before inserting into your `~/.bashrc` or `~/.zshrc`.
 
 The final version should look something like this:
 
@@ -356,7 +359,7 @@ image::screenshots/07-ShellBranch.png[]
 You have successfully added the current Git branch to your Bash or ZSH terminal prompt.
 
 #### Discussion
-This prompt works by running the `git symbolic-ref --short HEAD` command every time a new prompt is displayed. In event of an error or no output (i.e. no checked out branch) it will not display any Git information in the prompt.
+This prompt works by running the `git symbolic-ref --short HEAD` command every time a new prompt is displayed. In event of an error or no output (no checked out branch), it won't display any Git information in the prompt.
 
 ### Summary
 In this chapter you hopefully learned:
