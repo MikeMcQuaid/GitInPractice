@@ -12,7 +12,7 @@ In this chapter you will learn how to create a clean history by learning the fol
 
 ### Writing a good commit message
 We saw already in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> why small commits are better and how commit messages should be formatted. Let's go into a bit more detail on what is a good format to use when writing your commit messages and why.
-//(TP)-The link below is broken.
+
 Below is an example of a good commit message format. It's strongly influenced by
 a guide written by Tim Pope which is now at
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html.
@@ -46,7 +46,7 @@ _italics_, ~~strikethrough~~, `monospace` or lists bulleted with a `*`
 or numbered with e.g. `1.`. You shouldn't go overboard with this but it
 can add some useful, basic formatting.
 ```
-//(TP)-An example of the above would be nice here.
+
 ### Building a commit from parts of files: git add --patch
 We've seen previously in the book how to create commits from all the changes in an individual file. As commits should be as small as possible (recall <<01-LocalGit#viewing-history-git-log-gitk-gitx>>) sometimes there may be multiple changes made to a file that you want to split into multiple commits. Of course you could manually undo and redo these changes to the files but that would be rather tedious. Thankfully Git provides you with various tools to add only certain changes in certain files to the index staging area or directly commit them.
 
@@ -269,4 +269,3 @@ In this chapter you learned:
 * How to use `git add --patch` or `git commit --patch` to stage only chosen hunks for a new commit
 * How to use GitX or Git GUI to stage only selected lines or hunks for a new commit
 * How to use `git diff --check` to make sure you haven't added any bad whitespace changes
-//(TP)-May be out of scope, but how about Git Extensions? This is a great tool for all your needs and integrates very well with VS.

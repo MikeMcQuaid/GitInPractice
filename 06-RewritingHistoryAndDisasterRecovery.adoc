@@ -655,7 +655,6 @@ Ref 'refs/heads/master' was rewritten <5>
 
 From the filter-branch file removal output:
 
-// BEN: same comment as earlier: Manning doesn't really do definition lists like this; we use bulleted lists like * TERM---This term...
 * "filter command (1)" (`git filter-branch`) takes the following flags:
   `--prune-empty` flag::
     This discards any now empty commits (those that only changed the `00-Preface.asciidoc`) as they're no longer needed.
