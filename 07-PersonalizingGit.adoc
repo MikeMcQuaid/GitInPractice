@@ -3,8 +3,6 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 Git is a heavily configurable tool. As we've seen previously in this book, there are often times where you have multiple behaviors or choices for commands that you can select with flags or by using different commands. You may always want to run a command with a lengthy set of commands, or want to set your preferred `difftool` or `mergetool` as a default. These tweaks can be done per-repository or globally, and will allow you to maximize productivity when adopting a particular Git workflow.
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets (prev paragraph would go after the bullets)
-
 In this chapter you'll learn about Git shortcuts by learning the following topics:
 
 * How to set configuration for a single repository, all of a user's repositories, or all of a system's repositories
@@ -142,8 +140,7 @@ Git's output doesn't use colors by default on versions below 1.8.4. To enable co
 # git config --global color.ui auto
 ```
 
-// BEN: I don't understand the significance of "not writing to a file" below ... could be more clear 
-This will mean that, if supported by your terminal and not writing to a file, Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will use red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
+This will mean that, if supported by your terminal and not writing the output of a command to a file, Git will use colored text in the output. I think colored output makes Git's commands much easier to read and parse quickly. The `git diff` output in this case will use red for removed lines and green for added ones. This is a much quicker way of parsing these changes than looking for a `+` or `-` symbol (which is included in the output regardless).
 
 Note the red and green colors chosen are set by your terminal rather than Git. If you wish to change them, you'll need to change your terminal's settings (which are specific to the terminal software you're using).
 

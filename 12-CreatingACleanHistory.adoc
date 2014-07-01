@@ -222,7 +222,7 @@ image::diagrams/12-GitGUIBeforeStage.png[]
 
 <<git-gui>> shows the Git GUI user interface. It is similar to GitX 's stage mode but the two `Unstaged Changes` and `Staged Changes (Will Commit)` file lists are shown on the left hand side rather than left and right of the commit message.
 
-You select the file whose changes you want to view by clicking on it in the `Unstaged Changes` list. Stage the the `// Git Through Praxis?` line by right-clicking on it and selecting `Stage Line For Commit` from the right-click menu. If you had wanted to stage all the lines in a hunk you could have selected `Stage Hunk For Commit` from the right-click menu. If you had wanted to stage all changes in a file you could have selected the file name in the `Unstaged Changes` list, click the `Commit` menu and click `Stage To Commit`.
+You select the file whose changes you want to view by clicking on it in the `Unstaged Changes` list. Stage the `// Git Through Praxis?` line by right-clicking on it and selecting `Stage Line For Commit` from the right-click menu. If you had wanted to stage all the lines in a hunk you could have selected `Stage Hunk For Commit` from the right-click menu. If you had wanted to stage all changes in a file you could have selected the file name in the `Unstaged Changes` list, click the `Commit` menu and click `Stage To Commit`.
 
 .Git GUI staged
 [[git-gui-staged]]

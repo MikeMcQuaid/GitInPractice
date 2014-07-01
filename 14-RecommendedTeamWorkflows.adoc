@@ -2,10 +2,10 @@
 ifdef::env-github[:outfilesuffix: .adoc]
 
 We saw in <<13-MergingVsRebasing#homebrew-s-workflow>> and <<13-MergingVsRebasing#cmake-s-workflow>> that you can have two teams who both use Git as a version control system for managing a software project but handle branches, merging and rebasing very differently. The different strategies for deciding how and when to branch, merge or rebase are as part of a team are _team workflows_. The different workflows allow different ways of handling (or not handling) stable releases, tags and bugfixing of previous releases.
-//(TP)-Should it be GitHub Flow in both lines below or only Git Flow in the first? Reading on, both I guess. What confused me was that Git Flow was mentioned first, but GitHub flow was described first.
+
 In this chapter you will learn the two most popular Git workflows and two of my personal workflows:
-* How to use Git Flow to manage branching and merging in an untagged project
-* How to use GitHub Flow to manage branching and merging in a single or multiple release project
+* How to use GitHub Flow to manage branching and merging in an untagged project
+* How to use Git Flow to manage branching and merging in a single or multiple release project
 * How to use Mike Flow Single to manage branching, rebasing and merging in a single release project
 * How to use Mike Flow Multiple to manage branching, rebasing and merging in a multiple release project
 
@@ -141,7 +141,7 @@ Mike Flow Multiple is essentially Mike Flow Single with release branches:
 * Unlike feature branches release branches are never rewritten.
 * Tags are created on feature branches rather than `master`.
 
-Let's say you are working on a new desktop application called CutDub which provides the ability to trim dubstep music albums to your chosen length. You want to add a feature for automatic silence trimming so create a feature branch named `auto-silence-trim` from the `master` branch. You then commit your changes to this branch over the course of a few weeks and push them to the remote repository. When you've tested your changes and think they are stable enough to be included in next stable version you would merge them into `master` and delete your branch. When the the `2.x` release branch created from the `master` branch it will include your automatic silence trimming feature. When `2.0` is tagged and released it will include your automatic silence trimming feature. If you needed to fix a bug in the `2.0` release with some trims causing corruption you would create a feature branch named `fix-trim-corruption` and merge it into `master` and `2.x` and produce a new release after testing.
+Let's say you are working on a new desktop application called CutDub which provides the ability to trim dubstep music albums to your chosen length. You want to add a feature for automatic silence trimming so create a feature branch named `auto-silence-trim` from the `master` branch. You then commit your changes to this branch over the course of a few weeks and push them to the remote repository. When you've tested your changes and think they are stable enough to be included in next stable version you would merge them into `master` and delete your branch. When the `2.x` release branch created from the `master` branch it will include your automatic silence trimming feature. When `2.0` is tagged and released it will include your automatic silence trimming feature. If you needed to fix a bug in the `2.0` release with some trims causing corruption you would create a feature branch named `fix-trim-corruption` and merge it into `master` and `2.x` and produce a new release after testing.
 
 Let's look at a diagram to help us understand Mike Flow Multiple:
 

@@ -20,8 +20,8 @@ Enter your username, email and password and click the create button to advance t
 .Choose GitHub plan
 [[github-plan]]
 image::diagrams/B-GitHubPlan.png[]
-//(TP)-I think readers might be confused as to the ability for all to commit to a public repository. 
-The form in <<github-plan>> allows you to select your GitHub payment plan. The only differences between plans are the number of private repositories you can create. Private repositories mean that none of your commits or files committed to the repository can accessed by others without your explicit approval. In this book you will never have to commit anything private to a repository so you do not need to choose a paid plan. After you have selected a plan click the finish button to advance to the next screen.
+
+The form in <<github-plan>> allows you to select your GitHub payment plan. The only differences between plans are the number of private repositories you can create. Private repositories mean that none of your commits or files committed to the repository can accessed by others without your explicit approval. Public repositories mean that all your commits are viewable by anyone but no-one else can commit to your repository without your explicit approval. In this book you will never have to commit anything private to a repository so you do not need to choose a paid plan. After you have selected a plan click the finish button to advance to the next screen.
 
 You have created a GitHub account and the next step is to create a new repository.
 

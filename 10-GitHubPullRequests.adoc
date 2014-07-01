@@ -311,4 +311,4 @@ In this chapter you hopefully learned:
 * How pull requests are used to request the merge and review of branches
 * How forks are used to request pull requests on repositories without commit access
 * How to create a new pull request using `gh pull-request`
-* How to merge a a pull request using `git merge` or `gh merge`
+* How to merge a pull request using `git merge` or `gh merge`

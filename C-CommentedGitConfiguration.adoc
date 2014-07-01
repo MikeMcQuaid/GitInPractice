@@ -1,7 +1,9 @@
 [appendix]
 ## Commented Git Configuration
+In Chapter 7 you learnt about configuring Git for maximum productivity. I've been using Git as my main version control system for a pretty long time at this point so have my Git configuration well optimized.
+
 This appendix includes my Git configuration files at the time of writing. These are heavily commented to explain what they are doing and why.
-//(TP)-How about a reference to chapter 7 where you speak about Git personalization?
+
 The latest versions are always available in my dotfiles repository on GitHub: https://github.com/mikemcquaid/dotfiles
 
 .`~/.gitconfig`

@@ -26,7 +26,7 @@ Despite these downsides, the strengths of Git have proved too strong for many so
 Many of these projects and many users of Git have also been introduced to and use Git through a Git hosting provider. My favorite is GitHub, but various other paid and free alternatives are available.
 
 ### Initial setup
-Once you've installed Git (as detailed in <<A-GitInstallation#git-installation>>) the first thing you need to do is to tell Git your name and email (particularly before creating any commits). Rather than usernames Git uses a name and email address to identify the author of a commit.
+Once you've installed Git version 1.8 or above (as detailed in <<A-GitInstallation#git-installation>>) the first thing you need to do is to tell Git your name and email (particularly before creating any commits). Rather than usernames Git uses a name and email address to identify the author of a commit.
 
 My name is Mike McQuaid and email address is `mike@mikemcquaid.com` so I would run:
 
