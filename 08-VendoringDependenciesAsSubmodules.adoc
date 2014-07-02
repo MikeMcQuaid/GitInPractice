@@ -1,7 +1,6 @@
 ## Vendoring dependencies as submodules
 ifdef::env-github[:outfilesuffix: .adoc]
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets
 In this chapter you will learn how to maintain dependencies on other Git-based software projects within your own using Git submodules.
 
 * When submodules are useful
@@ -41,9 +40,8 @@ Create a new repository on GitHub that we can use as a submodule by following th
 3.  Create a file named `TODO.md` with the `echo` command by running `echo "# TODO\n1. Add something useful to this submodule." > TODO.md`.
 4.  Commit the new `TODO.md` as the initial commit by running `git commit --message "Initial commit of submodule." TODO.md`.
 5.  Create a new repository on GitHub (or another Git hosting provider).
-6.  Add the new remote reference to the GitHub repository by running `git remote add origin https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git`.\
+6.  Add the new remote reference to the GitHub repository by running `git remote add origin https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git`.
 7.  Push the repository to GitHub by running `git push --set-upstream origin master`.
-// BEN: delete slash at end of #6 above?
 
 The output of all these commands should resemble the following:
 
