@@ -5,7 +5,6 @@ Despite the growth of Git, Subversion (also known as SVN) remains widely used ac
 
 Thankfully Git provides functionality to allow you to access existing Subversion repositories through the `git svn` command. This also provides a good way of learning Git if you still have to use Subversion repositories, and a good migration path for projects that currently use Subversion and wish to use Git.
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets (preceding paragraphs would go under the bullets)
 In this chapter you'll learn about Git's Subversion integration by learning the following topics:
 
 * How to import an existing Subversion repository into a Git repository
@@ -57,8 +56,7 @@ Checked out HEAD:
 
 From the Subversion repository clone output:
 
-// BEN: please confirm whether Git 2 has released and when
-* "clone command (1)" shows the `git svn clone` command used to clone the entire Subversion repository. The `--prefix` argument is only needed in Git versions before 2.0 (which should be released around May 2014) and means that the Subversion remote branches will all be created under `origin/` (like a normal Git remote repository would do). The `--stdlayout` flag is used to say that the Subversion repository is in the usual format--has the `branches`, `tags`, and `trunk` as the subfolders of the root of the repository and they should all be imported.
+* "clone command (1)" shows the `git svn clone` command used to clone the entire Subversion repository. The `--prefix` argument is only needed in Git versions before 2.0 (which was released on May 28, 2014) and means that the Subversion remote branches will all be created under `origin/` (like a normal Git remote repository would do). The `--stdlayout` flag is used to say that the Subversion repository is in the usual format--has the `branches`, `tags`, and `trunk` as the subfolders of the root of the repository and they should all be imported.
 * "SVN repository (2)" shows the HTTP URL of the Subversion repository that we've cloned.
 * "Directory name (3)" shows the name of the local directory which will contain the new Git repository created from the Subversion repository.
 * "First revision (4)" shows the first commit/revision (`r1`) of the Subversion repository being mapped and imported as a new commit/SHA-1 (`ec0d88...`) into the local Git repository.
@@ -228,8 +226,7 @@ image::diagrams/09-GitSvnWorkflow.png[]
 
 The equivalents to `git fetch` and `git pull --rebase` for Subversion repositories are `git svn fetch` and `git svn rebase`. There's no equivalent to `git pull` without `--rebase`. This is because Git and Subversion handle merges differently, so it's important to avoid merge commits on updates, as they won't (and shouldn't) be seen by other users of the Subversion repository.
 
-If you run `git svn rebase` on the `master` branch and there are no outputs the output will be:
-// BEN: "if there are no outputs the output will be" is not clear
+If you run `git svn rebase` on the `master` branch and there are no new commits the output will be:
 
 .No new Subversion revisions output
 ```
@@ -354,9 +351,7 @@ From the Subversion push output:
 * "Push success (2)" shows that the new Subversion revision was committed successfully.
 * "New revision (3)" shows the new commit that was created from the new Subversion revision. Recall that commits all contain their revision numbers and repository UUIDs, which requires rewriting the commit message. Also recall that rewriting the commit message changes the SHA-1 of a commit. As a result, this new commit SHA-1 doesn't match the SHA-1 in "new commit (1)," although the actual changes are the same.
 * "Commit diff (4)" shows `git svn` checking that there are no differences between the commit that was just created and the commit the Subversion repository returned.
-* "trunk reset (5)" shows that the `HEAD` and `master` branch pointers are being updated to the new commit. The old commit is still accessible before it was rewritten with the Subversion metadata.
-// BEN: "is still accessible before it was rewritten" is confusing. I would rewrite as "the old commit from before it was rewritten" or similar
-// BEN: also, it's not clear which commit has the metadata: is it "the old commit with the metadata" or "it was rewritten with the metadata"? 
+* "trunk reset (5)" shows that the `HEAD` and `master` branch pointers are being updated to the new commit. The old commit is still accessible from before it was rewritten and the new commit was created with the Subversion metadata.
 
 You have successfully committed and pushed changes to a Subversion repository.
 
