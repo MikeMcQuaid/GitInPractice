@@ -407,8 +407,7 @@ From the final bisect output:
 [[gitx-bisect]]
 image::screenshots/04-GitXBisect.png[]
 
-//BEN: below: new temporary what? files? commits?
-From <<gitx-bisect>>, you can see that `git bisect` creates new, temporary (they're removed by `git bisect reset`) as it is working. These indicate the commits that were marked by `git bisect bad` and `git bisect good` while working through the history. The `refs/bisect/bad` ref points to the final, bad commit that was detected.
+From <<gitx-bisect>>, you can see that `git bisect` creates new, temporary refs (they're removed by `git bisect reset`) as it is working. These indicate the commits that were marked by `git bisect bad` and `git bisect good` while working through the history. The `refs/bisect/bad` ref points to the final, bad commit that was detected.
 
 You've located the commit that renamed `GitInPractice.asciidoc`.
 
