@@ -478,7 +478,7 @@ Although `git bisect` is already useful, wouldn't it be even better if, rather t
 
 # git bisect bad
 
-# git bisect good
+# git bisect good 6576b6
 
 Bisecting: 3 revisions left to test after this (roughly 2 steps)
 [ac14a50465f37cfb038bdecd1293eb4c1d98a2ee] Start Chapter 2.
