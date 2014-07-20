@@ -3,7 +3,6 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 We saw in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> that a clean history can make it easier to find useful information. For a history to be clean, it should use good, well-formatted commit messages for commits which are as small as possible.
 
-// usual Manning style is just "In this chapter" and the bullets
 In this chapter you will learn how to create a clean history by learning the following topics:
 
 * How to write a good commit message
@@ -17,9 +16,6 @@ We saw already in <<01-LocalGit#viewing-history-git-log-gitk-gitx>> why small co
 Here's an example of a good commit message format. It's strongly influenced by
 a guide written by Tim Pope, which is now at
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html.
-
-// BEN: this looks like it's formatted as a listing, and I'm not sure why
-// BEN: if I were editing this, I would definitely remove all the "e.g."s but am unsure how to handle if it's supposed to be a listing with limited line length
 
 .Good commit message format
 ```
@@ -36,8 +32,8 @@ the first line of the commit may get confused.
 The commit's message body can be split into multiple paragraphs which
 should be wrapped at 72 characters or fewer. The wrapping is done to
 ensure the output of tools like `git log` remains readable even when it
-adds indentation for e.g. diffs. Otherwise the commit message has no
-other limits on length; it should be as long as it needs to be to fully
+adds indentation for diffs. Otherwise the commit message has no other
+limits on length; it should be as long as it needs to be to fully
 explain the commit. While the subject might describe what the commit
 does, the body should expand on why the change was made. It should also
 use the present tense to match the tense used by commit messages
@@ -47,8 +43,8 @@ If you're using GitHub (and some other tools) then the contents of
 commit messages can contain Markdown. You may use Markdown to add some
 formatting that looks good in ASCII or rendered such as using **bold**,
 _italics_, ~~strikethrough~~, `monospace` or lists bulleted with a `*`
-or numbered with e.g. `1.`. You shouldn't go overboard with this but it
-can add some useful, basic formatting.
+or numbered with, for example `1.`. You shouldn't go overboard with
+this but it can add some useful, basic formatting.
 ```
 
 ### Building a commit from parts of files: git add --patch
@@ -191,18 +187,13 @@ As you may have noticed, throughout this book I mostly prefer to use (and theref
 We saw in <<building-a-commit-from-parts-of-files-git-add-patch>> how to build commits from parts of files from the Git command-line application, but it's a task I've found is far easier using a graphical application. In this section I'll show you how to do this with GitX or `git-gui` (which provides this functionality in a separate application).
 
 #### Graphically building a commit in GitX
-GitX provides a staging mode that also allows adding entire files or individual hunks to staging provides support for graphically staging hunks. If you click on the "Stage" in the top-right of GitX it should resemble the following:
-
-// BEN: it looks like the figure shows what happens after you click Stage, so it's not clear what "stage" is: is it a button, similar to the Unstage button in the figure?
-// BEN: we most likely should remove the quotes around "Stage" but I don't know whether it should be changed to "click Stage in the top right" or "click the Stage button"
+GitX provides a staging mode that also allows adding entire files or individual hunks to staging provides support for graphically staging hunks. If you click on the Stage hunk button in the top-right of GitX it should resemble the following:
 
 .GitX stage mode
 [[gitx-stage]]
 image::diagrams/12-GitXBeforeStage.png[]
 
-// BEN: Manning generally doesn't use code font for things like menus and buttons. Instead we just use Headline Case in a plain-text font.
-
-You can see from <<gitx-stage>> that the staging mode shows a selection of files to stage, the changes to the selected file, and allows staging of hunks or selected lines through their respective buttons. Stage the `// Git Through Praxis?` line by clicking on it and then clicking the `Stage line` button that appears on the right of that line. If you had wanted to stage all the lines in a hunk you could've clicked the Stage button at the top-right of the hunk. If you had wanted to stage all changes in a file, you could've right-clicked on the file name in the Unstaged Changes list and selected Stage Changes from the right-click menu.
+You can see from <<gitx-stage>> that the staging mode shows a selection of files to stage, the changes to the selected file, and allows staging of hunks or selected lines through their respective buttons. Stage the `// Git Through Praxis?` line by clicking on it and then clicking the Stage line button that appears on the right of that line. If you had wanted to stage all the lines in a hunk you could've clicked the Stage button at the top-right of the hunk. If you had wanted to stage all changes in a file, you could've right-clicked on the file name in the Unstaged Changes list and selected Stage Changes from the right-click menu.
 
 .GitX staged hunk
 [[gitx-staged-hunk]]

@@ -8,16 +8,13 @@ We saw in <<02-RemoteGit#adding-a-remote-repository-git-remote-add>> how to push
 * Provide an internal mirror of an external Git repository to allow faster transfer speeds
 * Host a Git repository on a server entirely under your own control
 
-// BEN: unclear: "sharing and viewing a repository on my machine with repositories on other machines" 
-I personally only use the commands in this chapter for basic sharing and viewing of a repository on my machine with repositories on other machines on the same network (rather than over the internet). Though we'll see more advanced tools in <<advanced-git-hosting>>, this chapter is focused on understanding the features provided by Git itself and how it works, rather than more advanced Git hosting solutions. In essence, this chapter is a guide for software engineers to understand how Git repositories can be shared and not a guide for system administrators on how set up Git servers. Unless you're an experienced system administrator, I'd advise using on an external Git hosting provider (such as GitHub) rather than running your own Git servers. We'll cover Git's repository hosting commands by learning about the following topics:
+I only use the commands in this chapter for viewing a local repository or sharing a local repository with computers on the same network (rather than over the internet). Though we'll see more advanced tools in <<advanced-git-hosting>>, this chapter is focused on understanding the features provided by Git itself and how it works, rather than more advanced Git hosting solutions. In essence, this chapter is a guide for software engineers to understand how Git repositories can be shared and not a guide for system administrators on how set up Git servers. Unless you're an experienced system administrator, I'd advise using on an external Git hosting provider (such as GitHub) rather than running your own Git servers. We'll cover Git's repository hosting commands by learning about the following topics:
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets. (all the above would go below the intro bullets)
-// BEN: also, some of these bullets are a bit too long... should be no more than 8 words each
-* How to create a repository in a format used for hosting as a server
-* How to mirror an existing repository for hosting as a server
-* How to share the contents of a repository with users on the same network
-* How to display the contents of a repository in a web browser
-* How to provide more advanced Git hosting with other software
+* How to create a repository in a format for hosting a server
+* How to mirror an existing repository for hosting a server
+* How to share a repository with a local network
+* How to view a repository in a web browser
+* How to provide advanced Git hosting with other software
 
 ### Initialize a local repository in a server hosting format: git init --bare
 The Git repositories we've seen throughout this book have all had a similar structure: the working directory contains a checkout of the files in the current branch and a `.git` subdirectory which contains the repository data.
@@ -256,7 +253,6 @@ You have successfully displayed the contents of the repository in a browser..
 ### Advanced Git hosting
 In addition to the tools provided with Git you've seen in this chapter, there is a wide third-party ecosystem of Git tools that can help you share your repositories and provide a web interface to view them. There are too many and their setup is too involved for me to detail them all here. Some of the most popular options are:
 
-// BEN: we don't really do definition lists like this. we do bulleted lists with the intro term separated by an em-dash
 GitHub::
     GitHub (https://github.com) is the most widely used Git hosting, and provides many features beyond sharing and viewing Git repositories. It provides free open-source public hosting and paid private hosting. Alternatively you can pay for GitHub Enterprise (https://enterprise.github.com), which provides a hosted GitHub appliance that can be run inside your network.
 

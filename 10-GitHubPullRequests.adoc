@@ -5,7 +5,6 @@ GitHub provides more than just Git hosting that you can `git push` to and `git f
 
 Two of these features are _pull requests_ and _forks_. In this chapter you'll learn about GitHub's pull requests by learning about the following topics:
 
-// BEN: usual manning style is just "In this chapter" and then the bullets
 * How to make pull requests from branches on the same repository
 * How to make pull requests from branches a forked repository
 * How to interact with forks and pull requests from the command-line

@@ -1,8 +1,6 @@
 ## Merging versus rebasing
 ifdef::env-github[:outfilesuffix: .adoc]
 
-// BEN: usual Manning style is just "In this chapter" and then the bullets
-
 In this chapter you will learn about the pros and cons of merging vs rebasing by learning the following topics:
 
 * How CMake uses a branching and merging strategy to manage contributions
@@ -127,8 +125,7 @@ For a Homebrew maintainer to merge a branch into `master`:
 
 1.  Checkout the `master` branch with `git checkout master`.
 2.  Add the forked repository and cherry-pick the commit with `git add remote username https://github.com/username/homebrew.git`, `git fetch username`, and `git merge username/branchname`. Alternatively, some maintainers (including me) use Homebrew's `brew pull` command, which pulls the contents of a pull request onto a local branch by using patch files rather than fetching from the forked repository.
-3.  Rebase, reword, and clean up the commits on `master` with `git rebase --interactive origin/master`. It's common for Homebrew maintainers to edit or squash commits and rewrite commit messages but preserve the "author" metadata so the author retains credit. Often a commit will be edited to contain a string like "Closes #123", which automatically closes the pull request numbered 123 when the commit is merged to master. This will also be covered more in chapter 11.
-// BEN: this is ch 13, so if the ref to ch 11 is correct then it should say "was" -- otherwise please fix reference
+3.  Rebase, reword, and clean up the commits on `master` with `git rebase --interactive origin/master`. It's common for Homebrew maintainers to edit or squash commits and rewrite commit messages but preserve the "author" metadata so the author retains credit. Often a commit will be edited to contain a string like "Closes #123", which automatically closes the pull request numbered 123 when the commit is merged to master. This was covered more in chapter 10.
 4.  Push the `master` branch with `git push`.
 
 ### CMake's workflow pros and cons
