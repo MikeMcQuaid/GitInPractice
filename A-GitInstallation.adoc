@@ -48,7 +48,6 @@ On Linux or Unix, you can install Git directly from your package manager. How to
 * _OpenBSD_--`pkg_add git`
 
 ### How to install and run Git on Microsoft Windows
-// BEN: I'm using GitHub for Windows client and it is really good; it's probably worth mentioning here -- or would appendix B be a better place to mention it?
 To verify whether Git is already installed, look for "Git Bash" links in your Start Menu or on your Desktop.
 
 Git for Windows can be downloaded from the official Git site at http://git-scm.com/download/win. Download and click through the installer. When it has completed, it will provide Start Menu links to run Git Bash.

@@ -3,13 +3,11 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 We saw in <<13-MergingVsRebasing#homebrew-s-workflow>> and <<13-MergingVsRebasing#cmake-s-workflow>> that you can have two teams who both use Git as a version control system for managing a software project but handle branches, merging, and rebasing very differently. The different strategies for deciding how and when to branch, merge, or rebase as part of a team are _team workflows_. The different workflows allow different ways of handling (or not handling) stable releases, tags, and bugfixing of previous releases.
 
-// BEN: usual manning style is just "in this chapter" and then the bullets
-// BEN: also these bullets are too long, shouldn't be longer than 8 words
 In this chapter you will learn the two most popular Git workflows and two of my personal workflows:
-* How to use GitHub Flow to manage branching and merging in an untagged project
-* How to use Git Flow to manage branching and merging in a single or multiple release project
-* How to use Mike Flow Single to manage branching, rebasing, and merging in a single release project
-* How to use Mike Flow Multiple to manage branching, rebasing, and merging in a multiple release project
+* How to use GitHub Flow to manage an untagged project
+* How to use Git Flow to manage a tagged project
+* How to use Mike Flow Single to manage a single release project
+* How to use Mike Flow Multiple to manage a multiple release project
 
 ### GitHub Flow
 GitHub Flow is so named because it's the Git workflow that came out of the GitHub organization. It was first formally described in a blog post by Scott Chacon in 2011 at http://scottchacon.com/2011/08/31/github-flow.html.
