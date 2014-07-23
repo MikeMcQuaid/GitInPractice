@@ -8,68 +8,68 @@ ifdef::env-github[:outfilesuffix: .adoc]
 TODO: Scott Chacon.
 
 ### Preface
-As all good software engineers will agree: version control is important. I was first introduced to version control while studying Computer Science at university and dabbling with open-source in my free time. CVS and Subversion started being used for managing our small pieces of coursework, group projects and larger open-source projects we interacted with. Initially it all felt a bit overkill; why do I need this when I'm working by myself? It only took a few personal screw-ups for me to understand why they are so important.
+As all good software engineers will agree: version control is important. I was first introduced to version control while studying Computer Science at university and dabbling with open source in my free time. CVS and Subversion started being used for managing our small pieces of coursework, group projects, and larger open-source projects we interacted with. Initially it all felt a bit overkill; why do I need this when I'm working by myself? It only took a few personal screw-ups for me to understand why they are so important.
 
-I was first introduced to Git in 2006 while working audio drivers for the Linux kernel at a summer internship. It was a fairly terrifying beast in those days; incredibly fast compared to its competitors, impressive in how it managed almost everything offline but with an arcane user-interface full of jargon. The jargon has decreased but everything else remains fairly similar: Git is fast, impressive and confusing.
+I was first introduced to Git in 2006 while working audio drivers for the Linux kernel at a summer internship. It was a fairly terrifying beast in those days; incredibly fast compared to its competitors, impressive in how it managed almost everything offline, but with an arcane user-interface full of jargon. The jargon has decreased but everything else remains fairly similar: Git is fast, impressive, and confusing.
 
-My first few jobs after graduating found most companies still using Subversion. Git was one of these things used by kernel hackers and the particularly hardcore open-source crowd and not ready for mainstream use yet. I liked the glimpse I had had with it so continued using it stealthily using `git svn`; a bridge that allows you to access Subversion repositories using Git. Eventually GitHub came along and convinced people that Git could be easy to use and I was able to use Git more regularly through becoming a maintainer of the Homebrew Mac OS X package manager and more employers and clients using GitHub.
+My first few jobs after graduating found most companies still using Subversion. Git was one of these things used by kernel hackers and the particularly hardcore open-source crowd, and not ready for mainstream use yet. I liked the glimpse I'd had with it so continued using it stealthily using `git svn`; a bridge that allows you to access Subversion repositories using Git. Eventually GitHub came along and convinced people that Git could be easy to use, and I was able to use Git more regularly through becoming a maintainer of the Homebrew Mac OS X package manager and more employers and clients using GitHub.
 
-I think because I was a relatively early adopter of Git and the type of person who needs to know how things work I ended up helping others with Git; first at my own workplace and then through training courses, talks and helping others in the open-source community.
+I think because I was a relatively early adopter of Git and the type of person who needs to know how things work, I ended up helping others with Git; first at my own workplace and then through training courses, talks, and helping others in the open-source community.
 
-Eventually I was contacted by another publisher about writing a Git book and contacted Manning to ask if I could write with them. The result is Git in Practice: a book which takes you through from intermediate to advanced level Git tools and workflows that I've found useful when working as a software engineer.
+Eventually I was contacted by another publisher about writing a Git book and contacted Manning to ask if I could write with them. The result is _Git in Practice_: a book that takes you through from intermediate to advanced level Git tools and workflows that I've found useful when working as a software engineer.
 
 ### Acknowledgements
-There's many people without whom this book would not be a reality. Firstly, I'd like to thank Dan Maharry, my development editor at Manning, who has kept me motivated and provided excellent feedback which has resulted in a far better book than I could have done on my own. Additionally, many others who has worked at and with Manning who have helped me along the way, particularly Jay Bryant, Michael Stephens, Bert Bates, Benjamin Berg, Karsten Strøbæk, Art Bergquist  and Ozren Harlovic.
+There are many people without whom this book wouldn't be a reality. Firstly, I'd like to thank Dan Maharry, my development editor at Manning, who has kept me motivated and provided excellent feedback which has resulted in a far better book than I could have done on my own. Additionally, many others who has worked at and with Manning who have helped me along the way, particularly Jay Bryant, Michael Stephens, Bert Bates, Benjamin Berg, Karsten Strøbæk, Art Bergquist  and Ozren Harlovic.
 
 Thanks to Scott Chacon for his great book Pro Git which helped me while I was learning Git and for agreeing to write the foreword.
 
-Thanks to Linus Torvalds without whom this wonderful version control system would not exist and to Tom Preston-Werner, Chris Wanstrath, and PJ Hyett for starting GitHub without whom Git would not have nearly the widespread usage it does today. Also thanks to them for hiring me!
+Thanks to Linus Torvalds without whom this wonderful version control system would not exist, and to Tom Preston-Werner, Chris Wanstrath, and PJ Hyett for starting GitHub, without whom Git wouldn't have nearly the widespread usage it does today. Also thanks to them for hiring me!
 
 Finally, I'd like to thank my wife Lindsay for putting up with my occasional whining about writing this book and for her understanding with how much time I had to spend on it.
 
-### About this Book
-Git in Practice is not a comprehensive guide of every single command and feature available with Git. A book that covered this would be considerably longer than the one you find before you and you'd learn a lot of information that is unnecessary. Instead this book provides a detailed understanding of all the features of Git useful when using Git to manage source code for software projects. The contents were decided by looking at my Terminal shell history; literally prioritizing commands based on how much I use them. On top of this are the workflows and best-practices that are used in the real-world to organize software projects when using Git.
+### About this book
+_Git in Practice_ is not a comprehensive guide of every single command and feature available with Git. A book that covered this would be considerably longer than the one you find before you, and you'd learn a lot of information that is unnecessary. Instead this book provides a detailed understanding of all the features of Git useful when using Git to manage source code for software projects. The contents were decided by looking at my Terminal shell history; literally prioritizing commands based on how much I use them. On top of this are the workflows and best-practices that are used in the real-world to organize software projects when using Git.
 
-This book does not aim at every software developer but, as an "In Practice" book, aims at the intermediate to advanced level. To get the most use out of this book you should be able to relate to or exceed the knowledge of one of these target readers:
+This book doesn't aim at every software developer but, as an "In Practice" book, aims at the intermediate to advanced level. To get the most use out of this book, you should be able to relate to or exceed the knowledge of one of these target readers:
 
 * "Software Developer" who uses Git and knows enough interact with a Git repository but lacks understanding of any features beyond those provided by other version control systems.
-* "Software Developer" with advanced Subversion knowledge (i.e. happy with branching, merging, setting/getting Subversion metadata variables) who wishes to learn how to use Git.
+* "Software Developer" with advanced Subversion knowledge (happy with branching, merging, setting/getting Subversion metadata variables) who wishes to learn how to use Git.
 * "Software Developer" who wishes to learn Git best practices to contribute to open-source projects on GitHub.
-* "Trainer" with Git experience who wants to learn some more conceptual information, commands they may have missed, workflows and find a resource to help coach others on using Git.
+* "Trainer" with Git experience who wants to learn some more conceptual information, commands they may have missed, and workflows, and wants a resource to help coach others on using Git.
 * "System Administrator" with has good version control understanding but wants to create Git repositories for scripts and/or host repositories for teams.
 
-If you don't know this yet: don't worry. You could either try and work through this book and reread parts you struggle with or pick up a beginner's guide to Git through Manning, another publisher or online and come back to Git In Practice when you are done.
+If you don't know this yet: don't worry. You could either try and work through this book and reread parts you struggle with or pick up a beginner's guide to Git through Manning, another publisher, or online, and come back to _Git In Practice_ when you are done.
 
 This book also has some recommended prerequisite knowledge and tools:
 
-* Command Line: familiarity with the command-line as Git will only be used as a command-line tool in this book. For example, needs to be able to create, edit and remove directories and files from the command-line. This includes Windows users who will be need to install MSYSGit (which provides Git in a Unix shell on Windows).
-* Software Development: this book will assume a basic understanding (and desire to learn more) about how version control is used in a team of software developers to build software projects.
-* Git or Version Control: understanding of versions, branching and merging in Git (e.g. `git commit`) or another version control system (e.g. Subversion `commit`, `log`, `copy`, `switch`, `merge`).
-* GitHub: able to access to a free GitHub account.
-* Programming Languages: no particular programming language knowledge.
+* Command line--Familiarity with the command line, as Git will only be used as a command-line tool in this book. For example, needs to be able to create, edit, and remove directories and files from the command line. This includes Windows users, who will be need to install MSYSGit (which provides Git in a Unix shell on Windows).
+* Software development--This book will assume a basic understanding (and desire to learn more) about how version control is used in a team of software developers to build software projects.
+* Git or version control--Understanding of versions, branching, and merging in Git (such as `git commit`) or another version control system (such as Subversion `commit`, `log`, `copy`, `switch`, `merge`).
+* GitHub--Ability to access to a free GitHub account.
+* Programming languages--No particular programming language knowledge.
 
-Again, if you don't know any of this: don't worry. The book may be trickier to you but it should not be impossible and there's nothing that another beginner title or search online will not be able to help you with.
+Again, if you don't know any of this: don't worry. The book may be trickier for you, but it shouldn't be impossible, and there's nothing that another beginner title or search online won't be able to help you with.
 
 #### Roadmap
-Part 1 (Chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
+Part 1 (chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
 
-Chapter 1 will cover why Git was created and how to create and interact with a local Git repository by committing files, viewing history, examining changes between commits and using graphical tools.
+Chapter 1 will cover why Git was created and how to create and interact with a local Git repository by committing files, viewing history, examining changes between commits, and using graphical tools.
 
 Chapter 2 will cover connecting your local Git repository with other repositories over the internet allowing you to send and receive changes.
 
-Part 2 (Chapters 3-6) will cover the most essential commands to learn when using Git either alone or with a team. It's here that you'll start to see some of the more powerful differences between Git and other version control systems with advanced branching capabilities and history rewriting.
+Part 2 (chapters 3-6) will cover the most essential commands to learn when using Git either alone or with a team. This is where you'll start to see some of the more powerful differences between Git and other version control systems with advanced branching capabilities and history rewriting.
 
-Chapter 3 will cover using interacting with files and directories in a Git repository, ignoring files or changes, deleting files based on their status in the repository, reseting files to a previous state and temporarily storing changes to files to be reapplied later.
+Chapter 3 will cover using interacting with files and directories in a Git repository, ignoring files or changes, deleting files based on their status in the repository, reseting files to a previous state, and temporarily storing changes to files to be reapplied later.
 
 Chapter 4 will cover using Git's history querying capabilities and configuring them to display the most useful information for any particular task.
 
-Chapter 5 will cover using branches effectively with merges, dealing with conflicts, tagging and reverting commits.
+Chapter 5 will cover using branches effectively with merges, dealing with conflicts, tagging, and reverting commits.
 
 Chapter 6 will cover changing previous commits in a Git repository (known as "rewriting history") and avoiding losing your work when doing so or through data corruption.
 
-Part 3 (Chapters 7-11) will provide you with some bonus Git skills that will help you be more efficient. These chapters will provide you with a collection of techniques that won't be used with every Git project but may be important for new ones.
+Part 3 (chapters 7-11) will provide some bonus Git skills that will help you be more efficient. These chapters introduce a collection of techniques that won't be used with every Git project, but may be important for new ones.
 
-Chapter 7 will cover personalizing Git's configuration so you can work most effectively and efficiently given the current project, computer or version of Git you are working on.
+Chapter 7 will cover personalizing Git's configuration so you can work most effectively and efficiently given the current project, computer, or version of Git you are working on.
 
 Chapter 8 will cover using Git's submodules to reference other Git repositories from inside a Git repository; particularly useful when dealing with software dependencies.
 
@@ -78,25 +78,25 @@ Chapter 9 will cover interacting with Subversion repositories using Git either a
 Chapter 10 will cover using GitHub's pull request and forks features to work effectively in teams and contribute to open-source software.
 
 Chapter 11 will cover how Git repositories are hosted and migrated.
-Part 4 (Chapters 12-14) will discuss different workflows and best practices for using Git as part of a team of software developers. You will be able to compare and contrast differing approaches and decide which is best for your team.
+Part 4 (chapters 12-14) will discuss different workflows and best practices for using Git as part of a team of software developers. You will be able to compare and contrast differing approaches and decide which is best for your team.
 
 Chapter 12 will cover how to ensure your commit history is clean, readable and useful with small, meaningful commits.
 
 Chapter 13 will cover the CMake and Homebrew open-source project's different workflows and compare them to examine the differences between a rebase-heavy and merge-heavy workflow.
 
-Chapter 14 will cover the most widely used and my recommended workflows for working with Git as part of a team building software and how to manage branching, merging, rebasing and releasing new versions of software.
+Chapter 14 will cover the most widely used and my recommended workflows for working with Git as part of a team building software and how to manage branching, merging, rebasing, and releasing new versions of software.
 
-Appendix A will cover how to install Git on Windows, Mac, Linux or Unix.
+Appendix A will cover how to install Git on Windows, Mac, Linux, or Unix.
 Appendix B will cover creating a GitHub account and repository for use throughout this book.
-Appendix C will cover my Git configuration file: what I've customized, how and why.
+Appendix C will cover my Git configuration file: what I've customized, how, and why.
 Appendix D will cover why you should use version control at all and how to convince others it is a good idea.
 
 #### Code
 This book works through creating the Git repository for a silly example book called "Git In Practice: Redux". This is available to download on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
 
-I also used a Git repository when writing this book in Asciidoc files. If you wish to get access this for an online copy of the book, to submit changes or to see how it changed over time please email me your GitHub username at mike+gitinpractice@mikemcquaid.com and I will grant you access to the repository.
+I also used a Git repository when writing this book in Asciidoc files. If you wish to get access this for an online copy of the book, to submit changes, or to see how it changed over time, please email me your GitHub username at mike+gitinpractice@mikemcquaid.com and I will grant you access to the repository.
 
-My commented Git configuration are available in my dotfiles repository on GitHub at https://github.com/mikemcquaid/dotfiles and in Appendix C.
+My commented Git configuration are available in my dotfiles repository on GitHub at https://github.com/mikemcquaid/dotfiles and in appendix C.
 
 #### Author Online
 TODO: Manning copy.

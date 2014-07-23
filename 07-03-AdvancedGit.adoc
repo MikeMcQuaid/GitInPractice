@@ -1,7 +1,7 @@
 # Advanced Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Part 3 (Chapters 7-11) will provide you with some bonus Git skills that will help you be more efficient. These chapters will provide you with a collection of techniques that won't be used with every Git project but may be important for new ones.
+Part 3 (chapters 7-11) provide some bonus Git skills that will help you be more efficient. These chapters introduce a collection of techniques that won't be used with every Git project, but may be important for new ones.
 
 This part will cover the following topics:
 
@@ -10,5 +10,5 @@ This part will cover the following topics:
 * How to use submodules to vendor dependencies for a project
 * How to send and receive changes to a Subversion repository from Git
 * How to access a GitHub repository using a Subversion client
-* How to create and merge GitHub pull requests and forks from the command-line
+* How to create and merge GitHub pull requests and forks from the command line
 * How to share a repository as a server or through a web interface

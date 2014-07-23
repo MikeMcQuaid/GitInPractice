@@ -1,7 +1,7 @@
-# Git Best Practices
+# Git best practices
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Part 4 (Chapters 12-14) will discuss different workflows and best practices for using Git as part of a team of software developers. You will be able to compare and contrast differing approaches and decide which is best for your team.
+Part 4 (chapters 12-14) discuss different workflows and best practices for using Git as part of a team of software developers. You'll be able to compare and contrast differing approaches and decide which is best for your team.
 
 This part will cover the following topics:
 

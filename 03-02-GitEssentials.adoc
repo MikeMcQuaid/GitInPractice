@@ -1,12 +1,12 @@
-# Git Essentials
+# Git essentials
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Part 2 (Chapters 3-6) will cover the most essential commands to learn when using Git either alone or with a team. It's here that you'll start to see some of the more powerful differences between Git and other version control systems with advanced branching capabilities and history rewriting.
+Part 2 (chapters 3-6) will cover the most essential commands to learn when using Git either alone or with a team. This is where you'll start to see some of the more powerful differences between Git and other version control systems with advanced branching capabilities and history rewriting.
 
 This part will cover the following topics:
 
-* How to delete, move and rename versioned files or directories
-* How to ignore, reset or temporarily stash certain files or changes
+* How to delete, move, and rename versioned files or directories
+* How to ignore, reset, or temporarily stash certain files or changes
 * How to tweak history output to display only the information you need
 * How to find out what person or commit caused a particular bug
 * How to easily resolve merge conflicts
