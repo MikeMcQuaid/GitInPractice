@@ -5,7 +5,16 @@
 ifdef::env-github[:outfilesuffix: .adoc]
 
 ### Foreword
-TODO: Scott Chacon.
+
+I first heard of Git probably 9 years ago, around the end of 2005, right around when v1.0 was being tagged. Reading through my friend Mike’s book, it amazes me just how much has changed in what I’m only now realizing has been nearly a decade of history.
+
+At the time I was introduced to Git, it was still very much more of a collection of tools for content management and less a version control system. It was installed as hundreds of commands such as ‘git-update-index’ instead of the single git command we now call. In fact, in my first exposure to it, I used it at work as a transport mechanism for media content, instead using Perforce to version control the code we wrote around Git.
+
+It fascinated me how clean and simple the data model was and how easy it was to manipulate to do anything you wanted, not simply what was prescribed and intended. Equally fascinating was how difficult it was to learn. It took my friend weeks to drill into me how this thing worked, but once it did I was totally hooked and have spend most of the decade since helping people use it and understand it.
+
+If you’re still struggling with Git, this book does a great job of leading you through the basics in a simple and straightforward manner. If you’re more comfortable, the Advanced and Best Practices sections will certainly help you see other ways you could be using Git to make your teams workflows simpler or more effective. While I’ve spent a lot of time learning and explaining to others the elegant simplicity of the data model, I’ve never helped run a huge open source effort such as Homebrew as Mike has, and that experience is invaluable in explaining more advanced and complex workflows as Mike describes here.
+
+I hope you enjoy this book and I hope you use it to understand and enjoy the amazing benefits that a tool like Git can bring to your daily development life. I’m proud of Mike for taking this challenge on and for producing a great book on a tool that has made the transition over the past decade from being an interesting hobbyist’s script to an essential part of millions of software developer’s daily lives.
 
 ### Preface
 As all good software engineers will agree: version control is important. I was first introduced to version control while studying Computer Science at university and dabbling with open source in my free time. CVS and Subversion started being used for managing our small pieces of coursework, group projects, and larger open-source projects we interacted with. Initially it all felt a bit overkill; why do I need this when I'm working by myself? It only took a few personal screw-ups for me to understand why they are so important.
