@@ -228,20 +228,20 @@ system.
 >>>>>>> separate-files <6>
 ```
 <1> Unchanged line
-<2> Incoming marker
-<3> Incoming line
+<2> Current marker
+<3> Current line
 <4> Branch separator
-<5> Current version
-<6> Current marker
+<5> Incoming line
+<6> Incoming marker
 
 Recall this output and annotations from <<02-RemoteGit#merge-conflicts>>:
 
 * "Unchanged line (1)" is provided for context.
-* "Incoming marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
-* "Incoming line (3)" shows a line from the incoming branch.
+* "Current marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
+* "Current line (3)" shows a line from the current branch.
 * "Branch separator (4)" starts the section containing the lines from the incoming branch.
-* "Current version (5)" shows a line from the current branch.
-* "Current marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
+* "Incoming line (5)" shows a line from the incoming branch.
+* "Incoming marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
 
 We now need to edit the file so it has the correct version. In this case this involves removing the Chapter 2 section, as it was moved to another file in the `separate-files` branch, and use the new Chapter 1 content that was entered in the `master` branch (here indicated by the `HEAD` section).
 

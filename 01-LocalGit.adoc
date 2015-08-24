@@ -391,7 +391,7 @@ In <<gitx-history>> you can see the GitX history graph output. This format will 
 `git log` can take a `--patch` (or `-p`) flag to show the _diff_ for each commit output. It can also take `--stat` or `--word-diff` flag to show a _diffstat_ or _word diff_. These terms will be explained in <<diff-formats>>.
 
 ##### Rewriting history
-Git is unusual compared to many other version control systems in that it allows history to be rewritten. This may seen surprising or worrying; after all did I not just tell you that the history contains the entire list of changes to the project over time? Sometimes you may want to highlight only broader changes to files in a version control system over a period of time instead of sharing every single change that was made in reaching the final state.
+Git is unusual compared to many other version control systems in that it allows history to be rewritten. This may seem surprising or worrying; after all did I not just tell you that the history contains the entire list of changes to the project over time? Sometimes you may want to highlight only broader changes to files in a version control system over a period of time instead of sharing every single change that was made in reaching the final state.
 
 .Squashing multiple commits into a single commit
 [[squashing]]

@@ -594,21 +594,21 @@ system.
 // TODO: think of funny first line that editor will approve. <5>
 >>>>>>> separate-files <6>
 ```
-<1> unchanged line
-<2> incoming marker
-<3> incoming line
-<4> branch separator
-<5> current version
-<6> current marker
+<1> Unchanged line
+<2> Current marker
+<3> Current line
+<4> Branch separator
+<5> Incoming line
+<6> Incoming marker
 
 When a merge conflict occurs, the version control system will go through any files that have conflicts and insert something similar to the preceding markers. These markers indicate the versions of the file on each branch.
 
-* "unchanged line (1)" is provided only for context in this example.
-* "incoming marker (2)" starts the section containing the lines from the current branch (referenced by `HEAD` here).
-* "incoming line (3)" shows a line from the incoming branch's commit(s).
-* "branch separator (4)" starts the section containing the lines from the incoming branch.
-* "current version (5)" shows a line from the current branch's commit(s).
-* "current marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
+* "Unchanged line (1)" is provided for context.
+* "Current marker (2)" starts the current branch section containing the lines from the current branch (referenced by `HEAD` here).
+* "Current line (3)" shows a line from the current branch.
+* "Branch separator (4)" starts the section containing the lines from the incoming branch.
+* "Incoming line (5)" shows a line from the incoming branch.
+* "Incoming marker (6)" marker ends the section containing the lines from the incoming branch (referenced by `separate-files`; the name of the branch being merged in).
 
 .How can conflict markers be found quickly?
 NOTE: When searching a large file for the merge conflict markers, you should enter `<<<<` into your text editor's find tool to quickly locate them.
