@@ -239,7 +239,7 @@ From the add output:
 * "ignored file (1)" `GitInPractiseGoodIdeas.tmp` wasn't added, as its addition would contradict your `.gitignore` rules.
 * "error message (2)" was printed, as no files were added.
 
-This interaction between `.gitignore` and `git add` is particularly useful when adding subdirectories of files and directories which may contain files that should to be ignored. `git add` won't add these files but will still successfully add all other that shouldn't be ignored.
+This interaction between `.gitignore` and `git add` is particularly useful when adding subdirectories of files and directories which may contain files that should be ignored. `git add` won't add these files but will still successfully add all other that shouldn't be ignored.
 
 ### Delete ignored files
 When files have been successfully ignored by the addition of a `.gitignore` file, you'll sometimes want to delete them all.

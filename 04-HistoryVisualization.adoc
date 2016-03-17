@@ -97,7 +97,7 @@ index ebb69c3..0000000
 
 From the `show commit` output:
 
-* "commit information (1)" shows all the same information expected in `git log output`, but only ever shows a single commit.
+* "commit information (1)" shows all the same information expected in `git log` output, but only ever shows a single commit.
 * "commit diff (2)" shows the changes that were made in that commit. It's the equivalent of typing `git diff HEAD^^..HEAD^`--the difference between the previous commit and the one before it.
 
 The `git show HEAD^` output is equivalent to `git log --max-count=1 --patch HEAD^`.
