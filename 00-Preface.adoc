@@ -103,20 +103,21 @@ Appendix D will cover why you should use version control at all and how to convi
 #### Code
 This book works through creating the Git repository for a silly example book called "Git In Practice: Redux". This is available to download on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
 
-I also used a Git repository when writing this book in Asciidoc files. If you wish to get access this for an online copy of the book, to submit changes, or to see how it changed over time, please email me your GitHub username at mike+gitinpractice@mikemcquaid.com and I will grant you access to the repository.
+I also used a Git repository when writing this book in Asciidoc files. This is available at https://github.com/GitInPractice/GitInPractice
 
 My commented Git configuration are available in my dotfiles repository on GitHub at https://github.com/mikemcquaid/dotfiles and in appendix C.
 
 #### Author Online
-TODO: Manning copy.
+Purchase of Git in Practice includes free access to a private web forum run by Manning Publications where you can make comments about the book, ask technical questions, and receive help from the author and from other users. To access the forum and subscribe to it, point your web browser to https://www.manning.com/books/git-in-practice.
+This page provides information on how to get on the forum once you’re registered, what kind of help is available, and the rules of conduct on the forum. Manning’s commitment to our readers is to provide a venue where a meaningful dialog between individual readers and between readers and the author can take place. It’s not a commitment to any specific amount of participation on the part of the author, whose contribution to the forum remains voluntary (and unpaid). We suggest you try asking the author some challenging questions lest his interest stray!
+The Author Online forum and the archives of previous discussions will be accessible from the publisher’s website as long as the book is in print.
 
 #### About the author
-My name is Mike McQuaid. I work as a software engineer at GitHub, speak at conferences and train people in using Git. I've contributed widely to Git-based open-source software, including Qt and the Linux kernel, and am a maintainer of the Git-based Homebrew project, a popular OSX package manager.
-
-#### About the title
-TODO: Manning copy.
+My name is Mike McQuaid. I work as a software engineer at GitHub, speak at conferences and train people in using Git. I've contributed widely to Git-based open-source software, including Qt and the Linux kernel, and am a maintainer of the Git-based Homebrew project, a popular macOS package manager.
 
 #### About the cover
-TODO: Manning copy.
+The figure on the cover of Git in Practice is captioned “A Kamtchatdale in her full dress in 1768.” The Kamtchatka Peninsula is the eastern-most part of Russia, lying between the Pacific Ocean to the east and the Sea of Okhotsk to the west. The illustration is taken from Thomas Jefferys’ A Collection of the Dresses of Different Nations, Ancient and Modern, London, published between 1757 and 1772. The title page states that these are hand-colored copperplate engravings, heightened with gum arabic. Thomas Jefferys (1719–1771) was called “Geographer to King George III.” He was an English cartographer who was the leading map supplier of his day. He engraved and printed maps for government and other official bodies and produced a wide range of commercial maps and atlases, especially of North America. His work as a map maker sparked an interest in local dress customs of the lands he surveyed and mapped; they are brilliantly displayed in this four-volume collection.
+Fascination with faraway lands and travel for pleasure were relatively new phenomena in the eighteenth century and collections such as this one were popular, introducing both the tourist as well as the armchair traveler to the inhabitants of other countries. The diversity of the drawings in Jefferys’ volumes speaks vividly of the uniqueness and individuality of the world’s nations centuries ago. Dress codes have changed, and the diversity by region and country, so rich at one time, has faded away. It is now often hard to tell the inhabitant of one continent from another. Perhaps, trying to view it optimistically, we have traded a cultural and visual diversity for a more varied personal life—or a more varied and interesting intellectual and technical life.
+At a time when it is hard to tell one computer book from another, Manning celebrates the inventiveness and initiative of the computer business with book covers based on the rich diversity of national costumes three centuries ago, brought back to life by Jefferys’ pictures.
 
 :numbered:

@@ -1,10 +1,5 @@
 # Git In Practice
-Git In Practice is an intermediate-level Git book due to be published by Manning in 2014.
-
-## Status
-Git In Practice is a work in progress.
-
-I rewrite the history of this repository often. Sorry about that.
+Git In Practice is an opinionated, intermediate/advanced-level Git book by @MikeMcQuaid.
 
 ## Table of Contents
 1. [Preface](00-Preface.adoc)
@@ -32,20 +27,20 @@ I rewrite the history of this repository often. Sorry about that.
     3. [Commented Git Configuration](C-CommentedGitConfiguration.adoc)
     4. [Why Use Version Control?](D-WhyUseVersionControl.adoc)
 
-## Usage
-You can read all the AsciiDoc source files inline on GitHub.
+## License
+You have the right to read this book through this open source repository, link others to it anywhere on the internet but not redistribute the contents of this repository outside of GitHub.
 
-If you want to create HTML, Manning XML or PDF files then clone this repository into the `./input/` subdirectory of a local [ManningAsciiDoc](https://github.com/mikemcquaid/ManningAsciiDoc) clone.
+## Supporting
+It takes a lot of time from multiple people to write a published book. While the content is available to read freely from this repository, if this content is useful to you and you can afford it please consider [buying a paper or ebook copy from Manning](http://www.manning.com/mcquaid/?a_aid=MikeMcQuaid&a_bid=5688bbf4).
+
+## Status
+Published by Manning in 2014 and given a public GitHub repository in 2017.
+
+## Twitter
+[@GitInPractice](https://twitter.com/GitInPractice)
 
 ## Contributing
-If you contribute changes to this repository you agree that I'll pretend I wrote them and may thank you in the foreword but you won't be assigned partial copyright or receive any royalties.
-
-If you're OK with that then please feel free to create issues or pull-requests. Please don't edit the repository directly unless I've explicitly given you permission to do so.
-
-Thanks!
+If you contribute changes to this repository you assign copyright to @MikeMcQuaid and Manning Publications. If a future edition is released we may thank you in the foreword but you won't be assigned partial copyright or receive any royalties. If you're OK with that then please feel free to create pull-requests.
 
 ## Contact
-[Mike McQuaid](mailto:mike@mikemcquaid.com)
-
-## License
-Git In Practice is copyright Mike McQuaid and/or Manning, I'm not quite sure how it works.
+[Mike McQuaid](mailto:mike+gitinpractice@mikemcquaid.com)

@@ -1,0 +1,3 @@
+Copyright Mike McQuaid and Manning Publications. All rights reserved.
+
+You have the right to read this book through this open source repository, link others to it but not redistribute it outside of GitHub.
