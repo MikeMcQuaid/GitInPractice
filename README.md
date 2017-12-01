@@ -31,7 +31,7 @@ Git In Practice is an opinionated, intermediate/advanced-level Git book by [@Mik
 You have the right to read this book through this open source repository, link others to it anywhere on the internet but not redistribute the contents of this repository outside of GitHub.
 
 ## Supporting
-It takes a lot of time from multiple people to write a published book. While the content is available to read freely from this repository, if this content is useful to you and you can afford it please consider [buying a paper or ebook copy from Manning](http://www.manning.com/mcquaid/?a_aid=MikeMcQuaid&a_bid=5688bbf4).
+It takes a lot of time from multiple people to write a published book. While the content is available to read freely from this repository, if this content is useful to you and you can afford it, please consider [buying a paper or ebook copy from Manning](http://www.manning.com/mcquaid/?a_aid=MikeMcQuaid&a_bid=5688bbf4).
 
 ## Status
 Published by Manning in 2014 and given a public GitHub repository in 2017.
