@@ -35,9 +35,9 @@ You have set your Git user name in your global Git configuration.
 When you ran `git config --global user.name "Mike McQuaid"`, a file named `.gitconfig` was created  (or modified if it existed) in your `$HOME` directory.
 
 .Where is the `$HOME` directory?
-NOTE: The `$HOME` directory is often signified with the tilde (`~`) character, and will be in the rest of this chapter. If your username is `mike`, the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on OSX and `/home/mike` on Linux/Unix.
+NOTE: The `$HOME` directory is often signified with the tilde (`~`) character, and will be in the rest of this chapter. If your username is `mike`, the `$HOME` directory typically resides in `C:\Users\mike` on Windows, `/Users/mike` on macOS and `/home/mike` on Linux/Unix.
 
-The filename is prefixed with a dot, and this means on OSX and Linux that it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal, we can see the contents. Provided you ran `git config` as requested in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>>, it should look something like this:
+The filename is prefixed with a dot, and this means on macOS and Linux that it may be hidden by default in graphical file browsers or file dialogs. If we run `cat ~/.gitconfig` in a terminal, we can see the contents. Provided you ran `git config` as requested in <<01-LocalGit#initial-setup>> and <<05-AdvancedBranching#only-resolve-each-merge-conflict-once-git-rerere>>, it should look something like this:
 ```
 # cat ~/.gitconfig
 
@@ -126,7 +126,7 @@ Although the global `~/.gitconfig` file wasn't created until we set some values,
   email = mike.mcquaid@github.com
 ```
 
-You can see various default options have been set based on the current system (such as `ignorecase`, as Git has detected that we're using the default OSX case-insensitive filesystem) and interactions with the Git repository. When we do a `git push --set-upstream`, Git sets values in a `branch` section in the `.git/config` file. This section specifies where to push and pull from when on a certain branch.
+You can see various default options have been set based on the current system (such as `ignorecase`, as Git has detected that we're using the default macOS case-insensitive filesystem) and interactions with the Git repository. When we do a `git push --set-upstream`, Git sets values in a `branch` section in the `.git/config` file. This section specifies where to push and pull from when on a certain branch.
 
 ### Useful configuration settings
 In this section I'll show you how to set some of the most useful configuration settings for making Git easier to use. But Git has a huge number of configuration settings; it would be a significant proportion of this book to try and detail them all. I recommend reading through `git config --help` at some point and considering which other settings you may wish to change. Additionally, in <<mike-gitconfig>> you can see my personal, commented Git configuration if you're interested in what I use.
@@ -177,7 +177,7 @@ Sometimes you may have problems with this approach; some other users of the repo
 # git config --global core.excludesfile ~/.gitignore
 ```
 
-This global file behaves as any other `.gitignore` file, but you can put entries in it to be shared between all repositories. For example, in mine I put `.DS_Store`, which are the thumbnail cache files that OSX puts in any directory you view with Finder.app that contains images (see it in <<mike-gitignore>>). I also put editor-specific files and build output directory names that I tend to personally prefer. This means I don't need to remember to do so for every new repository that I use or add an ignore rule to repositories whenever I change text editors.
+This global file behaves as any other `.gitignore` file, but you can put entries in it to be shared between all repositories. For example, in mine I put `.DS_Store`, which are the thumbnail cache files that macOS puts in any directory you view with Finder.app that contains images (see it in <<mike-gitignore>>). I also put editor-specific files and build output directory names that I tend to personally prefer. This means I don't need to remember to do so for every new repository that I use or add an ignore rule to repositories whenever I change text editors.
 
 #### Display help output in your web browser
 You might be someone who keeps their web browser open more than a terminal, or just finds documentation easier to read in a browser than a terminal. You can request that `git --help` commands display their output in a web browser by appending the `--web` flag. For example, to get help for the `git help` command in the web browser, you'd run `git help --help --web`.
@@ -192,14 +192,14 @@ If your Git installation displayed the HTML documentation correctly then you can
 
 After this, when you run a command like `git config --help`, instead of displaying in your terminal, it will open the HTML documentation in your default browser. If you wish to configure the browser that's used, you can run `git web--browse --help` to view the many different ways of configuring the browser that is used.
 
-#### Store passwords in the OSX keychain
-Apple's Mac OSX operating system provides a system-wide secure keychain for each user. This is whats used to store your passwords for various services such as network shares. You can also request that Git store its various passwords there, for example for private `https://` GitHub repository clones. To do this you run the following:
+#### Store passwords in the macOS keychain
+Apple's macOS operating system provides a system-wide secure keychain for each user. This is whats used to store your passwords for various services such as network shares. You can also request that Git store its various passwords there, for example for private `https://` GitHub repository clones. To do this you run the following:
 
 ```
 # git config --global credential.helper osxkeychain
 ```
 
-After setting this, the next time you clone a private GitHub repository and ask for a password, you'll be prompted whether to allow `git-credential-osxkeychain` access to your keychain. You should allow this and then passwords will be stored and retrieved from here in future. This is useful on OSX, as otherwise Git may prompt for the same passwords multiple times or write them unencrypted to disk.
+After setting this, the next time you clone a private GitHub repository and ask for a password, you'll be prompted whether to allow `git-credential-osxkeychain` access to your keychain. You should allow this and then passwords will be stored and retrieved from here in future. This is useful on macOS, as otherwise Git may prompt for the same passwords multiple times or write them unencrypted to disk.
 
 Alternatively on Windows, there's a tool named `git-credential-winstore` (available at http://gitcredentialstore.codeplex.com) to store these credentials in the Windows Credential Store. On Linux/Unix there's a tool named `git-credential-gnome-keyring` (bundled with Git 1.8.0 and above) to store these credentials in the Gnome Keyring.
 

@@ -78,7 +78,7 @@ For a CMake core maintainer to merge a branch into `master` after successful rev
 CMake core maintainers actually perform these steps with the `stage` command over SSH by running `ssh git@cmake.org stage cmake merge -b master branchname`.
 
 ### Homebrew's workflow
-Homebrew is a package manager for OSX. It has thousands of contributors but a very small number of maintainers with commit access to the main repository (five at the time of writing).
+Homebrew is a package manager for macOS. It has thousands of contributors but a very small number of maintainers with commit access to the main repository (five at the time of writing).
 
 Homebrew's main Git repository is available to access at https://github.com/Homebrew/homebrew. Please clone it and examine it while reading this chapter.
 

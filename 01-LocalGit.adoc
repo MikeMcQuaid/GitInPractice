@@ -366,7 +366,7 @@ There are more attractive, up-to-date, and platform-native alternatives to `gitk
 [[gitx]]
 image::screenshots/01-GitX.png[]
 
-On OS X there are tools such as `GitX` (and various forks of the project). As OS X is my platform of choice, I'll be using screenshots of the `GitX-dev` fork of `GitX` to discuss history in this book, and would recommend you use it too if you use OS X. `GitX-dev` is available at https://github.com/rowanj/gitx and can be seen in <<gitx>>.
+On macOS there are tools such as `GitX` (and various forks of the project). As macOS is my platform of choice, I'll be using screenshots of the `GitX-dev` fork of `GitX` to discuss history in this book, and would recommend you use it too if you use macOS. `GitX-dev` is available at https://github.com/rowanj/gitx and can be seen in <<gitx>>.
 
 To view the commit history with gitk or GitX:
 

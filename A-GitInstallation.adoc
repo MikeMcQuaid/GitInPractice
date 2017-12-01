@@ -7,8 +7,8 @@ Let's see if Git is already installed on your local machine and install it if ne
 .Why are there different versions of Git in this section?
 NOTE: The different installation methods and operating systems install different versions of Git. Don't worry about this; the main differences between newer Git versions and older ones are the helpfulness of the output messages. Version 2.0.0 was the released version at the time of writing, but version 1.8 or above should be sufficient for the needs of this book.
 
-### How to install and run Git on Apple OS X
-To verify if Git is already installed, open a Terminal (either the default OS X `/Applications/Utilities/Terminal.app` or an alternative such as `iTerm.app`) and run `git --version`. If Git is already installed, the output should resemble <<osx-git-version>>:
+### How to install and run Git on Apple macOS
+To verify if Git is already installed, open a Terminal (either the default macOS `/Applications/Utilities/Terminal.app` or an alternative such as `iTerm.app`) and run `git --version`. If Git is already installed, the output should resemble <<osx-git-version>>:
 
 .`git --version` in Terminal.app on OS X Mavericks
 [[osx-git-version]]
