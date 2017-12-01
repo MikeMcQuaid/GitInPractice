@@ -1,5 +1,5 @@
 # Git In Practice
-Git In Practice is an opinionated, intermediate/advanced-level Git book by @MikeMcQuaid.
+Git In Practice is an opinionated, intermediate/advanced-level Git book by [@MikeMcQuaid](https://github.com/MikeMcQuaid).
 
 ## Table of Contents
 1. [Preface](00-Preface.adoc)
