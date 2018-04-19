@@ -45,7 +45,7 @@ This book doesn't aim at every software developer but, as an "In Practice" book,
 * "Software Developer" with advanced Subversion knowledge (happy with branching, merging, setting/getting Subversion metadata variables) who wishes to learn how to use Git.
 * "Software Developer" who wishes to learn Git best practices to contribute to open-source projects on GitHub.
 * "Trainer" with Git experience who wants to learn some more conceptual information, commands they may have missed, and workflows, and wants a resource to help coach others on using Git.
-* "System Administrator" with has good version control understanding but wants to create Git repositories for scripts and/or host repositories for teams.
+* "System Administrator" who has good version control understanding but wants to create Git repositories for scripts and/or host repositories for teams.
 
 If you don't know this yet: don't worry. You could either try and work through this book and reread parts you struggle with or pick up a beginner's guide to Git through Manning, another publisher, or online, and come back to _Git In Practice_ when you are done.
 
