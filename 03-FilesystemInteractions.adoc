@@ -287,7 +287,8 @@ You wish to stash all your uncommitted changes for later retrieval.
 #### Solution
 1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`
 2.  Run `echo EXTRA >> 01-IntroducingGitInPractice.asciidoc`.
-3.  Run `git stash save`. The output should resemble the following:
+3.  Run `git add 01-IntroducingGitInPractice.asciidoc`
+4.  Run `git stash save`. The output should resemble the following:
 
 .Stashing uncommitted changes output
 ```
