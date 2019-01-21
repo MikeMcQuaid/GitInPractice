@@ -290,7 +290,7 @@ image::diagrams/01-Objects.png[]
 
 In <<git-objects>> you can see the main Git objects we're concerned with: _commits_, _blobs_, and _trees_. There's also a _tag_ object, but don't worry about tags until they're introduced later in  <<05-AdvancedBranching#create-a-tag-git-tag>>. <<typical-commit>> showed an example of a commit object, and how they store metadata and referenced file contents. The file contents reference is actually a reference to a _tree object_. A tree object stores a reference to all the _blob objects_ at a particular point in time and other tree objects if there are any subdirectories. A blob object stores the contents of a particular version of a particular single file in the Git repository.
 
-.Should objects being interacted with directly?
+.Should objects be interacted with directly?
 NOTE: When using Git, you should never need to interact with objects or object files directly. The terminology of _blobs_ and _trees_ aren't used regularly in Git or in this book, but it's useful to remember what these are so you can build a conceptual understanding of what Git is doing internally. When things go well, this should be unnecessary, but when we start to delve into more advanced Git functionality or Git spits out a baffling error message, then remembering _blobs_ and _trees_ may help you work out what has happened.
 
 ###### Parent commits
