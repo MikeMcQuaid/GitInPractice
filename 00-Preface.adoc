@@ -60,7 +60,7 @@ This book also has some recommended prerequisite knowledge and tools:
 Again, if you don't know any of this: don't worry. The book may be trickier for you, but it shouldn't be impossible, and there's nothing that another beginner title or search online won't be able to help you with.
 
 #### Roadmap
-Part 1 (chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
+Part 1 (chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already but I’d encourage you to persevere with this anyway; it’s setting a good foundation which the rest of the book will build upon.
 
 Chapter 1 will cover why Git was created and how to create and interact with a local Git repository by committing files, viewing history, examining changes between commits, and using graphical tools.
 
