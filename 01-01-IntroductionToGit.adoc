@@ -1,7 +1,7 @@
 # Introduction to Git
 ifdef::env-github[:outfilesuffix: .adoc]
 
-Part 1 (chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already, but I’d encourage you to preserve with this anyway; it’s setting a good foundation which the rest of the book will build upon.
+Part 1 (chapters 1-2) will fly through the basics of using Git while teaching you the underlying concepts that are often misunderstood or omitted in beginners guides. You may know how to use Git already, but I’d encourage you to persevere with this anyway; it’s setting a good foundation which the rest of the book will build upon.
 
 This part will cover the following topics:
 
