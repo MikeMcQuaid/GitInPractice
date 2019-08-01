@@ -152,7 +152,7 @@ If there's more than one line in a commit message then the other lines will be s
 #### Discussion
 If you specify the `--patch` (or `-p`) flag to `git log` then you can also format the diff output by specifying flags for `git diff` too. Recall word diffs from <<01-LocalGit#diff-formats>>. `git log --patch --word-diff` will show the word diff (rather than unified diff) for each log entry.
 
-`git log` can take a `--date` flag, which takes various parameters to display the output dates in different formats. For example, `--date=relative` displays all dates relative to the current date--`6 weeks ago` and `--date-short` displays only the date, such as `2013-11-28`. Also `iso` (or iso8601), `rfc` (or `rfc2822`), `raw`, `local`, and `default` formats are available but I won't detail them all in this book.
+`git log` can take a `--date` flag, which takes various parameters to display the output dates in different formats. For example, `--date=relative` displays all dates relative to the current date--`6 weeks ago` and `--date=short` displays only the date, such as `2013-11-28`. Also `iso` (or iso8601), `rfc` (or `rfc2822`), `raw`, `local`, and `default` formats are available but I won't detail them all in this book.
 
 The `--format` (or `--pretty`) flag can take various parameters such as `email` that we've seen in this example, `medium` which is the default if no format was specified, or `oneline`, `short`, `full`, `fuller`, or `raw`. I won't show every format in this book but please compare and contrast them on your local machine. Different formats are better used in different situations depending on how much of their displayed information you care about at that time.
 
