@@ -380,12 +380,12 @@ You wish to check out the `GitInPracticeRedux` repository from earlier chapters 
 
 #### Solution
 1.  Change to the directory where you want the new `GitInPracticeReduxSVN` repository to be created; for example `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxSVN`.
-2.  Run `svn co https://github.com/GitInPractice/GitInPracticeRedux GitInPracticeReduxSVN`. The output should resemble the following:
+2.  Run `svn co https://github.com/MikeMcQuaid/GitInPracticeRedux GitInPracticeReduxSVN`. The output should resemble the following:
 
 .Checkout GitHub repository with Subversion partial output
 [.long-annotations]
 ```
-# svn co https://github.com/GitInPractice/GitInPracticeRedux
+# svn co https://github.com/MikeMcQuaid/GitInPracticeRedux
 
 A    GitInPracticeRedux/branches
 A    GitInPracticeRedux/branches/inspiration
@@ -418,7 +418,7 @@ From the checkout GitHub repository with Subversion partial output:
 You have checked out the `GitInPracticeRedux` repository using Subversion.
 
 #### Discussion
-As you can see, the Git repository has been transformed into the traditional Subversion layout with `trunk`, `branches`, and `tags` folders in the root. Typically you'd use `svn co https://github.com/GitInPractice/GitInPracticeRedux/trunk` instead and switch to the current branch of choice using `svn switch`.
+As you can see, the Git repository has been transformed into the traditional Subversion layout with `trunk`, `branches`, and `tags` folders in the root. Typically you'd use `svn co https://github.com/MikeMcQuaid/GitInPracticeRedux/trunk` instead and switch to the current branch of choice using `svn switch`.
 
 You can `svn commit`, `svn branch`, and use any other Subversion commands with this repository and they're mapped on the GitHub servers into the corresponding Git commands.
 

@@ -40,7 +40,7 @@ Create a new repository on GitHub that we can use as a submodule by following th
 3.  Create a file named `TODO.md` with the `echo` command by running `echo "# TODO\n1. Add something useful to this submodule." > TODO.md`.
 4.  Commit the new `TODO.md` as the initial commit by running `git commit --message "Initial commit of submodule." TODO.md`.
 5.  Create a new repository on GitHub (or another Git hosting provider).
-6.  Add the new remote reference to the GitHub repository by running `git remote add origin https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git`.
+6.  Add the new remote reference to the GitHub repository by running `git remote add origin https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git`.
 7.  Push the repository to GitHub by running `git push --set-upstream origin master`.
 
 The output of all these commands should resemble the following:
@@ -64,7 +64,7 @@ Initialized empty Git repository in
  create mode 100644 TODO.md
 
 # git remote add origin
-  https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git
+  https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git
 
 # git push --set-upstream origin master
 
@@ -73,7 +73,7 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 272 bytes | 0 bytes/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git
+To https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git
  * [new branch]      master -> master <3>
 Branch master set up to track remote branch master from origin.
 ```
@@ -99,7 +99,7 @@ You wish to add a the `GitInPracticeReduxSubmodule` repository as a submodule of
 #### Solution
 1.  Change to the directory containing your repository; on my machine, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Run `git checkout master`.
-3.  Run `git submodule add https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git submodule`.
+3.  Run `git submodule add https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git submodule`.
 4.  Commit the new submodule changes to the repository by running `git commit --message "Add submodule."`
 
 The output of all these commands should resemble the following:
@@ -107,7 +107,7 @@ The output of all these commands should resemble the following:
 .Submodule addition output
 ```
 # git submodule add
-  https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git
+  https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git
   submodule
 
 Cloning into 'submodule'... <1>
@@ -163,7 +163,7 @@ index 0000000..c63f995
 @@ -0,0 +1,3 @@
 +[submodule "submodule"] <1>
 +       path = submodule <2>
-+       url = https://github.com/GitInPractice/GitInPracticeReduxS... <3>
++       url = https://github.com/MikeMcQuaid/GitInPracticeReduxS... <3>
 diff --git a/submodule b/submodule
 new file mode 160000
 index 0000000..e95b4cd
@@ -234,7 +234,7 @@ The output of all these commands should resemble the following:
 
 Cleared directory 'submodule' <1>
 Submodule 'submodule'
-  (https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git)
+  (https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git)
   unregistered for path 'submodule' <2>
 
 # rm -rf .git/modules/ <3>
@@ -264,7 +264,7 @@ You wish to initialize all submodules in your repository and update them to the 
 # git submodule update --init
 
 Submodule 'submodule'
-  (https://github.com/GitInPractice/GitInPracticeReduxSubmodule.git)
+  (https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git)
   registered for path 'submodule' <1>
 Cloning into 'submodule'...
 remote: Counting objects: 3, done.

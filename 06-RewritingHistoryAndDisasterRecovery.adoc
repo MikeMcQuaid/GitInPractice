@@ -461,7 +461,7 @@ To test `git pull --rebase`, let's create another clone of the same repository, 
 To create another cloned, local repository and push a commit from it:
 
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created; for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPullTest`.
-2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxPullTest` to clone into the `GitInPracticeReduxPullTest` directory.
+2.  Run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git GitInPracticeReduxPullTest` to clone into the `GitInPracticeReduxPullTest` directory.
 3.  Change directory to the new Git repository; in my case, `cd /Users/mike/GitInPracticeReduxPullTest/`.
 4.  Modify the `00-Preface.asciidoc` file.
 5.  Run `git commit --message 'Preface: Sequel not prequel.' 00-Preface.asciidoc`.
@@ -504,7 +504,7 @@ remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/GitInPractice/GitInPracticeRedux
+From https://github.com/MikeMcQuaid/GitInPracticeRedux
    4455fa9..ae54679  master     -> origin/master <1>
 First, rewinding head to replay your work on top of it...
 Applying: Chapter 2: only one chapter. <2>
@@ -546,10 +546,10 @@ Let's try and rebase the `inspiration` branch again and push it:
 ```
 # git push
 
-To https://github.com/GitInPractice/GitInPracticeRedux.git
+To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
  ! [rejected]        inspiration -> inspiration (non-fast-forward) <1>
 error: failed to push some refs to
-  'https://github.com/GitInPractice/GitInPracticeRedux.git'
+  'https://github.com/MikeMcQuaid/GitInPracticeRedux.git'
 hint: Updates were rejected because the tip of your current branch
   is behind
 hint: its remote counterpart. Integrate the remote changes (e.g.
@@ -583,7 +583,7 @@ You wish to rewrite the history on the remote `origin/inspiration` branch based 
 Counting objects: 1, done.
 Writing objects: 100% (1/1), 204 bytes | 0 bytes/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/GitInPractice/GitInPracticeRedux.git
+To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
  + 0109344...ca74d2b inspiration -> inspiration (forced update) <1>
 ```
 <1> Forced update
@@ -607,7 +607,7 @@ Git provides a tool called `git filter-branch` for these cases; it will iterate 
 To avoiding messing up our current local repository lets create another cloned, local repository:
 
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created; for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxFilterTest`.
-2.  Run `git clone https://github.com/GitInPractice/GitInPracticeRedux.git GitInPracticeReduxFilterTest` to clone into the `GitInPracticeReduxFilterTest` directory.
+2.  Run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git GitInPracticeReduxFilterTest` to clone into the `GitInPracticeReduxFilterTest` directory.
 3.  Change directory to the new Git repository; on my machine, `cd /Users/mike/GitInPracticeReduxFilterTest/`.
 
 .GitX before filter-branch

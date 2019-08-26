@@ -101,11 +101,11 @@ Appendix C will cover my Git configuration file: what I've customized, how, and 
 Appendix D will cover why you should use version control at all and how to convince others it is a good idea.
 
 #### Code
-This book works through creating the Git repository for a silly example book called "Git In Practice: Redux". This is available to download on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
+This book works through creating the Git repository for a silly example book called "Git In Practice: Redux". This is available to download on GitHub at https://github.com/MikeMcQuaid/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
 
-I also used a Git repository when writing this book in Asciidoc files. This is available at https://github.com/GitInPractice/GitInPractice
+I also used a Git repository when writing this book in Asciidoc files. This is available at https://github.com/MikeMcQuaid/GitInPractice
 
-My commented Git configuration are available in my dotfiles repository on GitHub at https://github.com/mikemcquaid/dotfiles and in appendix C.
+My commented Git configuration are available in my dotfiles repository on GitHub at https://github.com/MikeMcQuaid/dotfiles and in appendix C.
 
 #### Author Online
 Purchase of Git in Practice includes free access to a private web forum run by Manning Publications where you can make comments about the book, ask technical questions, and receive help from the author and from other users. To access the forum and subscribe to it, point your web browser to https://www.manning.com/books/git-in-practice.

@@ -30,7 +30,7 @@ We've been working mostly from the command line in this book, and PRs are someti
 
 The `gh` command-line tool allows various interactions with GitHub by providing a wrapper on top of Git's interface and adding new commands and improving the interaction of some Git commands with GitHub.
 
-For example, instead of running `git clone https://github.com/GitInPractice/GitInPracticeRedux` you could instead just run `gh clone GitInPractice/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
+For example, instead of running `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux` you could instead just run `gh clone GitInPractice/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
 
 The `gh` tool can also be used to create PRs from the command line. Although this accomplishes the same end result as the web interface and is slightly less flexible, I generally prefer it, as it fits in more nicely into the command-line-driven workflow of using the Git to interact with a project's repository.
 
@@ -70,13 +70,13 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 348 bytes | 0 bytes/s, done.
 Total 3 (delta 2), reused 0 (delta 0)
-To https://github.com/GitInPractice/GitInPracticeRedux
+To https://github.com/MikeMcQuaid/GitInPracticeRedux
  * [new branch]      pr-test -> pr-test
 Branch pr-test set up to track remote branch pr-test from origin. <3>
 
 # gh pull-request
 
-https://github.com/GitInPractice/GitInPracticeRedux/pull/1 <4>
+https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/1 <4>
 ```
 <1> Local branch
 <2> New commit
@@ -109,7 +109,7 @@ Essentially the pull request has just created a remote branch named `pr-test`, w
 The `gh` tool also accepts the `-b` and `-h` parameters, which can be followed with a branch name to change the base and head branches respectively. These can either be passed a branch name such as `pr-test`; a branch name and GitHub user/organization name such as `GitInPractice:pr-test`; or a GitHub user/organization name, repository name, and branch name, as in `GitInPractice/GitInPracticeRedux:pr-test`.
 
 .How can you view a pull request without whitespace changes?
-NOTE: The Files Changed pane on a pull request will show a diff of the changes in that pull request. Some lines may have changes to whitespace that you don't care about. In this case, you can avoid them by appending `?w=1` to the "Files changed" URL; for example, https://github.com/GitInPractice/GitInPracticeRedux/pull/1/files?w=1
+NOTE: The Files Changed pane on a pull request will show a diff of the changes in that pull request. Some lines may have changes to whitespace that you don't care about. In this case, you can avoid them by appending `?w=1` to the "Files changed" URL; for example, https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/1/files?w=1
 
 ### Making a pull request from a forked repository: gh fork
 If you want to commit to an open source software project that you don't have commit access to, you'll want to create a pull request so others can review your changes before they're merged (because open source doesn't mean letting anyone commit to any repository at any time). To do this, you'll want to create your own repository that you can make commits and push branches to and request pull requests from. As you may recall from <<what-are-pull-requests-and-forks>>, you can fork any repository you have read access to (which includes all public, open-source repositories).
@@ -136,7 +136,7 @@ remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/mikemcquaid/GitInPracticeRedux
+From https://github.com/MikeMcQuaid/GitInPracticeRedux
  * [new branch]      inspiration -> mikemcquaid/inspiration
  * [new branch]      master     -> mikemcquaid/master
  * [new branch]      pr-test    -> mikemcquaid/pr-test
@@ -159,13 +159,13 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (3/3), 348 bytes | 0 bytes/s, done.
 Total 3 (delta 2), reused 0 (delta 0)
-To https://github.com/mikemcquaid/GitInPracticeRedux
+To https://github.com/MikeMcQuaid/GitInPracticeRedux
  * [new branch]      credits -> credits
 Branch credits set up to track remote branch credits from origin. <4>
 
 # gh pull-request
 
-https://github.com/GitInPractice/GitInPracticeRedux/pull/2 <5>
+https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/2 <5>
 ```
 <1> Repository fork
 <2> Local branch
@@ -179,7 +179,7 @@ From the fork and pull request creation output:
 * "Local branch (2)" shows the creation of the new local branch.
 * "New commit (3)" shows the new commit on the `credits` branch.
 * "Remote branch (4)" shows the new remote branch that was created.
-* "Pull request (5)" shows the URL for the new pull request. It's requesting the merge of the `credits` branch from the https://github.com/mikemcquaid/GitInPracticeRedux forked repository into the `master` branch of the https://github.com/GitInPractice/GitInPracticeRedux main repository.
+* "Pull request (5)" shows the URL for the new pull request. It's requesting the merge of the `credits` branch from the https://github.com/MikeMcQuaid/GitInPracticeRedux forked repository into the `master` branch of the https://github.com/MikeMcQuaid/GitInPracticeRedux main repository.
 
 You have created a fork and pull request from it from the command line.
 
@@ -219,11 +219,11 @@ Merge made by the 'recursive' strategy.
 Counting objects: 1, done.
 Writing objects: 100% (1/1), 241 bytes | 0 bytes/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/GitInPractice/GitInPracticeRedux.git
+To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
    cc206b5..7a19d89  master -> master <3>
 
 # git push --delete origin pr-test
-To https://github.com/GitInPractice/GitInPracticeRedux.git
+To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
  - [deleted]         pr-test <4>
 ```
 <1> Branch checkout
@@ -263,7 +263,7 @@ You wish to merge a pull request from a forked repository from the command line.
 #### Solution
 1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
 2.  Checkout the `master` branch by running `git checkout master`.
-3.  Merge the remote pull request into the `master` branch by running `gh merge https://github.com/GitInPractice/GitInPracticeRedux/pull/2`.
+3.  Merge the remote pull request into the `master` branch by running `gh merge https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/2`.
 4.  Push the updated `master` branch with `git push`.
 
 The output for these commands should resemble the following:
@@ -275,9 +275,9 @@ The output for these commands should resemble the following:
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'. <1>
 
-# gh merge https://github.com/GitInPractice/GitInPracticeRedux/pull/2
+# gh merge https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/2
 
-From https://github.com/mikemcquaid/GitInPracticeRedux
+From https://github.com/MikeMcQuaid/GitInPracticeRedux
  * [new branch]      credits    -> mikemcquaid/credits
 Merge made by the 'recursive' strategy.
  01-IntroducingGitInPractice.asciidoc | 4 ++--
@@ -290,7 +290,7 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (5/5), done.
 Writing objects: 100% (5/5), 620 bytes | 0 bytes/s, done.
 Total 5 (delta 3), reused 0 (delta 0)
-To https://github.com/GitInPractice/GitInPracticeRedux.git
+To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
    7a19d89..77f848d  master -> master <3>
 ```
 <1> Branch checkout

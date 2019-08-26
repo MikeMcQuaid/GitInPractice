@@ -54,7 +54,7 @@ All command output listings in this book show:
 NOTE: You can follow listings as you work through the book by running the listed commands (in a Terminal on Unix or Git Bash on Windows) and comparing the output to the listing. A POSIX-incompatible shell (which includes the Windows Command Prompt without Git Bash) may work for some listings but will fail for others that rely on POSIX syntax (such as the use of single quotes).
 
 .Is there an example repository?
-NOTE: The steps followed in the examples in this book were used to create the demo repository `GitInPracticeRedux` on GitHub at https://github.com/GitInPractice/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
+NOTE: The steps followed in the examples in this book were used to create the demo repository `GitInPracticeRedux` on GitHub at https://github.com/MikeMcQuaid/GitInPracticeRedux. Note that the current state of this repository is the state after following all the examples in the book, so you should browse to the beginning of the history if you wish to follow along with the listings in this book.
 
 Now Git is set up; to use Git you need to initialize a Git _repository_ on your local machine.
 

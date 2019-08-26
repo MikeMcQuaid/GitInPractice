@@ -91,12 +91,12 @@ You wish mirror an existing remote repository.
 
 #### Solution
 1.  Change to the directory you wish to contain your new repository directory; on my system, `cd /Users/mike/`.
-2.  Run `git clone --mirror https://github.com/GitInPractice/GitInPracticeRedux.git`. The output should resemble the following:
+2.  Run `git clone --mirror https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. The output should resemble the following:
 
 .clone mirror output
 ```
 # git clone --mirror
-  https://github.com/GitInPractice/GitInPracticeRedux.git
+  https://github.com/MikeMcQuaid/GitInPracticeRedux.git
 
 Cloning into bare repository 'GitInPracticeRedux.git'...<1>
 remote: Reusing existing pack: 79, done.
