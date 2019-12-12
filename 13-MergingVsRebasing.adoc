@@ -21,7 +21,7 @@ CMake makes heavy use of branching and merges. Several of the branches visible o
 
 * `next`--Shown in the figure as `origin/next`. An _integration branch_ used for integration of _feature branches_ (also known as _topic branches_) when developing a new version of CMake. `master` is merged in here regularly to fix merge conflicts.
 * `nightly`--Shown in the figure as `origin/nightly`. Follows the `next` branch and is updated to the latest commit on `next` automatically at 01:00 UTC every day. Used by automated nightly tests to get a consistent version for each day.
-* `master`--Seen in figure indirectly; merged in `Merge 'branch' master into next` commit. An _integration branch_ which is always kept ready for a new release; release branches are merged into here and then deleted. New feature branches are branched off of `master`.
+* `master`--Seen in figure indirectly; merged in `Merge branch 'master' into next` commit. An _integration branch_ which is always kept ready for a new release; release branches are merged into here and then deleted. New feature branches are branched off of `master`.
 * _Feature branches_--Seen in figure merged `Merge topic '...' into next` commits. Used for development of all bug fixes and new features. All new commits (except merge commits) are made on feature branches. Merged into `next` for integration testing and `master` for permanent inclusion and then can be deleted.
 
 .CMake repository history
