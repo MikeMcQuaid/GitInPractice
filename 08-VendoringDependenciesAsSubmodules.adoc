@@ -10,7 +10,7 @@ In this chapter you will learn how to maintain dependencies on other Git-based s
 * How to run a command in every submodule in a repository
 
 ### When are submodules useful?
-Almost all software projects will make use of other software projects as libraries or tools. For example, say you're using Git and writing a desktop application in C++, and you want to use communicate with a server that provides a JSON API. Rather than writing the JSON handling yourself, you find an open source project on GitHub that provides a library for accessing JSON APIs with C++. You want to include this open source library into your project and update it when they've released new versions with new bug fixes you need.
+Almost all software projects will make use of other software projects as libraries or tools. For example, say you're using Git and writing a desktop application in C++, and you want to communicate with a server that provides a JSON API. Rather than writing the JSON handling yourself, you find an open source project on GitHub that provides a library for accessing JSON APIs with C++. You want to include this open source library into your project and update it when they've released new versions with new bug fixes you need.
 
 There are generally two approaches to handling other software projects (usually known as _dependencies_) and which versions work with your own software:
 

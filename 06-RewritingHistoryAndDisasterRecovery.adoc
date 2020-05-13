@@ -5,7 +5,7 @@ In <<01-LocalGit#viewing-history-git-log-gitk-gitx>> we briefly discussed that G
 
 In this chapter you will learn about rewriting history by learning the following topics:
 
-* How to use view the history of all changes made to branches over time
+* How to view the history of all changes made to branches over time
 * How to make a branch point to a previous commit
 * How to change the parent of commits to point to another
 * How to force push rewritten history to a remote repository
@@ -94,7 +94,7 @@ In <<03-FilesystemInteractions#revert-a-previous-commit-git-revert>> you learned
 
 When we used `git reset` previously, we used it either with no arguments (which implies `--mixed`) or with `--hard`. Remember `--hard` resets the index and the working directory and `--mixed` resets the index but not the working directory. In short, `--hard` will discard any uncommitted work, whereas `--mixed` will simply unstage it (effectively reversing a `git add`).
 
-`git reset` can also take an ref as an argument. Rather than just resetting to the last commit, this will allow you to reset a branch to any other commit in the repository.
+`git reset` can also take a ref as an argument. Rather than just resetting to the last commit, this will allow you to reset a branch to any other commit in the repository.
 
 Let's create a temporary commit (that hasn't been pushed) that we can reset:
 
@@ -191,7 +191,7 @@ NOTE: Commits in the reflog that are older than 90 days and not ancestors of any
 .What's the difference between `git reset` and `git checkout`?
 NOTE: `git reset` modifies the current branch pointer so it points to another commit. `git checkout` modifies the `HEAD` pointer so it points to another branch (or, rarely, commit). If you're on the `master` branch then `git reset --hard v0.1-release` sets the `master` branch to point to the top of the `v0.1-release` branch, whereas `git checkout v0.1-release` changes the current branch (the `HEAD` pointer) to point to the `v0.1-release` branch.
 
-`git reset` can also take a list of paths as the last arguments to the command. These can be separated using a `--` between the ref and the list of paths. The `--` is optional but makes more explicit the separation between the ref and paths. After all, it's possible (if unlikely) that you could have a file and path with the same name.
+`git reset` can also take a list of paths as the last arguments to the command. These can be separated using a `--` between the ref and the list of paths. The `--` is optional but makes more explicit the separation between the ref and paths. After all, it's possible (if unlikely) that you could have a ref and path with the same name.
 
 For example, to reset the contents of the `00-Preface.asciidoc` file to the previous commit, you'd run `git reset HEAD^ -- 00-Preface.asciidoc`.
 
@@ -454,7 +454,7 @@ Although complex, `git rebase --interactive` allows for powerful workflows (some
 Part 3 will cover some workflows, in which `git rebase --interactive` is a key part.
 
 ### Pull a branch and rebase commits: git pull --rebase
-Rebasing is often useful when you're pulling commits into your current branch. You almost certainly don't want to create a merge commit just because you've made commits on your current branch and want to fetch new commits from upstream. A merge commit will be created, however, if you've committed on this branch and pull in new commits. Instead of creating a merge conflict, you can use `git pull --rebase`.
+Rebasing is often useful when you're pulling commits into your current branch. You almost certainly don't want to create a merge commit just because you've made commits on your current branch and want to fetch new commits from upstream. A merge commit will be created, however, if you've committed on this branch and pull in new commits. Instead of creating a merge commit, you can use `git pull --rebase`.
 
 To test `git pull --rebase`, let's create another clone of the same repository, make a new commit, and `git push` it. This will allow downloading new changes with `git pull --rebase` on the original remote repository.
 

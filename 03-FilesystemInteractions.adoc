@@ -312,7 +312,7 @@ stash@{0}: WIP on master: 36640a5 Ignore .tmp files. <1>
 ```
 <1> Stashed commit
 
-This shows the single stash that you made. You can access it using the `ref stash@{0}`, so for example, `git diff stash@{0}` will show you the difference between the working directory and the contents of that stash.
+This shows the single stash that you made. You can access it using the ref `stash@{0}`, so for example, `git diff stash@{0}` will show you the difference between the working directory and the contents of that stash.
 
 If you save another stash then it will become `stash@{0}` and the previous stash will become `stash@{1}`. This is because the stashes are stored on a _stack_ structure. A stack structure is best thought of as being like a stack of plates. You add new plates on the top of the existing plates and if you remove a single plate, you'll take it from the top. Similarly when you run `git stash`, the new stash will be added will be added to the top (it will become `stash@{0}`) and the previous stash will no longer be at the top (it will become `stash@{1}`).
 
