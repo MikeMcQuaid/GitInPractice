@@ -143,7 +143,7 @@ Subject: [PATCH] Ignore .tmp files.
 From the email formatted log output:
 
 * "unix mailbox date (1)" can be safely ignored. The first part is the SHA-1 hash for the commit. The log output is generated in the Unix _mbox_ (short for "mailbox") format. The second, date part is not affected by the commit date or contents but is a special value used to indicate that this was outputted from Git rather than taken from real Unix mbox.
-* "commit author (2)" is the author of the commit. This is one of the reasons why Git stores a name and email address for authors and in commits; it eases the transition to email format. A commit can seen as an email sent by the author of the commit requesting a change be made.
+* "commit author (2)" is the author of the commit. This is one of the reasons why Git stores a name and email address for authors and in commits; it eases the transition to email format. A commit can be seen as an email sent by the author of the commit requesting a change be made.
 * "commit date (3)" is the date on which the commit was made. This also sets the date for the email in its headers.
 * "commit subject (4)" is the first line of the commit message prefixed with "[PATCH]". This is another reason to structure your commit messages like emails (as mentioned in <<01-LocalGit#viewing-history-git-log-gitk-gitx>>).
 
