@@ -1,0 +1,8 @@
+[appendix]
+## Errata
+ifdef::env-github[:outfilesuffix: .adoc]
+
+Since this book was published, a few errors have been pointed out.
+
+### Chapter 8
+- The description of the command `git submodule update` actually describes the behaviour of `git submodule update --remote`.

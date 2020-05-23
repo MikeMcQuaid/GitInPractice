@@ -28,6 +28,7 @@ Git In Practice is an opinionated, intermediate/advanced-level Git book by [@Mik
     2. [Creating a GitHub Account and Repository](B-CreatingAGitHubAccountAndRepository.adoc)
     3. [Commented Git Configuration](C-CommentedGitConfiguration.adoc)
     4. [Why Use Version Control?](D-WhyUseVersionControl.adoc)
+    5. [Errata](E-Errata.adoc)
 
 ## License
 
