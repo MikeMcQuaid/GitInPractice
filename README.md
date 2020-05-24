@@ -23,11 +23,11 @@ Git In Practice is an opinionated, intermediate/advanced-level Git book by [@Mik
     1. [Creating a Clean History](12-CreatingACleanHistory.adoc)
     2. [Merging vs. Rebasing](13-MergingVsRebasing.adoc)
     3. [Recommended Team Workflows](14-RecommendedTeamWorkflows.adoc)
-6. Appendices
-    1. [Git Installation](A-GitInstallation.adoc)
-    2. [Creating a GitHub Account and Repository](B-CreatingAGitHubAccountAndRepository.adoc)
-    3. [Commented Git Configuration](C-CommentedGitConfiguration.adoc)
-    4. [Why Use Version Control?](D-WhyUseVersionControl.adoc)
+6. [Appendices](15-Appendices.adoc)
+    1. [Git Installation](15-Appendices.adoc#appendix-a-git-installation)
+    2. [Creating a GitHub Account and Repository](15-Appendices.adoc#appendix-b-creating-a-github-account-and-repository)
+    3. [Commented Git Configuration](15-Appendices.adoc#appendix-c-commented-git-configuration)
+    4. [Why Use Version Control?](15-Appendices.adoc#appendix-d-why-use-version-control)
 
 ## License
 
@@ -44,6 +44,8 @@ Published by Manning in 2014 and given a public GitHub repository in 2017.
 ## Contributing
 
 If you contribute changes to this repository you assign copyright to [@MikeMcQuaid](https://github.com/MikeMcQuaid) and Manning Publications. If a future edition is released we may thank you in the foreword but you won't be assigned partial copyright or receive any royalties. If you're OK with that then please feel free to create pull-requests.
+
+Thanks to [all the GitInPractice contributors](https://github.com/MikeMcQuaid/GitInPractice/graphs/contributors)!
 
 ## Contact
 
