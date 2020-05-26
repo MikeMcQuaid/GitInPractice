@@ -3,7 +3,7 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 In this chapter you will learn how to maintain dependencies on other Git-based software projects within your own using Git submodules.
 
-* When are submodules useful
+* When submodules are useful
 * How to add a submodule to a repository
 * How to view the status of the submodules in a repository
 * How to update and initialize all submodules in a repository
@@ -135,7 +135,7 @@ From the submodule addition output:
 * "Submodule directory (3)" shows the new directory named `submodule` that was created to store the contents of the new submodule repository. Note that you'd normally not call this `submodule` but we're just using this name for these examples.
 
 You have successfully added the `GitInPracticeReduxSubmodule` submodule to the `GitInPracticeRedux` repository.
-The `GitInPracticeRedux` repository might now be referred to as the "superproject", i.e. a Git repository containing a submodule.
+We will now refer to `GitInPracticeRedux` as the "superproject" i.e. the Git repository containing the submodule.
 
 #### Discussion
 The new directory named `submodule` behaves like any other Git repository. If you change into its directory, you can run services like GitX, `git log`, and even make changes and push them to the `GitInPracticeReduxSubmodule` repository (provided you have commit access).
@@ -226,7 +226,7 @@ Let's simulate this situation by making a new clone of the `GitInPracticeRedux` 
 2.  Run `git clone GitInPracticeRedux GitInPracticeReduxClone`.
 
 #### Problem
-You wish to initialize all submodules in your repository and populate their working tree according to the submodule commit recorded in the superproject.
+You wish to initialize all submodules in your repository and populate their working tree according to the submodule commit recorded in the `GitInPracticeRedux` superproject.
 
 #### Solution
 1.  Change to the directory containing your newly cloned repository; for example, `cd /Users/mike/GitInPracticeReduxClone/`.
@@ -264,15 +264,14 @@ From the submodule initialize and update output:
 `git submodule update` can take some parameters to customize its behavior:
 
 * The `--recursive` flag, which will run `git submodule update --init` inside each of the submodules directories too. This is useful when there are nested submodules inside submodules.
-* The `--force` (or `-f`) flag can be passed to update the submodules to the commit recorded in the superproject by running the equivalent of `git checkout --force`--to discard any uncommitted changes made to the submodule.
+* The `--force` (or `-f`) flag can be passed to update the submodules to the commit recorded in the superproject by running the equivalent of `git checkout --force` --to discard any uncommitted changes made to the submodule.
 * The `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk.
 
 `git clone` can also take a `--recurse-submodules` (or `--recursive`) flag to automatically run `git submodule update --init` on any submodules within the repository. Typically if you're cloning a repository you know contains submodules, then you'll use `git clone --recursive-submodules` to clone it and all the necessary submodules (and the submodules of the submodules, if they exist).
 
-Sometimes, you may want to update the submodule to the latest upstream revision to incorporate any changes that were made in the upstream, submodule repository. 
-In that case, `git submodule update` has other useful parameters:
+When you wish to update the submodule to the latest upstream revision to incorporate any changes that were made in the upstream, submodule repository you can use the following `git submodule update` parameters:
 
-* The `--remote` flag would fetch and checkout the latest upstream revision in the local submodule repository. This would then require another commit and push to update this on the `GitInPracticeRedux` remote repository. This should only be done after testing that the changes made to the `GitInPracticeReduxSubmodule` repository remain compatible with the `GitInPracticeRedux` project.
+* The `--remote` flag will fetch and checkout the latest upstream revision in the local submodule repository. This would then require another commit to update this on the local `GitInPracticeRedux` repository and a push to update this on the remote `GitInPracticeRedux` repository. This should only be done after testing that the changes made to the `GitInPracticeReduxSubmodule` repository remain compatible with the `GitInPracticeRedux` project.
 * The `--no-fetch` flag will attempt to update the submodule without running `git fetch`. This will only update the submodule to a later revision if this has already been fetched. This is useful if you want to fetch the changes to a submodule now and then update and test this update at a later point.
 
 ### Run a command in every submodule: git submodule foreach
