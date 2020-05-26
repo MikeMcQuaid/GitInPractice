@@ -135,6 +135,7 @@ From the submodule addition output:
 * "Submodule directory (3)" shows the new directory named `submodule` that was created to store the contents of the new submodule repository. Note that you'd normally not call this `submodule` but we're just using this name for these examples.
 
 You have successfully added the `GitInPracticeReduxSubmodule` submodule to the `GitInPracticeRedux` repository.
+We will now refer to `GitInPracticeRedux` as the "superproject" i.e. the Git repository containing the submodule.
 
 #### Discussion
 The new directory named `submodule` behaves like any other Git repository. If you change into its directory, you can run services like GitX, `git log`, and even make changes and push them to the `GitInPracticeReduxSubmodule` repository (provided you have commit access).
@@ -219,43 +220,16 @@ From the submodule status output:
 ### Update and initialize all submodules: git submodule update --init
 We have initialized a submodule (copied the submodule names and URLs  `.gitmodules` to `.git/config`) when we ran `git submodule add` earlier. But initialization won't be done automatically for anyone else with a clone of this repository: they must run `git submodule init`.
 
-Let's simulate this situation by removing the current clone of the submodule in this repository:
+Let's simulate this situation by making a new clone of the `GitInPracticeRedux` repository.
 
-1.  Change to the directory containing your repository; on my machine, `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git submodule deinit .`.
-3.  Run `rm -rf .git/modules/` to remove the directory where Git caches submodules outside of the working directory.
-
-The output of all these commands should resemble the following:
-
-.Remove submodule clone
-[.long-annotations]
-```
-# git submodule deinit .
-
-Cleared directory 'submodule' <1>
-Submodule 'submodule'
-  (https://github.com/MikeMcQuaid/GitInPracticeReduxSubmodule.git)
-  unregistered for path 'submodule' <2>
-
-# rm -rf .git/modules/ <3>
-```
-<1> Submodule deinit
-<2> Submodule unregister
-<3> Submodule delete
-
-From the remove submodule clone output:
-
-* "Submodule deinit (1)" shows the clearing of the submodule directory. This means that the directory named `submodule` has all its contents deleted.
-* "Submodule unregister (2)" shows that the submodule has been unregistered--it doesn't remove the submodule from the repository, but returns it to an uninitialized state.
-* "Submodule delete (3)" shows the deletion of the submodule storage directory. Although the submodule is cloned into the `submodule` directory, it's initially cloned into `.git/modules` too and then cloned from there to the `submodule` directory. Deleting this ensures that there's no copy of the submodule's repository in the current repository.
-
-Sometimes at the same time as initializing a repository, you may want to also update it to the latest revision to incorporate any changes that were made in the upstream, submodule repository. Now that we've removed the submodule from our repository, we can initialize the submodule and update it to any later revision.
+1.  Change to the parent directory of the directory containing your repository; on my machine, `cd /Users/mike/GitInPracticeRedux/..`.
+2.  Run `git clone GitInPracticeRedux GitInPracticeReduxClone`.
 
 #### Problem
-You wish to initialize all submodules in your repository and update them to the latest revision.
+You wish to initialize all submodules in your repository and populate their working tree according to the submodule commit recorded in the `GitInPracticeRedux` superproject.
 
 #### Solution
-1.  Change to the directory containing your repository; for example, `cd /Users/mike/GitInPracticeRedux/`.
+1.  Change to the directory containing your newly cloned repository; for example, `cd /Users/mike/GitInPracticeReduxClone/`.
 2.  Run `git submodule update --init`. The output should resemble the following:
 
 .Submodule initialize and update output
@@ -286,16 +260,19 @@ From the submodule initialize and update output:
 * "Submodule checkout (3)" shows the submodule contents being checked out into the `submodule` directory for the currently stored revision.
 
 #### Discussion
-If there had been any changes to the `GitInPracticeReduxSubmodule` repository then the `git submodule update --init` command would initialize the submodule in the local repository and then update the stored submodule revision to the latest revision in the local repository. This would then require another commit and push to update this on the remote repository. This should only be done after testing that the changes made to the `GitInPracticeReduxSubmodule` repository remain compatible with the `GitInPracticeRedux` project.
 
 `git submodule update` can take some parameters to customize its behavior:
 
 * The `--recursive` flag, which will run `git submodule update --init` inside each of the submodules directories too. This is useful when there are nested submodules inside submodules.
-* The `--no-fetch` flag will attempt to update the submodule without running `git fetch`. This will only update the submodule to a later revision if this has already been fetched. This is useful if you want to fetch the changes to a submodule now and then update and test this update at a later point.
-* The `--force` (or `-f`) flag can be passed to update the submodules to the latest revision by running the equivalent of `git checkout --force`--to discard any uncommitted changes made to the submodule.
+* The `--force` (or `-f`) flag can be passed to update the submodules to the commit recorded in the superproject by running the equivalent of `git checkout --force` --to discard any uncommitted changes made to the submodule.
 * The `--depth` is passed to the `git clone` of the submodule to allow creating a shallow clone with only the requested number of revisions within it. This can be used to shrink the size of the submodule on disk.
 
 `git clone` can also take a `--recurse-submodules` (or `--recursive`) flag to automatically run `git submodule update --init` on any submodules within the repository. Typically if you're cloning a repository you know contains submodules, then you'll use `git clone --recursive-submodules` to clone it and all the necessary submodules (and the submodules of the submodules, if they exist).
+
+When you wish to update the submodule to the latest upstream revision to incorporate any changes that were made in the upstream, submodule repository you can use the following `git submodule update` parameters:
+
+* The `--remote` flag will fetch and checkout the latest upstream revision in the local submodule repository. This would then require another commit to update this on the local `GitInPracticeRedux` repository and a push to update this on the remote `GitInPracticeRedux` repository. This should only be done after testing that the changes made to the `GitInPracticeReduxSubmodule` repository remain compatible with the `GitInPracticeRedux` project.
+* The `--no-fetch` flag will attempt to update the submodule without running `git fetch`. This will only update the submodule to a later revision if this has already been fetched. This is useful if you want to fetch the changes to a submodule now and then update and test this update at a later point.
 
 ### Run a command in every submodule: git submodule foreach
 Sometimes you may wish to perform a command or query within every submodule. For example, you may want to iterate through all the submodules in a repository (and their submodules) and run a Git command to ensure they have all checked out the `master` branch, and have fetched the latest remote repository commits or print status information. Git provides the `git submodule foreach` command for this case: it takes a command (or commands) as an argument and then iterates through each Git submodule (and their submodules) and runs the same command.
