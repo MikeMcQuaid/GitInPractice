@@ -38,7 +38,7 @@ You wish to add the new GitInPractice remote repository to your current reposito
 
 #### Solution
 1.  Change directory to the Git repository, in my case `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git remote add origin` with your repository URL appended. So if your username is `GitInPractice` and repository is named `GitInPracticeRedux`, run `git remote add origin https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. There will be no output.
+2.  Run `git remote add origin` with your repository URL appended. So if your username is `GitInPractice` and your repository is named `GitInPracticeRedux`, run `git remote add origin https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. There will be no output.
 
 You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble the following:
 
@@ -58,7 +58,7 @@ In the remote listing:
 * "fetch URL (1)" specifies the URL that `git fetch` uses to fetch new remote commits.
 * "push URL (2)" specifies the URL that `git push` uses to send new local commits.
 
-.When the fetch and push URLs differ?
+.When do the fetch and push URLs differ?
 NOTE: These won't differ unless they've been set to do so by the `git remote` command or by Git configuration. It's almost never necessary to do this, so I won't cover it in this book.
 
 You've added a remote named `origin` that points to the remote `GitInPracticeRedux` repository belonging to the `GitInPractice` user on GitHub. You can now send and receive changes from this remote. Nothing has been sent or received yet; the new remote is effectively just a named URL pointing to the remote repository location.
@@ -74,12 +74,12 @@ You've added a remote named `origin` that points to the remote `GitInPracticeRed
 NOTE: You can have multiple remote repositories connected to your local repository so the remote repositories are named. Typically if you have a single remote repository, it will be named `origin`.
 
 ##### Authoritative version storage
-With centralized version control systems, the central server always stores the authoritative version of the code. Clients to this repository will typically only store a small proportion of the history and require access to the server to perform most tasks. With a distributed version control system like Git, every local repository has a complete copy of the data. Which repository stores the authoritative version in this case? It turns out that this is merely a matter of convention; Git itself doesn't deem any particular repository to have any higher priority than another. Typically in organizations there will be a central location (like with a centralized version control) that is treated as the authoritative version and people are encouraged to push their commits and branches to.
+With centralized version control systems, the central server always stores the authoritative version of the code. Clients to this repository will typically only store a small proportion of the history and require access to the server to perform most tasks. With a distributed version control system like Git, every local repository has a complete copy of the data. Which repository stores the authoritative version in this case? It turns out that this is merely a matter of convention; Git itself doesn't deem any particular repository to have any higher priority than another. Typically in organizations there will be a central location (like with a centralized version control) that is treated as the authoritative version and which people are encouraged to push their commits and branches to.
 
-The lack of authority for a particular repository with distributed version control systems is sometimes seen as a liability but can actually be a strength. The Linux kernel project (for which Git was original created) makes use of this to provide a network of trust and a more manageable way of merging changes. When Linus Torvalds, the self-named "benevolent dictator" of the project, tags a new release, this is generally considered a new release of Linux. What's in his repository (well, his publicly accessible one; he will have multiple repositories between various personal machines that he doesn't make publicly accessible) is generally considered to be what's in Linux. Linus has trusted lieutenants from whom he can pull and merge commits and branches. Rather than every single merge to Linux needing to be done by Linus, he can leave some of it to his lieutenants (who leave some to their sub-lieutenants and so on), so everyone can needs only worry about verifying and including the work of a small number of others. This particular workflow may not make sense in many organizations, but it demonstrates how distributed version control systems can allow different ways of managing merges to centralized version control.
+The lack of authority for a particular repository with distributed version control systems is sometimes seen as a liability but can actually be a strength. The Linux kernel project (for which Git was original created) makes use of this to provide a network of trust and a more manageable way of merging changes. When Linus Torvalds, the self-named "benevolent dictator" of the project, tags a new release, this is generally considered a new release of Linux. What's in his repository (well, his publicly accessible one; he will have multiple repositories between various personal machines that he doesn't make publicly accessible) is generally considered to be what's in Linux. Linus has trusted lieutenants from whom he can pull and merge commits and branches. Rather than every single merge to Linux needing to be done by Linus, he can leave some of it to his lieutenants (who leave some to their sub-lieutenants and so on), so each person only needs to worry about verifying and including the work of a small number of others. This particular workflow may not make sense in many organizations, but it demonstrates how distributed version control systems can allow different ways of managing merges to centralized version control.
 
 ### Pushing changes to a remote repository: git push
-You'll eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git (which can operate over HTTP, SSH, or its own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result, you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
+You'll eventually wish to send commits made in the local repository to a remote. To do this always requires an explicit action. Only changes specifically requested will be sent and the Git command-line tool (which can operate over HTTP, SSH, or its own protocol (`git://`)) will ensure that only the differences between the repositories are sent. As a result, you can push small changes from a large local repository to a large remote repository very quickly as long as they have most commits in common.
 
 Let's push the changes you made in our repository in <<01-LocalGit#committing-changes-to-files-git-commit>> to the newly created remote you made in <<adding-a-remote-repository-git-remote-add>>.
 
@@ -157,7 +157,7 @@ You wish to remove the existing `GitInPracticeRedux` local repository and recrea
 #### Solution
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created--say, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
 2.  Run `rm -rf GitInPracticeRedux` to remove the existing `GitInPracticeRedux` repository.
-3.  Run `git clone` with your repository URL appended. So if your username is `GitInPractice` and repository is named `GitInPracticeRedux` run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. The output should resemble the following:
+3.  Run `git clone` with your repository URL appended. So if your username is `GitInPractice` and your repository is named `GitInPracticeRedux` run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. The output should resemble the following:
 
 .Cloning a remote repository
 [.long-annotations]
@@ -292,7 +292,7 @@ To test `git fetch`, let's use the `GitInPracticeReduxPushTest` local repository
 
 To push another commit from the `GitInPracticeReduxPushTest` repository:
 
-1.  Change directory to the `GitInPracticeReduxPushTest repository; for example `cd /Users/mike/GitInPracticeReduxPushTest/`.
+1.  Change directory to the `GitInPracticeReduxPushTest` repository; for example `cd /Users/mike/GitInPracticeReduxPushTest/`.
 2.  Modify the `GitInPractice.asciidoc` file.
 3.  Run `git add GitInPractice.asciidoc`.
 4.  Run `git commit --message 'Joke rejected by editor!'`.
@@ -332,7 +332,7 @@ You've fetched the new commits from the remote repository into your local reposi
 [[gitx-fetch]]
 image::screenshots/02-GitXFetch.png[]
 
-You can see from <<gitx-fetch>> that another new commit has been added to the repository, but this time only `origin/master` has been updated but `master` has not. To see this, you may need to select the `origin` remote and `master` remote branch in the GitX sidebar. Selecting commits by remote branches is a feature sadly not available in `gitk`
+You can see from <<gitx-fetch>> that another new commit has been added to the repository, but this time only `origin/master` has been updated, and `master` has not. To see this, you may need to select the `origin` remote and `master` remote branch in the GitX sidebar. Selecting commits by remote branches is a feature sadly not available in `gitk`
 
 To clean up our local repository, let's do another quick `git pull` to update the state of the `master` branch based on the (already fetched) `origin/master`.
 
@@ -365,7 +365,7 @@ image::screenshots/02-GitXFetchPull.png[]
 <<git-fetch-pull>> shows that the `master` branch has now been updated to match the `origin/master` latest commit once more.
 
 .Should I use pull or fetch?
-NOTE: I prefer to use `git fetch` over `git pull`. This means I can continue to fetch regularly in the background, and only include these changes in my local branches when it's convenient and in the method I find most appropriate, which may be merging or rebasing (or resetting which you will see later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of a merge conflict, for example.
+NOTE: I prefer to use `git fetch` over `git pull`. This means I can continue to fetch regularly in the background, and only include these changes in my local branches when it's convenient and in the method I find most appropriate, which may be merging or rebasing (or resetting, which you will see later in <<06-RewritingHistoryAndDisasterRecovery#resetting-a-branch-to-a-previous-commit-git-reset>>). Additionally, I sometimes work in situations where I have no internet connection (such as on planes) and using `git fetch` is superior in these situations; it can fetch changes without requiring any human interaction in the case of a merge conflict, for example.
 
 We've talked about local branches and remote branches but haven't actually created any ourselves yet. Let's learn about how branches work and how to create them.
 
@@ -388,9 +388,9 @@ When a branch is created and new commits are made, that branch advances forward 
 
 The branch is pointed to a new commit when a new commit is made on that branch. A _tag_ is similar to a branch, but points to a single commit and remains pointing to the same commit even when new commits are made. Typically tags are used for annotating commits; for example, when you release version 1.0 of your software, you may tag the commit used to build the 1.0 release with a "1.0" tag. This means you can come back to it in future, rebuild that release, or check how certain things worked without fear that it will be somehow changed automatically.
 
-Branching allows two independent tracks of development to occur at once. In <<branches>>, the `separate-files branch` was used to separate the content from a single file and split it into two new files. This allowed refactoring of the book structure to be done in the `separate-files` branch while the default branch (known as `master` in Git) could be used to create more content. In version control systems like Git where creating a branch is a quick, local operation, branches may be used for every independent change.
+Branching allows two independent tracks of development to occur at once. In <<branches>>, the `separate-files` branch was used to separate the content from a single file and split it into two new files. This allowed refactoring of the book structure to be done in the `separate-files` branch while the default branch (known as `master` in Git) could be used to create more content. In version control systems like Git where creating a branch is a quick, local operation, branches may be used for every independent change.
 
-Some programmers will create new branches whenever they work on a new bug fix or feature and then integrate these branches at a later point; perhaps after requesting review of their changes from others. This means even for programmers working without a team, it can be useful to have multiple branches in use at any one point. For example, you may be working on a new feature but realize that a critical error in your application needs fixed immediately. You could quickly create a new branch based off the version used by customers, fix the error, and switch branch back to the branch you'd been committing the new feature to.
+Some programmers will create new branches whenever they work on a new bug fix or feature and then integrate these branches at a later point; perhaps after requesting a review of their changes from others. This means even for programmers working without a team, it can be useful to have multiple branches in use at any one point. For example, you may be working on a new feature but realize that a critical error in your application needs fixed immediately. You could quickly create a new branch based off the version used by customers, fix the error, and switch branch back to the branch you'd been committing the new feature to.
 
 #### Problem
 You wish to create a new local branch named `chapter-two` from the current (`master`) branch.
@@ -414,7 +414,7 @@ You can verify the branch was created by running `git branch`, which should have
 From the branch output:
 
 * "new branch (1)" was created with the expected name.
-* "current branch <2>" is indicated by the `*` prefix, which shows you're still on the master branch as before. `git branch` creates a new branch but doesn't change to it.
+* "current branch (2)" is indicated by the `*` prefix, which shows you're still on the master branch as before. `git branch` creates a new branch but doesn't change to it.
 
 You've created a new local branch named `chapter-two` that currently points to the same commit as `master`.
 
@@ -567,7 +567,7 @@ You've merged the `chapter-two` branch into the `master` branch.
 This brings the commit that was made in the `chapter-two` branch into the `master` branch.
 
 .What if you try and merge the same commit into a branch multiple times?
-NOTE: `git merge` won't merge the same commit into a branch multiple times; it will simple exit and output `Already up-to-date.` rather than performing the merge.
+NOTE: `git merge` won't merge the same commit into a branch multiple times; it will simply exit and output `Already up-to-date.` rather than performing the merge.
 
 .Local repository after `git merge chapter-two`
 [[gitx-merge]]
@@ -631,7 +631,7 @@ image::diagrams/02-Rebasing.png[]
 We'll cover rebasing in more detail later in <<06-RewritingHistoryAndDisasterRecovery#rebase-commits-on-top-of-another-branch-git-rebase>>. All that's necessary to remember for now is that it's a different approach to a merge that can be used for a similar outcome (pulling changes from one branch into another).
 
 ### Deleting a remote branch
-Now that the `chapter-two` branch has been merged into the `master` branch, the new commit that made in the `chapter-two` branch is now in the `master` branch. This means that we can push the `master` branch to push all the `chapter-two` changes to `origin/master`. Once this is done (and assuming we don't want to make any more commits to the `chapter-two` branch) then `origin/chapter-two` can be safely deleted.
+Now that the `chapter-two` branch has been merged into the `master` branch, the new commit that was made in the `chapter-two` branch is now in the `master` branch. This means that we can push the `master` branch to push all the `chapter-two` changes to `origin/master`. Once this is done (and assuming we don't want to make any more commits to the `chapter-two` branch) then `origin/chapter-two` can be safely deleted.
 
 .Why delete the branches?
 NOTE: Sometimes branches in version control systems are kept around for a long time and sometimes they're very temporary. A long-running branch may be one that represents the version deployed to a particular server. A short-running branch may be a single bug fix or feature that has been completed. In Git, once a branch has been merged, the history of the branch is still visible in the history and the branch can be safely deleted as a merged branch is, at that point, just a ref to an existing commit in the history of the branch it was merged into.

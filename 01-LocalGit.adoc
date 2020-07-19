@@ -507,7 +507,7 @@ This word diff shows the same changes as the unified format diff in the previous
 ##### Refs
 In Git _refs_ are the possible ways of addressing individual commits. They're an easier way to refer to a specific commit or branch when specifying an argument to a Git command.
 
-The first ref you've already seen is a branch (which is `master` by default if you haven't created any other branches). Branches are actually pointers to a specific commit. Referencing the branch name `master` is the same as referencing the SHA-1 of commit at the top of the master branch, such as the short SHA-1 `6b437c7` in the last example. Whenever you might type `6b437c7` to a command, you could instead type `master`, and vice versa. Using branch names is quicker and easier to remember for referencing commits than always using SHA-1s.
+The first ref you've already seen is a branch (which is `master` by default if you haven't created any other branches). Branches are actually pointers to a specific commit. Referencing the branch name `master` is the same as referencing the SHA-1 of the commit at the top of the master branch, such as the short SHA-1 `6b437c7` in the last example. Whenever you might type `6b437c7` to a command, you could instead type `master`, and vice versa. Using branch names is quicker and easier to remember for referencing commits than always using SHA-1s.
 
 Refs can also have modifiers appended. Suffixing a ref with `~1` is the same as saying "one commit before that ref." For example `master~1` is the penultimate commit on the master branch, for example the short SHA-1 `6576b68` in the last example. Another equivalent syntax is `master^`, which is the same as `master~1` (and `master^^` equivalent to `master~2`).
 
