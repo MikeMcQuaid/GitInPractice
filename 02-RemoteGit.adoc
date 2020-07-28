@@ -38,7 +38,7 @@ You wish to add the new GitInPractice remote repository to your current reposito
 
 #### Solution
 1.  Change directory to the Git repository, in my case `cd /Users/mike/GitInPracticeRedux/`.
-2.  Run `git remote add origin` with your repository URL appended. So if your username is `GitInPractice` and your repository is named `GitInPracticeRedux`, run `git remote add origin https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. There will be no output.
+2.  Run `git remote add origin` with your repository URL appended. So if your username is `GitInPracticeReader` and your repository is named `GitInPracticeRedux`, run `git remote add origin https://github.com/GitInPracticeReader/GitInPracticeRedux.git`. There will be no output.
 
 You can verify this remote has been created successfully by running `git remote --verbose`. The output should resemble the following:
 
@@ -47,8 +47,8 @@ You can verify this remote has been created successfully by running `git remote 
 ```
 # git remote --verbose
 
-origin  https://github.com/MikeMcQuaid/GitInPracticeRedux.git (fetch) <1>
-origin  https://github.com/MikeMcQuaid/GitInPracticeRedux.git (push) <2>
+origin  https://github.com/GitInPracticeReader/GitInPracticeRedux.git (fetch) <1>
+origin  https://github.com/GitInPracticeReader/GitInPracticeRedux.git (push) <2>
 ```
 <1> fetch URL
 <2> push URL
@@ -102,7 +102,7 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (5/5), done.
 Writing objects: 100% (6/6), 602 bytes | 0 bytes/s, done.
 Total 6 (delta 0), reused 0 (delta 0)
-To https://github.com/MikeMcQuaid/GitInPracticeRedux.git <4>
+To https://github.com/GitInPracticeReader/GitInPracticeRedux.git <4>
  * [new branch]      master -> master <5>
 Branch master set up to track remote branch master from origin. <6>
 ```
@@ -157,12 +157,12 @@ You wish to remove the existing `GitInPracticeRedux` local repository and recrea
 #### Solution
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created--say, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeRedux`.
 2.  Run `rm -rf GitInPracticeRedux` to remove the existing `GitInPracticeRedux` repository.
-3.  Run `git clone` with your repository URL appended. So if your username is `GitInPractice` and your repository is named `GitInPracticeRedux` run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git`. The output should resemble the following:
+3.  Run `git clone` with your repository URL appended. So if your username is `GitInPracticeReader` and your repository is named `GitInPracticeRedux` run `git clone https://github.com/GitInPracticeReader/GitInPracticeRedux.git`. The output should resemble the following:
 
 .Cloning a remote repository
 [.long-annotations]
 ```
-# git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git
+# git clone https://github.com/GitInPracticeReader/GitInPracticeRedux.git
 
 Cloning into 'GitInPracticeRedux'... <1>
 remote: Counting objects: 6, done. <2>
@@ -188,8 +188,8 @@ You can verify this remote has been created successfully by running `git remote 
 ```
 # git remote --verbose
 
-origin  https://github.com/MikeMcQuaid/GitInPracticeRedux.git (fetch) <1>
-origin  https://github.com/MikeMcQuaid/GitInPracticeRedux.git (push) <2>
+origin  https://github.com/GitInPracticeReader/GitInPracticeRedux.git (fetch) <1>
+origin  https://github.com/GitInPracticeReader/GitInPracticeRedux.git (push) <2>
 ```
 <1> fetch URL
 <2> push URL
@@ -207,7 +207,7 @@ image::screenshots/02-GitXPush.png[]
 
 <<git-clone>> shows the state of the repository after the `git clone`. It's identical to the state after the `git push` in <<gitx-push>>. This shows that the clone was successful and the newly created local repository has the same contents as the deleted old local repository.
 
-Cloning a repository has also created a new remote called `origin`. `origin` is the default remote and references the repository that the clone originated from (which is https://github.com/MikeMcQuaid/GitInPracticeRedux.git in this case).
+Cloning a repository has also created a new remote called `origin`. `origin` is the default remote and references the repository that the clone originated from (which is https://github.com/GitInPracticeReader/GitInPracticeRedux.git in this case).
 
 Now let's learn how to pull new commits from the remote repository.
 
@@ -221,7 +221,7 @@ To test `git pull` let's create another clone of the same repository, make a new
 To create another cloned, local repository and push a commit from it:
 
 1.  Change to the directory where you want the new `GitInPracticeRedux` repository to be created -- for example, `cd /Users/mike/` to create the new local repository in `/Users/mike/GitInPracticeReduxPushTest`.
-2.  Run `git clone` with your repository URL and destination directory appended. So if your username is `GitInPractice`, repository is named `GitInPracticeRedux` and destination directory is named `GitInPracticeReduxPushTest` run `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux.git GitInPracticeReduxPushTest` to clone into the `GitInPracticeReduxPushTest` directory.
+2.  Run `git clone` with your repository URL and destination directory appended. So if your username is `GitInPracticeReader`, repository is named `GitInPracticeRedux` and destination directory is named `GitInPracticeReduxPushTest` run `git clone https://github.com/GitInPracticeReader/GitInPracticeRedux.git GitInPracticeReduxPushTest` to clone into the `GitInPracticeReduxPushTest` directory.
 3.  Change directory to the new Git repository: in our example, `cd /Users/mike/GitInPracticeReduxPushTest/`.
 4.  Modify the `GitInPractice.asciidoc` file.
 5.  Run `git add GitInPractice.asciidoc`.
@@ -246,7 +246,7 @@ remote: Counting objects: 5, done. <1>
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/MikeMcQuaid/GitInPracticeRedux <2>
+From https://github.com/GitInPracticeReader/GitInPracticeRedux <2>
    6b437c7..85a5db1  master     -> origin/master <3>
 Updating 6b437c7..85a5db1 <4>
 Fast-forward <5>
@@ -316,7 +316,7 @@ remote: Counting objects: 5, done. <1>
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/MikeMcQuaid/GitInPracticeRedux <2>
+From https://github.com/GitInPracticeReader/GitInPracticeRedux <2>
    85a5db1..07fc4c3  master     -> origin/master <3>
 ```
 <1> object preparation/transmission
@@ -495,7 +495,7 @@ You wish to push the changes from the local `chapter-two` branch to create the r
 git push --set-upstream origin chapter-two
 
 Total 0 (delta 0), reused 0 (delta 0) <1>
-To https://github.com/MikeMcQuaid/GitInPracticeRedux.git
+To https://github.com/GitInPracticeReader/GitInPracticeRedux.git
  * [new branch]      chapter-two -> chapter-two <2>
 Branch chapter-two set up to track remote branch
 chapter-two from origin. <3>
@@ -649,7 +649,7 @@ You wish to push the current `master` branch and delete the branch named `chapte
 ```
 # git push origin :chapter-two
 
-To https://github.com/MikeMcQuaid/GitInPracticeRedux.git <1>
+To https://github.com/GitInPracticeReader/GitInPracticeRedux.git <1>
  - [deleted]         chapter-two <2>
 ```
 <1> remote URL
