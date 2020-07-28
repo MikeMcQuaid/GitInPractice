@@ -30,7 +30,7 @@ We've been working mostly from the command line in this book, and PRs are someti
 
 The `gh` command-line tool allows various interactions with GitHub by providing a wrapper on top of Git's interface and adding new commands and improving the interaction of some Git commands with GitHub.
 
-For example, instead of running `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux` you could instead just run `gh clone GitInPractice/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
+For example, instead of running `git clone https://github.com/MikeMcQuaid/GitInPracticeRedux` you could instead just run `gh clone MikeMcQuaid/GitInPracticeRedux` to perform the same action of cloning a GitHub repository to your local machine.
 
 The `gh` tool can also be used to create PRs from the command line. Although this accomplishes the same end result as the web interface and is slightly less flexible, I generally prefer it, as it fits in more nicely into the command-line-driven workflow of using the Git to interact with a project's repository.
 
@@ -106,7 +106,7 @@ image::diagrams/10-PullRequest.png[]
 
 Essentially the pull request has just created a remote branch named `pr-test`, which we've requested someone merge into the `master` branch and discuss any changes that need to be made.
 
-The `gh` tool also accepts the `-b` and `-h` parameters, which can be followed with a branch name to change the base and head branches respectively. These can either be passed a branch name such as `pr-test`; a branch name and GitHub user/organization name such as `GitInPractice:pr-test`; or a GitHub user/organization name, repository name, and branch name, as in `GitInPractice/GitInPracticeRedux:pr-test`.
+The `gh` tool also accepts the `-b` and `-h` parameters, which can be followed with a branch name to change the base and head branches respectively. These can either be passed a branch name such as `pr-test`; a branch name and GitHub user/organization name such as `GitInPractice:pr-test`; or a GitHub user/organization name, repository name, and branch name, as in `MikeMcQuaid/GitInPracticeRedux:pr-test`.
 
 .How can you view a pull request without whitespace changes?
 NOTE: The Files Changed pane on a pull request will show a diff of the changes in that pull request. Some lines may have changes to whitespace that you don't care about. In this case, you can avoid them by appending `?w=1` to the "Files changed" URL; for example, https://github.com/MikeMcQuaid/GitInPracticeRedux/pull/1/files?w=1
