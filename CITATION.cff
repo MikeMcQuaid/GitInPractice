@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this book, please cite it as below."
+title: "Git in Practice"
+type: dataset
+authors:
+  - family-names: "McQuaid"
+    given-names: "Mike"
+    email: mike@mikemcquaid.com
+date-released: "2014-09-29"
+url: https://github.com/MikeMcQuaid/GitInPractice
+keywords:
+  - Software Engineering
+  - Development
+preffered-citation:
+  type: book
+  authors:
+    - family-names: "McQuaid"
+      given-names: "Mike"
+      email: mike@mikemcquaid.com
+  isbn: 9781617291975
+  title: "Git in Practice"
+  publisher: Manning
+  pages: 272
+  year: 2014
+  month: 9
+  url: https://github.com/MikeMcQuaid/GitInPractice
